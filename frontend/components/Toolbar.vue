@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar clipped-left fixed app>
+  <v-toolbar :dark="dark" :color="color" clipped-left fixed app>
     <v-toolbar-side-icon @click="$emit('toggle', !drawer)" />
     <v-toolbar-title v-text="title" />
   </v-toolbar>
@@ -13,9 +13,17 @@ export default {
       type: Boolean,
       default: true
     },
+    dark: {
+      type: Boolean,
+      default: false
+    },
     title: {
       type: String,
       default: 'Yee Netbank'
+    },
+    color: {
+      type: String,
+      default: 'white'
     }
   }
 }

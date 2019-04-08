@@ -2,6 +2,7 @@
   <v-navigation-drawer
     v-model="drawer"
     :mini-variant="miniVariant"
+    :color="color"
     clipped
     fixed
     app
@@ -29,10 +30,17 @@
 export default {
   name: 'Drawer',
   props: {
-    drawer: Boolean,
+    drawer: {
+      type: Boolean,
+      default: true
+    },
     miniVariant: {
       type: Boolean,
       default: true
+    },
+    color: {
+      type: String,
+      default: 'white'
     },
     items: {
       type: Array,

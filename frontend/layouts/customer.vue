@@ -1,7 +1,11 @@
 <template>
   <v-app>
-    <drawer :items="items" :drawer="drawer" :miniVariant="miniVariant"></drawer>
-    <toolbar></toolbar>
+    <drawer
+      :items="items"
+      :drawer="drawerPannel"
+      :miniVariant="miniVariant"
+    ></drawer>
+    <toolbar :drawer="drawerPannel" @toggle="setDrawer"></toolbar>
     <v-content>
       <v-container>
         <nuxt />
@@ -22,7 +26,7 @@ export default {
   data() {
     return {
       clipped: false,
-      drawer: true,
+      drawerPannel: true,
       fixed: false,
       items: [
         {
@@ -61,8 +65,10 @@ export default {
       title: 'Vuetify.js'
     }
   },
-  theme: {
-    primary: 'red'
+  methods: {
+    setDrawer(value) {
+      this.drawerPannel = value
+    }
   }
 }
 </script>

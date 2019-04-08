@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar clipped-left="true" fixed app>
-    <v-toolbar-side-icon @click="drawer = !drawer" />
+  <v-toolbar clipped-left fixed app>
+    <v-toolbar-side-icon @click="$emit('toggle', !drawer)" />
     <v-toolbar-title v-text="title" />
   </v-toolbar>
 </template>

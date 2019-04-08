@@ -2,6 +2,8 @@
   <v-toolbar :dark="dark" :color="color" clipped-left fixed app>
     <v-toolbar-side-icon @click="$emit('toggle', !drawer)" />
     <v-toolbar-title v-text="title" />
+    <v-spacer></v-spacer>
+    <v-avatar color="white"></v-avatar>
   </v-toolbar>
 </template>
 

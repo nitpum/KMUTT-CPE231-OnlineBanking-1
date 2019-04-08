@@ -5,7 +5,12 @@
       :drawer="drawerPannel"
       :miniVariant="miniVariant"
     ></drawer>
-    <toolbar :drawer="drawerPannel" @toggle="setDrawer"></toolbar>
+    <toolbar
+      :dark="true"
+      :color="theme.primary"
+      :drawer="drawerPannel"
+      @toggle="setDrawer"
+    ></toolbar>
     <v-content>
       <v-container>
         <nuxt />
@@ -17,6 +22,7 @@
 <script>
 import drawer from '@/components/Drawer.vue'
 import toolbar from '@/components/Toolbar'
+import colors from 'vuetify/es5/util/colors'
 
 export default {
   components: {
@@ -62,7 +68,10 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Vuetify.js',
+      theme: {
+        primary: colors.cyan.base
+      }
     }
   },
   methods: {

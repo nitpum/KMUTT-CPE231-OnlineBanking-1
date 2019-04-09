@@ -3,9 +3,7 @@
     <toolbar @drawer="drawer = !drawer" />
     <drawer :drawer.sync="drawer" />
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
     <v-footer fixed app>
       <span>&copy; 2019</span>

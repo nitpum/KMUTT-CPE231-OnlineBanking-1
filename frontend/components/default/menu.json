@@ -1,9 +1,9 @@
 {
   "menu": [{
-    "name": "Home",
+    "title": "Home",
     "to": "/"
   }, {
-    "name": "About",
+    "title": "About",
     "to": "/about"
   }]
 }

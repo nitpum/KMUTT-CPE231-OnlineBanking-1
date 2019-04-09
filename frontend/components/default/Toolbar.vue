@@ -6,7 +6,7 @@
     <v-spacer />
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn v-for="(item, i) in menu" :key="'menu-' + i" :to="item.to" flat>
-        {{ item.name }}
+        {{ item.title }}
       </v-btn>
     </v-toolbar-items>
     <v-toolbar-side-icon class="hidden-md-and-up" @click="$emit('drawer')" />

@@ -3,7 +3,7 @@
     <drawer
       :items="items"
       :drawer="drawerPannel"
-      :miniVariant="miniVariant"
+      :minivariant="miniVariant"
     ></drawer>
     <toolbar
       :dark="true"

@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    :mini-variant="miniVariant"
+    :mini-variant="minivariant"
     :color="color"
     clipped
     fixed
@@ -34,7 +34,7 @@ export default {
       type: Boolean,
       default: true
     },
-    miniVariant: {
+    minivariant: {
       type: Boolean,
       default: true
     },

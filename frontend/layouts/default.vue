@@ -22,6 +22,9 @@ export default {
   },
   data: () => ({
     drawer: false
-  })
+  }),
+  created() {
+    this.$vuetify.theme.primary = '#00BCD4'
+  }
 }
 </script>

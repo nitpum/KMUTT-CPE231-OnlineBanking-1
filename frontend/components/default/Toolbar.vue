@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="#00BCD4" fixed app dark>
+  <v-toolbar color="primary" fixed app dark>
     <v-toolbar-title>
       Yee NetBank
     </v-toolbar-title>

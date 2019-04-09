@@ -1,5 +1,11 @@
 <template>
-  <v-navigation-drawer v-model="model" overflow right app disable-resize-watcher>
+  <v-navigation-drawer
+    v-model="model"
+    overflow
+    right
+    app
+    disable-resize-watcher
+  >
     <v-list>
       <v-list-tile v-for="(item, i) in menu" :key="'menu-' + i" :to="item.to">
         <v-list-tile-content>

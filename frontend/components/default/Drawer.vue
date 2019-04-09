@@ -1,10 +1,10 @@
 <template>
-  <v-navigation-drawer v-model="model" overflow right app>
+  <v-navigation-drawer v-model="model" overflow right app disable-resize-watcher>
     <v-list>
       <v-list-tile v-for="(item, i) in menu" :key="'menu-' + i" :to="item.to">
         <v-list-tile-content>
           <v-list-tile-title>
-            {{ item.name }}
+            {{ item.title }}
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>

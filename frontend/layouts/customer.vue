@@ -7,7 +7,7 @@
     ></drawer>
     <toolbar
       :dark="true"
-      :color="theme.primary"
+      :color="primary"
       :drawer="drawerPannel"
       @toggle="setDrawer"
     ></toolbar>
@@ -22,7 +22,7 @@
 <script>
 import drawer from '@/components/Drawer.vue'
 import toolbar from '@/components/Toolbar'
-import colors from 'vuetify/es5/util/colors'
+import theme from './themes/customer'
 
 export default {
   components: {
@@ -68,11 +68,11 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
-      theme: {
-        primary: colors.cyan.base
-      }
+      title: 'Vuetify.js'
     }
+  },
+  created() {
+    this.$vuetify.theme = theme
   },
   methods: {
     setDrawer(value) {

@@ -14,6 +14,7 @@
 <script>
 import Toolbar from '@/components/default/Toolbar'
 import Drawer from '@/components/default/Drawer'
+import theme from './themes/customer'
 
 export default {
   components: {
@@ -24,7 +25,7 @@ export default {
     drawer: false
   }),
   created() {
-    this.$vuetify.theme.primary = '#00BCD4'
+    this.$vuetify.theme = theme
   }
 }
 </script>

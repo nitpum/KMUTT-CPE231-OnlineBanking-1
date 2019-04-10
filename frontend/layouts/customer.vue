@@ -12,9 +12,7 @@
       @toggle="setDrawer"
     ></toolbar>
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
   </v-app>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    v-model="model"
     :mini-variant="minivariant"
     :color="color"
     clipped
@@ -45,6 +45,16 @@ export default {
     items: {
       type: Array,
       default() {}
+    }
+  },
+  computed: {
+    model: {
+      get() {
+        return this.drawer
+      },
+      set(val) {
+        this.$emit('update:drawer', val)
+      }
     }
   }
 }

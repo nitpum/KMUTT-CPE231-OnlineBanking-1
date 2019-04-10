@@ -2,13 +2,13 @@
   <v-app>
     <drawer
       :items="items"
-      :drawer="drawerPannel"
+      :drawer.sync="drawerPannel"
       :minivariant="miniVariant"
     ></drawer>
     <toolbar
       :dark="true"
       color="primary"
-      :drawer="drawerPannel"
+      :drawer.sync="drawerPannel"
       @toggle="setDrawer"
     ></toolbar>
     <v-content>

@@ -36,7 +36,7 @@ export default {
         {
           icon: 'account_balance',
           title: 'Transactions',
-          to: '/app/'
+          to: '/app/transactions'
         },
         {
           icon: 'send',

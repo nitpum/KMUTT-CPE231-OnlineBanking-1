@@ -9,8 +9,13 @@
     show-arrows
     fixed-tabs
   >
-    <v-tab v-for="(month, i) in months" :key="'tab-' + i" ripple>
-      {{ month }}
+    <v-tab
+      v-for="(tab, i) in tabs"
+      :key="'tab-' + i"
+      ripple
+      :to="'/app/transactions/' + tab"
+    >
+      {{ monthYearString(tab) }}
     </v-tab>
   </v-tabs>
 </template>
@@ -19,7 +24,27 @@
 export default {
   data: () => ({
     active: null,
-    months: ['OCT 2019', 'NOV 2019', 'DEC 2019']
-  })
+    tabs: ['2019/10', '2019/11', '2019/12']
+  }),
+  methods: {
+    monthYearString(str) {
+      const params = RegExp(`(\\d{4})/(\\d{2})`, 'g').exec(str)
+      const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
+      return `${months[params[2] - 1]}  ${params[1]}`
+    }
+  }
 }
 </script>

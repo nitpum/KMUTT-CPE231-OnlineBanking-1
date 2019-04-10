@@ -14,7 +14,7 @@ export default {
   props: {
     drawer: {
       type: Boolean,
-      default: true
+      default: null
     },
     dark: {
       type: Boolean,

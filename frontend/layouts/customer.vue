@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       clipped: false,
-      drawerPannel: true,
+      drawerPannel: null,
       fixed: false,
       items: [
         {

@@ -32,7 +32,7 @@ export default {
   props: {
     drawer: {
       type: Boolean,
-      default: true
+      default: null
     },
     minivariant: {
       type: Boolean,

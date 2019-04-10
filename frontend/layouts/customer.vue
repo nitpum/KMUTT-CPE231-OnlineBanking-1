@@ -7,7 +7,7 @@
     ></drawer>
     <toolbar
       :dark="true"
-      :color="primary"
+      color="primary"
       :drawer="drawerPannel"
       @toggle="setDrawer"
     ></toolbar>

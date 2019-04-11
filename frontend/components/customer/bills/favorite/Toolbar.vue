@@ -1,6 +1,6 @@
 <template>
   <v-card-title class="headline">
-    Favorite bill payment
+    Favorite
     <v-spacer />
     <add-favorite />
   </v-card-title>

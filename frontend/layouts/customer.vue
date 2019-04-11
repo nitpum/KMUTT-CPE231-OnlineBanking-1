@@ -43,7 +43,7 @@ export default {
           title: 'Transfer'
         },
         {
-          icon: 'input',
+          icon: 'mdi-checkbook',
           title: 'Cheque'
         },
         {

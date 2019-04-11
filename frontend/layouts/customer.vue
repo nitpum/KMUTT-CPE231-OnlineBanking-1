@@ -52,7 +52,8 @@ export default {
         },
         {
           icon: 'receipt',
-          title: 'Pay Bills'
+          title: 'Pay Bills',
+          to: '/app/bills'
         },
         {
           icon: 'account_balance_wallet',

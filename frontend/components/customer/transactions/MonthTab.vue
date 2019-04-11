@@ -21,11 +21,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data: () => ({
-    active: null,
-    tabs: ['2019/10', '2019/11', '2019/12']
+    active: null
   }),
+  computed: {
+    ...mapGetters({
+      tabs: 'transactions/tabs'
+    })
+  },
   methods: {
     monthYearString(str) {
       const params = RegExp(`(\\d{4})/(\\d{2})`, 'g').exec(str)

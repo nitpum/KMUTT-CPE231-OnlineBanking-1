@@ -14,11 +14,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@mdi/font": "^3.5.95",
     "@nuxtjs/axios": "^5.3.6",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "nuxt": "^2.4.0",
-    "vuetify": "^1.5.9",
+    "vuetify": "^1.5.11",
     "vuetify-loader": "^1.2.1"
   },
   "devDependencies": {

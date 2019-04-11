@@ -20,7 +20,17 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn color="primary">Sign In</v-btn>
+      <v-btn color="primary" @click="signIn()">Sign In</v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
+<script>
+export default {
+  methods: {
+    signIn() {
+      this.$router.push('/app')
+    }
+  }
+}
+</script>

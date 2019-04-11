@@ -3,7 +3,7 @@
     <toolbar />
     <v-container fluid grid-list-lg>
       <v-layout row wrap>
-        <v-flex xs12 sm6 lg4 xl3>
+        <v-flex xs12 sm6 xl4>
           <bill-card />
         </v-flex>
       </v-layout>

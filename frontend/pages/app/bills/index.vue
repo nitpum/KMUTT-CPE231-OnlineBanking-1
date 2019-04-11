@@ -4,7 +4,7 @@
       <v-spacer />
       <pay-btn />
     </v-toolbar>
-    <v-container>
+    <v-container fluid>
       <favorite />
     </v-container>
   </div>
@@ -15,6 +15,7 @@ import PayBtn from '@/components/customer/bills/PayBtn'
 import Favorite from '@/components/customer/bills/favorite'
 
 export default {
+  layout: 'customer',
   components: {
     PayBtn,
     Favorite

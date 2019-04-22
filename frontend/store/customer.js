@@ -14,6 +14,17 @@ export default {
     current: 0
   }),
   getters: {
+    accounts: state => state.accounts,
     currentAcc: state => state.accounts[state.current]
+  },
+  mutations: {
+    SWITCH_TO(state, index) {
+      state.current = index
+    }
+  },
+  actions: {
+    switchTo({ commit }, index) {
+      commit('SWITCH_TO', index)
+    }
   }
 }

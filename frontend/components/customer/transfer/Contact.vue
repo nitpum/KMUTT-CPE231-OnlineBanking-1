@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="480">
+  <v-dialog v-model="dialog" max-width="400">
     <v-btn slot="activator" flat icon>
       <v-icon>
         contacts
@@ -20,26 +20,26 @@
       </v-toolbar>
       <v-card-text class="text-xs-right">
         <add-contact />
+        <v-list two-line>
+          <v-list-tile
+            v-for="(contact, i) in contacts"
+            :key="'contact-' + i"
+            @click="selected(contact)"
+          >
+            <v-list-tile-content>
+              <v-list-tile-title>
+                {{ contact.name }}
+              </v-list-tile-title>
+              <v-list-tile-sub-title class="text--primary">
+                {{ contact.bank }}
+              </v-list-tile-sub-title>
+              <v-list-tile-sub-title>
+                {{ contact.acc }}
+              </v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
       </v-card-text>
-      <v-list two-line>
-        <v-list-tile
-          v-for="(contact, i) in contacts"
-          :key="'contact-' + i"
-          @click="selected(contact)"
-        >
-          <v-list-tile-content>
-            <v-list-tile-title>
-              {{ contact.name }}
-            </v-list-tile-title>
-            <v-list-tile-sub-title class="text--primary">
-              {{ contact.bank }}
-            </v-list-tile-sub-title>
-            <v-list-tile-sub-title>
-              {{ contact.acc }}
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
     </v-card>
   </v-dialog>
 </template>
@@ -55,7 +55,7 @@ export default {
     dialog: false,
     contacts: [
       {
-        name: 'Thuswonsa K',
+        name: 'Thuswongsa K.',
         bank: 'Korbboon Bank Co, Ltd.',
         bankId: 1,
         acc: '325-9-71464-9'

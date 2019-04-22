@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="400px">
+  <v-dialog v-model="dialog" max-width="600px">
     <v-btn slot="activator" color="green" dark>
       <v-icon left>add</v-icon>
       add
@@ -15,9 +15,11 @@
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <v-text-field label="Name" counter="50" />
-        <v-select label="Bank" />
-        <v-text-field label="Account Number" mask="###-#-#####-#" />
+        <v-container>
+          <v-text-field label="Name" counter="50" />
+          <v-select label="Bank" />
+          <v-text-field label="Account Number" mask="###-#-#####-#" />
+        </v-container>
       </v-card-text>
       <v-card-actions>
         <v-spacer />

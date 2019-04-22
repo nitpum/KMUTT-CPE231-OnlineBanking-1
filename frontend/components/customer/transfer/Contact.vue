@@ -9,7 +9,7 @@
     <v-card>
       <v-toolbar>
         <v-toolbar-title flat>
-          Favorite
+          Favorites
         </v-toolbar-title>
         <v-spacer />
         <v-btn icon flat @click="dialog = false">

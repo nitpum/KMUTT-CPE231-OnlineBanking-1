@@ -1,6 +1,6 @@
 <template>
   <v-card-title class="headline">
-    Favorite
+    Favorites
     <v-spacer />
     <add-favorite />
   </v-card-title>

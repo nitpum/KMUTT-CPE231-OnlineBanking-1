@@ -4,7 +4,22 @@
       :items="items"
       :drawer.sync="drawerPannel"
       :minivariant="miniVariant"
-    ></drawer>
+    >
+      <v-list>
+        <v-list-tile class="pt-2">
+          <v-list-tile-content>
+            <v-list-tile-title>{{ accountId }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ accountType }}</v-list-tile-sub-title>
+          </v-list-tile-content>
+          <v-list-tile-actions>
+            <v-btn icon>
+              <v-icon>arrow_drop_down</v-icon>
+            </v-btn>
+          </v-list-tile-actions>
+        </v-list-tile>
+      </v-list>
+      <v-divider class="mt-1" />
+    </drawer>
     <toolbar
       :dark="true"
       color="primary"
@@ -26,6 +41,12 @@ export default {
   components: {
     drawer,
     toolbar
+  },
+  props: {
+    accountId: {
+      type: String,
+      default: '000-0-00000-0'
+    }
   },
   data() {
     return {
@@ -68,7 +89,9 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Vuetify.js',
+      accounts: ['000-0-00000-0'],
+      accountType: 'Saving account'
     }
   },
   created() {

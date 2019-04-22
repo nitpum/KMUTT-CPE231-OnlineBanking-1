@@ -9,7 +9,7 @@
         {{ item.title }}
       </v-btn>
     </v-toolbar-items>
-    <bottom-sheet />
+    <bottom-sheet class="hidden-md-and-up" />
   </v-toolbar>
 </template>
 

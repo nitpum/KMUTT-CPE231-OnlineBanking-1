@@ -7,6 +7,7 @@
     fixed
     app
   >
+    <slot />
     <v-list>
       <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to">
         <v-list-tile-action>

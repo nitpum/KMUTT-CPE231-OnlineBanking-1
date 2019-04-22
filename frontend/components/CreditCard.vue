@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="mb-3">
     <v-card-title primary-title class="mb-0 pb-0">
       <div>
         <h3 class="headline mb-0">{{ cardNumber }}</h3>
@@ -13,7 +13,7 @@
       {{ cardType }} ({{ provider }})
     </v-card-text>
     <v-card-text v-if="bookId" class="pt-0 pb-0 grey--text">
-      Book ID: ({{ bookId }})
+      Book ID: {{ bookId }}
     </v-card-text>
     <v-divider class="mt-4" />
     <v-card-actions>
@@ -58,12 +58,12 @@ export default {
     },
     censor: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   computed: {
     cardNumber() {
-      return this.censor
+      return !this.censor
         ? this.number
         : this.number
             .split('-')

@@ -40,7 +40,8 @@ export default {
         },
         {
           icon: 'send',
-          title: 'Transfer'
+          title: 'Transfer',
+          to: '/app/transfer'
         },
         {
           icon: 'mdi-checkbook',

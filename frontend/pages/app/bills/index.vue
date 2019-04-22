@@ -2,6 +2,7 @@
   <div>
     <v-toolbar flat color="transparent">
       <v-spacer />
+      <!-- @todo #2 Pay Button function  -->
       <pay-btn />
     </v-toolbar>
     <v-container fluid>

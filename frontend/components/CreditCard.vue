@@ -10,7 +10,10 @@
       {{ holder }}
     </v-card-text>
     <v-card-text class="pt-0 pb-1 grey--text">
-      {{ cardType }} ({{ provider }})
+      {{ cardType }}
+      <template v-if="provider">
+        ({{ provider }})
+      </template>
     </v-card-text>
     <v-card-text v-if="accountId" class="pt-0 pb-0 grey--text">
       Account: {{ accountId }}

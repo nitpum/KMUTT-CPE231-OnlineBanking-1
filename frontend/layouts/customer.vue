@@ -48,7 +48,8 @@ export default {
         },
         {
           icon: 'payment',
-          title: 'My Card'
+          title: 'My Card',
+          to: '/app/cards'
         },
         {
           icon: 'receipt',

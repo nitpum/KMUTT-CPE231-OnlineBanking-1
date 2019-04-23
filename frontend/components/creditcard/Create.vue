@@ -6,9 +6,12 @@
       </v-card-title>
       <v-card-text>
         <v-container>
-          <v-text-field label="Owner" />
+          <v-text-field label="Owner" append-icon="mdi-folder-search-outline" />
           <v-select label="Type" />
-          <v-text-field label="Account No." />
+          <v-text-field
+            label="Account No."
+            append-icon="mdi-folder-search-outline"
+          />
         </v-container>
       </v-card-text>
       <v-card-actions>

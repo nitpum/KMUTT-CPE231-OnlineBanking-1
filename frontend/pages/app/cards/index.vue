@@ -8,7 +8,7 @@
           <credit-card
             :censor="true"
             book-id="1234-1234-1234"
-            show-reset-pin="true"
+            :show-reset-pin="true"
           />
         </v-flex>
       </v-layout>

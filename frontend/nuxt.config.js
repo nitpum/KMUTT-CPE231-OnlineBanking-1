@@ -78,5 +78,13 @@ module.exports = {
         })
       }
     }
+  },
+  generate: {
+    routes: [
+      'app/transactions/2019/09',
+      '/app/transactions/2019/10',
+      'app/transactions/2019/11',
+      'app/transactions/2019/12'
+    ]
   }
 }

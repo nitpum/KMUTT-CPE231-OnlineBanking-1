@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Toolbar from '@/components/default/Toolbar'
+import Toolbar from '@/components/home/Toolbar'
 import theme from './themes/customer'
 
 export default {

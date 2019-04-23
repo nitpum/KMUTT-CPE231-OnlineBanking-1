@@ -42,6 +42,12 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn flat color="primary" @click="dialog = false">
+              close
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
     </v-list-tile>

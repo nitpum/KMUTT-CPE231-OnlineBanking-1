@@ -25,7 +25,7 @@
 export default {
   name: 'Drawer',
   props: {
-    drawer: {
+    value: {
       type: Boolean,
       default: null
     },
@@ -45,10 +45,10 @@ export default {
   computed: {
     model: {
       get() {
-        return this.drawer
+        return this.value
       },
       set(val) {
-        this.$emit('update:drawer', val)
+        this.$emit('input', val)
       }
     }
   }

@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <drawer
-      :items="items"
-      :drawer.sync="drawerPannel"
-      :minivariant="miniVariant"
-    >
+    <drawer v-model="drawerPannel" :items="items" :minivariant="miniVariant">
       <accounts />
       <v-divider class="mt-1" />
     </drawer>

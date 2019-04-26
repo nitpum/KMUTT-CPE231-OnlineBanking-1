@@ -24,7 +24,7 @@
 import drawer from '@/components/Drawer.vue'
 import toolbar from '@/components/Toolbar'
 import theme from './themes/customer'
-import Accounts from '@/components/customer/Accounts'
+import Accounts from '@/components/customer/accounts/Switch'
 
 export default {
   components: {

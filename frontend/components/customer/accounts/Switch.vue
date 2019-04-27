@@ -15,7 +15,10 @@
               Accounts
             </v-toolbar-title>
             <v-spacer />
-            <v-btn color="primary">add</v-btn>
+            <activate v-model="activate" />
+            <v-btn color="primary" @click="activate = true">
+              add
+            </v-btn>
           </v-toolbar>
           <v-card-text>
             <v-expansion-panel :value="0">
@@ -56,10 +59,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Activate from '@/components/customer/accounts/Activate'
 
 export default {
+  components: {
+    Activate
+  },
   data: () => ({
-    dialog: false
+    dialog: false,
+    activate: false
   }),
   computed: {
     ...mapGetters({

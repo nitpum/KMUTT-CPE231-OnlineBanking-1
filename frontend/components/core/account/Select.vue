@@ -14,12 +14,12 @@
       label="Account Type"
       :text="account ? account.type : ''"
     ></text-label>
-    <select-dialog :dialog.sync="dialog" :select.sync="select"></select-dialog>
+    <select-dialog v-model="dialog" @select="select"></select-dialog>
   </div>
 </template>
 
 <script>
-import SelectDialog from '@/components/core/account/SelectDialog'
+import SelectDialog from './SelectDialog'
 import TextLabel from '@/components/core/TextLabel'
 
 export default {
@@ -27,19 +27,29 @@ export default {
     SelectDialog,
     TextLabel
   },
+  props: {
+    value: {
+      type: String,
+      default: ''
+    }
+  },
   data: () => ({
     dialog: false,
     account: null
   }),
   computed: {
-    select: {
+    account: {
       get() {
-        return null
+        return this.value
       },
       set(val) {
-        this.$emit('update:select', val)
-        this.account = val
+        this.$emit('input', val)
       }
+    }
+  },
+  methods: {
+    select(val) {
+      this.account = val
     }
   }
 }

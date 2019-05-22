@@ -58,11 +58,13 @@ export default {
         },
         {
           icon: 'mdi-cloud',
-          title: 'ADM'
+          title: 'ADM',
+          to: '/admin/adm'
         },
         {
           icon: 'mdi-cloud',
-          title: 'System'
+          title: 'System',
+          to: '/admin/system'
         }
       ],
       miniVariant: false,

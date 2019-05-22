@@ -5,8 +5,8 @@
     offset-y
     :nudge-width="250"
   >
-    <template slot="activator">
-      <v-avatar>
+    <template v-slot:activator="{ on }">
+      <v-avatar style="cursor: pointer" v-on="on">
         <v-img :src="avatar" />
       </v-avatar>
     </template>

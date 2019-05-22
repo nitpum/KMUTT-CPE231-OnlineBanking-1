@@ -9,7 +9,7 @@
             </v-card-title>
             <v-card-text>
               <h3>From</h3>
-              <select-account :select.sync="from"></select-account>
+              <select-account v-model="from" />
               <h3>To</h3>
               <v-select
                 label="Reciptient Bank"

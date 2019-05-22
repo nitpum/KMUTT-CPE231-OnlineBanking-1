@@ -45,7 +45,8 @@ export default {
         },
         {
           icon: 'payment',
-          title: 'My Card'
+          title: 'Card',
+          to: '/staff/cards'
         },
         {
           icon: 'mdi-checkbook',

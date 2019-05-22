@@ -46,16 +46,20 @@
       </v-card-title>
       <v-divider />
       <v-card-text>
-        <!-- @todo: manager account type graph -->
-        graph here
+        <bar-chart :data="charts" :options="chartOptions" :height="300" />
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import BarChart from '@/components/cores/charts/Bar.js'
+
 export default {
   layout: 'manager',
+  components: {
+    BarChart
+  },
   data: () => ({
     data: {
       new: 10,
@@ -86,7 +90,28 @@ export default {
         key: 'total',
         label: 'Total account'
       }
-    ]
+    ],
+    charts: {
+      labels: ['Fixes', 'All Free', 'Saving'],
+      datasets: [
+        {
+          backgroundColor: ['#00BCD4', '#EC008C', '#009688'],
+          data: [200, 400, 1400]
+        }
+      ]
+    },
+    chartOptions: {
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    }
   })
 }
 </script>

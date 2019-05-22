@@ -1,13 +1,14 @@
 <template>
   <v-app>
     <drawer v-model="drawerPannel" :items="items" :minivariant="miniVariant">
-      <accounts />
+      <staff-info />
       <v-divider class="mt-1" />
     </drawer>
     <toolbar
       :dark="true"
       color="primary"
       :drawer.sync="drawerPannel"
+      title="STAFF - Yee Netbank"
       @toggle="setDrawer"
     ></toolbar>
     <v-content>
@@ -17,16 +18,16 @@
 </template>
 
 <script>
-import drawer from '@/components/Drawer.vue'
-import toolbar from '@/components/Toolbar'
-import theme from './themes/customer'
-import Accounts from '@/components/customer/accounts/Switch'
+import Drawer from '@/components/Drawer.vue'
+import Toolbar from '@/components/Toolbar'
+import theme from './themes/staff'
+import StaffInfo from '@/components/StaffInfo'
 
 export default {
   components: {
-    drawer,
-    toolbar,
-    Accounts
+    Drawer,
+    Toolbar,
+    StaffInfo
   },
   data() {
     return {
@@ -36,35 +37,23 @@ export default {
       items: [
         {
           icon: 'account_balance',
-          title: 'Transactions',
-          to: '/app/transactions'
-        },
-        {
-          icon: 'send',
-          title: 'Transfer',
-          to: '/app/transfer'
-        },
-        {
-          icon: 'mdi-checkbook',
-          title: 'Cheque'
-        },
-        {
-          icon: 'payment',
-          title: 'My Card',
-          to: '/app/cards'
-        },
-        {
-          icon: 'receipt',
-          title: 'Pay Bills',
-          to: '/app/bills'
+          title: 'Transactions'
         },
         {
           icon: 'account_balance_wallet',
           title: 'Account'
         },
         {
-          icon: 'build',
-          title: 'Settings'
+          icon: 'payment',
+          title: 'My Card'
+        },
+        {
+          icon: 'mdi-checkbook',
+          title: 'Cheque'
+        },
+        {
+          icon: 'bar_chart',
+          title: 'Analytics'
         }
       ],
       miniVariant: false,

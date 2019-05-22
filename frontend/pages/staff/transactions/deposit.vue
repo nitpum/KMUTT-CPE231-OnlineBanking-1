@@ -10,7 +10,7 @@
             <v-card-text>
               <v-text-field
                 label="Account ID"
-                :value="account.id"
+                :value="account && account.id ? account.id : ''"
                 placeholder="Account ID"
                 readonly
                 @click="dialog = true"
@@ -58,7 +58,7 @@ export default {
   layout: 'staff',
   components: { SelectDialog },
   data: () => ({
-    account: { name: 'Nikola Testla', type: 'Saving Deposit' },
+    account: null,
     dialog: false
   })
 }

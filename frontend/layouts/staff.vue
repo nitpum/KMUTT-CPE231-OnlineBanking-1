@@ -37,7 +37,30 @@ export default {
       items: [
         {
           icon: 'account_balance',
-          title: 'Transactions'
+          title: 'Transactions',
+          children: [
+            {
+              icon: 'add',
+              text: 'Deposit',
+              to: '/staff/transactions/deposit'
+            },
+            {
+              icon: 'remove',
+              text: 'Withdraw',
+              to: '/staff/transactions/withdraw'
+            },
+            {
+              icon: 'swap_horiz',
+              text: 'Transfer',
+              to: '/staff/transactions/transfer'
+            },
+            { icon: 'receipt', text: 'Bills', to: '/staff/transactions/bills' },
+            {
+              icon: 'bar_chart',
+              text: 'Analytics',
+              to: '/staff/transactions/analytics'
+            }
+          ]
         },
         {
           icon: 'account_balance_wallet',
@@ -51,10 +74,6 @@ export default {
         {
           icon: 'mdi-checkbook',
           title: 'Cheque'
-        },
-        {
-          icon: 'bar_chart',
-          title: 'Analytics'
         }
       ],
       miniVariant: false,

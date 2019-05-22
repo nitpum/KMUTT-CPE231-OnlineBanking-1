@@ -19,8 +19,6 @@
                 v-model="to.id"
                 label="Account ID"
                 placeholder="Account ID"
-                readonly
-                @click="fromDialog = true"
               ></v-text-field>
               <v-text-field
                 label="Amount"
@@ -39,11 +37,6 @@
     </v-container>
   </div>
 </template>
-
-<style scoped>
-.v-text-field__slot {
-}
-</style>
 
 <script>
 import SelectAccount from '@/components/core/account/Select'

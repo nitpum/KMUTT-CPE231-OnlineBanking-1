@@ -50,7 +50,8 @@ export default {
         },
         {
           icon: 'mdi-domain',
-          title: 'Balance'
+          title: 'Balance',
+          to: '/manager/balance'
         },
         {
           icon: 'mdi-bank',

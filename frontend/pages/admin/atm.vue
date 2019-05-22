@@ -43,17 +43,17 @@ export default {
         value: 'name'
       },
       {
-        text: 'Amount of Transactions Today',
+        text: 'Today transactions',
         align: 'center',
         value: 'transactions.today'
       },
       {
-        text: 'Amount of Transactions This Week',
+        text: 'This week transactions',
         align: 'center',
         value: 'transactions.week'
       },
       {
-        text: 'Amount of Transactions This Month',
+        text: 'This month transactions',
         align: 'center',
         value: 'transactions.month'
       },

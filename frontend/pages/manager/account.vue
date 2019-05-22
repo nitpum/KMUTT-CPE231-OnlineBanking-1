@@ -33,7 +33,7 @@
     <v-card>
       <v-card-title>
         <h3 class="headline mb-0">
-          Acount Type
+          Account Type
         </h3>
       </v-card-title>
       <v-divider />

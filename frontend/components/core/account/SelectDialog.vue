@@ -8,7 +8,7 @@
         <v-container>
           <v-text-field label="Search" prepend-inner-icon="search" solo />
           <v-divider />
-          <v-list two-line>
+          <v-list three-line>
             <v-list-tile
               v-for="(account, i) in accounts"
               :key="i"
@@ -20,9 +20,9 @@
                 </v-list-tile-title>
                 <v-list-tile-sub-title>
                   {{ account.id }}
-                  <template v-if="account.type">
-                    ({{ account.type.toUpperCase() }})
-                  </template>
+                </v-list-tile-sub-title>
+                <v-list-tile-sub-title>
+                  {{ account.type.toUpperCase() }}
                 </v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     select: function(account) {
-      this.$emit('update:account', account)
+      this.$emit('update:select', account)
       this.model = false
     }
   }

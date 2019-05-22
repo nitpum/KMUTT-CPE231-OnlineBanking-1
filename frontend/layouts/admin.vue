@@ -53,7 +53,8 @@ export default {
         },
         {
           icon: 'mdi-cloud',
-          title: 'ATM'
+          title: 'ATM',
+          to: '/admin/atm'
         },
         {
           icon: 'mdi-cloud',

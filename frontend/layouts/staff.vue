@@ -46,8 +46,8 @@ export default {
             },
             {
               icon: 'remove',
-              text: 'Withdraw',
-              to: '/staff/transactions/withdraw'
+              text: 'Withdrawal',
+              to: '/staff/transactions/withdrawal'
             },
             {
               icon: 'swap_horiz',

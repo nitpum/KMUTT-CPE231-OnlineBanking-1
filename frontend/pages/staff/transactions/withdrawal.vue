@@ -8,27 +8,7 @@
               <h2>Withdrawal</h2>
             </v-card-title>
             <v-card-text>
-              <v-text-field
-                label="Account ID"
-                :value="account && account.id ? account.id : ''"
-                placeholder="Account ID"
-                readonly
-                @click="dialog = true"
-              ></v-text-field>
-              <v-text-field
-                v-if="account"
-                :value="account.name"
-                label="Name"
-                placeholder="Name"
-                readonly
-              ></v-text-field>
-              <v-text-field
-                v-if="account"
-                label="Account Type"
-                :value="account.type"
-                placeholder="Account Type"
-                readonly
-              ></v-text-field>
+              <select-account :select.sync="account"></select-account>
               <v-text-field
                 label="Amount"
                 placeholder="0.00"
@@ -44,19 +24,15 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <select-dialog
-      :dialog.sync="dialog"
-      :account.sync="account"
-    ></select-dialog>
   </div>
 </template>
 
 <script>
-import SelectDialog from '@/components/core/account/SelectDialog'
+import SelectAccount from '@/components/core/account/Select'
 
 export default {
   layout: 'staff',
-  components: { SelectDialog },
+  components: { SelectAccount },
   data: () => ({
     account: null,
     dialog: false

@@ -16,22 +16,14 @@
               xs12
               sm6
             >
-              <v-layout
+              <p
                 v-for="overview in overviews.slice(col[0], col[1])"
                 :key="overview.key"
-                row
+                style="text-align:left;"
               >
-                <v-flex shrink>
-                  <p class="text-xs-right my-0">
-                    {{ overview.label }}
-                  </p>
-                </v-flex>
-                <v-flex glow>
-                  <p class="text-xs-right my-0">
-                    {{ data[overview.key] }}
-                  </p>
-                </v-flex>
-              </v-layout>
+                {{ overview.label }}
+                <span style="float:right;">{{ data[overview.key] }}</span>
+              </p>
             </v-flex>
           </v-layout>
         </v-container>
@@ -46,16 +38,20 @@
       </v-card-title>
       <v-divider />
       <v-card-text>
-        <!-- @todo: manager account type graph -->
-        graph here
+        <bar-chart :data="charts" :options="chartOptions" :height="300" />
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import BarChart from '@/components/cores/charts/Bar.js'
+
 export default {
   layout: 'manager',
+  components: {
+    BarChart
+  },
   data: () => ({
     data: {
       new: 10,
@@ -86,7 +82,28 @@ export default {
         key: 'total',
         label: 'Total account'
       }
-    ]
+    ],
+    charts: {
+      labels: ['Fixes', 'All Free', 'Saving'],
+      datasets: [
+        {
+          backgroundColor: ['#00BCD4', '#EC008C', '#009688'],
+          data: [200, 400, 1400]
+        }
+      ]
+    },
+    chartOptions: {
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    }
   })
 }
 </script>

@@ -3,7 +3,7 @@
     <v-card class="mb-3">
       <v-card-title>
         <h3 class="headline mb-0">
-          Card Overview
+          Balance by age
         </h3>
       </v-card-title>
       <v-divider />
@@ -11,7 +11,7 @@
         <v-container fluid grid-list-xl py-0>
           <v-layout row wrap>
             <v-flex
-              v-for="(col, i) in [[0, 4], [4, 6]]"
+              v-for="(col, i) in [[0, 3], [3, 5]]"
               :key="'col-' + i"
               xs12
               sm6
@@ -33,12 +33,12 @@
     <v-card>
       <v-card-title>
         <h3 class="headline mb-0">
-          Card Expires
+          Average Balance / Age
         </h3>
       </v-card-title>
       <v-divider />
       <v-card-text>
-        <!-- @todo: manager card expires graph -->
+        <!-- @todo: manager account type graph -->
         graph here
       </v-card-text>
     </v-card>
@@ -50,37 +50,32 @@ export default {
   layout: 'manager',
   data: () => ({
     data: {
-      new: 10,
-      min: 1,
-      max: 10,
-      average: 5,
-      total: 5000,
-      expires: 'March'
+      min: '1',
+      max: '100,000,000',
+      average: '500,000',
+      least: '1 - 15',
+      most: '30 - 50'
     },
     overviews: [
       {
-        key: 'new',
-        label: 'New card'
-      },
-      {
         key: 'min',
-        label: 'Min new card / Month'
+        label: 'Min value'
       },
       {
         key: 'max',
-        label: 'Max new card / Month'
+        label: 'Max value'
       },
       {
         key: 'average',
-        label: 'Average new card / Month'
+        label: 'Average value'
       },
       {
-        key: 'total',
-        label: 'Total card'
+        key: 'least',
+        label: 'Least balance age'
       },
       {
-        key: 'expires',
-        label: 'Most expires month'
+        key: 'most',
+        label: 'Most balance age'
       }
     ]
   })

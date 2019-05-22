@@ -1,12 +1,14 @@
 <template>
   <div>
     <v-container>
+      <v-layout justify-end>
+        <v-btn color="green white--text" @click="activateDialog = true">
+          ACTIVATE
+          <activate-dialog :dialog.sync="activateDialog" />
+        </v-btn>
+      </v-layout>
       <v-layout align-center justify-center>
         <v-flex xs4>
-          <v-btn color="green white--text" @click="activateDialog = true">
-            ACTIVATE
-            <activate-dialog :dialog.sync="activateDialog" />
-          </v-btn>
           <credit-card
             v-for="(card, i) in cards"
             :key="i"

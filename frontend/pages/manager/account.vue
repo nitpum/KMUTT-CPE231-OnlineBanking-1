@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import BarChart from '@/components/cores/charts/Bar.js'
+import BarChart from '@/components/core/charts/Bar.js'
 
 export default {
   layout: 'manager',

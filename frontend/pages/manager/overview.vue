@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import DatePickerDialog from '@/components/cores/DatePickerDialog'
+import DatePickerDialog from '@/components/core/DatePickerDialog'
 
 export default {
   layout: 'manager',

@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import LineChart from '@/components/cores/charts/Line.js'
+import LineChart from '@/components/core/charts/Line.js'
 
 export default {
   layout: 'manager',

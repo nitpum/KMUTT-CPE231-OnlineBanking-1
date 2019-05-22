@@ -16,22 +16,14 @@
               xs12
               sm6
             >
-              <v-layout
+              <p
                 v-for="overview in overviews.slice(col[0], col[1])"
                 :key="overview.key"
-                row
+                style="text-align:left;"
               >
-                <v-flex shrink>
-                  <p class="text-xs-right my-0">
-                    {{ overview.label }}
-                  </p>
-                </v-flex>
-                <v-flex glow>
-                  <p class="text-xs-right my-0">
-                    {{ data[overview.key] }}
-                  </p>
-                </v-flex>
-              </v-layout>
+                {{ overview.label }}
+                <span style="float:right;">{{ data[overview.key] }}</span>
+              </p>
             </v-flex>
           </v-layout>
         </v-container>

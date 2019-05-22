@@ -16,7 +16,9 @@
               {{ text }}
             </template>
             <template v-else>
-              {{ placeholder }}
+              <span class="placeholder">
+                {{ placeholder }}
+              </span>
             </template>
           </div>
         </div>
@@ -71,5 +73,8 @@ export default {
   width: 100%;
   max-height: 32px;
   min-height: 32px;
+}
+.placeholder {
+  color: rgba(0, 0, 0, 0.54);
 }
 </style>

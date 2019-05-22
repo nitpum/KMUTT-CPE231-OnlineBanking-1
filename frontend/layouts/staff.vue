@@ -73,7 +73,8 @@ export default {
         },
         {
           icon: 'mdi-checkbook',
-          title: 'Cheque'
+          title: 'Cheque',
+          to: '/staff/cheque'
         }
       ],
       miniVariant: false,

@@ -94,6 +94,9 @@ export default {
     },
     chartOptions: {
       maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
       scales: {
         yAxes: [
           {

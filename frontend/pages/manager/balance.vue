@@ -38,16 +38,20 @@
       </v-card-title>
       <v-divider />
       <v-card-text>
-        <!-- @todo: manager account type graph -->
-        graph here
+        <bar-chart :data="charts" :options="chartOptions" :height="300" />
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import BarChart from '@/components/cores/charts/Bar.js'
+
 export default {
   layout: 'manager',
+  components: {
+    BarChart
+  },
   data: () => ({
     data: {
       min: '1',
@@ -77,7 +81,31 @@ export default {
         key: 'most',
         label: 'Most balance age'
       }
-    ]
+    ],
+    charts: {
+      labels: ['1 - 15', '15 - 30', '30 - 50', '50 - 80'],
+      datasets: [
+        {
+          backgroundColor: ['#00BCD4', '#EC008C', '#3F51B5', '#6202EE'],
+          data: [41, 74, 163, 132]
+        }
+      ]
+    },
+    chartOptions: {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    }
   })
 }
 </script>

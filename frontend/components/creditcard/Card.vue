@@ -12,7 +12,7 @@
     <v-card-text class="pt-0 pb-1 grey--text">
       {{ cardType }}
       <template v-if="provider">
-        ({{ provider }})
+        ({{ provider.toUpperCase() }})
       </template>
     </v-card-text>
     <v-card-text v-if="accountId" class="pt-0 pb-0 grey--text">

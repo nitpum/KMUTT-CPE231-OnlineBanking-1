@@ -62,7 +62,8 @@ export default {
         },
         {
           icon: 'mdi-cloud',
-          title: 'System'
+          title: 'System',
+          to: '/admin/system'
         }
       ],
       miniVariant: false,

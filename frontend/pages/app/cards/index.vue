@@ -3,9 +3,9 @@
     <v-container>
       <v-layout align-center justify-center>
         <v-flex xs4>
-          <v-btn color="green white--text" @click="createDialog = true">
+          <v-btn color="green white--text" @click="activateDialog = true">
             ACTIVATE
-            <create-dialog :dialog.sync="createDialog" />
+            <activate-dialog :dialog.sync="activateDialog" />
           </v-btn>
           <credit-card
             v-for="(card, i) in cards"
@@ -25,17 +25,17 @@
 
 <script>
 import CreditCard from '@/components/creditcard/Card'
-import CreateDialog from '@/components/creditcard/Create'
+import ActivateDialog from '@/components/creditcard/Activate'
 import { mapState } from 'vuex'
 
 export default {
   layout: 'customer',
   components: {
     CreditCard,
-    CreateDialog
+    ActivateDialog
   },
   data: () => ({
-    createDialog: false
+    activateDialog: false
   }),
   computed: {
     ...mapState({

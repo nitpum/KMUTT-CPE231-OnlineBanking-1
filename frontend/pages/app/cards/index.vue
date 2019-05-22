@@ -7,7 +7,6 @@
             ACTIVATE
             <create-dialog :dialog.sync="createDialog" />
           </v-btn>
-          <credit-card />
           <credit-card
             v-for="(card, i) in cards"
             :key="i"
@@ -27,6 +26,7 @@
 <script>
 import CreditCard from '@/components/creditcard/Card'
 import CreateDialog from '@/components/creditcard/Create'
+import { mapState } from 'vuex'
 
 export default {
   layout: 'customer',
@@ -36,6 +36,11 @@ export default {
   },
   data: () => ({
     createDialog: false
-  })
+  }),
+  computed: {
+    ...mapState({
+      cards: state => state.card.cards
+    })
+  }
 }
 </script>

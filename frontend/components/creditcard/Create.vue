@@ -16,7 +16,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn flat>
+        <v-btn flat @click="model = false">
           close
         </v-btn>
         <v-btn flat color="primary">

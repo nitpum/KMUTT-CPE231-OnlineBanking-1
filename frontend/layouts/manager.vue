@@ -38,7 +38,7 @@ export default {
         {
           icon: 'mdi-view-dashboard',
           title: 'Overview',
-          to: '/manager'
+          to: '/manager/overview'
         },
         {
           icon: 'account_balance_wallet',

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="model" max-width="500">
+  <v-dialog v-model="model" lazy max-width="500">
     <v-card>
       <v-card-title class="headline">
         Create Card
@@ -30,7 +30,7 @@
 <script>
 export default {
   props: {
-    dialog: {
+    value: {
       type: Boolean,
       default: false
     }
@@ -38,10 +38,10 @@ export default {
   computed: {
     model: {
       get() {
-        return this.dialog
+        return this.value
       },
       set(val) {
-        this.$emit('update:dialog', val)
+        this.$emit('input', val)
       }
     }
   }

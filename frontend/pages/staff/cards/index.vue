@@ -6,7 +6,7 @@
           <v-btn color="accent" block @click="createDialog = true">
             <v-icon>add</v-icon>
             Create
-            <create-dialog :dialog.sync="createDialog"></create-dialog>
+            <create-dialog v-model="createDialog" />
           </v-btn>
           <v-text-field
             placeholder="Search"

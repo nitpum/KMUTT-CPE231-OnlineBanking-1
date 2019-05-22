@@ -8,7 +8,7 @@
               <h2>Withdrawal</h2>
             </v-card-title>
             <v-card-text>
-              <select-account :select.sync="account"></select-account>
+              <select-account v-model="account" />
               <v-text-field
                 label="Amount"
                 placeholder="0.00"

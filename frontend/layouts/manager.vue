@@ -57,7 +57,8 @@ export default {
         },
         {
           icon: 'account_balance_wallet',
-          title: 'Accounts'
+          title: 'Account',
+          to: '/manager/account'
         },
         {
           icon: 'mdi-credit-card',

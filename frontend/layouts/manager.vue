@@ -6,7 +6,7 @@
     </drawer>
     <toolbar
       :dark="true"
-      color="teal"
+      :color="$vuetify.theme.primary"
       :drawer.sync="drawerPannel"
       title="MANAGER - Yee Netbank"
       @toggle="setDrawer"
@@ -20,7 +20,7 @@
 <script>
 import Drawer from '@/components/Drawer.vue'
 import Toolbar from '@/components/Toolbar'
-import theme from './themes/staff'
+import theme from './themes/manager'
 import StaffInfo from '@/components/StaffInfo'
 
 export default {
@@ -37,7 +37,8 @@ export default {
       items: [
         {
           icon: 'mdi-view-dashboard',
-          title: 'Overview'
+          title: 'Overview',
+          to: '/manager'
         },
         {
           icon: 'account_balance_wallet',
@@ -57,7 +58,8 @@ export default {
         },
         {
           icon: 'account_balance_wallet',
-          title: 'Accounts'
+          title: 'Account',
+          to: '/manager/account'
         },
         {
           icon: 'mdi-credit-card',

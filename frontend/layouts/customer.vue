@@ -6,7 +6,7 @@
     </drawer>
     <toolbar
       :dark="true"
-      color="primary"
+      :color="$vuetify.theme.primary"
       :drawer.sync="drawerPannel"
       @toggle="setDrawer"
     ></toolbar>

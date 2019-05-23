@@ -54,6 +54,15 @@ const query = {
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
+  }),
+  /**
+   * @param  {String} id - mongodb object id
+   * @returns {Object} - mongodb object
+   */
+  id: (id) => new Promise((resolve, reject) => {
+    BranchSchema.findById(id)
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
   })
 }
 

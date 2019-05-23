@@ -40,10 +40,14 @@ router.post('/create', async (req, res) => {
 })
 
 router.get('/query', (req, res) => {
+  const id = req.query.id || undefined
   const limit = Number(req.query.limit) || undefined
   const search = req.query.search || undefined
   if (search) {
     BranchModel.query.search(search, limit)
+      .then(doc => res.send(doc))
+  } else if (id) {
+    BranchModel.query.id(id)
       .then(doc => res.send(doc))
   } else {
     BranchModel.query.all(limit)

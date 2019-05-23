@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-3">
+  <v-card>
     <v-card-title primary-title class="mb-0 pb-0">
       <div>
         <h3 class="headline mb-0">{{ cardNumber }}</h3>
@@ -24,7 +24,7 @@
       <v-btn v-if="showResetPin" flat color="red" @click="$emit('resetPin')">
         RESET PIN
       </v-btn>
-      <v-btn flat color="red" @click="$emit('revoke')">
+      <v-btn flat color="red" @click="$emit('onRevoke')">
         REVOKE
       </v-btn>
     </v-card-actions>

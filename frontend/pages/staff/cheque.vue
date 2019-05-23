@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import PayDialog from '@/components/core/cheque/PayDialog'
+import PayDialog from '@/components/staff/cheque/PayDialog'
 
 export default {
   layout: 'staff',

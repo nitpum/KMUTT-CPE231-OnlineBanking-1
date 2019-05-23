@@ -6,7 +6,7 @@ const router = express.Router()
 // helpers
 const authen = require('../helpers/authen')
 
-const PERMISSION = 'admin'
+const PERMISSION = ['admin']
 
 // model
 const adminModel = require('../../models/admin/index')

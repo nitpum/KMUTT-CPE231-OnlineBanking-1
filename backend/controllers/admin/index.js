@@ -3,6 +3,8 @@ const passport = require('passport')
 const express = require('express')
 const router = express.Router()
 
+const PERMISSION = 'admin'
+
 // model
 const adminModel = require('../../models/admin/index')
 
@@ -27,6 +29,15 @@ router.post('/create', async (req, res) => {
   } catch (err) {
     if (err) res.send(err)
   }
+})
+
+router.post('/login', passport.authenticate(PERMISSION, {
+  successRedirect: '/admin',
+  failureRedirect: '/admin/login'
+}))
+
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../views/admin/', 'login.html'))
 })
 
 module.exports = router

@@ -9,7 +9,7 @@
       <v-divider />
       <v-data-table :headers="headers" :items="items" class="elevation-1">
         <template v-slot:items="{ item }">
-          <td>{{ item.id }}</td>
+          <td>{{ item.No }}</td>
           <td>{{ item.name }}</td>
           <td class="text-xs-center">{{ item.transactions.month }}</td>
           <td class="text-xs-right">
@@ -54,7 +54,7 @@ export default {
       {
         text: 'No.',
         align: 'left',
-        value: 'No.'
+        value: 'No'
       },
       {
         text: 'Account Name',
@@ -89,7 +89,7 @@ export default {
     ],
     items: [
       {
-        id: '000',
+        No: '000',
         name: 'Bangmod 1',
         transactions: {
           today: 5,
@@ -102,7 +102,7 @@ export default {
         minDep: '500'
       },
       {
-        id: '001',
+        No: '001',
         name: 'Bangmod 1',
         transactions: {
           today: 5,

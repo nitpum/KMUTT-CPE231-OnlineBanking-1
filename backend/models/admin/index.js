@@ -34,8 +34,24 @@ const create = (data) => new Promise(async (resolve, reject) => {
     resolve(doc)
   })
 })
+/**
+ * @param  {String} username
+ * @param  {String} password
+ * @returns {Object}
+ */
+const login = (username, password) => new Promise(async (resolve, reject) => {
+  try {
+    const doc = await AdminSchema.findOne({ username: username })
+    const compare = await passwordHelpers.compare(password, doc.password)
+    if (compare) resolve(doc)
+    else resolve(false)
+  } catch (err) {
+    reject(err)
+  }
+})
 
 module.exports = {
   create: create,
-  validation: validation
+  validation: validation,
+  login: login
 }

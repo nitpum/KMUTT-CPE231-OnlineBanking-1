@@ -24,6 +24,7 @@ mongoose.connect(
 
 app.use(passport.initialize())
 app.use(passport.session())
+require('./models/admin/passport')(passport)
 
 const configSession = require('./configs/session')
 app.use(session(configSession))

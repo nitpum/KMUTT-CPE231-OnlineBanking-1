@@ -1,6 +1,14 @@
 const AdminSchema = require('./schema')
 const passwordHelpers = require('../helpers/password-hash')
 
+const validation = (username) => new Promise((resolve, reject) => {
+  AdminSchema.findOne({ username: username }, (err, doc) => {
+    if (err) reject(err)
+    if (username === doc.username) resolve(false)
+    else resolve(true)
+  })
+})
+
 /**
  * create admin user
  * @param  {Object} data
@@ -23,14 +31,6 @@ const create = (data) => new Promise(async (resolve, reject) => {
   doc.save(err => {
     if (err) reject(err)
     resolve(doc)
-  })
-})
-
-const validation = (username) => new Promise((resolve, reject) => {
-  AdminSchema.findOne({ username: username }, (err, doc) => {
-    if (err) reject(err)
-    if (username === doc.username) resolve(false)
-    else resolve(true)
   })
 })
 

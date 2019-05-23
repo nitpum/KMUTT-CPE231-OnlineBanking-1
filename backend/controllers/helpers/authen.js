@@ -15,7 +15,6 @@ module.exports = function (options) {
     if (!req.session.passport) return res.redirect(options.unauthorizedPath)
     const user = req.session.passport.user
     const compare = options.permission.some(e => e === user.permission)
-    console.log(compare)
     if (compare) return next()
     else return res.redirect(options.unauthorizedPath)
   }

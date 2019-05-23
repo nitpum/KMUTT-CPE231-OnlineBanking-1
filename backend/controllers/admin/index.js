@@ -3,14 +3,13 @@ const passport = require('passport')
 const express = require('express')
 const router = express.Router()
 
+// helpers
+const authen = require('../helpers/authen')
+
 const PERMISSION = 'admin'
 
 // model
 const adminModel = require('../../models/admin/index')
-
-router.get('/', (req, res) => {
-  res.send('admin jaaa')
-})
 
 router.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/admin/', 'create.html'))
@@ -38,6 +37,15 @@ router.post('/login', passport.authenticate(PERMISSION, {
 
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/admin/', 'login.html'))
+})
+
+// authen required
+router.use(['/'], authen({
+  permission: PERMISSION,
+  unauthorizedPath: '/admin/login'
+}))
+router.get('/', (req, res) => {
+  res.send('admin jaaa')
 })
 
 module.exports = router

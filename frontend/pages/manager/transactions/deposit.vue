@@ -9,14 +9,33 @@
       <v-divider />
       <v-data-table :headers="headers" :items="items" class="elevation-1">
         <template v-slot:items="{ item }">
-          <td>{{ item.id }}</td>
+          <td>{{ item.No }}</td>
           <td>{{ item.name }}</td>
-          <td class="text-xs-center">{{ item.transactions.today }}</td>
-          <td class="text-xs-center">{{ item.transactions.week }}</td>
           <td class="text-xs-center">{{ item.transactions.month }}</td>
           <td class="text-xs-right">
             {{
-              Number(item.balance)
+              Number(item.amount)
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+            }}
+          </td>
+          <td class="text-xs-right">
+            {{
+              Number(item.avgDep)
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+            }}
+          </td>
+          <td class="text-xs-right">
+            {{
+              Number(item.maxDep)
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+            }}
+          </td>
+          <td class="text-xs-right">
+            {{
+              Number(item.minDep)
                 .toFixed(2)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
             }}
@@ -35,7 +54,7 @@ export default {
       {
         text: 'No.',
         align: 'left',
-        value: 'No.'
+        value: 'No'
       },
       {
         text: 'Account Name',
@@ -45,7 +64,7 @@ export default {
       {
         text: 'Month',
         align: 'center',
-        value: 'month'
+        value: 'transactions.month'
       },
       {
         text: 'Amount',
@@ -70,24 +89,30 @@ export default {
     ],
     items: [
       {
-        id: '000',
+        No: '000',
         name: 'Bangmod 1',
         transactions: {
           today: 5,
-          week: 20,
-          month: 80
+          week: 1,
+          month: 8
         },
-        balance: 5000
+        amount: '5000',
+        avgDep: '3000',
+        maxDep: '7000',
+        minDep: '500'
       },
       {
-        id: '000',
+        No: '001',
         name: 'Bangmod 1',
         transactions: {
           today: 5,
-          week: 20,
-          month: 80
+          week: 1,
+          month: 8
         },
-        balance: 10000
+        amount: '5000',
+        avgDep: '3000',
+        maxDep: '7000',
+        minDep: '500'
       }
     ]
   })

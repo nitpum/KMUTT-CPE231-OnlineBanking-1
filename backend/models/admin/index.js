@@ -42,6 +42,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
 const login = (username, password) => new Promise(async (resolve, reject) => {
   try {
     const doc = await AdminSchema.findOne({ username: username })
+    if (!doc) resolve(false)
     const compare = await passwordHelpers.compare(password, doc.password)
     if (compare) resolve(doc)
     else resolve(false)

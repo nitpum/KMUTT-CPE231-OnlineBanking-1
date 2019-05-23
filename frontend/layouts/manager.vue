@@ -55,7 +55,29 @@ export default {
         },
         {
           icon: 'mdi-bank',
-          title: 'Transactions'
+          title: 'Transactions',
+          children: [
+            {
+              icon: 'add',
+              text: 'Deposit',
+              to: '/manager/transactions/deposit'
+            },
+            {
+              icon: 'remove',
+              text: 'Withdrawal',
+              to: '/manager/transactions/withdrawal'
+            },
+            {
+              icon: 'swap_horiz',
+              text: 'Transfer',
+              to: '/manager/transactions/transfer'
+            },
+            {
+              icon: 'receipt',
+              text: 'Bills',
+              to: '/manager/transactions/bills'
+            }
+          ]
         },
         {
           icon: 'account_balance_wallet',

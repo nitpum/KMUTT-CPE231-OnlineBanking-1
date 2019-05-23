@@ -34,5 +34,6 @@ const create = (options) => new Promise(async (resolve, reject) => {
 })
 
 module.exports = {
-  create: create
+  create: create,
+  schema: BranchSchema
 }

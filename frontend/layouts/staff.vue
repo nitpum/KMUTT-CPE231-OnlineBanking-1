@@ -64,7 +64,8 @@ export default {
         },
         {
           icon: 'account_balance_wallet',
-          title: 'Account'
+          title: 'Account',
+          to: '/staff/account'
         },
         {
           icon: 'payment',

@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-layout justify-center>
-        <v-flex xs6>
+        <v-flex md6 sm8 xs12>
           <v-card>
             <v-card-title primary-title>
               <h2>Withdrawal</h2>

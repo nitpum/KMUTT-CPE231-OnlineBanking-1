@@ -33,7 +33,32 @@ const create = (options) => new Promise(async (resolve, reject) => {
   })
 })
 
+const query = {
+  /**
+     * get all branch
+     * @param  {Number} limit=5000 - list first 5000 branch order by indexed
+     * @returns {Array} - mongodb object
+     */
+  all: (limit = 5000) => new Promise((resolve, reject) => {
+    BranchSchema.find({})
+      .limit(limit)
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
+  }),
+  /**
+   * @param  {String} s
+   * @param  {Number} limit=1000 list search 1000 branch order by indexed
+   */
+  search: (s, limit = 1000) => new Promise((resolve, reject) => {
+    BranchSchema.find({ $text: { $search: s } })
+      .limit(limit)
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
+  })
+}
+
 module.exports = {
   create: create,
-  schema: BranchSchema
+  schema: BranchSchema,
+  query: query
 }

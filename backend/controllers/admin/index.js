@@ -9,7 +9,7 @@ const authen = require('../helpers/authen')
 const PERMISSION = ['admin']
 
 // model
-const adminModel = require('../../models/admin/index')
+const AdminModel = require('../../models/admin/index')
 
 router.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/admin/', 'create.html'))
@@ -19,7 +19,7 @@ router.post('/create', async (req, res) => {
   try {
     const { username, password, email } = req.body
     console.log(username, password, email)
-    const doc = await adminModel.create({
+    const doc = await AdminModel.create({
       username: username,
       password: password,
       email: email

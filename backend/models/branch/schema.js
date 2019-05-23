@@ -8,4 +8,5 @@ const branchSchema = mongoose.Schema({
   dateCreate: { type: Date, default: Date.now }
 })
 
+branchSchema.index({ name: 'text', address: 'text' })
 module.exports = mongoose.model('branch', branchSchema)

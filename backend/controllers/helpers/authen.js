@@ -11,7 +11,8 @@
  */
 module.exports = function (options) {
   return (req, res, next) => {
-    if (!req.session.user) return res.redirect(options.unauthorizedPath)
+    if (!req.session) return res.redirect(options.unauthorizedPath)
+    if (!req.session.passport) return res.redirect(options.unauthorizedPath)
     const user = req.session.passport.user
     if (user.permission === options.permission) return next()
     else return res.redirect(options.unauthorizedPath)

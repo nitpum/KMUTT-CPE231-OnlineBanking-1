@@ -4,7 +4,7 @@ const branchSchema = mongoose.Schema({
   name: String,
   address: String,
   zipcode: String,
-  balance: Number,
+  balance: { type: Number, default: 0 },
   dateCreate: { type: Date, default: Date.now }
 })
 

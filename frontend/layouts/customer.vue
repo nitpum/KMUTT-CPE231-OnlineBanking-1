@@ -1,20 +1,17 @@
 <template>
   <v-app>
-    <drawer
-      :items="items"
-      :drawer="drawerPannel"
-      :mini-variant="miniVariant"
-    ></drawer>
+    <drawer v-model="drawerPannel" :items="items" :minivariant="miniVariant">
+      <accounts />
+      <v-divider class="mt-1" />
+    </drawer>
     <toolbar
       :dark="true"
-      :color="primary"
-      :drawer="drawerPannel"
+      :color="$vuetify.theme.primary"
+      :drawer.sync="drawerPannel"
       @toggle="setDrawer"
     ></toolbar>
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
   </v-app>
 </template>
@@ -23,38 +20,43 @@
 import drawer from '@/components/Drawer.vue'
 import toolbar from '@/components/Toolbar'
 import theme from './themes/customer'
+import Accounts from '@/components/customer/accounts/Switch'
 
 export default {
   components: {
     drawer,
-    toolbar
+    toolbar,
+    Accounts
   },
   data() {
     return {
       clipped: false,
-      drawerPannel: true,
+      drawerPannel: null,
       fixed: false,
       items: [
         {
           icon: 'account_balance',
           title: 'Transactions',
-          to: '/customer/'
+          to: '/app/transactions'
         },
         {
           icon: 'send',
-          title: 'Transfer'
+          title: 'Transfer',
+          to: '/app/transfer'
         },
         {
-          icon: 'input',
+          icon: 'mdi-checkbook',
           title: 'Cheque'
         },
         {
           icon: 'payment',
-          title: 'My Card'
+          title: 'My Card',
+          to: '/app/cards'
         },
         {
           icon: 'receipt',
-          title: 'Pay Bills'
+          title: 'Pay Bills',
+          to: '/app/bills'
         },
         {
           icon: 'account_balance_wallet',

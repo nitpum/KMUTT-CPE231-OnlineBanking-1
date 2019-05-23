@@ -9,14 +9,18 @@
         {{ item.title }}
       </v-btn>
     </v-toolbar-items>
-    <v-toolbar-side-icon class="hidden-md-and-up" @click="$emit('drawer')" />
+    <bottom-sheet class="hidden-md-and-up" />
   </v-toolbar>
 </template>
 
 <script>
+import BottomSheet from './BottomSheet'
 import { menu } from './menu.json'
 
 export default {
+  components: {
+    BottomSheet
+  },
   data: () => ({
     menu: menu
   })

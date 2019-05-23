@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <toolbar @drawer="drawer = !drawer" />
-    <drawer :drawer.sync="drawer" />
+    <toolbar />
     <v-content>
       <nuxt />
     </v-content>
@@ -12,18 +11,13 @@
 </template>
 
 <script>
-import Toolbar from '@/components/default/Toolbar'
-import Drawer from '@/components/default/Drawer'
+import Toolbar from '@/components/home/Toolbar'
 import theme from './themes/customer'
 
 export default {
   components: {
-    Toolbar,
-    Drawer
+    Toolbar
   },
-  data: () => ({
-    drawer: false
-  }),
   created() {
     this.$vuetify.theme = theme
   }

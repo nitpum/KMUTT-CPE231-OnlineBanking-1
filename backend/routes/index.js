@@ -1,4 +1,5 @@
 const admin = require('../controllers/admin')
+const branch = require('../controllers/branch')
 
 /**
  * router HTTP function top on express.js
@@ -7,6 +8,7 @@ const admin = require('../controllers/admin')
 module.exports = app => {
   // controllers
   app.use('/admin', admin)
+  app.use('/branch', branch)
 
   app.use('*', (req, res) => {
     res.send('online banking system')

@@ -53,5 +53,6 @@ const login = (username, password) => new Promise(async (resolve, reject) => {
 module.exports = {
   create: create,
   validation: validation,
-  login: login
+  login: login,
+  schema: AdminSchema
 }

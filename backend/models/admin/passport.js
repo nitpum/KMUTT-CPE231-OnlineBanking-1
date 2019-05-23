@@ -2,8 +2,8 @@ const LocalStrategy = require('passport-local').Strategy
 
 const PERMISSION = 'admin'
 
-const AdminSchema = require('./schema')
 const AdminModel = require('./index')
+const AdminSchema = AdminModel.schema
 
 module.exports = passport => {
   // used to serialize the user for the session

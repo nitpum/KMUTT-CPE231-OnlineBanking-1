@@ -86,4 +86,8 @@ router.get('/query', (req, res) => {
   }
 })
 
+router.get('/analytic', (req, res) => {
+  StaffModel.analytic.count().then(n => res.send(n))
+})
+
 module.exports = router

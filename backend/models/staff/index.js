@@ -1,5 +1,6 @@
 const StaffSchema = require('./schema')
 const QueryModel = require('./query')
+const AnalyticModel = require('./analytic')
 
 // helpers
 const passwordHelpers = require('../helpers/password-hash')
@@ -85,5 +86,6 @@ module.exports = {
   create: create,
   schema: StaffSchema,
   login: login,
-  query: QueryModel
+  query: QueryModel,
+  analytic: AnalyticModel
 }

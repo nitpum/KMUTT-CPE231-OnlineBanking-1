@@ -1,5 +1,7 @@
 const StaffSchema = require('./schema')
+const QueryModel = require('./query')
 
+// helpers
 const passwordHelpers = require('../helpers/password-hash')
 const loginHelpers = require('../helpers/user-login')
 
@@ -82,5 +84,6 @@ const login = (username, password) => new Promise(async (resolve, reject) => {
 module.exports = {
   create: create,
   schema: StaffSchema,
-  login: login
+  login: login,
+  query: QueryModel
 }

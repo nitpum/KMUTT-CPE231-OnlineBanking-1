@@ -1,5 +1,6 @@
 const BranchSchema = require('./schema')
 const QueryModel = require('./query')
+const AnalyticModel = require('./analytic')
 
 const validation = (name) => new Promise((resolve, reject) => {
   BranchSchema.findOne({ name: name }, (err, doc) => {
@@ -37,5 +38,6 @@ const create = (options) => new Promise(async (resolve, reject) => {
 module.exports = {
   create: create,
   schema: BranchSchema,
-  query: QueryModel
+  query: QueryModel,
+  analytic: AnalyticModel
 }

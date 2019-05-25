@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
+const BranchModel = require('./schema')
+
 const ObjectId = mongoose.Types.ObjectId
 
-const BranchModel = require('./schema')
-/**
- * @param  {Array} list
- */
 const mapObjectId = (list) => {
   const result = list.map(x => ObjectId(x))
   return result
@@ -33,6 +31,7 @@ const analytic = {
     }),
 
     /**
+     * sum by list of id
    * @param  {Array} list - list of object_id
    * @returns {Array} - mongodb object
    */

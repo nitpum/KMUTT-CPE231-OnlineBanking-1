@@ -12,6 +12,7 @@ const staffSchema = mongoose.Schema({
   zipcode: { type: String, maxlength: 5 },
   address: String,
   birthDate: Date,
+  phone: { type: String, maxlength: 13, required: true },
   gender: { type: String, enum: ['M', 'F', 'U'], required: true },
   citizenId: { type: String, maxlength: 13, required: true },
   position: { type: String, required: true },

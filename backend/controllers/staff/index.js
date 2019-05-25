@@ -25,7 +25,7 @@ router.post('/create', (req, res) => {
   const {
     username, password, name, zipcode,
     address, birthDate, gender, citizenId,
-    position, branch, email
+    position, branch, email, phone
   } = req.body
   const [firstName, lastName] = name.split(' ')
 
@@ -40,6 +40,7 @@ router.post('/create', (req, res) => {
     position: position,
     branch: branch,
     email: email,
+    phone: phone,
     name: {
       firstName: firstName,
       lastName: lastName

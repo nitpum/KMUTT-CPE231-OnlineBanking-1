@@ -30,13 +30,14 @@ const validation = (data) => new Promise(async (resolve, reject) => {
  * @param  {String} data.gender - ['M', 'F', 'U']
  * @param  {String} data.citizenId - citizenId
  * @param  {String} data.position - position
+ * @param  {String} data.phone - phone
  * @param  {String} data.branch - branch that staff assigned
  * @returns {Object} - mongodb document
  */
 const create = (data) => new Promise(async (resolve, reject) => {
   const {
     username, password, name, zipcode,
-    address, birthDate, gender,
+    address, birthDate, gender, phone,
     citizenId, position, branch, email
   } = data
   const { firstName, lastName } = name
@@ -59,7 +60,8 @@ const create = (data) => new Promise(async (resolve, reject) => {
     citizenId: citizenId,
     position: position,
     branch: branch,
-    email: email
+    email: email,
+    phone: phone
   })
 
   doc.save(err => {

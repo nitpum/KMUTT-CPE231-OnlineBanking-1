@@ -65,8 +65,22 @@ const create = (data) => new Promise(async (resolve, reject) => {
   })
 })
 
+/**
+ * @param  {String} username
+ * @param  {String} password
+ * @returns {Object}
+ */
+const login = (username, password) => new Promise(async (resolve, reject) => {
+  try {
+    const res = await loginHelpers(username, password, StaffSchema)
+    resolve(res)
+  } catch (err) {
+    reject(err)
+  }
+})
+
 module.exports = {
   create: create,
-  schema: StaffSchema
-
+  schema: StaffSchema,
+  login: login
 }

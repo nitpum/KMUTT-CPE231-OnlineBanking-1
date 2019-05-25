@@ -49,4 +49,22 @@ router.post('/create', (req, res) => {
   })
 })
 
+router.post('/login', passport.authenticate(PERMISSION, {
+  successRedirect: '/staff',
+  failureRedirect: '/staff/login'
+}))
+
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
+})
+
+// authen required
+router.use(['/'], authen({
+  permission: PERMISSION,
+  unauthorizedPath: '/staff/login'
+}))
+router.get('/', (req, res) => {
+  res.send('staff jaaa')
+})
+
 module.exports = router

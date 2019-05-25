@@ -10,12 +10,42 @@ const PERMISSION = ['staff']
 
 // models
 const StaffModel = require('../../models/staff')
+const BranchModel = require('../../models/branch/')
 
 router.get('/create', (req, res) => {
-  res.send('create staff jaa')
+  BranchModel.query.all()
+    .then(doc => {
+      res.render(path.join(__dirname, '../../views/staff', 'create'), {
+        branches: doc
+      })
+    }).catch(err => res.send(err))
 })
 
+router.post('/create', (req, res) => {
+  const {
+    username, password, name, zipcode,
+    address, birthDate, gender, citizenId,
+    position, branch
+  } = req.body
+  const [firstName, lastName] = name.split(' ')
 
-
+  StaffModel.create({
+    username: username,
+    password: password,
+    zipcode: zipcode,
+    address: address,
+    birthDate: birthDate,
+    gender: gender,
+    citizenId: citizenId,
+    position: position,
+    branch: branch,
+    name: {
+      firstName: firstName,
+      lastName: lastName
+    }
+  }).then(doc => {
+    res.send(doc)
+  })
+})
 
 module.exports = router

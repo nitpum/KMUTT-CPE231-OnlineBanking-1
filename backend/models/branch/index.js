@@ -1,4 +1,6 @@
 const BranchSchema = require('./schema')
+const QueryModel = require('./query')
+const AnalyticModel = require('./analytic')
 
 const validation = (name) => new Promise((resolve, reject) => {
   BranchSchema.findOne({ name: name }, (err, doc) => {
@@ -33,41 +35,9 @@ const create = (options) => new Promise(async (resolve, reject) => {
   })
 })
 
-const query = {
-  /**
-     * get all branch
-     * @param  {Number} limit=5000 - list first 5000 branch order by indexed
-     * @returns {Array} - mongodb object
-     */
-  all: (limit = 5000) => new Promise((resolve, reject) => {
-    BranchSchema.find({})
-      .limit(limit)
-      .then(doc => resolve(doc))
-      .catch(err => reject(err))
-  }),
-  /**
-   * @param  {String} s
-   * @param  {Number} limit=1000 list search 1000 branch order by indexed
-   */
-  search: (s, limit = 1000) => new Promise((resolve, reject) => {
-    BranchSchema.find({ $text: { $search: s } })
-      .limit(limit)
-      .then(doc => resolve(doc))
-      .catch(err => reject(err))
-  }),
-  /**
-   * @param  {String} id - mongodb object id
-   * @returns {Object} - mongodb object
-   */
-  id: (id) => new Promise((resolve, reject) => {
-    BranchSchema.findById(id)
-      .then(doc => resolve(doc))
-      .catch(err => reject(err))
-  })
-}
-
 module.exports = {
   create: create,
   schema: BranchSchema,
-  query: query
+  query: QueryModel,
+  analytic: AnalyticModel
 }

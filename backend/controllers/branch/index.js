@@ -57,4 +57,25 @@ router.get('/query', (req, res) => {
   }
 })
 
+router.get('/analytic', (req, res) => {
+  const id = req.query.id || undefined
+  const limit = Number(req.query.limit) || undefined
+  let listBranchId
+  if (req.query.listBranchId) {
+    listBranchId = String(req.query.listBranchId).split(',')
+  } else {
+    listBranchId = undefined
+  }
+
+  if (listBranchId) {
+    BranchModel.analytic.balance.idList(listBranchId)
+      .then(doc => res.send(doc))
+      .catch(err => res.send(err))
+  } else {
+    BranchModel.analytic.balance.all(limit).then(doc => {
+      res.send(doc)
+    })
+  }
+})
+
 module.exports = router

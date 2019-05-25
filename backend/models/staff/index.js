@@ -31,8 +31,8 @@ const validation = (username) => new Promise((resolve, reject) => {
 const create = (data) => new Promise(async (resolve, reject) => {
   const {
     username, password, name, zipcode,
-    address, birthDate, gender, citizenId,
-    position, branch
+    address, birthDate, gender,
+    citizenId, position, branch
   } = data
   const { firstName, lastName } = name
   const userValid = await validation(username)

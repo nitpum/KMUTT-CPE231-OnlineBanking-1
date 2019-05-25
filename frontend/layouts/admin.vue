@@ -45,7 +45,8 @@ export default {
         },
         {
           icon: 'mdi-domain',
-          title: 'Branch'
+          title: 'Branch',
+          to: '/admin/branch'
         },
         {
           icon: 'mdi-domain',

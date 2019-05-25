@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container grid-list-md>
       <v-layout justify-end>
         <v-btn color="green white--text" @click="activateDialog = true">
           ACTIVATE
@@ -12,6 +12,7 @@
           <credit-card
             v-for="(card, i) in cards"
             :key="i"
+            class="mb-2"
             :censor="true"
             :number="card.number"
             :holder="card.holder ? card.holder : ''"

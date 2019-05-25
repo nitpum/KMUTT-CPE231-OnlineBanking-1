@@ -4,17 +4,13 @@ const passwordHelpers = require('../helpers/password-hash')
 const loginHelpers = require('../helpers/user-login')
 
 const validation = (data) => new Promise(async (resolve, reject) => {
-  try {
-    const [username, citizenId, email] = await Promise.all([
-      StaffSchema.findOne({ username: data.username }),
-      StaffSchema.findOne({ citizenId: data.citizenId }),
-      StaffSchema.findOne({ email: data.email })
-    ])
-    if (!username && !citizenId && !email) resolve(true)
-    resolve(false)
-  } catch (err) {
-    reject(err)
-  }
+  const [username, citizenId, email] = await Promise.all([
+    StaffSchema.findOne({ username: data.username }),
+    StaffSchema.findOne({ citizenId: data.citizenId }),
+    StaffSchema.findOne({ email: data.email })
+  ])
+  if (!username && !citizenId && !email) resolve(true)
+  reject(new Error('username or citizendId or email duplicated'))
 })
 
 /**

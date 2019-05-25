@@ -1,4 +1,4 @@
-const BranchSchema = require('./index').schema
+const BranchSchema = require('./schema')
 
 const query = {
   /**

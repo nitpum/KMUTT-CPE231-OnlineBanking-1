@@ -16,7 +16,8 @@ const staffSchema = mongoose.Schema({
   gender: { type: String, enum: ['M', 'F', 'U'], required: true },
   citizenId: { type: String, maxlength: 13, required: true },
   position: { type: String, required: true },
-  branch: branchRef
+  branch: branchRef,
+  dateCreate: { type: Date, default: Date.now }
 })
 
 staffSchema.index({ 'name.firstName': 'text',

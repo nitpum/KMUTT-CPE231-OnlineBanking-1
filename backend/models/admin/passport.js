@@ -1,10 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy
-const bcrypt = require('bcryptjs')
 
 const PERMISSION = 'admin'
 
-const AdminSchema = require('./schema')
 const AdminModel = require('./index')
+const AdminSchema = AdminModel.schema
 
 module.exports = passport => {
   // used to serialize the user for the session
@@ -32,6 +31,7 @@ module.exports = passport => {
         AdminModel.login(username, password).then(doc => {
           if (doc) {
             doc.permission = PERMISSION
+            delete doc.password
             return done(null, doc)
           }
           return done(null, false)

@@ -1,5 +1,6 @@
 const AdminSchema = require('./schema')
 const passwordHelpers = require('../helpers/password-hash')
+const loginHelpers = require('../helpers/user-login')
 
 const validation = (username) => new Promise((resolve, reject) => {
   AdminSchema.findOne({ username: username }, (err, doc) => {
@@ -34,6 +35,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
     resolve(doc)
   })
 })
+
 /**
  * @param  {String} username
  * @param  {String} password
@@ -41,10 +43,8 @@ const create = (data) => new Promise(async (resolve, reject) => {
  */
 const login = (username, password) => new Promise(async (resolve, reject) => {
   try {
-    const doc = await AdminSchema.findOne({ username: username })
-    const compare = await passwordHelpers.compare(password, doc.password)
-    if (compare) resolve(doc)
-    else resolve(false)
+    const res = await loginHelpers(username, password, AdminSchema)
+    resolve(res)
   } catch (err) {
     reject(err)
   }
@@ -53,5 +53,6 @@ const login = (username, password) => new Promise(async (resolve, reject) => {
 module.exports = {
   create: create,
   validation: validation,
-  login: login
+  login: login,
+  schema: AdminSchema
 }

@@ -18,8 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 const configDB = require('./configs/db')
 mongoose.connect(
-  configDB.url,
-  { useNewUrlParser: true }
+  configDB.url, configDB.options
 )
 
 app.use(passport.initialize())

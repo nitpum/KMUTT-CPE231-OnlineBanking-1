@@ -3,12 +3,18 @@ const StaffSchema = require('./schema')
 const passwordHelpers = require('../helpers/password-hash')
 const loginHelpers = require('../helpers/user-login')
 
-const validation = (username) => new Promise((resolve, reject) => {
-  StaffSchema.findOne({ username: username }, (err, doc) => {
-    if (err) reject(err)
-    if (doc) resolve(false)
-    else resolve(true)
-  })
+const validation = (data) => new Promise(async (resolve, reject) => {
+  try {
+    const [username, citizenId, email] = await Promise.all([
+      StaffSchema.findOne({ username: data.username }),
+      StaffSchema.findOne({ citizenId: data.citizenId }),
+      StaffSchema.findOne({ email: data.email })
+    ])
+    if (!username && !citizenId && !email) resolve(true)
+    resolve(false)
+  } catch (err) {
+    reject(err)
+  }
 })
 
 /**
@@ -32,11 +38,14 @@ const create = (data) => new Promise(async (resolve, reject) => {
   const {
     username, password, name, zipcode,
     address, birthDate, gender,
-    citizenId, position, branch
+    citizenId, position, branch, email
   } = data
   const { firstName, lastName } = name
-  const userValid = await validation(username)
-  if (!userValid) reject(Error('username duplicated'))
+  const valid = await validation({
+    username: username,
+    citizenId: citizenId
+  })
+  if (!valid) reject(Error('username or citizendId or email duplicated'))
   const hash = await passwordHelpers.generate(password)
 
   const doc = new StaffSchema({
@@ -50,7 +59,8 @@ const create = (data) => new Promise(async (resolve, reject) => {
     gender: gender,
     citizenId: citizenId,
     position: position,
-    branch: branch
+    branch: branch,
+    email: email
   })
 
   doc.save(err => {

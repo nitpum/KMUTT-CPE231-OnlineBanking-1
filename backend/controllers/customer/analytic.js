@@ -7,16 +7,12 @@ const CustomerModel = require('../../models/customer/')
 router.get('/', async (req, res) => {
   const n = await CustomerModel.analytic.count()
   const bal = await CustomerModel.analytic.balance.all()
+  const ageRange = await CustomerModel.analytic.age()
 
-  res.send({
-    ...n, ...bal
-  })
-})
-
-router.get('/', (req, res) => {
-  CustomerModel.analytic.count()
-    .then(n => res.send(n))
-    .catch(err => res.send(String(err)))
+  const parser = {
+    ...n, ...bal, ageRange: ageRange
+  }
+  res.send(parser)
 })
 
 module.exports = router

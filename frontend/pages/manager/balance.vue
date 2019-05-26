@@ -2,7 +2,7 @@
   <v-container grid-list-lg>
     <v-layout column>
       <v-flex>
-        <v-card class="mb-3">
+        <v-card>
           <v-card-title>
             <h3 class="headline mb-0">
               Balance by age

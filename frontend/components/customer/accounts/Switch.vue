@@ -5,9 +5,9 @@
         <v-list-tile-title>{{ currentAcc.id }}</v-list-tile-title>
         <v-list-tile-sub-title>{{ currentAcc.type }}</v-list-tile-sub-title>
       </v-list-tile-content>
-      <v-list-tile-actions>
+      <v-list-tile-action>
         <v-icon>arrow_drop_down</v-icon>
-      </v-list-tile-actions>
+      </v-list-tile-action>
       <v-dialog v-model="dialog" max-width="400">
         <v-card>
           <v-toolbar flat>

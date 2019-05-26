@@ -2,7 +2,7 @@
   <v-dialog v-model="model" lazy max-width="500">
     <v-card>
       <v-card-title primary-title>
-        <h2>Staff</h2>
+        <h2><slot name="title">Staff</slot></h2>
       </v-card-title>
       <v-card-text>
         <text-label
@@ -72,7 +72,9 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat @click="model = false">Close</v-btn>
-        <v-btn v-if="editable" color="primary" flat>Submit</v-btn>
+        <v-btn v-if="editable" color="primary" flat @click="$emit('onSubmit')">
+          <slot name="sumbit-btn">Submit</slot>
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

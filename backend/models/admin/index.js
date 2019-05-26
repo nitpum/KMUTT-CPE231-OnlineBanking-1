@@ -29,7 +29,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
     username: username,
     email: email
   })
-  if (!valid) reject(new Error('username or email duplicated'))
+  if (!valid) return reject(new Error('username or email duplicated'))
   const hash = await passwordHelpers.generate(password)
 
   const doc = new AdminSchema({

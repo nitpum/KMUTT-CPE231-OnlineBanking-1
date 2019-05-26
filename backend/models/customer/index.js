@@ -1,4 +1,5 @@
 const CustomerSchema = require('./schema')
+const QueryModel = require('./query')
 
 // helpers
 const passwordHelpers = require('../helpers/password-hash')
@@ -48,7 +49,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
     email: email
   })
 
-  if (!valid) reject(new Error('username or citizendId or email duplicated'))
+  if (!valid) return reject(new Error('username or citizendId or email duplicated'))
   const hash = await passwordHelpers.generate(password)
 
   const doc = new CustomerSchema({
@@ -88,5 +89,6 @@ const login = (username, password) => new Promise(async (resolve, reject) => {
 module.exports = {
   schema: CustomerSchema,
   create: create,
-  login: login
+  login: login,
+  query: QueryModel
 }

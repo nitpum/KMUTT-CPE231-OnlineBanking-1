@@ -1,5 +1,6 @@
 const CustomerSchema = require('./schema')
 const QueryModel = require('./query')
+const AnalyticModel = require('./analytic')
 
 // helpers
 const passwordHelpers = require('../helpers/password-hash')
@@ -40,7 +41,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
   const {
     username, password, name, zipcode,
     address, birthDate, gender, phone,
-    citizenId, email
+    citizenId, email, balance
   } = data
   const { firstName, lastName } = name
   const valid = await validation({
@@ -63,7 +64,8 @@ const create = (data) => new Promise(async (resolve, reject) => {
     birthDate: birthDate,
     phone: phone,
     gender: gender,
-    citizenId: citizenId
+    citizenId: citizenId,
+    balance: balance
   })
 
   doc.save(err => {
@@ -90,5 +92,6 @@ module.exports = {
   schema: CustomerSchema,
   create: create,
   login: login,
-  query: QueryModel
+  query: QueryModel,
+  analytic: AnalyticModel
 }

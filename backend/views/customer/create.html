@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Customer - Create</title>
+  </head>
+  <body>
+    <form action="/customer/create" method="POST">
+      <label for="username">username</label>
+      <input type="text" name="username" /> <br />
+      <label for="password">password</label>
+      <input type="password" name="password" /> <br />
+      <label for="email">email</label>
+      <input type="email" name="email" /> <br />
+      <label for="birthDate">birthDate</label>
+      <input type="date" name="birthDate" /> <br />
+      <label for="address">address</label>
+      <input type="text" name="address" /> <br />
+      <label for="zipcode">zipcode</label>
+      <input type="number" name="zipcode" /> <br />
+      <label for="gender">gender</label>
+      <select name="gender">
+        <option value="M">M</option>
+        <option value="F">F</option>
+        <option value="U">U</option>
+      </select>
+      <br />
+      <label for="citizenId">citizenId</label>
+      <input type="number" name="citizenId" /> <br />
+      <label for="phone">phone</label>
+      <input type="number" name="phone" /> <br />
+
+      <button type="submit">create</button>
+    </form>
+  </body>
+</html>

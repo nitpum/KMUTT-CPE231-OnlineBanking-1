@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const branchRef = { type: mongoose.Schema.Types.ObjectId, red: 'branch' }
+const branchRef = { type: mongoose.Schema.Types.ObjectId, ref: 'branch' }
 
 const staffSchema = mongoose.Schema({
   username: { type: String, required: true },

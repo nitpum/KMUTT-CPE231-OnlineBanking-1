@@ -2,6 +2,9 @@ const CustomerModel = require('./schema')
 
 // helpers
 const mapObjectIdHelpers = require('../helpers/map-mongodb-objectId')
+const generateDateRangeHelpers = require('../helpers/generate-date-range')
+
+generateDateRangeHelpers(range).then(n => console.log(n))
 
 const analytic = {
   balance: {
@@ -47,6 +50,7 @@ const analytic = {
         .catch(err => reject(err))
     })
   },
+
   /**
    * count staff
    * @returns {Object} - number of staff
@@ -59,7 +63,13 @@ const analytic = {
         nCustomers: n
       })
     })
-  })
+  }),
+
+  // 0-15 16-30 31-45 46-60 61-75 76-90 91-105+
+  age: () => {
+    const range = [0, 15, 30, 45, 60, 75, 90, 105]
+    return null
+  }
 }
 
 module.exports = analytic

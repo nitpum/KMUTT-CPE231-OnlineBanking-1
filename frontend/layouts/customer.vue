@@ -46,7 +46,8 @@ export default {
         },
         {
           icon: 'mdi-checkbook',
-          title: 'Cheque'
+          title: 'Cheque',
+          to: '/app/cheque'
         },
         {
           icon: 'payment',

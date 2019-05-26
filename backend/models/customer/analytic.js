@@ -1,4 +1,3 @@
-
 const CustomerModel = require('./schema')
 
 // helpers

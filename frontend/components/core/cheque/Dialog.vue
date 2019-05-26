@@ -2,24 +2,33 @@
   <v-dialog v-model="model" lazy max-width="500">
     <v-card>
       <v-card-title primary-title>
-        <h2>Pay Cheque</h2>
+        <h2>Cheque</h2>
       </v-card-title>
       <v-card-text>
-        <v-text-field
+        <text-label
           label="Cheque ID"
           placeholder="0-000-000-000-000-000"
-        ></v-text-field>
+        ></text-label>
         <text-label label="Type" placeholder="Type"></text-label>
         <text-label label="Bank" placeholder="Yee Bank"></text-label>
         <text-label label="Account ID" placeholder="Account ID"></text-label>
         <text-label label="Account Name" placeholder="Name"></text-label>
         <text-label label="Amount" placeholder="0.00 THB"></text-label>
-        <v-text-field label="Drawee" placeholder="Drawee"></v-text-field>
+        <text-label
+          v-if="!editable"
+          label="Drawee"
+          placeholder="Drawee"
+        ></text-label>
+        <v-text-field
+          v-if="editable"
+          label="Drawee"
+          placeholder="Drawee"
+        ></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat @click="model = false">Close</v-btn>
-        <v-btn color="primary" flat>Submit</v-btn>
+        <v-btn v-if="editable" color="primary" flat>Submit</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -36,6 +45,14 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    editable: {
+      type: Boolean,
+      default: false
+    },
+    cheque: {
+      type: Object,
+      default: null
     }
   },
   computed: {

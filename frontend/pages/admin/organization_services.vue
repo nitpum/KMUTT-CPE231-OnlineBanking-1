@@ -2,35 +2,7 @@
   <v-container grid-list-lg>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-card>
-          <v-card-title>
-            <h3 class="headline mb-0">
-              Overview
-            </h3>
-          </v-card-title>
-          <v-divider />
-          <v-card-text>
-            <v-layout row wrap>
-              <v-flex
-                v-for="(col, i) in [[0, 4], [4, 6]]"
-                :key="'col-' + i"
-                xs12
-                sm6
-              >
-                <p
-                  v-for="overview in overviews.slice(col[0], col[1])"
-                  :key="overview.key"
-                  style="text-align:left;"
-                >
-                  {{ overview.label }}
-                  <span style="float:right;">
-                    {{ data[overview.key] }}
-                  </span>
-                </p>
-              </v-flex>
-            </v-layout>
-          </v-card-text>
-        </v-card>
+        <overview-info :overviews="overviews" :data="data" />
       </v-flex>
 
       <v-flex xs12 sm6>
@@ -84,8 +56,13 @@
 </template>
 
 <script>
+import OverviewInfo from '@/components/core/overview/Info'
+
 export default {
   layout: 'admin',
+  components: {
+    OverviewInfo
+  },
   data: () => ({
     from: undefined,
     to: undefined,
@@ -95,33 +72,37 @@ export default {
       avgSPO: 5,
       maxService: 20,
       todayService: 800,
-      thisMonthService: '421,561'
+      thisMonthService: 421561
     },
     overviews: [
-      {
-        key: 'totalOrg',
-        label: 'Total Organization'
-      },
-      {
-        key: 'totalService',
-        label: 'Total Service'
-      },
-      {
-        key: 'avgSPO',
-        label: 'Average Service / Organization'
-      },
-      {
-        key: 'maxService',
-        label: 'Max Service'
-      },
-      {
-        key: 'todayService',
-        label: 'Today Service Usage'
-      },
-      {
-        key: 'thisMonthService',
-        label: 'This Month Service Usage'
-      }
+      [
+        {
+          key: 'totalOrg',
+          label: 'Total Organization'
+        },
+        {
+          key: 'totalService',
+          label: 'Total Service'
+        },
+        {
+          key: 'avgSPO',
+          label: 'Average Service / Organization'
+        },
+        {
+          key: 'maxService',
+          label: 'Max Service'
+        }
+      ],
+      [
+        {
+          key: 'todayService',
+          label: 'Today Service Usage'
+        },
+        {
+          key: 'thisMonthService',
+          label: 'This Month Service Usage'
+        }
+      ]
     ]
   })
 }

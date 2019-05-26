@@ -38,9 +38,9 @@ export default {
   },
   data: () => ({
     data: {
-      min: '1',
-      max: '100,000,000',
-      average: '500,000',
+      min: 1,
+      max: 100000000,
+      average: 500000,
       least: '1 - 15',
       most: '30 - 50'
     },

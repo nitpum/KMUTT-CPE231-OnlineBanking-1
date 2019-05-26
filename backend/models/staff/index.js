@@ -13,7 +13,7 @@ const validation = (data) => new Promise(async (resolve, reject) => {
     StaffSchema.findOne({ email: data.email })
   ])
   if (!username && !citizenId && !email) resolve(true)
-  reject(new Error('username or citizendId or email duplicated'))
+  resolve(false)
 })
 
 /**

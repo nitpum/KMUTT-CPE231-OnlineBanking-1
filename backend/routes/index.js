@@ -1,6 +1,7 @@
 const admin = require('../controllers/admin')
 const branch = require('../controllers/branch')
 const staff = require('../controllers/staff')
+const customer = require('../controllers/customer')
 
 /**
  * router HTTP function top on express.js
@@ -11,6 +12,7 @@ module.exports = app => {
   app.use('/admin', admin)
   app.use('/branch', branch)
   app.use('/staff', staff)
+  app.use('/customer', customer)
 
   app.use('*', (req, res) => {
     res.send('online banking system')

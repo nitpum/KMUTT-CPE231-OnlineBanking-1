@@ -11,6 +11,9 @@ const PERMISSION = ['customer', 'admin']
 // models
 const CustomerModel = require('../../models/customer')
 
+// controllers
+const AnalyticController = require('./analytic')
+
 router.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/customer/', 'create.html'))
 })
@@ -83,8 +86,6 @@ router.get('/query', (req, res) => {
   }
 })
 
-router.get('/analytic', (req, res) => {
-  CustomerModel.analytic.count().then(n => res.send(n))
-})
+router.use('/analytic', AnalyticController)
 
 module.exports = router

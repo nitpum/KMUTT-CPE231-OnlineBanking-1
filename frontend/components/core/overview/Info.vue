@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import numeral from 'numeral'
+
 export default {
   props: {
     title: {
@@ -47,9 +49,7 @@ export default {
     format(value, place, suffix) {
       return [
         typeof value === 'number'
-          ? Number(value)
-              .toFixed(place || 0)
-              .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+          ? numeral(value).format(['0,0', '0'.repeat(place)].join('.'))
           : value,
         suffix
       ].join(' ')

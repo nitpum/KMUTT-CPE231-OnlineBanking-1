@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import numeral from 'numeral'
+
 export default {
   data: () => ({
     balance: 1902.19,
@@ -51,11 +53,7 @@ export default {
   }),
   methods: {
     format(value) {
-      return typeof value === 'number'
-        ? Number(value)
-            .toFixed(2)
-            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-        : value
+      return numeral(value).format('0,0.00')
     }
   }
 }

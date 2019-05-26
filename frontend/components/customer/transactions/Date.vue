@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import numeral from 'numeral'
+
 export default {
   data: () => ({
     date: 'Dec 12, 2019',
@@ -44,14 +46,7 @@ export default {
   }),
   methods: {
     format(value) {
-      return [
-        value < 0 ? '' : '+',
-        typeof value === 'number'
-          ? Number(value)
-              .toFixed(2)
-              .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-          : value
-      ].join('')
+      return numeral(value).format('+0,0.00')
     }
   }
 }

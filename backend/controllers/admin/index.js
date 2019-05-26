@@ -15,19 +15,19 @@ router.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/admin/', 'create.html'))
 })
 
-router.post('/create', async (req, res) => {
-  try {
-    const { username, password, email } = req.body
-    console.log(username, password, email)
-    const doc = await AdminModel.create({
-      username: username,
-      password: password,
-      email: email
-    })
-    if (doc) res.send(doc)
-  } catch (err) {
-    res.send(err)
-  }
+router.post('/create', (req, res) => {
+  const { username, password, email } = req.body
+  console.log(username, password, email)
+  AdminModel.create({
+    username: username,
+    password: password,
+    email: email
+  }).then(doc => {
+    res.send(doc)
+  }).catch(err => res.send({
+    validation: false,
+    err: String(err)
+  }))
 })
 
 router.post('/login', passport.authenticate(PERMISSION, {

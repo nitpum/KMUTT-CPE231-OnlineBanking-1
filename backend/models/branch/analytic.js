@@ -1,12 +1,7 @@
-const mongoose = require('mongoose')
 const BranchModel = require('./schema')
 
-const ObjectId = mongoose.Types.ObjectId
-
-const mapObjectId = (list) => {
-  const result = list.map(x => ObjectId(x))
-  return result
-}
+// helpers
+const mapObjectIdHelpers = require('../helpers/map-mongodb-objectId')
 
 const analytic = {
   balance: {
@@ -35,8 +30,8 @@ const analytic = {
    * @param  {Array} list - list of object_id
    * @returns {Array} - mongodb object
    */
-    idList: (list) => new Promise((resolve, reject) => {
-      const objectIdLists = mapObjectId(list)
+    idList: (list) => new Promise(async (resolve, reject) => {
+      const objectIdLists = await mapObjectIdHelpers(list)
       BranchModel.aggregate([
         { $match: { _id: { $in: objectIdLists } } },
         {

@@ -13,6 +13,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.set('view engine', 'pug')
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -24,6 +25,8 @@ mongoose.connect(
 app.use(passport.initialize())
 app.use(passport.session())
 require('./models/admin/passport')(passport)
+require('./models/staff/passport')(passport)
+require('./models/customer/passport')(passport)
 
 const configSession = require('./configs/session')
 app.use(session(configSession))

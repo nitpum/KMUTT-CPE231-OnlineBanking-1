@@ -13,7 +13,7 @@
             </h3>
           </v-card-title>
           <v-divider />
-          <heatmap />
+          <heatmap v-if="showHeatmap" />
         </v-card>
       </v-flex>
 
@@ -66,6 +66,7 @@ export default {
     Heatmap
   },
   data: () => ({
+    showHeatmap: false,
     from: undefined,
     to: undefined,
     data: {
@@ -106,6 +107,9 @@ export default {
         }
       ]
     ]
-  })
+  }),
+  mounted() {
+    this.showHeatmap = true
+  }
 }
 </script>

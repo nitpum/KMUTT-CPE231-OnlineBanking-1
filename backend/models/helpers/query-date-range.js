@@ -1,6 +1,5 @@
 const moment = require('moment')
 
-
 // helpers
 const generateDateRangeHelpers = require('./generate-date-range')
 /**
@@ -25,7 +24,6 @@ module.exports = (range = {
       { $match: keyString },
       ...mongoDBQueryFormat
     ]
-    console.log(JSON.stringify(compoundQuery), i)
 
     model.aggregate(compoundQuery)
       .then(doc => resolve(

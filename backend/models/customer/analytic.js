@@ -4,6 +4,7 @@ const CustomerModel = require('./schema')
 // helpers
 const mapObjectIdHelpers = require('../helpers/map-mongodb-objectId')
 const generateDateRangeHelpers = require('../helpers/generate-date-range')
+const queryDateRangeHelpers = require('../helpers/query-date-range')
 
 const analytic = {
   balance: {
@@ -66,36 +67,40 @@ const analytic = {
 
   // 0-15 16-30 31-45 46-60 61-75 76-90 91-105+
   age: () => new Promise(async (resolve, reject) => {
-    const range = [0, 15, 30, 45, 60, 75, 90, 105]
-    const result = []
-    const allPromise = []
-    let rangeDate = await generateDateRangeHelpers(range)
-    rangeDate.forEach((d, i) => {
-      allPromise.push(
-        eachDatePromise(rangeDate, result, d, i)
-      )
-      // CustomerModel.aggregate([
-      //   { $match: {
-      //     birthDate: {
-      //       $lt: rangeDate[i],
-      //       $gte: rangeDate[i + 1]
-      //     }
-      //   } },
-      //   { $count: 'n' }
-      // ]).then(doc => {
-      //   result.push({
-      //     n: doc[0] ? doc[0].n : 0,
-      //     range: [`${moment().year() - moment(d).year()}`, `${moment().year() - moment(rangeDate[i + 1]).year()}`]
-      //   })
-      // })
-    })
+    const range = [0, 15, 30, 45, 60, 75, 90, 105, 1000]
+    //   const query = JSON.stringify(
+    //     `[
+    //   { "$match": {
+    //     "birthDate": {
+    //       "$lt": "0",
+    //       "$gte": "78788888"
+    //     }
+    //   } },
+    //   { "$count": 'n' }
+    // ]`)
 
-    // console.log(allPromise)
-    await Promise.all(allPromise)
-    // console.log(result)
+    const query = `
+    [
+      {"$count": "n"}
+    ]
+    `
+
+    const result = await queryDateRangeHelpers({
+      array: range
+    }, query, CustomerModel, 'birthDate')
     resolve(result)
+    // )
+    // const result = []
+    // const allPromise = []
+    // let rangeDate = await generateDateRangeHelpers(range)
+    // rangeDate.forEach((d, i) => {
+    //   allPromise.push(
+    //     eachDatePromise(rangeDate, result, d, i)
+    //   )
+    // })
 
-    // setTimeout(() => resolve(result), 3000)
+    // await Promise.all(allPromise)
+    // resolve(result)
   })
 }
 

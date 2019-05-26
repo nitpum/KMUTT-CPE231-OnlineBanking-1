@@ -7,7 +7,7 @@ const analytic = {
   balance: {
     /**
      * get all balance with branch
-     * @returns {Array} - mongodb object
+     * @returns {Object} - { balance: n }
      */
     all: () => new Promise((resolve, reject) => {
       CustomerModel.aggregate([
@@ -20,9 +20,10 @@ const analytic = {
             }
           }
         }
-      ]).then(doc => {
-        resolve(doc)
-      }).catch(err => reject(err))
+      ]).then(doc => resolve({
+        balance: doc[0].balance
+      }))
+        .catch(err => reject(err))
     }),
 
     /**

@@ -1,7 +1,7 @@
 const moment = require('moment')
 
 // helpers
-const generateDateRangeHelpers = require('./generate-date-range')
+const generateDateRangeArrayHelpers = require('./generate-date-range-array')
 /**
  * @param  {Array} range - number of range [0, 15, 30, 999]
  * @param  {Array} range.array
@@ -36,7 +36,7 @@ module.exports = (range = {
 
   const allPromise = []
   const result = []
-  const rangeDate = await generateDateRangeHelpers(range.array, range.unit)
+  const rangeDate = await generateDateRangeArrayHelpers(range.array, range.unit)
   rangeDate.forEach(
     (d, i) => {
       allPromise.push(

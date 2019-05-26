@@ -83,4 +83,8 @@ router.get('/query', (req, res) => {
   }
 })
 
+router.get('/analytic', (req, res) => {
+  CustomerModel.analytic.count().then(n => res.send(n))
+})
+
 module.exports = router

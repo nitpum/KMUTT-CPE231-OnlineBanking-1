@@ -1,4 +1,7 @@
 const mongoose = require('mongoose')
+const favoriteRef = { type: mongoose.Schema.Types.ObjectId, ref: 'favorite' }
+const notifyRef = { type: mongoose.Schema.Types.ObjectId, ref: 'favorite' }
+const accRef = { type: mongoose.Schema.Types.ObjectId, ref: 'account' }
 
 const customerSchema = mongoose.Schema({
   username: { type: String, required: true },
@@ -16,6 +19,10 @@ const customerSchema = mongoose.Schema({
   phone: { type: String, maxlength: 13, required: true },
   lastAccess: Date,
   status: { type: String, enum: ['ACTIVE', 'LOCKED', 'TOKEN', 'RESETPASS', 'ETC'], default: 'ACTIVE' },
+  favorite: [favoriteRef],
+  notifications: [notifyRef],
+  account: [accRef],
+
   dateCreate: { type: Date, default: Date.now }
 })
 

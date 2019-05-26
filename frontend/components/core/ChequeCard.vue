@@ -9,7 +9,7 @@
     <v-divider />
     <v-card-actions>
       <v-spacer />
-      <v-btn color="primary">
+      <v-btn color="primary" flat>
         more info
       </v-btn>
     </v-card-actions>

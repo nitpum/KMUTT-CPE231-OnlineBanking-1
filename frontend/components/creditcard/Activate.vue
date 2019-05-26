@@ -6,7 +6,11 @@
       </v-card-title>
       <v-card-text>
         <v-container>
-          <v-text-field label="Card No." prepend-icon="payment" />
+          <v-text-field
+            label="Card No."
+            prepend-icon="payment"
+            mask="credit-card"
+          />
         </v-container>
       </v-card-text>
       <v-card-actions>

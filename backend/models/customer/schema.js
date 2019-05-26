@@ -22,6 +22,7 @@ const customerSchema = mongoose.Schema({
   favorite: [favoriteRef],
   notifications: [notifyRef],
   account: [accRef],
+  balance: { type: Number, default: 0 },
 
   dateCreate: { type: Date, default: Date.now }
 })

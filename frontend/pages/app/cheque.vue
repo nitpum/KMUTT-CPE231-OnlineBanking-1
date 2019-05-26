@@ -1,5 +1,6 @@
 <template>
   <v-container grid-list-lg>
+    <Dialog v-model="dialog"></Dialog>
     <v-layout row wrap>
       <v-flex
         v-for="(cheque, i) in cheques"
@@ -9,26 +10,29 @@
         md4
         xl3
       >
-        <cheque-card
-          :id="cheque.id"
+        <card
           :account-id="cheque.accountId"
-          :drawee="cheque.drawee"
           :amount="cheque.amount"
-        />
+          :show-more-info="true"
+          @onMoreInfo="dialog = true"
+        ></card>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import ChequeCard from '@/components/core/ChequeCard'
+import Card from '@/components/core/cheque/Card'
+import Dialog from '@/components/core/cheque/Dialog'
 
 export default {
   layout: 'customer',
   components: {
-    ChequeCard
+    Card,
+    Dialog
   },
   data: () => ({
+    dialog: false,
     cheques: [
       {
         id: '0-000-000-000-000-000',

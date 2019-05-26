@@ -13,7 +13,7 @@
             </h3>
           </v-card-title>
           <v-divider />
-          graph here
+          <heatmap v-if="showHeatmap" />
         </v-card>
       </v-flex>
 
@@ -57,13 +57,16 @@
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
+import Heatmap from '@/components/admin/org/Heatmap'
 
 export default {
   layout: 'admin',
   components: {
-    OverviewInfo
+    OverviewInfo,
+    Heatmap
   },
   data: () => ({
+    showHeatmap: false,
     from: undefined,
     to: undefined,
     data: {
@@ -104,6 +107,9 @@ export default {
         }
       ]
     ]
-  })
+  }),
+  mounted() {
+    this.showHeatmap = true
+  }
 }
 </script>

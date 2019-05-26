@@ -9,6 +9,7 @@ const generateDateRangeArrayHelpers = require('./generate-date-range-array')
  * @param  {Object} model - mongodb object
  * @param  {String} mongodbQuery - mongodb model e.g. [{$match: {}}, {$group: _id:null}]
  * @param  {String} key - key of date to filter e.g. createDate, brithDate
+ * @returns {Array}
  */
 module.exports = (range = {
   unit: 'years'

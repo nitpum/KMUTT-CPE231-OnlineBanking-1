@@ -3,13 +3,16 @@ const passwordHelpers = require('../helpers/password-hash')
 const loginHelpers = require('../helpers/user-login')
 
 const validation = (data) => new Promise(async (resolve, reject) => {
-  // try {
-  const [username, email] = await Promise.all([
-    AdminSchema.findOne({ username: data.username }),
-    AdminSchema.findOne({ email: data.email })
-  ])
-  if (!username && !email) resolve(true)
-  reject(new Error('username or email duplicated'))
+  try {
+    const [username, email] = await Promise.all([
+      AdminSchema.findOne({ username: data.username }),
+      AdminSchema.findOne({ email: data.email })
+    ])
+    if (!username && !email) resolve(true)
+    resolve(false)
+  } catch (err) {
+    reject(err)
+  }
 })
 
 /**
@@ -26,7 +29,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
     username: username,
     email: email
   })
-  if (!valid) reject(new Error('username duplicated'))
+  if (!valid) reject(new Error('username or email duplicated'))
   const hash = await passwordHelpers.generate(password)
 
   const doc = new AdminSchema({

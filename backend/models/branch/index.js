@@ -21,7 +21,7 @@ const validation = (name) => new Promise((resolve, reject) => {
 const create = (options) => new Promise(async (resolve, reject) => {
   const { name, address, zipcode, balance } = options
   const nameValid = await validation(name)
-  if (!nameValid) reject(Error('name branch duplicated'))
+  if (!nameValid) return reject(Error('name branch duplicated'))
   const doc = new BranchSchema({
     name: name,
     address: address,

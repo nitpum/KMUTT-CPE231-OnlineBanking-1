@@ -45,7 +45,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
     username: username,
     citizenId: citizenId
   })
-  if (!valid) reject(Error('username or citizendId or email duplicated'))
+  if (!valid) return reject(Error('username or citizendId or email duplicated'))
   const hash = await passwordHelpers.generate(password)
 
   const doc = new StaffSchema({

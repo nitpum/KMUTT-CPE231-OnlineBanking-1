@@ -1,13 +1,7 @@
 <template>
   <v-container grid-list-lg>
-    <v-card>
-      <v-card-title>
-        <h3 class="headline mb-0">
-          Overview
-        </h3>
-      </v-card-title>
-      <v-divider />
-      <v-card-text>
+    <overview-info :overviews="overviews" :data="data">
+      <template v-slot:header>
         <v-layout>
           <v-flex>
             <date-picker-dialog v-model="from" label="From" />
@@ -16,42 +10,19 @@
             <date-picker-dialog v-model="to" label="To" />
           </v-flex>
         </v-layout>
-
-        <v-layout row wrap>
-          <v-flex
-            v-for="(col, i) in [[0, 4], [4, 8]]"
-            :key="'col-' + i"
-            xs12
-            sm6
-          >
-            <p
-              v-for="overview in overviews.slice(col[0], col[1])"
-              :key="overview.key"
-              style="text-align:left;"
-            >
-              {{ overview.label }}
-              <span style="float:right;">
-                {{
-                  Number(data[overview.key])
-                    .toFixed(2)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-                }}
-                THB
-              </span>
-            </p>
-          </v-flex>
-        </v-layout>
-      </v-card-text>
-    </v-card>
+      </template>
+    </overview-info>
   </v-container>
 </template>
 
 <script>
+import OverviewInfo from '@/components/core/overview/Info'
 import DatePickerDialog from '@/components/core/DatePickerDialog'
 
 export default {
   layout: 'manager',
   components: {
+    OverviewInfo,
     DatePickerDialog
   },
   data: () => ({
@@ -68,38 +39,58 @@ export default {
       avgWdl: 2000
     },
     overviews: [
-      {
-        key: 'totalDep',
-        label: 'Total Deposit'
-      },
-      {
-        key: 'minDep',
-        label: 'Minimum Deposit'
-      },
-      {
-        key: 'maxDep',
-        label: 'Maximum Deposit'
-      },
-      {
-        key: 'avgDep',
-        label: 'Average Deposit'
-      },
-      {
-        key: 'totalWdl',
-        label: 'Total Withdrawal'
-      },
-      {
-        key: 'minWdl',
-        label: 'Minimum Withdrawal'
-      },
-      {
-        key: 'maxWdl',
-        label: 'Maximum Withdrawal'
-      },
-      {
-        key: 'avgWdl',
-        label: 'Average Withdrawal'
-      }
+      [
+        {
+          key: 'totalDep',
+          label: 'Total Deposit',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'minDep',
+          label: 'Minimum Deposit',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'maxDep',
+          label: 'Maximum Deposit',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'avgDep',
+          label: 'Average Deposit',
+          place: 2,
+          suffix: 'THB'
+        }
+      ],
+      [
+        {
+          key: 'totalWdl',
+          label: 'Total Withdrawal',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'minWdl',
+          label: 'Minimum Withdrawal',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'maxWdl',
+          label: 'Maximum Withdrawal',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'avgWdl',
+          label: 'Average Withdrawal',
+          place: 2,
+          suffix: 'THB'
+        }
+      ]
     ]
   })
 }

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import OverviewCard from '@/components/core/OverviewCard'
+import OverviewCard from '@/components/core/overview/Card'
 
 export default {
   layout: 'admin',

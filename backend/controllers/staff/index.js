@@ -45,9 +45,12 @@ router.post('/create', (req, res) => {
       firstName: firstName,
       lastName: lastName
     }
-  }).then(doc => {
-    res.send(doc)
   })
+    .then(doc => res.send(doc))
+    .catch(err => res.send({
+      validation: false,
+      err: String(err)
+    }))
 })
 
 router.post('/login', passport.authenticate(PERMISSION, {

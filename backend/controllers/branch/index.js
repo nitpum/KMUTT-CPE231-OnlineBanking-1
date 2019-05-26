@@ -24,19 +24,19 @@ router.get('/create', async (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/branch/', 'create.html'))
 })
 
-router.post('/create', async (req, res) => {
-  try {
-    const { name, address, zipcode, balance } = req.body
-    const doc = await BranchModel.create({
-      name: name,
-      address: address,
-      zipcode: zipcode,
-      balance: balance
-    })
-    res.send(doc)
-  } catch (err) {
-    res.send(err)
-  }
+router.post('/create', (req, res) => {
+  const { name, address, zipcode, balance } = req.body
+  BranchModel.create({
+    name: name,
+    address: address,
+    zipcode: zipcode,
+    balance: balance
+  })
+    .then(doc => res.send(doc))
+    .catch(err => res.send({
+      validation: false,
+      err: String(err)
+    }))
 })
 
 router.get('/query', (req, res) => {

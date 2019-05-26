@@ -5,13 +5,17 @@ const passwordHelpers = require('../helpers/password-hash')
 const loginHelpers = require('../helpers/user-login')
 
 const validation = (data) => new Promise(async (resolve, reject) => {
-  const [username, citizenId, email] = await Promise.all([
-    CustomerSchema.findOne({ username: data.username }),
-    CustomerSchema.findOne({ citizenId: data.citizenId }),
-    CustomerSchema.findOne({ email: data.email })
-  ])
-  if (!username && !citizenId && !email) resolve(true)
-  reject(new Error('username or citizendId or email duplicated'))
+  try {
+    const [username, citizenId, email] = await Promise.all([
+      CustomerSchema.findOne({ username: data.username }),
+      CustomerSchema.findOne({ citizenId: data.citizenId }),
+      CustomerSchema.findOne({ email: data.email })
+    ])
+    if (!username && !citizenId && !email) resolve(true)
+    resolve(false)
+  } catch (err) {
+    reject(err)
+  }
 })
 
 /**
@@ -44,7 +48,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
     email: email
   })
 
-  if (!valid) reject(Error('username or citizendId or email duplicated'))
+  if (!valid) reject(new Error('username or citizendId or email duplicated'))
   const hash = await passwordHelpers.generate(password)
 
   const doc = new CustomerSchema({
@@ -67,7 +71,22 @@ const create = (data) => new Promise(async (resolve, reject) => {
   })
 })
 
+/**
+ * @param  {String} username
+ * @param  {String} password
+ * @returns {Object}
+ */
+const login = (username, password) => new Promise(async (resolve, reject) => {
+  try {
+    const res = await loginHelpers(username, password, CustomerSchema)
+    resolve(res)
+  } catch (err) {
+    reject(err)
+  }
+})
+
 module.exports = {
   schema: CustomerSchema,
-  create: create
+  create: create,
+  login: login
 }

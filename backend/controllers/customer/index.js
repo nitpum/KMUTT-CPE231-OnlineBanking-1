@@ -11,6 +11,10 @@ const PERMISSION = ['customer', 'admin']
 // models
 const CustomerModel = require('../../models/customer')
 
+// controllers
+const AnalyticController = require('./analytic')
+const QueryController = require('./query')
+
 router.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/customer/', 'create.html'))
 })
@@ -19,7 +23,7 @@ router.post('/create', (req, res) => {
   const {
     username, password, name, zipcode,
     address, birthDate, gender, citizenId,
-    email, phone
+    email, phone, balance
   } = req.body
   const [firstName, lastName] = name.split(' ')
 
@@ -33,6 +37,7 @@ router.post('/create', (req, res) => {
     citizenId: citizenId,
     email: email,
     phone: phone,
+    balance: balance,
     name: {
       firstName: firstName,
       lastName: lastName
@@ -64,23 +69,7 @@ router.get('/', (req, res) => {
   res.send('customer jaaa')
 })
 
-router.get('/query', (req, res) => {
-  const id = req.query.id || undefined
-  const limit = Number(req.query.limit) || undefined
-  const search = req.query.search || undefined
-
-  if (search) {
-    CustomerModel.query.search(search, limit)
-      .then(doc => res.send(doc))
-  } else if (id) {
-    CustomerModel.query.id(id)
-      .then(doc => res.send(doc))
-  } else {
-    CustomerModel.query.all(limit)
-      .then(doc => {
-        res.send(doc)
-      })
-  }
-})
+router.use('/analytic', AnalyticController)
+router.use('/query', QueryController)
 
 module.exports = router

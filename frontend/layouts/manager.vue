@@ -46,7 +46,8 @@ export default {
         },
         {
           icon: 'mdi-clipboard-account',
-          title: 'Staff'
+          title: 'Staff',
+          to: '/manager/staff'
         },
         {
           icon: 'mdi-domain',

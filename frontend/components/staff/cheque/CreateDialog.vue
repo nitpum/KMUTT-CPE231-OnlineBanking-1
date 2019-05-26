@@ -5,8 +5,7 @@
         <h2>Create Cheque</h2>
       </v-card-title>
       <v-card-text>
-        <text-label label="Type" placeholder="Type"></text-label>
-        <text-label label="Bank" placeholder="Yee Bank"></text-label>
+        <v-select label="Type" placeholder="Type" :items="types"></v-select>
         <v-select label="Bank" placeholder="Bank" :items="banks"></v-select>
         <v-text-field
           label="Account ID"
@@ -28,12 +27,7 @@
 </template>
 
 <script>
-import TextLabel from '@/components/core/TextLabel'
-
 export default {
-  components: {
-    TextLabel
-  },
   props: {
     value: {
       type: Boolean,
@@ -41,6 +35,7 @@ export default {
     }
   },
   data: () => ({
+    types: [],
     banks: ['Yee bank']
   }),
   computed: {

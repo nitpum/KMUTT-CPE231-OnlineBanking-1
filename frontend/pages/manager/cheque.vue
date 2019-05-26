@@ -1,56 +1,40 @@
 <template>
-  <v-container>
-    <v-card class="mb-3">
-      <v-card-title>
-        <h3 class="headline mb-0">
-          Cheque Overview
-        </h3>
-      </v-card-title>
-      <v-divider />
-      <v-card-text>
-        <v-container fluid grid-list-xl py-0>
-          <v-layout row wrap>
-            <v-flex
-              v-for="(col, i) in [[0, 4], [4, 6]]"
-              :key="'col-' + i"
-              xs12
-              sm6
-            >
-              <p
-                v-for="overview in overviews.slice(col[0], col[1])"
-                :key="overview.key"
-                style="text-align:left;"
-              >
-                {{ overview.label }}
-                <span style="float:right;">{{ data[overview.key] }}</span>
-              </p>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card-text>
-    </v-card>
+  <v-container grid-list-lg>
+    <v-layout column>
+      <v-flex>
+        <overview-info
+          :overviews="overviews"
+          :data="data"
+          title="Cheque Overview"
+        />
+      </v-flex>
 
-    <v-card>
-      <v-card-title>
-        <h3 class="headline mb-0">
-          Cheque Usage
-        </h3>
-      </v-card-title>
-      <v-divider />
-      <v-card-text>
-        <line-chart :data="charts" :options="chartOptions" :height="300" />
-      </v-card-text>
-    </v-card>
+      <v-flex>
+        <v-card>
+          <v-card-title>
+            <h3 class="headline mb-0">
+              Cheque Usage
+            </h3>
+          </v-card-title>
+          <v-divider />
+          <v-card-text>
+            <line-chart :data="charts" :options="chartOptions" :height="300" />
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
 import LineChart from '@/components/core/charts/Line.js'
+import OverviewInfo from '@/components/core/overview/Info'
 
 export default {
   layout: 'manager',
   components: {
-    LineChart
+    LineChart,
+    OverviewInfo
   },
   data: () => ({
     data: {
@@ -62,30 +46,42 @@ export default {
       most: 'December'
     },
     overviews: [
-      {
-        key: 'total',
-        label: 'Total value of month'
-      },
-      {
-        key: 'min',
-        label: 'Min value'
-      },
-      {
-        key: 'max',
-        label: 'Max value'
-      },
-      {
-        key: 'average',
-        label: 'Average value'
-      },
-      {
-        key: 'least',
-        label: 'Least usage'
-      },
-      {
-        key: 'most',
-        label: 'Most usage'
-      }
+      [
+        {
+          key: 'total',
+          label: 'Total value of month',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'min',
+          label: 'Min value',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'max',
+          label: 'Max value',
+          place: 2,
+          suffix: 'THB'
+        },
+        {
+          key: 'average',
+          label: 'Average value',
+          place: 2,
+          suffix: 'THB'
+        }
+      ],
+      [
+        {
+          key: 'least',
+          label: 'Least usage'
+        },
+        {
+          key: 'most',
+          label: 'Most usage'
+        }
+      ]
     ],
     charts: {
       labels: [

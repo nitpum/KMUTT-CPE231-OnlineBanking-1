@@ -54,12 +54,7 @@ export default {
               text: 'Transfer',
               to: '/staff/transactions/transfer'
             },
-            { icon: 'receipt', text: 'Bills', to: '/staff/transactions/bills' },
-            {
-              icon: 'bar_chart',
-              text: 'Analytics',
-              to: '/staff/transactions/analytics'
-            }
+            { icon: 'receipt', text: 'Bills', to: '/staff/transactions/bills' }
           ]
         },
         {

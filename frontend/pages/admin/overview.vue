@@ -2,26 +2,24 @@
   <v-container grid-list-xl>
     <v-layout row wrap>
       <v-flex v-for="(card, i) in cards" :key="'ov-card-' + i" xs12 sm6>
-        <v-card>
-          <v-sheet :color="card.color" dark class="pa-3">
-            <div class="display-3 text-xs-center pt-4">{{ card.value }}</div>
-            <div class="headline text-truncate pt-3">{{ card.title }}</div>
-          </v-sheet>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn flat color="primary">
-              more info
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+        <overview-card :title="card.title" :color="card.color">
+          <span class="display-3">
+            {{ card.value }}
+          </span>
+        </overview-card>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import OverviewCard from '@/components/core/overview/Card'
+
 export default {
   layout: 'admin',
+  components: {
+    OverviewCard
+  },
   data: () => ({
     cards: [
       {

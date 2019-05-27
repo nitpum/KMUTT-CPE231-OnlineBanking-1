@@ -7,12 +7,14 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const morgan = require('morgan')
 
 const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(morgan('dev'))
 app.set('view engine', 'pug')
 
 app.use(express.static(path.join(__dirname, 'public')))

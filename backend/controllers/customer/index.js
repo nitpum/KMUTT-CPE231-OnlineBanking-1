@@ -53,7 +53,7 @@ router.post('/create', (req, res) => {
   ))
 })
 
-router.post('/login', passport.authenticate(PERMISSION, {
+router.post('/login', passport.authenticate('customer', {
   successRedirect: '/customer',
   failureRedirect: '/customer/login'
 }))

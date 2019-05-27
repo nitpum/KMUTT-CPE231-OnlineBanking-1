@@ -12,7 +12,7 @@ const BranchModel = require('../../models/branch/index')
 // const BranchSchema = BranchModel.schema
 
 // authen required
-router.use(['/'], authen({
+router.use(['/', '/create', '/query', '/analytic'], authen({
   permission: PERMISSION,
   unauthorizedPath: '/admin/login'
 }))

@@ -1,8 +1,7 @@
 const moment = require('moment')
 
-
 // helpers
-const generateDateRangeHelpers = require('./generate-date-range')
+const generateDateRangeArrayHelpers = require('./generate-date-range-array')
 /**
  * @param  {Array} range - number of range [0, 15, 30, 999]
  * @param  {Array} range.array
@@ -10,6 +9,7 @@ const generateDateRangeHelpers = require('./generate-date-range')
  * @param  {Object} model - mongodb object
  * @param  {String} mongodbQuery - mongodb model e.g. [{$match: {}}, {$group: _id:null}]
  * @param  {String} key - key of date to filter e.g. createDate, brithDate
+ * @returns {Array}
  */
 module.exports = (range = {
   unit: 'years'
@@ -25,7 +25,6 @@ module.exports = (range = {
       { $match: keyString },
       ...mongoDBQueryFormat
     ]
-    console.log(JSON.stringify(compoundQuery), i)
 
     model.aggregate(compoundQuery)
       .then(doc => resolve(
@@ -38,7 +37,7 @@ module.exports = (range = {
 
   const allPromise = []
   const result = []
-  const rangeDate = await generateDateRangeHelpers(range.array, range.unit)
+  const rangeDate = await generateDateRangeArrayHelpers(range.array, range.unit)
   rangeDate.forEach(
     (d, i) => {
       allPromise.push(

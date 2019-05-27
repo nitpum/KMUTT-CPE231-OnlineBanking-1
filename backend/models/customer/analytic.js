@@ -2,7 +2,7 @@ const CustomerModel = require('./schema')
 
 // helpers
 const mapObjectIdHelpers = require('../helpers/map-mongodb-objectId')
-const queryDateRangeHelpers = require('../helpers/query-date-range')
+const queryDateRangeArrayHelpers = require('../helpers/query-date-range-array')
 
 const analytic = {
   balance: {
@@ -73,7 +73,7 @@ const analytic = {
     // 0-15 16-30 31-45 46-60 61-75 76-90 91-105+
     const query = `[ {"$count": "n"} ]`
 
-    const result = await queryDateRangeHelpers({
+    const result = await queryDateRangeArrayHelpers({
       array: range.array,
       unit: range.unit
     }, query, CustomerModel, 'birthDate')

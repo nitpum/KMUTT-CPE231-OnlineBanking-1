@@ -75,6 +75,53 @@ const create = (data) => new Promise(async (resolve, reject) => {
 })
 
 /**
+  * edit customer user
+ * @param  {Object} data
+ * @param  {String} id - mongodb id
+ * @param  {String} data.username - username
+ * @param  {String} data.password - password
+ * @param  {String} data.email - email
+ * @param  {String} data.name.firstName - firstname
+ * @param  {String} data.name.lastName - firstname
+ * @param  {String} data.zipcode - zipcode
+ * @param  {String} data.address - address
+ * @param  {Date} data.birthDate - birthdate
+ * @param  {String} data.gender - ['M', 'F', 'U']
+ * @param  {String} data.citizenId - citizenId
+ * @param  {String} data.position - position
+ * @param  {String} data.phone - phone
+ * @returns {Object} - updated mongodb document
+ */
+const edit = (id, data) => new Promise(async (resolve, reject) => {
+  try {
+    const { password } = data
+    let hash
+    if (password) {
+      hash = await passwordHelpers.generate(password)
+      data.password = hash
+    } else {
+      delete data.password
+    }
+    const doc = await CustomerSchema.findByIdAndUpdate(id, { $set: data }, { upsert: true })
+    resolve(doc)
+  } catch (err) {
+    reject(err)
+  }
+})
+
+/**
+ * @param  {String} id - mongodb id
+ * @returns {Object} mongodb object
+ */
+const remove = id => new Promise((resolve, reject) => {
+  CustomerSchema.findOneAndDelete({ _id: id }, (err, res) => {
+    if (err) reject(err)
+    if (!res) reject(new Error('not found'))
+    resolve(res)
+  })
+})
+
+/**
  * @param  {String} username
  * @param  {String} password
  * @returns {Object}
@@ -91,6 +138,8 @@ const login = (username, password) => new Promise(async (resolve, reject) => {
 module.exports = {
   schema: CustomerSchema,
   create: create,
+  edit: edit,
+  delete: remove,
   login: login,
   query: QueryModel,
   analytic: AnalyticModel

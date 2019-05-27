@@ -53,21 +53,11 @@ router.post('/create', (req, res) => {
   ))
 })
 
-<<<<<<< HEAD
-router.post('/login', passport.authenticate('customer'), (req, res) => {
-  res.sendStatus(200)
-})
-=======
 router.post('/login', passport.authenticate('customer'), (req, res) => res.sendStatus(200))
->>>>>>> backend
 
 router.get('/logout', logout, (req, res) => res.sendStatus(200))
 
-<<<<<<< HEAD
-router.get('/logout', logout, (req, res) => res.sendStatus(200))
-=======
 router.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../../views/customer/', 'login.html')))
->>>>>>> backend
 
 // authen required
 router.use(['/', '/edit', '/analytic', '/query'], authen({

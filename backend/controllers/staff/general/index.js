@@ -8,6 +8,7 @@ const StaffModel = require('../../../models/staff/general')
 
 // controllers
 const AnalyticControllers = require('./analytic')
+const QueryControllers = require('./query')
 
 router.get('/', (req, res) => res.send('general staff jaa'))
 
@@ -53,5 +54,6 @@ router.post('/create', (req, res) => {
 })
 
 router.use('/analytic', AnalyticControllers)
+router.use('/query', QueryControllers)
 
 module.exports = router

@@ -35,17 +35,13 @@ export default {
   }),
   methods: {
     signIn() {
-      this.$axios
-        .post(
-          '/customer/login',
-          {
+      this.$auth
+        .loginWith('customer', {
+          data: {
             username: this.username,
             password: this.password
-          },
-          {
-            maxRedirects: 0
           }
-        )
+        })
         .then(data => {
           this.$router.push('/app')
         })

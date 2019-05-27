@@ -45,7 +45,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/auth'
   ],
 
   /*
@@ -60,6 +61,30 @@ module.exports = {
     '/api/': {
       target: 'http://localhost:8080',
       pathRewrite: { '^/api': '' }
+    }
+  },
+
+  auth: {
+    strategies: {
+      customer: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/customer/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/customer/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/customer/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      }
     }
   },
 

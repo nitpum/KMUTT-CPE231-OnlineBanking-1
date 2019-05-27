@@ -69,7 +69,10 @@ router.post('/create', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
 // })
 
+router.use(['/general'], authen({ permission: ['general'] }))
 router.use('/general', GenralControllers)
+
+router.use(['/manager'], authen({ permission: ['manager'] }))
 router.use('/manager', ManagerControllers)
 
 // authen required
@@ -83,7 +86,5 @@ router.get('/', (req, res) => {
 
 router.use('/query', QueryControllers)
 router.use('/analytic', AnalyticControllers)
-
-
 
 module.exports = router

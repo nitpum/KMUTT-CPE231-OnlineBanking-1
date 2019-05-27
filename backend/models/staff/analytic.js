@@ -6,11 +6,14 @@ const queryDateRangeArrayHelpers = require('../helpers/query-date-range-array')
 const analytic = {
   /**
    * count staff
+   * @param {String} permission - type of query staff
    * @returns {Object} - number of staff
    * @property {Object} nStaffs - number of staff
    */
-  count: () => new Promise((resolve, reject) => {
-    StaffModel.find({}).countDocuments((err, n) => {
+  count: (permission) => new Promise((resolve, reject) => {
+    let query = {}
+    if (permission) query = { permission: permission }
+    StaffModel.find(query).countDocuments((err, n) => {
       if (err) reject(err)
       resolve({
         nStaffs: n

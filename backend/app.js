@@ -11,7 +11,10 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(cors())
+const corsOptions = require('./configs/cors')
+console.log(corsOptions)
+app.use(cors(corsOptions))
+app.options('*', cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())

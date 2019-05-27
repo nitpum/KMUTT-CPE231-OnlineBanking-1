@@ -61,7 +61,17 @@ export default {
         },
         {
           icon: 'build',
-          title: 'Settings'
+          title: 'Settings',
+          children: [
+            {
+              text: 'Change Username',
+              to: '/manager/transactions/deposit'
+            },
+            {
+              text: 'Change Password',
+              to: '/app/settings/changePass'
+            }
+          ]
         }
       ],
       miniVariant: false,

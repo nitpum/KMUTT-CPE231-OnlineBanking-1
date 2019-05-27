@@ -12,14 +12,15 @@ router.get('/', (req, res) => {
   if (search) {
     CustomerModel.query.search(search, limit)
       .then(doc => res.send(doc))
+      .catch(err => res.send({ op: false, err: String(err) }))
   } else if (id) {
     CustomerModel.query.id(id)
       .then(doc => res.send(doc))
+      .catch(err => res.send({ op: false, err: String(err) }))
   } else {
     CustomerModel.query.all(limit)
-      .then(doc => {
-        res.send(doc)
-      })
+      .then(doc => res.send(doc))
+      .catch(err => res.send({ op: false, err: String(err) }))
   }
 })
 

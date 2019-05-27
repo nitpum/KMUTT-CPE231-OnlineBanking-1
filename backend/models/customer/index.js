@@ -93,14 +93,18 @@ const create = (data) => new Promise(async (resolve, reject) => {
  * @returns {Object} - updated mongodb document
  */
 const edit = (id, data) => new Promise(async (resolve, reject) => {
-  const { password } = data
-  let hash
-  if (password) {
-    hash = await passwordHelpers.generate(password)
-    data.password = hash
+  try {
+    const { password } = data
+    let hash
+    if (password) {
+      hash = await passwordHelpers.generate(password)
+      data.password = hash
+    }
+    const doc = await CustomerSchema.findByIdAndUpdate(id, { $set: data }, { upsert: true })
+    resolve(doc)
+  } catch (err) {
+    reject(err)
   }
-  const doc = await CustomerSchema.findByIdAndUpdate(id, { $set: data }, { upsert: true })
-  resolve(doc)
 })
 
 /**

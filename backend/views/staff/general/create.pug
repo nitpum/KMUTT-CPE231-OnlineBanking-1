@@ -1,0 +1,43 @@
+form(action="/staff/create", method="post")
+    h3='General'
+    label(for="username") username
+    input(type="text" name="username")
+    br
+    label(for="password") password
+    input(type="password" name="password")
+    br
+    label(for="email") email
+    input(type="text" name="email")
+    br
+    label(for="name") name
+    input(type="text" name="name")
+    br
+    label(for="zipcode") zipcode
+    input(type="number" name="zipcode")
+    br
+    label(for="address") address
+    input(type="text" name="address")
+    br
+    label(for="birthDate") birthDate
+    input(type="date" name="birthDate")
+    br
+    label(for="phone") phone
+    input(type="number" name="phone")
+    br
+    label(for="gender") gender
+    select(name="gender")
+        option(value='M') M
+        option(value='F') F
+        option(value='U') U
+    br
+    label(for="citizenId") citizenId
+    input(type="number" name="citizenId")
+    br
+    label(for="position") position
+    input(type="text" name="position")
+    br
+    select(name="branch")
+        for branch in branches
+            option(value=branch._id)=branch.name
+    br
+    button(type="submit") create

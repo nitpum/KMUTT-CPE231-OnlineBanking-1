@@ -54,16 +54,13 @@ router.post('/create', (req, res) => {
     }))
 })
 
-router.post('/login', passport.authenticate(PERMISSION, {
-  successRedirect: '/staff',
-  failureRedirect: '/staff/login'
-}))
+router.post('/login', passport.authenticate(PERMISSION), (req, res) => res.sendStatus(200))
 
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
 })
 
-router.get('/logout', logout, (req, res) => res.redirect('/login'))
+router.get('/logout', logout, (req, res) => res.sendStatus(200))
 
 // authen required
 router.use(['/', '/query', 'analytic'], authen({

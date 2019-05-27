@@ -45,20 +45,104 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/auth'
   ],
+
   /*
    ** Axios module configuration
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    proxy: true
+    prefix: '/api/'
   },
 
   proxy: {
     '/api/': {
       target: 'http://localhost:8080',
       pathRewrite: { '^/api': '' }
+    }
+  },
+
+  auth: {
+    redirect: false,
+    strategies: {
+      customer: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/customer/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/customer/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/customer/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      staff: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/staff/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/staff/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/staff/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      manager: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/manager/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/manager/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/manager/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      admin: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/admin/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/admin/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/admin/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      }
     }
   },
 

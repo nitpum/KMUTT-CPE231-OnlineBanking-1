@@ -3,19 +3,21 @@
     <v-card-text>
       <v-form>
         <v-text-field
-          id="username"
+          v-model="username"
           prepend-icon="person"
           name="username"
           label="Username"
           type="text"
-        ></v-text-field>
+        />
         <v-text-field
-          id="password"
+          ref="password"
+          v-model="password"
           prepend-icon="lock"
           name="password"
           label="Password"
           type="password"
-        ></v-text-field>
+          @keyup.enter="signIn()"
+        />
       </v-form>
     </v-card-text>
     <v-card-actions>
@@ -27,9 +29,37 @@
 
 <script>
 export default {
+  props: {
+    strategy: {
+      type: String,
+      default: 'customer'
+    }
+  },
+  data: () => ({
+    username: '',
+    password: ''
+  }),
   methods: {
     signIn() {
-      this.$router.push('/app')
+      this.$auth
+        .loginWith(this.strategy, {
+          data: {
+            username: this.username,
+            password: this.password
+          }
+        })
+        .then(data => {
+          const redirect = '/'.concat(
+            this.strategy === 'customer' ? 'app' : this.strategy
+          )
+          this.$router.push(redirect)
+        })
+        .catch(({ response }) => {
+          if (response.status === 401) {
+            this.password = ''
+            this.$refs.password.focus()
+          }
+        })
     }
   }
 }

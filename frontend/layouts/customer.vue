@@ -23,6 +23,7 @@ import theme from './themes/customer'
 import Accounts from '@/components/customer/accounts/Switch'
 
 export default {
+  middleware: 'customer',
   components: {
     drawer,
     toolbar,
@@ -60,12 +61,18 @@ export default {
           to: '/app/bills'
         },
         {
-          icon: 'account_balance_wallet',
-          title: 'Account'
-        },
-        {
           icon: 'build',
-          title: 'Settings'
+          title: 'Settings',
+          children: [
+            {
+              text: 'Change Username',
+              to: '/app/settings/username'
+            },
+            {
+              text: 'Change Password',
+              to: '/app/settings/password'
+            }
+          ]
         }
       ],
       miniVariant: false,

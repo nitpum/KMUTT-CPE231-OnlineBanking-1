@@ -42,7 +42,8 @@ export default {
         },
         {
           icon: 'account_balance_wallet',
-          title: 'Customer'
+          title: 'Customer',
+          to: '/manager/customer'
         },
         {
           icon: 'mdi-clipboard-account',

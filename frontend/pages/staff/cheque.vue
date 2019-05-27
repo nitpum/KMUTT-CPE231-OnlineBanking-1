@@ -16,14 +16,14 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <pay-dialog v-model="payDialog"></pay-dialog>
+    <pay-dialog v-model="payDialog" :editable="true"></pay-dialog>
     <create-dialog v-model="createDialog"></create-dialog>
   </div>
 </template>
 
 <script>
 import Card from '@/components/core/cheque/Card'
-import PayDialog from '@/components/staff/cheque/PayDialog'
+import PayDialog from '@/components/core/cheque/Dialog'
 import CreateDialog from '@/components/staff/cheque/CreateDialog'
 
 export default {

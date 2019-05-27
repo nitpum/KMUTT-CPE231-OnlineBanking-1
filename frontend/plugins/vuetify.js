@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 import colors from 'vuetify/es5/util/colors'
+import { HeatMapPlugin } from '@syncfusion/ej2-vue-heatmap'
 import '@mdi/font/css/materialdesignicons.css'
+
+Vue.use(HeatMapPlugin)
 
 Vue.use(Vuetify, {
   theme: {

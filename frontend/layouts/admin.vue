@@ -45,11 +45,13 @@ export default {
         },
         {
           icon: 'mdi-domain',
-          title: 'Branch'
+          title: 'Branch',
+          to: '/admin/branch'
         },
         {
           icon: 'mdi-domain',
-          title: 'Organization & Services'
+          title: 'Organization & Services',
+          to: '/admin/organization_services'
         },
         {
           icon: 'mdi-cloud',

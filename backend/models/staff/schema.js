@@ -15,6 +15,7 @@ const staffSchema = mongoose.Schema({
   phone: { type: String, maxlength: 13, required: true },
   gender: { type: String, enum: ['M', 'F', 'U'], required: true },
   citizenId: { type: String, maxlength: 13, required: true },
+  permission: String,
   position: { type: String, required: true },
   branch: branchRef,
   dateCreate: { type: Date, default: Date.now }

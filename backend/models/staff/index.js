@@ -7,7 +7,8 @@ const passwordHelpers = require('../helpers/password-hash')
 const loginHelpers = require('../helpers/user-login')
 
 // models
-const StaffGeneralStaff = require('./general')
+const StaffGeneralModel = require('./general')
+const StaffManagerModel = require('./manager')
 
 const validation = (data) => new Promise(async (resolve, reject) => {
   const [username, citizenId, email] = await Promise.all([
@@ -93,5 +94,6 @@ module.exports = {
   login: login,
   query: QueryModel,
   analytic: AnalyticModel,
-  general: StaffGeneralStaff
+  general: StaffGeneralModel,
+  manager: StaffManagerModel
 }

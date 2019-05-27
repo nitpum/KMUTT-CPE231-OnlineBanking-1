@@ -23,7 +23,7 @@ import theme from './themes/customer'
 import Accounts from '@/components/customer/accounts/Switch'
 
 export default {
-  // middleware: 'customer',
+  middleware: 'customer',
   components: {
     drawer,
     toolbar,

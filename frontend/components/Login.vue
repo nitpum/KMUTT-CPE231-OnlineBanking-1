@@ -16,6 +16,7 @@
           name="password"
           label="Password"
           type="password"
+          @keyup.enter="signIn()"
         ></v-text-field>
       </v-form>
     </v-card-text>

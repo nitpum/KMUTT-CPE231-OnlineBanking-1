@@ -107,8 +107,9 @@ const edit = (id, data) => new Promise(async (resolve, reject) => {
  * @returns {Object} mongodb object
  */
 const remove = id => new Promise((resolve, reject) => {
-  CustomerSchema.findByIdAndRemove(id, (err, res) => {
+  CustomerSchema.findOneAndDelete({ _id: id }, (err, res) => {
     if (err) reject(err)
+    if (!res) reject(new Error('not found'))
     resolve(res)
   })
 })

@@ -69,6 +69,13 @@ router.get('/', (req, res) => {
   res.send('customer jaaa')
 })
 
+router.get('/edit', async (req, res) => {
+  const id = req.session.passport.user._id
+  let user = await CustomerModel.query.id(id)
+  if(!user) user = {}
+  res.render(path.join(__dirname, '../../views/customer/', 'edit'), { user: user })
+})
+
 router.use('/analytic', AnalyticController)
 router.use('/query', QueryController)
 

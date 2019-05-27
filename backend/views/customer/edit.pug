@@ -1,0 +1,44 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title Customer - Create
+  body
+    form(action='/customer/create', method='POST')
+      label(for='username') username
+      input(type='text', name='username' value=user.username)
+      br
+      label(for='password') password
+      input(type='password', name='password')
+      br
+      label(for='name') name
+      input(type='text', name='name')
+      br
+      label(for='email') email
+      input(type='email', name='email')
+      br
+      label(for='birthDate') birthDate
+      input(type='date', name='birthDate')
+      br
+      label(for='address') address
+      input(type='text', name='address')
+      br
+      label(for='zipcode') zipcode
+      input(type='number', name='zipcode')
+      br
+      label(for='balance') balance
+      input(type='number', name='balance')
+      br
+      label(for='gender') gender
+      select(name='gender')
+        option(value='M') M
+        option(value='F') F
+        option(value='U') U
+      br
+      label(for='citizenId') citizenId
+      input(type='number', name='citizenId')
+      br
+      label(for='phone') phone
+      input(type='number', name='phone')
+      br
+      button(type='submit') create

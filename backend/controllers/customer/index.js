@@ -5,6 +5,7 @@ const router = express.Router()
 
 // helpers
 const authen = require('../helpers/authen')
+const logout = require('../helpers/logout')
 
 const PERMISSION = ['customer', 'admin']
 
@@ -59,8 +60,10 @@ router.post('/login', passport.authenticate(PERMISSION, {
 
 router.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../../views/customer/', 'login.html')))
 
+router.get('/logout', logout, (req, res) => res.redirect('/login'))
+
 // authen required
-router.use(['/'], authen({
+router.use(['/', '/edit'], authen({
   permission: PERMISSION,
   unauthorizedPath: '/customer/login'
 }))
@@ -72,7 +75,7 @@ router.get('/', (req, res) => {
 router.get('/edit', async (req, res) => {
   const id = req.session.passport.user._id
   let user = await CustomerModel.query.id(id)
-  if(!user) user = {}
+  if (!user) user = {}
   res.render(path.join(__dirname, '../../views/customer/', 'edit'), { user: user })
 })
 

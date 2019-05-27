@@ -92,28 +92,25 @@ const create = (data) => new Promise(async (resolve, reject) => {
  * @returns {Object} - updated mongodb document
  */
 const edit = (id, data) => new Promise(async (resolve, reject) => {
-  const {
-    username, password, name, zipcode,
-    address, birthDate, gender, phone,
-    citizenId, email, balance
-  } = data
-  const { firstName, lastName } = name
-  const hash = await passwordHelpers.generate(password)
-  const doc = await CustomerSchema.findByIdAndUpdate(id, {
-    username: username,
-    password: hash,
-    'name.firstName': firstName,
-    'name.lastName': lastName,
-    email: email,
-    zipcode: zipcode,
-    address: address,
-    birthDate: birthDate,
-    phone: phone,
-    gender: gender,
-    citizenId: citizenId,
-    balance: balance
-  })
+  const { password } = data
+  let hash
+  if (password) {
+    hash = await passwordHelpers.generate(password)
+    data.password = hash
+  }
+  const doc = await CustomerSchema.findByIdAndUpdate(id, { $set: data }, { upsert: true })
   resolve(doc)
+})
+
+/**
+ * @param  {String} id - mongodb id
+ * @returns {Object} mongodb object
+ */
+const remove = id => new Promise((resolve, reject) => {
+  CustomerSchema.findByIdAndRemove(id, (err, res) => {
+    if (err) reject(err)
+    resolve(res)
+  })
 })
 
 /**
@@ -134,6 +131,7 @@ module.exports = {
   schema: CustomerSchema,
   create: create,
   edit: edit,
+  delete: remove,
   login: login,
   query: QueryModel,
   analytic: AnalyticModel

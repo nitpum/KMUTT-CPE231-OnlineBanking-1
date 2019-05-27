@@ -53,10 +53,9 @@ router.post('/create', (req, res) => {
   ))
 })
 
-router.post('/login', passport.authenticate('customer', {
-  successRedirect: '/customer',
-  failureRedirect: '/customer/login'
-}))
+router.post('/login', passport.authenticate('customer'), (req, res) => {
+  res.sendStatus(200)
+})
 
 router.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../../views/customer/', 'login.html')))
 

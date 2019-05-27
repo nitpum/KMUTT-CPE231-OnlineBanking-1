@@ -3,14 +3,15 @@
     <v-card-text>
       <v-form>
         <v-text-field
-          id="username"
+          v-model="username"
           prepend-icon="person"
           name="username"
           label="Username"
           type="text"
         ></v-text-field>
         <v-text-field
-          id="password"
+          ref="password"
+          v-model="password"
           prepend-icon="lock"
           name="password"
           label="Password"
@@ -27,9 +28,32 @@
 
 <script>
 export default {
+  data: () => ({
+    username: '',
+    password: ''
+  }),
   methods: {
     signIn() {
-      this.$router.push('/app')
+      this.$axios
+        .post(
+          '/customer/login',
+          {
+            username: this.username,
+            password: this.password
+          },
+          {
+            maxRedirects: 0
+          }
+        )
+        .then(data => {
+          this.$router.push('/app')
+        })
+        .catch(({ response }) => {
+          if (response.status === 401) {
+            this.password = ''
+            this.$refs.password.focus()
+          }
+        })
     }
   }
 }

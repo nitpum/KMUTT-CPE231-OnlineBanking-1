@@ -54,7 +54,7 @@ router.post('/create', (req, res) => {
     }))
 })
 
-router.post('/login', passport.authenticate(PERMISSION, {
+router.post('/login', passport.authenticate('staff', {
   successRedirect: '/staff',
   failureRedirect: '/staff/login'
 }))

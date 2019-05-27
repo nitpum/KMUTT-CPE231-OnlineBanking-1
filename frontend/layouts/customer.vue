@@ -60,10 +60,6 @@ export default {
           to: '/app/bills'
         },
         {
-          icon: 'account_balance_wallet',
-          title: 'Account'
-        },
-        {
           icon: 'build',
           title: 'Settings'
         }

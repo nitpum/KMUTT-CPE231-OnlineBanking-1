@@ -1,6 +1,10 @@
 const path = require('path')
+const passport = require('passport')
 const express = require('express')
 const router = express.Router()
+
+// helpers
+const logout = require('../../helpers/logout')
 
 // models
 const BranchModel = require('../../../models/branch')
@@ -11,6 +15,14 @@ const AnalyticControllers = require('./analytic')
 const QueryControllers = require('./query')
 
 router.get('/', (req, res) => res.send('manager staff jaa'))
+
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../../views/staff/manager', 'login.html'))
+})
+
+router.post('/login', passport.authenticate('staff'), (req, res) => res.sendStatus(200))
+
+router.get('/logout', logout, (req, res) => res.sendStatus(200))
 
 router.get('/create', (req, res) => {
   BranchModel.query.all()

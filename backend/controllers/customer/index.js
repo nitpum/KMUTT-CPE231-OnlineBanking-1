@@ -104,21 +104,24 @@ router.post('/edit', (req, res) => {
     }
   })
     .then(doc => res.send(doc))
-    .catch(err => res.send(String(err)))
+    .catch(err => res.send({
+      op: false,
+      err: err
+    }))
 })
 
 router.get('/delete', (req, res) => {
   const id = req.query.id
   if (!id) {
     return res.send({
-      delete: false,
+      op: false,
       err: 'select id'
     })
   }
   CustomerModel.delete(id)
     .then(doc => res.send(doc))
     .catch(err => res.send({
-      delete: false,
+      op: false,
       err: String(err)
     }))
 })

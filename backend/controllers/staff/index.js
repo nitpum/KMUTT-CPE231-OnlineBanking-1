@@ -5,6 +5,7 @@ const router = express.Router()
 
 // helpers
 const authen = require('../helpers/authen')
+const logout = require('../helpers/logout')
 
 const PERMISSION = ['staff', 'admin']
 
@@ -62,8 +63,10 @@ router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
 })
 
+router.get('/logout', logout, (req, res) => res.redirect('/login'))
+
 // authen required
-router.use(['/'], authen({
+router.use(['/', '/query', 'analytic'], authen({
   permission: PERMISSION,
   unauthorizedPath: '/staff/login'
 }))

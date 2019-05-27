@@ -5,6 +5,7 @@ const router = express.Router()
 
 // helpers
 const authen = require('../helpers/authen')
+const logout = require('../helpers/logout')
 
 const PERMISSION = ['admin']
 
@@ -38,6 +39,8 @@ router.post('/login', passport.authenticate(PERMISSION, {
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/admin/', 'login.html'))
 })
+
+router.get('/logout', logout, (req, res) => res.redirect('/login'))
 
 // authen required
 router.use(['/'], authen({

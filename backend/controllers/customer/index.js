@@ -63,7 +63,7 @@ router.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../../view
 router.get('/logout', logout, (req, res) => res.redirect('/login'))
 
 // authen required
-router.use(['/', '/edit'], authen({
+router.use(['/', '/edit', '/analytic', '/query'], authen({
   permission: PERMISSION,
   unauthorizedPath: '/customer/login'
 }))

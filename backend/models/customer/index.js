@@ -77,6 +77,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
 /**
   * edit customer user
  * @param  {Object} data
+ * @param  {String} id - mongodb id
  * @param  {String} data.username - username
  * @param  {String} data.password - password
  * @param  {String} data.email - email

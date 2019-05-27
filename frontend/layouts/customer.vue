@@ -69,7 +69,7 @@ export default {
             },
             {
               text: 'Change Password',
-              to: '/app/settings/changePass'
+              to: '/app/settings/password'
             }
           ]
         }

@@ -79,6 +79,34 @@ router.get('/edit', async (req, res) => {
   res.render(path.join(__dirname, '../../views/customer/', 'edit'), { user: user })
 })
 
+router.post('/edit', (req, res) => {
+  const id = req.session.passport.user._id
+  const {
+    username, password, name, zipcode,
+    address, birthDate, gender, citizenId,
+    email, phone, balance
+  } = req.body
+  const [firstName, lastName] = name.split(' ')
+  CustomerModel.edit(id, {
+    username: username,
+    password: password,
+    zipcode: zipcode,
+    address: address,
+    birthDate: birthDate,
+    gender: gender,
+    citizenId: citizenId,
+    email: email,
+    phone: phone,
+    balance: balance,
+    name: {
+      firstName: firstName,
+      lastName: lastName
+    }
+  })
+    .then(doc => res.send(doc))
+    .catch(err => res.send(String(err)))
+})
+
 router.use('/analytic', AnalyticController)
 router.use('/query', QueryController)
 

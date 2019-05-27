@@ -107,6 +107,22 @@ router.post('/edit', (req, res) => {
     .catch(err => res.send(String(err)))
 })
 
+router.get('/delete', (req, res) => {
+  const id = req.query.id
+  if (!id) {
+    return res.send({
+      delete: false,
+      err: 'select id'
+    })
+  }
+  CustomerModel.delete(id)
+    .then(doc => res.send(doc))
+    .catch(err => res.send({
+      delete: false,
+      err: String(err)
+    }))
+})
+
 router.use('/analytic', AnalyticController)
 router.use('/query', QueryController)
 

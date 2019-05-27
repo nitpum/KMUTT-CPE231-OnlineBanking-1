@@ -11,8 +11,7 @@
           label="Password"
           counter
           @click:append="show1 = !show1"
-        >
-        </v-text-field>
+        />
         <v-text-field
           v-model="newUsername"
           :rules="[rules.required, rules.min]"
@@ -20,10 +19,12 @@
           label="New Username"
           hint="At least 8 characters"
           counter
-        >
-        </v-text-field>
-        <v-btn color="success" :disabled="!valid">Save</v-btn>
+        />
       </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn color="success" :disabled="!valid">Save</v-btn>
+      </v-card-actions>
     </v-card>
   </v-container>
 </template>

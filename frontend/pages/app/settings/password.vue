@@ -11,8 +11,7 @@
           label="Old Password"
           counter
           @click:append="show1 = !show1"
-        >
-        </v-text-field>
+        />
         <v-text-field
           v-model="newPassword"
           :append-icon="show2 ? 'visibility' : 'visibility_off'"
@@ -23,8 +22,7 @@
           hint="At least 8 characters"
           counter
           @click:append="show2 = !show2"
-        >
-        </v-text-field>
+        />
         <v-text-field
           v-model="confirmPass"
           :append-icon="show3 ? 'visibility' : 'visibility_off'"
@@ -35,10 +33,12 @@
           hint="At least 8 characters"
           counter
           @click:append="show3 = !show3"
-        >
-        </v-text-field>
-        <v-btn color="success" :disabled="!valid">Save</v-btn>
+        />
       </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn color="success" :disabled="!valid">Save</v-btn>
+      </v-card-actions>
     </v-card>
   </v-container>
 </template>

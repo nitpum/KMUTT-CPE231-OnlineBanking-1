@@ -35,13 +35,21 @@ router.post('/create', (req, res) => {
 })
 
 router.post('/login', passport.authenticate(PERMISSION), (req, res) => res.sendStatus(200))
+<<<<<<< HEAD
+=======
+
+router.get('/logout', logout, (req, res) => res.sendStatus(200))
+>>>>>>> backend
 
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/admin/', 'login.html'))
 })
 
+<<<<<<< HEAD
 router.get('/logout', logout, (req, res) => res.sendStatus(200))
 
+=======
+>>>>>>> backend
 // authen required
 router.use(['/', '/edit', '/query'], authen({
   permission: PERMISSION,

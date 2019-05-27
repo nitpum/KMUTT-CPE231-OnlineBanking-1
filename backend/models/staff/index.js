@@ -6,6 +6,9 @@ const AnalyticModel = require('./analytic')
 const passwordHelpers = require('../helpers/password-hash')
 const loginHelpers = require('../helpers/user-login')
 
+// models
+const StaffGeneralStaff = require('./general')
+
 const validation = (data) => new Promise(async (resolve, reject) => {
   const [username, citizenId, email] = await Promise.all([
     StaffSchema.findOne({ username: data.username }),
@@ -89,5 +92,6 @@ module.exports = {
   schema: StaffSchema,
   login: login,
   query: QueryModel,
-  analytic: AnalyticModel
+  analytic: AnalyticModel,
+  general: StaffGeneralStaff
 }

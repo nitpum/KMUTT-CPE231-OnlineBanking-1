@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 // models
-const CustomerModel = require('../../models/customer/')
+const StaffModel = require('../../../models/staff/manager')
 
 router.get('/', (req, res) => {
   const id = req.query.id || undefined
@@ -10,17 +10,16 @@ router.get('/', (req, res) => {
   const search = req.query.search || undefined
 
   if (search) {
-    CustomerModel.query.search(search, limit)
+    StaffModel.query.search(search, limit)
       .then(doc => res.send(doc))
-      .catch(err => res.send({ op: false, err: String(err) }))
   } else if (id) {
-    CustomerModel.query.id(id)
+    StaffModel.query.id(id)
       .then(doc => res.send(doc))
-      .catch(err => res.send({ op: false, err: String(err) }))
   } else {
-    CustomerModel.query.all(limit)
-      .then(doc => res.send(doc))
-      .catch(err => res.send({ op: false, err: String(err) }))
+    StaffModel.query.all(limit)
+      .then(doc => {
+        res.send(doc)
+      })
   }
 })
 

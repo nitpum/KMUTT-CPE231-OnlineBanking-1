@@ -1,14 +1,14 @@
-const StaffSchema = require('./schema')
-const QueryModel = require('./query')
-const AnalyticModel = require('./analytic')
+const StaffSchema = require('../schema')
+
+const PERMISSION = 'manager'
 
 // helpers
-const passwordHelpers = require('../helpers/password-hash')
-const loginHelpers = require('../helpers/user-login')
+const passwordHelpers = require('../../helpers/password-hash')
+const loginHelpers = require('../../helpers/user-login')
 
 // models
-const StaffGeneralModel = require('./general')
-const StaffManagerModel = require('./manager')
+const QueryModel = require('./query')
+const AnalyticModel = require('./analytic')
 
 const validation = (data) => new Promise(async (resolve, reject) => {
   const [username, citizenId, email] = await Promise.all([
@@ -65,7 +65,8 @@ const create = (data) => new Promise(async (resolve, reject) => {
     position: position,
     branch: branch,
     email: email,
-    phone: phone
+    phone: phone,
+    permission: PERMISSION
   })
 
   doc.save(err => {
@@ -93,7 +94,5 @@ module.exports = {
   schema: StaffSchema,
   login: login,
   query: QueryModel,
-  analytic: AnalyticModel,
-  general: StaffGeneralModel,
-  manager: StaffManagerModel
+  analytic: AnalyticModel
 }

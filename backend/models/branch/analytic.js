@@ -45,7 +45,13 @@ const analytic = {
       ]).then(doc => resolve(doc))
         .catch(err => reject(err))
     })
-  }
+  },
+  count: () => new Promise((resolve, reject) => {
+    BranchModel.countDocuments((err, n) => {
+      if (err) reject(err)
+      resolve(n)
+    })
+  })
 }
 
 module.exports = analytic

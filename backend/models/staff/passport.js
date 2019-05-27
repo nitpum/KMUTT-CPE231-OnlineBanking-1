@@ -30,7 +30,6 @@ module.exports = passport => {
 
         StaffModel.login(username, password).then(doc => {
           if (doc) {
-            doc.permission = PERMISSION
             delete doc.password
             return done(null, doc)
           }

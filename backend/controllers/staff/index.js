@@ -60,13 +60,20 @@ router.post('/create', (req, res) => {
     }))
 })
 
-router.post('/login', passport.authenticate('staff'), (req, res) => res.sendStatus(200))
+// DEPRECATED
+// router.post('/login', passport.authenticate('staff'), (req, res) => res.sendStatus(200))
 
-router.get('/logout', logout, (req, res) => res.sendStatus(200))
+// router.get('/logout', logout, (req, res) => res.sendStatus(200))
 
-router.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
-})
+// router.get('/login', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
+// })
+
+router.use(['/general'], authen({ permission: ['general', 'admin'] }))
+router.use('/general', GenralControllers)
+
+router.use(['/manager'], authen({ permission: ['manager', 'admin'] }))
+router.use('/manager', ManagerControllers)
 
 // authen required
 router.use(['/', '/query', 'analytic'], authen({
@@ -79,19 +86,5 @@ router.get('/', (req, res) => {
 
 router.use('/query', QueryControllers)
 router.use('/analytic', AnalyticControllers)
-
-// general staff
-router.use(['/general'], authen({
-  permission: ['general', 'admin'],
-  unauthorizedPath: '/staff/general/login'
-}))
-router.use('/general', GenralControllers)
-
-// manager staff
-router.use(['/manager'], authen({
-  permission: ['manager', 'admin'],
-  unauthorizedPath: '/staff/manager/login'
-}))
-router.use('/manager', ManagerControllers)
 
 module.exports = router

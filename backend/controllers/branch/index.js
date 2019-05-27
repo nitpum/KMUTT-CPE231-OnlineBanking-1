@@ -17,7 +17,10 @@ router.use(['/', '/create', '/query', '/analytic'], authen({
   unauthorizedPath: '/admin/login'
 }))
 router.get('/', (req, res) => {
-  res.send('branch jaaa')
+  BranchModel.analytic.count()
+    .then(n => res.send({
+      n: n
+    }))
 })
 
 router.get('/create', async (req, res) => {
@@ -57,8 +60,7 @@ router.get('/query', (req, res) => {
   }
 })
 
-router.get('/analytic', (req, res) => {
-  const id = req.query.id || undefined
+router.get('/analytic', async (req, res) => {
   const limit = Number(req.query.limit) || undefined
   let listBranchId
   if (req.query.listBranchId) {
@@ -68,12 +70,14 @@ router.get('/analytic', (req, res) => {
   }
 
   if (listBranchId) {
-    BranchModel.analytic.balance.idList(listBranchId)
-      .then(doc => res.send(doc))
-      .catch(err => res.send(err))
+    res.send(await BranchModel.analytic.balance.idList(listBranchId))
   } else {
-    BranchModel.analytic.balance.all(limit).then(doc => {
-      res.send(doc)
+    const bal = await BranchModel.analytic.balance.all(limit)
+    const n = await BranchModel.analytic.count()
+
+    res.send({
+      balance: bal[0].balance,
+      n: n
     })
   }
 })

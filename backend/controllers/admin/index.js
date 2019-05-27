@@ -49,7 +49,9 @@ router.use(['/', '/edit', '/query'], authen({
 }))
 
 router.get('/', (req, res) => {
-  res.send('admin jaaa')
+  const id = req.session.passport.user._id
+  AdminModel.query.id(id)
+    .then(doc => res.send(doc))
 })
 
 router.get('/edit', async (req, res) => {

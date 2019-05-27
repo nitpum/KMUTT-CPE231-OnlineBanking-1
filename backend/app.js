@@ -1,16 +1,17 @@
 const path = require('path')
 const http = require('http')
 
+const morgan = require('morgan')
 const express = require('express')
 const session = require('express-session')
 const passport = require('passport')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const morgan = require('morgan')
 
 const app = express()
 
+app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())

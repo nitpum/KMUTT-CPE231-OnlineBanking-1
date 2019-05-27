@@ -16,6 +16,7 @@ const BranchModel = require('../../models/branch/')
 // controllers
 const QueryControllers = require('./query')
 const AnalyticControllers = require('./analytic')
+const GenralControllers = require('./general')
 
 router.get('/create', (req, res) => {
   BranchModel.query.all()
@@ -80,5 +81,6 @@ router.get('/', (req, res) => {
 
 router.use('/query', QueryControllers)
 router.use('/analytic', AnalyticControllers)
+router.use('/general', GenralControllers)
 
 module.exports = router

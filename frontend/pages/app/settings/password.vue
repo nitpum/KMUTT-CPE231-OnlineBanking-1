@@ -63,7 +63,11 @@ export default {
   },
   computed: {
     valid() {
-      return this.oldpass && this.newpass && this.newpass === this.confirmPass
+      return (
+        this.oldPassword &&
+        this.newPassword &&
+        this.newPassword === this.confirmPass
+      )
     }
   }
 }

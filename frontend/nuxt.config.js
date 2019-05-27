@@ -104,6 +104,44 @@ module.exports = {
         },
         tokenRequired: false,
         tokenType: false
+      },
+      manager: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/manager/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/manager/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/manager/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      admin: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/admin/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/admin/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/admin/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
       }
     }
   },

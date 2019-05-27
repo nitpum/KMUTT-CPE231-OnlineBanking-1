@@ -99,6 +99,8 @@ const edit = (id, data) => new Promise(async (resolve, reject) => {
     if (password) {
       hash = await passwordHelpers.generate(password)
       data.password = hash
+    } else {
+      delete data.password
     }
     const doc = await CustomerSchema.findByIdAndUpdate(id, { $set: data }, { upsert: true })
     resolve(doc)

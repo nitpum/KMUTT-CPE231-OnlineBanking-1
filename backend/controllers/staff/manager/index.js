@@ -14,7 +14,13 @@ const StaffModel = require('../../../models/staff/manager')
 const AnalyticControllers = require('./analytic')
 const QueryControllers = require('./query')
 
-router.get('/', (req, res) => res.send('manager staff jaa'))
+router.get('/', (req, res) => {
+  const id = req.session.passport.user._id
+  StaffModel.query.id(id)
+    .then(doc => {
+      res.send(doc)
+    })
+})
 
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../../../views/staff/manager', 'login.html'))

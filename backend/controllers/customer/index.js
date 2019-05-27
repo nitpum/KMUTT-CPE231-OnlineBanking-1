@@ -66,7 +66,9 @@ router.use(['/', '/edit', '/analytic', '/query'], authen({
 }))
 
 router.get('/', (req, res) => {
-  res.send('customer jaaa')
+  const id = req.session.passport.user._id
+  CustomerModel.query.id(id)
+    .then(doc => res.send(doc))
 })
 
 router.get('/edit', async (req, res) => {

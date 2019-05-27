@@ -65,6 +65,7 @@ module.exports = {
   },
 
   auth: {
+    redirect: false,
     strategies: {
       customer: {
         _scheme: 'local',
@@ -79,6 +80,25 @@ module.exports = {
           },
           user: {
             url: '/customer/query',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      staff: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/staff/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/staff/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/staff/query',
             method: 'get'
           }
         },

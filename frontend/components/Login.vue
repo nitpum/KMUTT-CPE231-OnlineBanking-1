@@ -8,7 +8,7 @@
           name="username"
           label="Username"
           type="text"
-        ></v-text-field>
+        />
         <v-text-field
           ref="password"
           v-model="password"
@@ -17,7 +17,7 @@
           label="Password"
           type="password"
           @keyup.enter="signIn()"
-        ></v-text-field>
+        />
       </v-form>
     </v-card-text>
     <v-card-actions>
@@ -29,6 +29,12 @@
 
 <script>
 export default {
+  props: {
+    strategy: {
+      type: String,
+      default: 'customer'
+    }
+  },
   data: () => ({
     username: '',
     password: ''
@@ -36,14 +42,17 @@ export default {
   methods: {
     signIn() {
       this.$auth
-        .loginWith('customer', {
+        .loginWith(this.strategy, {
           data: {
             username: this.username,
             password: this.password
           }
         })
         .then(data => {
-          this.$router.push('/app')
+          const redirect = '/'.concat(
+            this.strategy === 'customer' ? 'app' : this.strategy
+          )
+          this.$router.push(redirect)
         })
         .catch(({ response }) => {
           if (response.status === 401) {

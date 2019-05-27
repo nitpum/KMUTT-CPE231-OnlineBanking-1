@@ -4,8 +4,15 @@ const router = express.Router()
 // models
 const StaffModel = require('../../models/staff')
 
-router.get('/', (req, res) => {
-  StaffModel.analytic.count().then(n => res.send(n))
+router.get('/', async (req, res) => {
+  const n = await StaffModel.analytic.count()
+  const ageRange = await StaffModel.analytic.age()
+
+  const parser = {
+    ...n, ageRange: ageRange
+  }
+
+  res.send(parser)
 })
 
 module.exports = router

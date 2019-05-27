@@ -82,7 +82,19 @@ router.get('/', (req, res) => {
 
 router.use('/query', QueryControllers)
 router.use('/analytic', AnalyticControllers)
+
+// general staff
+router.use(['/general'], authen({
+  permission: ['general', 'admin'],
+  unauthorizedPath: '/staff/general/login'
+}))
 router.use('/general', GenralControllers)
+
+// manager staff
+router.use(['/manager'], authen({
+  permission: ['manager', 'admin'],
+  unauthorizedPath: '/staff/manager/login'
+}))
 router.use('/manager', ManagerControllers)
 
 module.exports = router

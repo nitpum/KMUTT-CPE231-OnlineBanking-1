@@ -14,6 +14,7 @@
           :account-id="cheque.accountId"
           :amount="cheque.amount"
           :show-more-info="true"
+          :show-revoke-btn="true"
           @onMoreInfo="dialog = true"
         ></card>
       </v-flex>

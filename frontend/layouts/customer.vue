@@ -66,7 +66,7 @@ export default {
           children: [
             {
               text: 'Change Username',
-              to: '/manager/transactions/deposit'
+              to: '/app/settings/username'
             },
             {
               text: 'Change Password',

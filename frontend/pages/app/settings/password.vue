@@ -5,11 +5,10 @@
         <v-text-field
           v-model="oldPassword"
           :append-icon="show1 ? 'visibility' : 'visibility_off'"
-          :rules="[rules.required, rules.min]"
+          :rules="[rules.required]"
           :type="show1 ? 'text' : 'password'"
           name="oldPassword"
           label="Old Password"
-          hint="At least 8 characters"
           counter
           @click:append="show1 = !show1"
         >
@@ -29,7 +28,7 @@
         <v-text-field
           v-model="confirmPass"
           :append-icon="show3 ? 'visibility' : 'visibility_off'"
-          :rules="[rules.required, rules.min]"
+          :rules="[rules.required, rules.min, match]"
           :type="show3 ? 'text' : 'password'"
           name="newPassword2"
           label="Confirm New Password"
@@ -68,6 +67,11 @@ export default {
         this.newPassword &&
         this.newPassword === this.confirmPass
       )
+    },
+    match() {
+      return this.newPassword && this.newPassword === this.confirmPass
+        ? true
+        : "Password doesn't match"
     }
   }
 }

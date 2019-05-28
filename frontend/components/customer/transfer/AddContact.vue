@@ -1,29 +1,23 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog v-model="dialog" max-width="500">
     <v-btn slot="activator" color="green" dark>
       <v-icon left>add</v-icon>
       add
     </v-btn>
     <v-card>
-      <v-toolbar flat>
-        <v-toolbar-title>
+      <v-card-title>
+        <h3 class="headline">
           Add favorite
-        </v-toolbar-title>
-        <v-spacer />
-        <v-btn icon flat @click="dialog = false">
-          <v-icon>close</v-icon>
-        </v-btn>
-      </v-toolbar>
+        </h3>
+      </v-card-title>
       <v-card-text>
-        <v-container>
-          <v-text-field label="Name" counter="50" />
-          <v-select label="Bank" />
-          <v-text-field label="Account Number" mask="###-#-#####-#" />
-        </v-container>
+        <v-text-field label="Name" counter="50" />
+        <v-select label="Bank" />
+        <v-text-field label="Account Number" mask="###-#-#####-#" />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn flat color="primary">
+        <v-btn flat color="primary" @click="dialog = false">
           close
         </v-btn>
         <v-btn flat color="primary">

@@ -27,7 +27,7 @@
                 </v-btn>
               </v-flex>
               <v-flex sm6 pr-2>
-                <v-btn depressed block>
+                <v-btn to="/atm/account" depressed block>
                   <v-icon>account_balance_wallet</v-icon>
                   Account
                 </v-btn>

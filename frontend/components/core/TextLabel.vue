@@ -1,14 +1,11 @@
 <template>
   <div
-    class="v-input v-text-field v-text-field--placeholder v-input--is-readonly theme--light"
+    class="v-input v-text-field v-text-field--placeholder v-input--is-readonly"
   >
     <div class="v-input__control">
       <div class="v-input__slot">
         <div class="v-text-field__slot">
-          <label
-            aria-hidden="true"
-            class="v-label v-label--active theme--light"
-          >
+          <label aria-hidden="true" class="v-label v-label--active">
             {{ label }}
           </label>
           <div class="text">

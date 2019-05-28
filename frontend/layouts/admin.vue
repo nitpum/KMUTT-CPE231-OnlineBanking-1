@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :dark="$store.state.darkMode">
     <drawer v-model="drawerPannel" :items="items" :minivariant="miniVariant" />
     <toolbar
       :dark="true"

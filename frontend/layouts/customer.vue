@@ -1,8 +1,10 @@
 <template>
-  <v-app>
+  <v-app :dark="$store.state.darkMode">
     <drawer v-model="drawerPannel" :items="items" :minivariant="miniVariant">
-      <accounts />
-      <v-divider class="mt-1" />
+      <template v-slot:top>
+        <accounts />
+        <v-divider class="mt-1" />
+      </template>
     </drawer>
     <toolbar
       :dark="true"

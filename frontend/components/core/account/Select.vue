@@ -34,8 +34,7 @@ export default {
     }
   },
   data: () => ({
-    dialog: false,
-    account: null
+    dialog: false
   }),
   computed: {
     account: {

@@ -21,7 +21,7 @@
                 </v-btn>
               </v-flex>
               <v-flex sm6 pr-2>
-                <v-btn depressed block>
+                <v-btn to="/atm/bills" depressed block>
                   <v-icon left>receipt</v-icon>
                   Pay Bills
                 </v-btn>

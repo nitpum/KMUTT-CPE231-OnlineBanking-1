@@ -2,6 +2,7 @@ const OrganizationSchema = require('./schema')
 
 // models
 const AnalyticModel = require('./analytic')
+const QueryModel = require('./query')
 
 /**
   * create organization
@@ -55,5 +56,6 @@ module.exports = {
   create: create,
   edit: edit,
   delete: remove,
-  analytic: AnalyticModel
+  analytic: AnalyticModel,
+  query: QueryModel
 }

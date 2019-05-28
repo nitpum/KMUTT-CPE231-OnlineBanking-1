@@ -15,7 +15,7 @@
               Branch List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0">
+            <v-btn color="primary" class="my-0" @click="createDialog = true">
               Create Branch
             </v-btn>
           </v-card-title>
@@ -24,22 +24,26 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <create-dialog v-model="createDialog" @onSubmit="createBranch" />
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import BranchList from '@/components/admin/BranchList'
+import CreateDialog from '@/components/admin/branch/CreateDialog'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    BranchList
+    BranchList,
+    CreateDialog
   },
   data: () => ({
     from: undefined,
     to: undefined,
+    createDialog: false,
     data: {
       totalBranch: 120,
       minStaff: 10,
@@ -79,6 +83,11 @@ export default {
         }
       ]
     ]
-  })
+  }),
+  methods: {
+    createBranch() {
+      this.createDialog = false
+    }
+  }
 }
 </script>

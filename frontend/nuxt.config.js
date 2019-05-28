@@ -79,7 +79,7 @@ module.exports = {
             method: 'get'
           },
           user: {
-            url: '/customer/query',
+            url: '/customer/query/me',
             method: 'get'
           }
         },
@@ -90,15 +90,15 @@ module.exports = {
         _scheme: 'local',
         endpoints: {
           login: {
-            url: '/staff/login',
+            url: '/staff/general/login',
             method: 'post'
           },
           logout: {
-            url: '/staff/logout',
+            url: '/staff/general/logout',
             method: 'get'
           },
           user: {
-            url: '/staff/query',
+            url: '/staff/general/query/me',
             method: 'get'
           }
         },
@@ -109,15 +109,15 @@ module.exports = {
         _scheme: 'local',
         endpoints: {
           login: {
-            url: '/manager/login',
+            url: '/staff/manager/login',
             method: 'post'
           },
           logout: {
-            url: '/manager/logout',
+            url: '/staff/manager/logout',
             method: 'get'
           },
           user: {
-            url: '/manager/query',
+            url: '/staff/manager/query/me',
             method: 'get'
           }
         },
@@ -128,15 +128,15 @@ module.exports = {
         _scheme: 'local',
         endpoints: {
           login: {
-            url: '/admin/login',
+            url: '/staff/admin/login',
             method: 'post'
           },
           logout: {
-            url: '/admin/logout',
+            url: '/staff/admin/logout',
             method: 'get'
           },
           user: {
-            url: '/admin/query',
+            url: '/staff/admin/query/me',
             method: 'get'
           }
         },

@@ -69,7 +69,10 @@ router.post('/create', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
 // })
 
-router.use(['/general'], authen({ permission: ['general', 'admin'] }))
+router.use(['/general'], authen({ 
+  permission: ['general', 'admin'],
+  bypassPath: PERMISSION.map(p => `/staff/${p}/login`).concat(PERMISSION.map(p => `/staff/${p}/create`))
+}))
 router.use('/general', GenralControllers)
 
 router.use(['/manager'], authen({ permission: ['manager', 'admin'] }))

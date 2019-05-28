@@ -3,6 +3,24 @@ const AccTypeSchema = require('./type/schema')
 
 // models
 const AccountQueryModel = require('./query')
+const AccountTypesModel = require('./type')
+
+const generateAccId = () => new Promise(async (resolve, reject) => {
+  try {
+    let state = false
+    let accId = ''
+    while (!state) {
+      accId = String(Math.random().toString(10).substring(3))
+      const doc = await AccountQueryModel.acc(accId)
+      if (!doc) return resolve(accId)
+      if (accId === doc.accountId) state = false
+      else state = true
+    }
+    resolve(accId)
+  } catch (err) {
+    reject(err)
+  }
+})
 
 /**
   * create bank account
@@ -60,5 +78,6 @@ const account = {
 }
 
 module.exports = {
-  account: account
+  account: account,
+  type: AccountTypesModel
 }

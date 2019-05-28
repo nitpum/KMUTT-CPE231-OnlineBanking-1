@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organization - Create</title>
+</head>
+<body>
+    <form action="/organization/create" method="POST">
+        <label for="name">name</label>
+        <input type="text" name="name"> <br>
+        <label for="type">type</label>
+        <select name="type">
+            <option value="BANK">BANK</option>
+            <option value="COMPANY">COMPANY</option>
+            <option value="ETC">ETC</option>
+        </select> <br>
+        <label for="bankSwift">bankSwift</label>
+        <input type="text" name="bankSwift"> <br>
+        <label for="bankAccount">bankAccount</label>
+        <input type="text" name="bankAccount"> <br>
+        <button type="submit">create</button>
+    </form>
+</body>
+</html>

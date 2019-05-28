@@ -5,9 +5,9 @@ const branchRef = { type: mongoose.Schema.Types.ObjectId, ref: 'branch', require
 
 const accountSchema = mongoose.Schema({
   accountId: { type: String, required: true },
-  customer: customerRef,
+  customerId: customerRef,
   accountType: typeRef,
-  branch: branchRef,
+  branchId: branchRef,
   status: { type: String, enum: ['ACTIVE', 'LOCK', 'ETC'], required: true }
 })
 

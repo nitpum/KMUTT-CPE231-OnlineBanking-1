@@ -3,8 +3,10 @@
     v-model="model"
     :mini-variant="minivariant"
     :color="color"
-    clipped
-    fixed
+    :clipped="clipped"
+    :fixed="fixed"
+    :right="right"
+    :floating="floating"
     app
   >
     <slot name="top" />
@@ -60,13 +62,29 @@ export default {
       type: Boolean,
       default: null
     },
-    minivariant: {
+    clipped: {
       type: Boolean,
       default: true
     },
     color: {
       type: String,
       default: 'white'
+    },
+    minivariant: {
+      type: Boolean,
+      default: true
+    },
+    fixed: {
+      type: Boolean,
+      default: true
+    },
+    floating: {
+      type: Boolean,
+      default: false
+    },
+    right: {
+      type: Boolean,
+      default: false
     },
     items: {
       type: Array,

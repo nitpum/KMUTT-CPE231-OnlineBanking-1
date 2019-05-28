@@ -15,3 +15,9 @@ export default {
   }
 }
 </script>
+
+<style>
+body {
+  background: transparent;
+}
+</style>

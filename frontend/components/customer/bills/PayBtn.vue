@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import payDialog from './payDialog'
+import PayDialog from './PayDialog'
 
 export default {
   components: {
-    payDialog
+    PayDialog
   },
   data: () => ({
     payDialog: false

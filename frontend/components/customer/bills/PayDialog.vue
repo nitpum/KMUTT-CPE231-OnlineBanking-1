@@ -22,9 +22,13 @@
           hint="Ref 2"
           persistent-hint
         />
+        <v-text-field v-model="amount" label="Amount" />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
+        <v-btn flat color="primary" @click="dialog = false">
+          close
+        </v-btn>
         <v-btn flat color="primary">
           pay
         </v-btn>
@@ -55,7 +59,8 @@ export default {
   data: () => ({
     listsDialog: false,
     d_ref1: '',
-    ref2: ''
+    ref2: '',
+    amount: ''
   }),
   computed: {
     dialog: {
@@ -71,9 +76,13 @@ export default {
         return this.bill || this.d_ref1
       },
       set(val) {
-        console.log(val) //eslint-disable-line
         this.d_ref1 = val
       }
+    }
+  },
+  methods: {
+    select(ref1) {
+      this.ref1 = ref1
     }
   }
 }

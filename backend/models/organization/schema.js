@@ -7,4 +7,6 @@ const organizationSchema = mongoose.Schema({
   bankAccount: String
 })
 
+organizationSchema.index({ '$**': 'text' })
+
 module.exports = mongoose.model('organization', organizationSchema)

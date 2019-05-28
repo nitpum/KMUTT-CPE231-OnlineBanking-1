@@ -1,5 +1,8 @@
 const OrganizationSchema = require('./schema')
 
+// models
+const AnalyticModel = require('./analytic')
+
 /**
   * create organization
  * @param  {Object} data
@@ -51,5 +54,6 @@ const remove = (id) => new Promise((resolve, reject) => {
 module.exports = {
   create: create,
   edit: edit,
-  delete: remove
+  delete: remove,
+  analytic: AnalyticModel
 }

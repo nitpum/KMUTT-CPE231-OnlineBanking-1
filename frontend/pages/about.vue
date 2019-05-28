@@ -3,7 +3,7 @@
     <v-card>
       <v-card-text>
         <v-layout row wrap justify-center>
-          <v-flex v-for="member in members" :key="member" xs12 sm6 md5 lg4 xl3>
+          <v-flex v-for="member in members" :key="member" xs12 sm6 md5 lg4 xl2>
             <center>
               <v-img
                 :src="`https://github.com/${member}.png`"

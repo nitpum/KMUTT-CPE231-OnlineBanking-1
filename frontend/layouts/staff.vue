@@ -40,6 +40,7 @@ export default {
         {
           icon: 'account_balance',
           title: 'Transactions',
+          group: '/staff/transactions/.*',
           children: [
             {
               icon: 'add',

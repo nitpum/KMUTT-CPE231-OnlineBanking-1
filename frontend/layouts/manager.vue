@@ -60,6 +60,7 @@ export default {
         {
           icon: 'mdi-bank',
           title: 'Transactions',
+          group: '/manager/transactions/.*',
           children: [
             {
               icon: 'add',

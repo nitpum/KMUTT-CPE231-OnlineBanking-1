@@ -65,6 +65,7 @@ export default {
         {
           icon: 'build',
           title: 'Settings',
+          group: '/app/settings/.*',
           children: [
             {
               text: 'Change Username',

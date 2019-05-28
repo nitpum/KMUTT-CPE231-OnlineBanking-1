@@ -14,7 +14,12 @@
       <slot name="before-list" />
       <template v-for="(item, i) in items">
         <template v-if="item.children">
-          <v-list-group :key="i" v-model="item.model" :prepend-icon="item.icon">
+          <v-list-group
+            :key="i"
+            v-model="item.model"
+            :prepend-icon="item.icon"
+            :group="item.group"
+          >
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>

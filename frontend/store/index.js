@@ -1,6 +1,6 @@
 export const state = () => ({
   user: {
-    username: 'suPerSecurityUseRnAMe',
+    username: 'somsukUsername',
     name: {
       firstName: 'Somsuk',
       lastName: 'Sukjai'

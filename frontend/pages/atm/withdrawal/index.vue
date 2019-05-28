@@ -9,16 +9,24 @@
           <v-card-text>
             <v-layout row wrap>
               <v-flex sm6 pr-2>
-                <v-btn block depressed>100</v-btn>
+                <v-btn to="/atm/withdrawal/confirm/100" block depressed
+                  >100</v-btn
+                >
               </v-flex>
               <v-flex sm6 pr-2>
-                <v-btn block depressed>300</v-btn>
+                <v-btn to="/atm/withdrawal/confirm/300" block depressed
+                  >300</v-btn
+                >
               </v-flex>
               <v-flex sm6 pr-2>
-                <v-btn block depressed>500</v-btn>
+                <v-btn to="/atm/withdrawal/confirm/500" block depressed
+                  >500</v-btn
+                >
               </v-flex>
               <v-flex sm6 pr-2>
-                <v-btn block depressed>1000</v-btn>
+                <v-btn to="/atm/withdrawal/confirm/1000" block depressed
+                  >1000</v-btn
+                >
               </v-flex>
               <v-flex sm6 pr-2>
                 <v-btn to="/atm/withdrawal/custom" block depressed

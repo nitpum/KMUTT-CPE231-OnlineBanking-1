@@ -14,11 +14,6 @@
         <v-list-tile>
           <v-spacer></v-spacer>
           <v-list-tile-action>
-            <v-btn to="/atm/login">
-              NEXT(LOGIn)
-            </v-btn>
-          </v-list-tile-action>
-          <v-list-tile-action>
             <v-btn to="/atm/menu">
               NEXT
             </v-btn>

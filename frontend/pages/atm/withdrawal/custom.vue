@@ -51,15 +51,15 @@ export default {
     }
   },
   methods: {
-    submit() {
+    async submit() {
       this.formHasErrors = false
-      Object.keys(this.form).forEach(f => {
+      await Object.keys(this.form).forEach(f => {
         if (!this.form[f]) this.formHasErrors = true
 
         this.$refs[f].validate(true)
       })
 
-      if (!this.formHasErrors)
+      if (!this.formHasErrors && this.amount > 0)
         this.$router.push(`/atm/withdrawal/confirm/${this.amount}`)
     }
   }

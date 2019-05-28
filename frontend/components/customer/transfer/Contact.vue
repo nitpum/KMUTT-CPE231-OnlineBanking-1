@@ -7,19 +7,14 @@
     </v-btn>
 
     <v-card>
-      <v-toolbar>
-        <v-toolbar-title flat>
+      <v-card-title>
+        <h3 class="headline">
           Favorites
-        </v-toolbar-title>
+        </h3>
         <v-spacer />
-        <v-btn icon flat @click="dialog = false">
-          <v-icon>
-            close
-          </v-icon>
-        </v-btn>
-      </v-toolbar>
-      <v-card-text class="text-xs-right">
         <add-contact />
+      </v-card-title>
+      <v-card-text class="text-xs-right">
         <v-list two-line>
           <v-list-tile
             v-for="(contact, i) in contacts"
@@ -40,6 +35,13 @@
           </v-list-tile>
         </v-list>
       </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+
+        <v-btn flat color="primary" @click="dialog = false">
+          close
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>

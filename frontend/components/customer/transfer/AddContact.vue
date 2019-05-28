@@ -5,15 +5,11 @@
       add
     </v-btn>
     <v-card>
-      <v-toolbar flat>
-        <v-toolbar-title>
+      <v-card-title>
+        <h3 class="headline">
           Add favorite
-        </v-toolbar-title>
-        <v-spacer />
-        <v-btn icon flat @click="dialog = false">
-          <v-icon>close</v-icon>
-        </v-btn>
-      </v-toolbar>
+        </h3>
+      </v-card-title>
       <v-card-text>
         <v-container>
           <v-text-field label="Name" counter="50" />
@@ -23,7 +19,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn flat color="primary">
+        <v-btn flat color="primary" @click="dialog = false">
           close
         </v-btn>
         <v-btn flat color="primary">

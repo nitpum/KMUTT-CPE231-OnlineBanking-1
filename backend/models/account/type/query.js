@@ -21,6 +21,17 @@ const query = {
     AccountTypeModel.findById(id)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
+  }),
+
+  /**
+     * @param  {String} s
+     * @param  {Number} limit=1000 list search 1000 branch order by indexed
+     */
+  search: (s, limit = 1000) => new Promise((resolve, reject) => {
+    AccountTypeModel.find({ $text: { $search: s } })
+      .limit(limit)
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
   })
 }
 

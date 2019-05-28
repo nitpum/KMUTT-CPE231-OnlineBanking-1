@@ -21,4 +21,14 @@ router.get('/create', async (req, res) => {
   })
 })
 
+router.post('/create', (req, res) => {
+  const data = req.body
+  AccountModel.type.create(data)
+    .then(doc => res.send(doc))
+    .catch(err => res.send({
+      op: false,
+      err: String(err)
+    }))
+})
+
 module.exports = router

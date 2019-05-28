@@ -6,6 +6,16 @@
           Bill payment
         </h3>
       </v-card-title>
+      <v-card-text class="py-0">
+        <v-text-field
+          v-model="search"
+          label="Search"
+          prepend-inner-icon="search"
+          clearable
+          solo
+          single-line
+        />
+      </v-card-text>
       <v-expansion-panel class="elevation-0" :value="0">
         <v-expansion-panel-content v-for="(cat, i) in cat" :key="'cat-' + i">
           <template v-slot:header>
@@ -57,6 +67,7 @@ export default {
     }
   },
   data: () => ({
+    search: '',
     cat: [
       {
         key: 'internet',

@@ -4,17 +4,19 @@
       <v-flex md6 sm12>
         <v-card>
           <v-card-title>
-            <h2 class="primary-title">Do you want another transaction?</h2>
+            <h2 class="primary-title">
+              Would you like to do another transactions?
+            </h2>
           </v-card-title>
           <v-divider />
           <v-card-actions>
             <v-btn to="/atm/menu" flat>
-              <v-icon>arrow_back_ios</v-icon>
               Yes
             </v-btn>
             <v-spacer></v-spacer>
             <v-btn flat @click="logout">
               No
+              <v-icon right>mdi-chevron-right</v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>

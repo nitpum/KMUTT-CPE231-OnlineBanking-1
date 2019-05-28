@@ -10,25 +10,25 @@
             <v-layout row wrap>
               <v-flex sm6 pr-2>
                 <v-btn to="/atm/withdrawal" depressed block>
-                  <v-icon>remove</v-icon>
+                  <v-icon left>remove</v-icon>
                   Withdrawal
                 </v-btn>
               </v-flex>
               <v-flex sm6 pr-2>
                 <v-btn depressed block>
-                  <v-icon>swap_horiz</v-icon>
+                  <v-icon left>swap_horiz</v-icon>
                   Transfer
                 </v-btn>
               </v-flex>
               <v-flex sm6 pr-2>
                 <v-btn depressed block>
-                  <v-icon>receipt</v-icon>
+                  <v-icon left>receipt</v-icon>
                   Pay Bills
                 </v-btn>
               </v-flex>
               <v-flex sm6 pr-2>
                 <v-btn to="/atm/account" depressed block>
-                  <v-icon>account_balance_wallet</v-icon>
+                  <v-icon left>account_balance_wallet</v-icon>
                   Account
                 </v-btn>
               </v-flex>

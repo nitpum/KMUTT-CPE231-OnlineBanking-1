@@ -15,7 +15,7 @@
                 </v-btn>
               </v-flex>
               <v-flex sm6 pr-2>
-                <v-btn depressed block>
+                <v-btn to="/atm/transfer" depressed block>
                   <v-icon>swap_horiz</v-icon>
                   Transfer
                 </v-btn>

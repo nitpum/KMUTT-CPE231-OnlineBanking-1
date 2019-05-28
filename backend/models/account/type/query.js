@@ -1,4 +1,4 @@
-const accTypeModel = require('./schema')
+const AccountTypeModel = require('./schema')
 
 const query = {
   /**
@@ -7,7 +7,7 @@ const query = {
        * @returns {Array} - mongodb object
        */
   all: (limit = 5000) => new Promise((resolve, reject) => {
-    accTypeModel.find({})
+    AccountTypeModel.find({})
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
@@ -18,7 +18,7 @@ const query = {
      * @returns {Object} - mongodb object
      */
   id: (id) => new Promise((resolve, reject) => {
-    accTypeModel.findById(id)
+    AccountTypeModel.findById(id)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
   })

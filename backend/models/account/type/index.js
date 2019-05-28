@@ -1,5 +1,5 @@
 // models
-const AccountQueryModel = require('./query')
+const AccountTypeModel = require('./schema')
 
 /**
   * create bank account
@@ -14,7 +14,7 @@ const AccountQueryModel = require('./query')
  * @returns {Object} - mongodb document
  */
 const create = data => new Promise((resolve, reject) => {
-  const doc = new AccountQueryModel(data)
+  const doc = new AccountTypeModel(data)
   doc.save(err => {
     if (err) reject(err)
     resolve(doc)
@@ -32,7 +32,7 @@ const create = data => new Promise((resolve, reject) => {
  * @returns {Object} - mongodb document
  */
 const edit = (id, data) => new Promise((resolve, reject) => {
-  AccountQueryModel.findByIdAndUpdate(id, data, (err, doc) => {
+  AccountTypeModel.findByIdAndUpdate(id, data, (err, doc) => {
     if (err) reject(err)
     resolve(doc)
   })
@@ -44,7 +44,7 @@ const edit = (id, data) => new Promise((resolve, reject) => {
  * @returns {Object} mongodb object
  */
 const remove = (id) => new Promise((resolve, reject) => {
-  AccountQueryModel.findOneAndDelete({ _id: id }, (err, res) => {
+  AccountTypeModel.findOneAndDelete({ _id: id }, (err, res) => {
     if (err) reject(err)
     if (!res) reject(new Error('not found'))
     resolve(res)
@@ -55,7 +55,7 @@ const accountType = {
   create: create,
   edit: edit,
   delete: remove,
-  query: AccountQueryModel
+  query: AccountTypeModel
 }
 
 module.exports = accountType

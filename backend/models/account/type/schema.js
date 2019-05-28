@@ -10,4 +10,6 @@ const accTypeSchema = mongoose.Schema({
   interestMin: { type: Number, default: 1 } // percent
 })
 
+accTypeSchema.index({ name: 'text' })
+
 module.exports = mongoose.model('accountType', accTypeSchema)

@@ -7,8 +7,9 @@
     fixed
     app
   >
-    <slot />
+    <slot name="top" />
     <v-list>
+      <slot name="before-list" />
       <template v-for="(item, i) in items">
         <template v-if="item.children">
           <v-list-group :key="i" v-model="item.model" :prepend-icon="item.icon">
@@ -46,6 +47,7 @@
           </v-list-tile>
         </template>
       </template>
+      <slot name="after-list" />
     </v-list>
   </v-navigation-drawer>
 </template>

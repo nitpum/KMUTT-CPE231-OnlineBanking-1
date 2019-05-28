@@ -21,6 +21,16 @@ const query = {
     accountModel.findById(id)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
+  }),
+
+  /**
+     * @param  {String} accountId - bank acc
+     * @returns {Object} - mongodb object
+     */
+  acc: (accountId) => new Promise((resolve, reject) => {
+    accountModel.findOne({ accountId: accountId })
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
   })
 }
 

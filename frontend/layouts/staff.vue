@@ -5,16 +5,6 @@
         <staff-info />
         <v-divider class="mt-1" />
       </template>
-      <template v-slot:after-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-switch v-model="darkMode" color="primary"></v-switch>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            Dark Mode
-          </v-list-tile-content>
-        </v-list-tile>
-      </template>
     </drawer>
     <toolbar
       :dark="true"
@@ -89,16 +79,6 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
-    }
-  },
-  computed: {
-    darkMode: {
-      get() {
-        return this.$store.state.darkMode
-      },
-      set(val) {
-        this.$store.commit('SET_DARKMODE', val)
-      }
     }
   },
   created() {

@@ -27,8 +27,8 @@
               :key="j"
               :to="child.to"
             >
-              <v-list-tile-action v-if="child.icon">
-                <v-icon>{{ child.icon }}</v-icon>
+              <v-list-tile-action>
+                <v-icon v-if="child.icon">{{ child.icon }}</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>

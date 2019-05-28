@@ -8,6 +8,7 @@ const accountSchema = mongoose.Schema({
   customerId: customerRef,
   accountType: typeRef,
   branchId: branchRef,
+  balance: { type: Number, default: 0 },
   status: { type: String, enum: ['ACTIVE', 'LOCK', 'ETC'], required: true }
 })
 

@@ -2,6 +2,7 @@
   <v-container style="max-width: 500px">
     <v-card>
       <v-card-text>
+        Current UserName: {{ $store.state.user.username }}
         <v-text-field
           v-model="Password"
           :append-icon="show1 ? 'visibility' : 'visibility_off'"

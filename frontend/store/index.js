@@ -1,4 +1,12 @@
 export const state = () => ({
+  user: {
+    username: 'somsukUsername',
+    name: {
+      firstName: 'Somsuk',
+      lastName: 'Sukjai'
+    },
+    email: 'eiei@whatismyemail.com'
+  },
   darkMode: false
 })
 

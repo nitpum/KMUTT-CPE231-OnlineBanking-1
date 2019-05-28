@@ -3,7 +3,7 @@ const passport = require('passport')
 const express = require('express')
 const router = express.Router()
 
-const PERMISSION = ['manager']
+const PERMISSION = ['manager', 'admin']
 
 // helpers
 const logout = require('../../helpers/logout')

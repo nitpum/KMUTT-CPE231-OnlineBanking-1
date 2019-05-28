@@ -71,7 +71,7 @@ router.post('/create', (req, res) => {
 
 router.use(['/general'], authen({ 
   permission: ['general', 'admin'],
-  bypassPath: PERMISSION.map(p => `/staff/${p}/login`)
+  bypassPath: PERMISSION.map(p => `/staff/${p}/login`).concat(PERMISSION.map(p => `/staff/${p}/create`))
 }))
 router.use('/general', GenralControllers)
 

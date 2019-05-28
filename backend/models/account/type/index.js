@@ -58,6 +58,4 @@ const accountType = {
   query: AccountQueryModel
 }
 
-module.exports = {
-  accountType: accountType
-}
+module.exports = accountType

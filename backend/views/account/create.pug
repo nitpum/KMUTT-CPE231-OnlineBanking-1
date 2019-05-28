@@ -14,9 +14,5 @@ form(action="/account/create", method="post")
     label(for="accountType") accountType
     select(name="accountType")
         for type in types
-            option(value=types._id)=types.name
-    br
-    
-
-
+            option(value=type._id)=type.name
     button(type="submit") create

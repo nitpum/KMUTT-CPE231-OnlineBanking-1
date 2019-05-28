@@ -13,7 +13,8 @@
               />
               <h3 class="headline">
                 <a
-                  href="`https://github.com/${member}`"
+                  :href="`https://github.com/${member}`"
+                  target="_blank"
                   style="text-decoration: none"
                 >
                   @{{ member }}

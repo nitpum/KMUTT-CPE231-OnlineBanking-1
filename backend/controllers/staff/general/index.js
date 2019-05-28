@@ -26,7 +26,10 @@ router.post('/login', passport.authenticate('staff'), (req, res) => res.sendStat
 router.get('/logout', logout, (req, res) => res.sendStatus(200))
 
 // authen required
-router.use(['/'], authen({ permission: PERMISSION }))
+router.use(['/'], authen({
+  permission: PERMISSION,
+  bypassPath: ['/staff/general/create']
+}))
 
 router.get('/', (req, res) => {
   const id = req.session.passport.user._id

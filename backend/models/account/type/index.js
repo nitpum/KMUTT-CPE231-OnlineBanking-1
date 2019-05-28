@@ -1,5 +1,6 @@
 // models
 const AccountTypeModel = require('./schema')
+const QueryModel = require('./query')
 
 /**
   * create bank account
@@ -55,7 +56,7 @@ const accountType = {
   create: create,
   edit: edit,
   delete: remove,
-  query: AccountTypeModel
+  query: QueryModel
 }
 
 module.exports = accountType

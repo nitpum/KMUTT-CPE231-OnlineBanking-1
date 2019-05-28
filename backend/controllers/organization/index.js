@@ -7,6 +7,7 @@ const authen = require('../helpers/authen')
 
 // controllers
 const AnalytiicControllers = require('./analytic')
+const QueryControllers = require('./query')
 
 // models
 const OrganizationModel = require('../../models/organization')
@@ -43,5 +44,6 @@ router.post('/edit', (req, res) => {
 })
 
 router.use('/analytic', AnalytiicControllers)
+router.use('/query', QueryControllers)
 
 module.exports = router

@@ -69,10 +69,7 @@ router.post('/create', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../../views/staff/', 'login.html'))
 // })
 
-router.use(['/general'], authen({ permission: ['general', 'admin'] }))
 router.use('/general', GenralControllers)
-
-router.use(['/manager'], authen({ permission: ['manager', 'admin'] }))
 router.use('/manager', ManagerControllers)
 
 // authen required

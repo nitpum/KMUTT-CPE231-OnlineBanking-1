@@ -260,7 +260,10 @@ export default {
           this.$emit('onSubmit')
         })
         .catch(e => {
-          this.$store.dispatch('snackbars/show', e.message)
+          this.$store.dispatch(
+            'snackbars/show',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
         })
     }
   }

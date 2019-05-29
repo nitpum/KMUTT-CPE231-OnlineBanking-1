@@ -21,4 +21,22 @@ router.post('/create', (req, res) => {
     .catch(err => res.status(400).send(String(err)))
 })
 
+router.post('/edit', (req, res) => {
+  const id = req.body.id
+  const data = req.body.data
+  serviceRefModel.serviceType.edit({
+    id: id,
+    data: data
+  })
+    .then(doc => res.send(doc))
+    .catch(err => res.status(400).send(String(err)))
+})
+
+router.post('/delete', (req, res) => {
+  const id = req.body.id
+  serviceRefModel.serviceType.delete(id)
+    .then(res => res.send(res))
+    .catch(err => res.status(400).send(String(err)))
+})
+
 module.exports = router

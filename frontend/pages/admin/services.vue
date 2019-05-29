@@ -44,14 +44,16 @@
               Service List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0">CREATE SERVICE</v-btn>
+            <v-btn color="primary" class="my-0" @click="openCreateDialog"
+              >CREATE SERVICE</v-btn
+            >
           </v-card-title>
           <v-divider />
           table here
         </v-card>
       </v-flex>
     </v-layout>
-    <Dialog />
+    <Dialog v-model="createDialog" />
   </v-container>
 </template>
 
@@ -71,6 +73,7 @@ export default {
     showHeatmap: false,
     from: undefined,
     to: undefined,
+    createDialog: false,
     data: {
       totalService: 850,
       avgSPO: 5,
@@ -107,6 +110,11 @@ export default {
   }),
   mounted() {
     this.showHeatmap = true
+  },
+  methods: {
+    openCreateDialog() {
+      this.createDialog = true
+    }
   }
 }
 </script>

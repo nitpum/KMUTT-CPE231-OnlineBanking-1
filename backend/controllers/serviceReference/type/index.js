@@ -18,6 +18,7 @@ router.get('/create', (req, res) => {
 
 router.post('/create', (req, res) => {
   const data = req.body
+  console.log(data)
   serviceRefModel.serviceType
     .create(data)
     .then(doc => res.send(doc))

@@ -5,15 +5,9 @@
         <h2>{{ title }}</h2>
       </v-card-title>
       <v-card-text>
-        <v-text-field v-model="name" label="Branch Name" required />
-        <v-textarea v-model="address" label="Address" required />
-        <v-text-field v-model="zipcode" label="Zipcode" mask="#####" required />
-        <v-text-field
-          v-model="balance"
-          label="Balance"
-          type="number"
-          required
-        />
+        <org-select v-model="data.organization" />
+        <type-select v-model="data.type" />
+        <v-text-field v-model="data.fee" type="number" label="Fee" required />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -33,7 +27,14 @@
 </template>
 
 <script>
+import OrgSelect from '@/components/admin/org/Select'
+import TypeSelect from '@/components/admin/service/type/Select'
+
 export default {
+  components: {
+    OrgSelect,
+    TypeSelect
+  },
   props: {
     value: {
       type: Boolean,
@@ -46,13 +47,30 @@ export default {
     title: {
       type: String,
       default: 'Create Services'
+    },
+    data: {
+      type: Object,
+      default() {
+        return {
+          organization: {
+            _id: '',
+            bankAccount: '',
+            bankSwift: '',
+            name: '',
+            type: ''
+          },
+          detail: '',
+          fee: 0,
+          type: {
+            _id: '',
+            name: '',
+            type: ''
+          }
+        }
+      }
     }
   },
   data: () => ({
-    name: '',
-    address: '',
-    zipcode: '',
-    balance: 0,
     loading: false
   }),
   computed: {
@@ -65,7 +83,15 @@ export default {
       }
     },
     disabled() {
-      return !this.name || !this.address || !this.zipcode || this.loading
+      return (
+        !this.data.organization._id ||
+        this.data.organization._id === '' ||
+        !this.data.type._id ||
+        this.data.type._id === '' ||
+        !this.data.fee ||
+        this.data.fee === '' ||
+        this.loading
+      )
     }
   },
   methods: {
@@ -84,11 +110,12 @@ export default {
         })
         .then(res => {
           this.$emit('onSubmit')
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
+          this.model = false
           this.name = ''
           this.address = ''
           this.zipcode = ''
           this.balance = 0
-          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)

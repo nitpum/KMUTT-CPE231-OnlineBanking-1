@@ -30,20 +30,18 @@ const generateAccId = () => new Promise(async (resolve, reject) => {
   }
 })
 
-const customerValidation = (id) => new Promise(async (resolve, reject) => {
-  const doc = await CustomerModel.query.citizenId(id)
-  if (doc) resolve(String(doc._id))
-  reject(new Error('not found this citizenId in customer'))
-})
-
 const accountValidation = (id) => new Promise((resolve, reject) => {
-
+  AccountSchema.findOne({ accountId: id })
+    .then(doc => {
+      if (doc) return reject(new Error('duplicated account id'))
+      resolve(true)
+    })
 })
 
 /**
   * create bank account
  * @param  {Object} data
- * @param  {String} data.accountId - accountId mongodb object
+ * @param  {String} data.accountId - virtual id
  * @param  {Object} data.customerId - customerId mongodb object
  * @param  {Object} data.accountType - accountType mongodb object
  * @param  {Object} data.branchId - branchId mongodb object
@@ -53,9 +51,8 @@ const accountValidation = (id) => new Promise((resolve, reject) => {
  */
 const create = data => new Promise(async (resolve, reject) => {
   try {
-    const customerValid = await customerValidation(data.citizenId)
-    data.customerId = customerValid
-    delete data.citizenId
+    const accIdValid = await accountValidation(data.accountId)
+    data.accountId = accIdValid
     const doc = new AccountSchema(data)
     doc.save(err => {
       if (err) reject(err)

@@ -4,7 +4,7 @@
       <v-flex>
         <overview-info
           :overviews="overviews"
-          :data="data"
+          :data="overviewsData"
           title="Staff Overview"
         />
       </v-flex>
@@ -27,7 +27,7 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <list />
+          <list :items="items" />
         </v-card>
       </v-flex>
     </v-layout>
@@ -37,12 +37,13 @@
       :password-editable="true"
       :editable="true"
       :submit-mode="dialogType"
-      @onSubmit="createBranch"
+      @onSubmit="createStaff"
     />
   </v-container>
 </template>
 
 <script>
+/* eslint-disable no-console */
 import OverviewInfo from '@/components/core/overview/Info'
 import Dialog from '@/components/core/staff/Dialog'
 import List from '@/components/admin/staff/List'
@@ -69,6 +70,9 @@ export default {
       role: '',
       password: ''
     },
+    overviewsData: {
+      totalStaff: 0
+    },
     overviews: [
       [
         {
@@ -76,11 +80,40 @@ export default {
           label: 'Total Staff'
         }
       ]
-    ]
+    ],
+    items: []
   }),
+  created() {
+    this.fetch()
+  },
   methods: {
-    createBranch() {
+    createStaff() {
       this.createDialog = false
+      this.fetch()
+    },
+    fetch() {
+      this.$axios
+        .get('/staff/general/analytic/count')
+        .then(res => {
+          this.overviewsData.totalStaff = res.data.nStaffs
+        })
+        .catch(e => {
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
+        })
+      this.$axios
+        .get('/staff/general/query/')
+        .then(res => {
+          this.items = res.data
+        })
+        .catch(e => {
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
+        })
     }
   }
 }

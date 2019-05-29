@@ -68,6 +68,7 @@ export default {
         })
         .then(() => {
           this.$store.dispatch('snackbars/success', 'Success')
+          this.$store.commit('UPDATE_USERNAME', this.newUsername)
           this.newUsername = ''
         })
         .catch(e => {

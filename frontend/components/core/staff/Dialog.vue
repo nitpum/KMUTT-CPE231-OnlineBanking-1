@@ -104,7 +104,7 @@
           "
           label="Role"
           placeholder="Role"
-          :text="role"
+          :text="position(role)"
         ></text-label>
         <v-select
           v-else
@@ -425,7 +425,7 @@ export default {
         email: this.data.email,
         branch: this.item.branch._id,
         phone: '0',
-        permission: this.role
+        permission: this.role.toLowerCase()
       }
       this.loading = true
       this.$axios
@@ -469,7 +469,7 @@ export default {
         zipcode: this.zipcode,
         birthDate: this.birthDate,
         position: this.role,
-        permission: this.role,
+        permission: this.role.toLowerCase(),
         branch: this.item.branch._id,
         phone: '0'
       }
@@ -493,6 +493,11 @@ export default {
         .finally(() => {
           this.loading = false
         })
+    },
+    position(pos) {
+      if (pos === 'general') return 'Staff'
+      else if (pos === 'manager') return 'Manager'
+      return pos
     }
   }
 }

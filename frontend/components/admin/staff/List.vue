@@ -3,7 +3,7 @@
     <template v-slot:items="{ item }">
       <td>{{ item._id }}</td>
       <td>{{ item.name.firstName }} {{ item.name.lastName }}</td>
-      <td>{{ item.position }}</td>
+      <td>{{ position(item.position) }}</td>
       <td>
         <template v-if="item.branch">
           {{ item.branch.name }}
@@ -52,6 +52,13 @@ export default {
         width: '50'
       }
     ]
-  })
+  }),
+  methods: {
+    position(pos) {
+      if (pos === 'general') return 'Staff'
+      else if (pos === 'manager') return 'Manager'
+      return pos
+    }
+  }
 }
 </script>

@@ -138,7 +138,6 @@ export default {
       }
     },
     showItem(item) {
-      console.log(item) //eslint-disable-line
       this.dialog = true
       this.dialogType = 'update'
       this.passwordEditable = false
@@ -152,7 +151,7 @@ export default {
         this.data.branch = item.branch
       }
       this.data.citizenId = item.citizenId
-      this.data.role = item.permission
+      this.data.role = item.position
     }
   }
 }

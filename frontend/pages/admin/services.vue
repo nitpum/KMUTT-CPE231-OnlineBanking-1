@@ -49,11 +49,12 @@
             >
           </v-card-title>
           <v-divider />
-          <list :items="list" />
+          <list :items="list" @onItemClick="openDialog" />
         </v-card>
       </v-flex>
     </v-layout>
     <Dialog v-model="createDialog" />
+    <Dialog v-model="editDialog" :data="item" />
   </v-container>
 </template>
 
@@ -76,12 +77,30 @@ export default {
     from: undefined,
     to: undefined,
     createDialog: false,
+    editDialog: false,
     data: {
       totalService: 850,
       avgSPO: 5,
       maxService: 20,
       todayService: 800,
       thisMonthService: 421561
+    },
+    item: {
+      _id: '',
+      organization: {
+        _id: '',
+        bankAccount: '',
+        bankSwift: '',
+        name: '',
+        type: ''
+      },
+      detail: '',
+      fee: 0,
+      type: {
+        _id: '',
+        name: '',
+        type: ''
+      }
     },
     list: [],
     overviews: [
@@ -118,10 +137,25 @@ export default {
   methods: {
     openCreateDialog() {
       this.createDialog = true
+      this.editDialog = false
+    },
+    openDialog(item) {
+      this.createDialog = false
+      this.editDialog = true
+      this.item = { ...item }
     },
     fetch() {
       this.$axios.get('/service-reference/query').then(res => {
-        this.list = res.data
+        this.list = []
+        res.data.forEach(item => {
+          this.list.push({
+            _id: item._id,
+            organization: item.organizationId,
+            detail: item.detail,
+            fee: item.fee,
+            type: item.typeId
+          })
+        })
       })
     }
   }

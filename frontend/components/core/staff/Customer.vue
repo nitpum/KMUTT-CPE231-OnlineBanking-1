@@ -6,19 +6,10 @@
     <v-card-text class="pt-0 pb-1 grey--text">
       {{ citizenId }}
     </v-card-text>
-    <v-card-text v-if="branch" class="pt-0 pb-1 grey--text">
-      Branch: {{ branch }}
-    </v-card-text>
-    <v-card-text v-if="bank" class="pt-0 pb-1 grey--text">
-      {{ bank }}
-    </v-card-text>
-    <v-card-text v-if="balance" class="pt-0 pb-1 grey--text">
-      Balance: {{ balance }}
-    </v-card-text>
     <v-divider class="mt-4" />
     <v-card-actions>
       <v-spacer />
-      <v-btn flat>
+      <v-btn color="primary" flat @click="$emit('onMoreInfo')">
         More Info
       </v-btn>
     </v-card-actions>

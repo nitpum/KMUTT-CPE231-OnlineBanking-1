@@ -62,7 +62,7 @@ export default {
       citizenId: '',
       address: '',
       zipcode: '',
-      birthDate: null,
+      birthDate: new Date(),
       role: '',
       password: ''
     },

@@ -1,8 +1,9 @@
 <template>
   <v-container>
-    <v-btn color="accent" fixed bottom fab right>
+    <v-btn color="accent" fixed bottom fab right @click="createDialog = true">
       <v-icon>add</v-icon>
     </v-btn>
+    <create-dialog v-model="createDialog" />
     <v-text-field
       label="Search"
       placeholder="Search"
@@ -19,14 +20,17 @@
 
 <script>
 import Card from '@/components/core/account/Card'
+import CreateDialog from '@/components/core/account/CreateDialog'
 
 export default {
   layout: 'staff',
   components: {
-    Card
+    Card,
+    CreateDialog
   },
   data: () => ({
-    accounts: [{}, {}, {}]
+    accounts: [{}, {}, {}],
+    createDialog: false
   })
 }
 </script>

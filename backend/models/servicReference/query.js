@@ -8,6 +8,7 @@ const query = {
          */
   all: (limit = 5000) => new Promise((resolve, reject) => {
     serviceReferenceSchema.find({})
+      .populate('organizationId')
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
@@ -18,6 +19,7 @@ const query = {
        */
   search: (s, limit = 1000) => new Promise((resolve, reject) => {
     serviceReferenceSchema.find({ $text: { $search: s } })
+      .populate('organizationId')
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
@@ -29,6 +31,7 @@ const query = {
        */
   id: (id) => new Promise((resolve, reject) => {
     serviceReferenceSchema.findById(id)
+      .populate('organizationId')
       .then(doc => resolve(doc))
       .catch(err => reject(err))
   })

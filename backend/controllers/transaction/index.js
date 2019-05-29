@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router()
 
 // models
+const staffModel = require('../../models/staff')
+// const accountModel = require('../../models/account')
 
 const PERMISSION = {
   default: ['admin', 'general', 'manager', 'customer'],
@@ -13,8 +15,15 @@ const PERMISSION = {
   delete: ['general', 'manager']
 }
 
-router.get('/', (req, res) => {
-  res.send('transaction jaaa')
+router.get('/', async (req, res) => {
+  const staffs = await staffModel.general.query.all()
+  res.render(path.join(__dirname, '../../views/transaction', 'index'),
+    { staffs: staffs }
+  )
+})
+
+router.post('/', (req, res) => {
+  res.send(req.body)
 })
 
 module.exports = router

@@ -1,8 +1,14 @@
 <template>
-  <v-data-table :headers="headers" :items="items">
-    <template v-slot:items="{ item, index }">
-      <td v-for="header in headers" :key="[index, header.value].join('-')">
-        {{ format(item[header.value], header.format) }}
+  <v-data-table :headers="headers" :items="items" class="elevation-1">
+    <template v-slot:items="{ item }">
+      <td>{{ item._id }}</td>
+      <td>{{ item.detail }}</td>
+      <td>{{ item.type.name }}</td>
+      <td>{{ item.organization.name }}</td>
+      <td class="text-xs-right">
+        <v-btn icon @click="$emit('onItemClick', item)">
+          <v-icon>edit</v-icon>
+        </v-btn>
       </td>
     </template>
   </v-data-table>
@@ -31,15 +37,14 @@ export default {
         value: 'type'
       },
       {
-        text: 'Organization',
-        value: 'organization'
+        text: 'Orgnization',
+        value: 'orgnization'
+      },
+      {
+        text: '',
+        width: '50'
       }
     ]
-  }),
-  methods: {
-    format(value, format) {
-      return format ? format(value) : value
-    }
-  }
+  })
 }
 </script>

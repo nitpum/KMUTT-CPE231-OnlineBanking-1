@@ -29,6 +29,8 @@
       :password-editable="true"
       title="Create Customer"
       :editable="true"
+      mode="create"
+      @onSubmit="createStaff"
     />
     <Dialog v-model="infoDialog" title="Edit Customer" :editable="true" />
   </div>
@@ -58,6 +60,9 @@ export default {
     openCreateDialog: function() {
       this.infoDialog = false
       this.createDialog = true
+    },
+    createStaff() {
+      this.createDialog = false
     }
   }
 }

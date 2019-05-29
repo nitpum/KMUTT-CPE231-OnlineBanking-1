@@ -9,19 +9,19 @@
       <v-card-text>
         <component
           :is="component('v-text-field')"
-          v-model="firstName"
+          v-model="data.name.firstName"
           label="Firstname"
           :text="firstName"
         />
         <component
           :is="component('v-text-field')"
-          v-model="lastName"
+          v-model="data.name.lastName"
           label="Lastname"
           :text="lastName"
         />
         <component
           :is="component('v-select')"
-          v-model="gender"
+          v-model="data.gender"
           label="Gender"
           :text="gender"
           :items="genders"
@@ -30,52 +30,55 @@
         />
         <component
           :is="component('v-text-field')"
-          v-model="citizenId"
+          v-model="data.citizenId"
           label="Citizen ID"
           :text="citizenId"
+          mask="# #### ##### ## #"
         />
         <component
           :is="component('v-text-field')"
-          v-model="address"
+          v-model="data.address"
           label="Address"
           :text="address"
         />
         <component
           :is="component('v-text-field')"
-          v-model="zipcode"
+          v-model="data.zipcode"
           label="Zipcode"
           :text="zipcode"
+          mask="#####"
           :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
         />
         <component
           :is="component('date-picker-dialog')"
-          v-model="birthDate"
+          v-model="data.birthDate"
           label="Birth Date"
           :text="birthDate"
         />
         <component
           :is="component('v-text-field')"
-          v-model="phone"
+          v-model="data.phone"
           label="Phone"
           :text="phone"
+          mask="## #### ####"
         />
         <component
           :is="component('v-text-field')"
-          v-model="email"
+          v-model="data.email"
           label="Email"
           :text="email"
           type="email"
         />
         <component
           :is="component('v-text-field')"
-          v-model="username"
+          v-model="data.username"
           label="Username"
           :text="username"
         />
 
         <v-text-field
           v-if="passwordEditable"
-          v-model="password"
+          v-model="data.password"
           label="Password"
         />
         <text-label
@@ -141,7 +144,7 @@ export default {
           citizenId: '',
           address: '',
           zipcode: '',
-          birthDate: new Date(),
+          birthDate: new Date().toISOString().split('T')[0],
           phone: '',
           username: '',
           status: '',
@@ -180,144 +183,6 @@ export default {
       set(val) {
         this.$emit('input', val)
       }
-    },
-    firstName: {
-      get() {
-        return this.data.firstName
-      },
-      set(val) {
-        const data = this.data
-        data.firstName = val
-        this.$emit('update:data', data)
-      }
-    },
-    lastName: {
-      get() {
-        return this.data.lastName
-      },
-      set(val) {
-        const data = this.data
-        data.lastName = val
-        this.$emit('update:data', data)
-      }
-    },
-    gender: {
-      get() {
-        return this.data.gender
-      },
-      set(val) {
-        const data = this.data
-        data.gender = val
-        this.$emit('update:data', data)
-      }
-    },
-    citizenId: {
-      get() {
-        return this.data.citizenId
-      },
-      set(val) {
-        const data = this.data
-        data.citizenId = val
-        this.$emit('update:data', data)
-      }
-    },
-    address: {
-      get() {
-        return this.data.address
-      },
-      set(val) {
-        const data = this.data
-        data.address = val
-        this.$emit('update:data', data)
-      }
-    },
-    zipcode: {
-      get() {
-        return this.data.zipcode
-      },
-      set(val) {
-        const data = this.data
-        data.zipcode = val
-        this.$emit('update:data', data)
-      }
-    },
-    birthDate: {
-      get() {
-        return this.data.birthDate
-          ? new Date(this.data.birthDate).toISOString().split('T')[0]
-          : new Date().toISOString().split('T')[0]
-      },
-      set(val) {
-        const data = this.data
-        data.birthDate = val
-        this.$emit('update:data', data)
-      }
-    },
-    phone: {
-      get() {
-        return this.data.phone
-      },
-      set(val) {
-        const data = this.data
-        data.phone = val
-        this.$emit('update:data', data)
-      }
-    },
-    username: {
-      get() {
-        return this.data.username
-      },
-      set(val) {
-        const data = this.data
-        data.username = val
-        this.$emit('update:data', data)
-      }
-    },
-    status: {
-      get() {
-        return this.data.status
-      },
-      set(val) {
-        const data = this.data
-        data.status = val
-        this.$emit('update:data', data)
-      }
-    },
-    email: {
-      get() {
-        return this.data.email
-      },
-      set(val) {
-        const data = this.data
-        data.email = val
-        this.$emit('update:data', data)
-      }
-    },
-    lastacess: {
-      get() {
-        return this.data.lastacess
-      },
-      set(val) {
-        const data = this.data
-        data.lastacess = val
-        this.$emit('update:data', data)
-      }
-    },
-    form() {
-      return {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        gender: this.gender,
-        citizenId: this.citizenId,
-        address: this.address,
-        zipcode: this.zipcode,
-        birthDate: this.birthDate,
-        phone: this.phone,
-        username: this.username,
-        status: this.status,
-        email: this.email,
-        lastacess: this.acess
-      }
     }
   },
   methods: {
@@ -332,17 +197,17 @@ export default {
     },
     create() {
       this.$axios
-        .post('/staff/general/create', {
-          name: `${this.firstName} ${this.lastName}`,
-          gender: this.gender,
-          citizenId: this.citizenId,
-          address: this.address,
-          zipcode: this.zipcode,
-          birthDate: this.birthDate,
-          username: this.username,
-          email: this.email,
-          password: this.password,
-          phone: '',
+        .post('/customer/create', {
+          name: `${this.data.name.firstName} ${this.data.name.lastName}`,
+          gender: this.data.gender,
+          citizenId: this.data.citizenId,
+          address: this.data.address,
+          zipcode: this.data.zipcode,
+          birthDate: this.data.birthDate,
+          username: this.data.username,
+          email: this.data.email,
+          password: this.data.password,
+          phone: this.data.phone,
           lastacess: new Date()
         })
         .then(res => {

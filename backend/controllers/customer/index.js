@@ -15,6 +15,7 @@ const CustomerModel = require('../../models/customer')
 // controllers
 const AnalyticController = require('./analytic')
 const QueryController = require('./query')
+const PaymentController = require('./payment')
 
 router.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/customer/', 'create.html'))
@@ -127,5 +128,6 @@ router.get('/delete', (req, res) => {
 
 router.use('/analytic', AnalyticController)
 router.use('/query', QueryController)
+router.use('/payment', PaymentController)
 
 module.exports = router

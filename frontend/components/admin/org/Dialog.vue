@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" lazy max-width="500" persistent>
+  <v-dialog v-model="dialog" lazy max-width="400" persistent>
     <v-card>
       <v-card-title primary-title>
         <h2>

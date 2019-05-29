@@ -10,24 +10,26 @@
         <v-text-field v-model="name" label="Branch Name" required />
         <v-textarea v-model="address" label="Address" required />
         <v-text-field v-model="zipcode" label="Zipcode" mask="#####" required />
-        <v-select v-model="status" label="Status" :items="status" required />
-        <v-text-field v-model="type" label="Type" disabled="true" required />
+        <v-select v-model="status" label="Status" :items="statuses" required />
         <v-text-field
-          v-model="Bank1000"
+          v-if="type === 'atm'"
+          v-model="bank1000"
           label="Bank1000"
           type="number"
           min="0"
           required
         />
         <v-text-field
-          v-model="Bank500"
+          v-if="type === 'atm'"
+          v-model="bank500"
           label="Bank500"
           type="number"
           min="0"
           required
         />
         <v-text-field
-          v-model="Bank100"
+          v-if="type === 'atm'"
+          v-model="bank100"
           label="Bank100"
           type="number"
           min="0"
@@ -61,12 +63,23 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    setValue: {
+      type: Function,
+      default: null
     }
   },
   data: () => ({
-    status: ['UP', 'DOWN', 'NO CASH'],
+    statuses: ['UP', 'DOWN'],
     formHasErrors: false,
-    loading: false
+    loading: false,
+    name: '',
+    address: '',
+    zipcode: '',
+    status: '',
+    bank1000: '',
+    bank500: '',
+    bank100: ''
   }),
   computed: {
     dialog: {
@@ -77,6 +90,12 @@ export default {
         this.$emit('input', val)
       }
     }
+  },
+  mounted() {
+    this.$emit('update:setValue', item => {
+      /* set value here */
+      this.name = item.name
+    })
   }
 }
 </script>

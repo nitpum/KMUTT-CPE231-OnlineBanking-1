@@ -6,9 +6,9 @@ const PERMISSION = {
   default: ['admin', 'general', 'manager', 'customer'],
   query: ['admin', 'general', 'manager', 'customer'],
   analytic: ['admin', 'general', 'manager'],
-  create: ['general', 'manager'],
-  edit: ['general', 'manager'],
-  delete: ['general', 'manager']
+  create: ['general'],
+  edit: ['general'],
+  delete: ['general']
 }
 
 // helpers
@@ -17,6 +17,7 @@ const authen = require('../helpers/authen')
 // models
 const AccountModel = require('../../models/account')
 const BranchModel = require('../../models/branch')
+const StaffModel = require('../../models/staff')
 
 // controllers
 const QueryController = require('./query')
@@ -35,7 +36,22 @@ router.get('/create', authen({ permission: PERMISSION.create }),
     })
   })
 
-router.post('/create', authen({ permission: PERMISSION.default }),
+router.get('/create/data', authen({ permission: PERMISSION.create }),
+  async (req, res) => {
+    const [ staff, types ] = await Promise.all([
+      StaffModel.query.id(req.session.passport.user._id),
+      AccountModel.type.query.all()
+    ])
+
+    const branch = await BranchModel.query.id(staff.branch)
+
+    res.json({
+      branch, types
+    })
+  }
+)
+
+router.post('/create', authen({ permission: PERMISSION.create }),
   (req, res) => {
     const data = req.body
     AccountModel.account.create(data)

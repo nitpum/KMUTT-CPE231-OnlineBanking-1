@@ -1,21 +1,22 @@
-import { strict } from "assert";
-import { stringify } from "querystring";
+const mongoose = require('mongoose')
 
-const mongoose = required('mongoose')
+const organizationRef = { type: mongoose.Schema.Types.ObjectId, ref: 'organization', required: true }
+const accRef = { type: mongoose.Schema.Types.ObjectId, ref: 'account' }
 
 const chequeSchema = mongoose.Schema({
-    chequeId: {type: String,required:true},
-    byOrganizationId: {type: String,required:true},
-    accountId: {type: String,required:true},
-    accountNo: String,
-    amount: String,
-    payFor: String,
-    type: {type: String,enum: ['CHASH','ORDER','ETC']},
-    Status: {type: String,enum: ['ACTIVE','REJECT','ETC']},
-    drawee: String,
-    created: Date,
-    drawDate: Date
-
+  chequeId: { type: String },
+  byOrganizationId: organizationRef,
+  accountId: accRef,
+  accountNo: String,
+  amount: { type: Number, default: 0 },
+  payFor: String,
+  type: { type: String, enum: ['CHASH', 'ORDER', 'ETC'] },
+  status: { type: String, enum: ['ACTIVE', 'REJECT', 'ETC'] },
+  drawee: { type: String, required: true },
+  created: { type: Date, default: Date.now },
+  drawDate: { type: Date, required: true }
 })
 
-module.exports = mongoose.model('cheque',chequeSchema)
+chequeSchema.index({ '$**': 'text' })
+
+module.exports = mongoose.model('cheque', chequeSchema)

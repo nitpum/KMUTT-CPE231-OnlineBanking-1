@@ -117,11 +117,11 @@ export default {
   methods: {
     create() {
       this.dialog = true
-      this.dialogTitle = 'Create ATM'
+      this.dialogTitle = 'Create ADM'
     },
     edit(item) {
       this.dialog = true
-      this.dialogTitle = 'Edit ATM'
+      this.dialogTitle = 'Edit ADM'
       this.setValue(item)
     }
   }

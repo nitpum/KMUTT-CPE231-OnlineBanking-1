@@ -7,7 +7,7 @@
           :text="$store.state.user.username"
         />
         <v-text-field
-          v-model="Password"
+          v-model="password"
           :append-icon="show1 ? 'visibility' : 'visibility_off'"
           :rules="[rules.required]"
           :type="show1 ? 'text' : 'password'"
@@ -27,7 +27,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="success" :disabled="!valid">Save</v-btn>
+        <v-btn color="success" :disabled="!valid" @click="commit()">Save</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -46,7 +46,7 @@ export default {
       show1: false,
       show2: false,
       show3: false,
-      Password: '',
+      password: '',
       newUsername: '',
       rules: {
         required: value => !!value || 'Required.',
@@ -56,7 +56,27 @@ export default {
   },
   computed: {
     valid() {
-      return this.Password && this.newUsername && this.newUsername.length >= 6
+      return this.password && this.newUsername && this.newUsername.length >= 6
+    }
+  },
+  methods: {
+    commit() {
+      this.$axios
+        .patch('/customer/me', {
+          password: this.password,
+          newUsername: this.newUsername
+        })
+        .then(() => {
+          this.$store.dispatch('snackbars/success', 'Success')
+          this.$store.commit('UPDATE_USERNAME', this.newUsername)
+          this.newUsername = ''
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/error', e.message)
+        })
+        .finally(() => {
+          this.password = ''
+        })
     }
   }
 }

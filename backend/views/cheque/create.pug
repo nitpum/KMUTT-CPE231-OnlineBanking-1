@@ -1,4 +1,4 @@
-form(action="/transaction", method="post")
+form(action="/cheque/create", method="post")
     h3 cheque jaa
     label(for="byOrganizationId") byOrganizationId
     select(name="byOrganizationId")
@@ -17,8 +17,8 @@ form(action="/transaction", method="post")
     label(for="amount") amount
     input(type="text" name="amount")
     br
-    label(for="payFor") payFor
-    input(type="text" name="payFor")
+    label(for="drawee") drawee
+    input(type="text" name="drawee")
     br
     select(name="type")
         option(value="CASH") CASH

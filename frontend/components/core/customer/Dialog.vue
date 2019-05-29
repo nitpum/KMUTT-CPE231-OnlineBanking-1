@@ -49,7 +49,7 @@
         />
         <component
           :is="component('date-picker-dialog')"
-          v-model="zipcode"
+          v-model="birthDate"
           label="Birth Date"
           :text="birthDate"
         />

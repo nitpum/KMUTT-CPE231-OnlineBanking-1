@@ -20,7 +20,7 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <branch-list />
+          <list :items="items" />
         </v-card>
       </v-flex>
     </v-layout>
@@ -31,21 +31,21 @@
       :password-editable="true"
       title="Create Manager"
       fixed-position="manager"
-      @onSubmit="createBranch"
+      @onSubmit="createManager"
     />
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
-import BranchList from '@/components/admin/BranchList'
+import List from '@/components/admin/staff/List'
 import Dialog from '@/components/core/staff/Dialog'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    BranchList,
+    List,
     Dialog
   },
   data: () => ({
@@ -53,51 +53,73 @@ export default {
     to: undefined,
     createDialog: false,
     data: {
-      totalBranch: 120,
-      minStaff: 10,
-      maxStaff: 40,
-      avgStaff: 20,
-      mostTransaction: 300,
-      avgTranPStaff: 5
+      totalManager: 120,
+      avgAge: 10,
+      maxAge: 40,
+      minAge: 20,
+      mostWorkday: 300,
+      minWorkday: 5,
+      avgWorkday: 10
     },
     overviews: [
       [
         {
-          key: 'totalBranch',
-          label: 'Total Branch'
+          key: 'totalManager',
+          label: 'Total Manager'
         },
         {
-          key: 'minStaff',
-          label: 'Minimum Staff'
+          key: 'avgAge',
+          label: 'Average Age'
         },
         {
-          key: 'maxStaff',
-          label: 'Maximum Staff'
+          key: 'maxAge',
+          label: 'Minimum Age'
         },
         {
-          key: 'avgStaff',
-          label: 'Average Staff'
+          key: 'avgAge',
+          label: 'Maximum Age'
         }
       ],
       [
         {
-          key: 'mostTransaction',
-          label: 'Most Transaction',
-          suffix: '(BangMod)'
+          key: 'mostWorkday',
+          label: 'Most Workday'
         },
         {
-          key: 'avgTranPStaff',
-          label: 'Average Transaction / Staff'
+          key: 'minWorkday',
+          label: 'Minimum Workday'
+        },
+        {
+          key: 'avgWorkday',
+          label: 'Average Workday'
         }
       ]
-    ]
+    ],
+    items: []
   }),
+  mounted() {
+    this.fetch()
+  },
   methods: {
     openCreateDialog() {
       this.createDialog = true
     },
-    createBranch() {
+    createManager() {
       this.createDialog = false
+      this.fetch()
+    },
+    fetch() {
+      this.$axios
+        .get('/staff/manager/query')
+        .then(res => {
+          this.items = res.data
+        })
+        .catch(e => {
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
+        })
     }
   }
 }

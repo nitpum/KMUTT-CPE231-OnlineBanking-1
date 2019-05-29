@@ -49,7 +49,7 @@ router.post('/create', (req, res) => {
   const {
     username, password, name, zipcode,
     address, birthDate, gender, citizenId,
-    position, branch, email, phone
+    position, branch, email, phone, permission
   } = req.body
   const [firstName, lastName] = name.split(' ')
 
@@ -62,13 +62,14 @@ router.post('/create', (req, res) => {
     gender: gender,
     citizenId: citizenId,
     position: position,
+    permission: 'manager',
     branch: branch,
     email: email,
     phone: phone,
     name: {
       firstName: firstName,
       lastName: lastName
-    }
+    },
   })
     .then(doc => res.send(doc))
     .catch(err => res.status(400).send({

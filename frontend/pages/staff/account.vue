@@ -5,13 +5,22 @@
     </v-btn>
     <create-dialog v-model="createDialog" />
     <v-text-field
+      v-model="search"
       label="Search"
       placeholder="Search"
       prepend-inner-icon="search"
       solo
     />
     <v-layout row wrap>
-      <v-flex v-for="(account, i) in accounts" :key="i" md4 sm12 xs12 mb-3 pr-3>
+      <v-flex
+        v-for="(account, i) in filteredAccounts"
+        :key="i"
+        md4
+        sm12
+        xs12
+        mb-3
+        pr-3
+      >
         <card
           :show-revoke-btn="true"
           :account-id="account.accountId"
@@ -24,6 +33,7 @@
 </template>
 
 <script>
+import safeRegex from 'safe-regex'
 import Card from '@/components/core/account/Card'
 import CreateDialog from '@/components/core/account/CreateDialog'
 
@@ -35,8 +45,18 @@ export default {
   },
   data: () => ({
     accounts: [],
-    createDialog: false
+    createDialog: false,
+    search: ''
   }),
+  computed: {
+    filteredAccounts() {
+      const regex = safeRegex(this.search) ? new RegExp(this.search, 'gi') : /./
+      return this.accounts.filter(
+        ({ accountId, holder, branch }) =>
+          regex.test(accountId) || regex.test(holder) || regex.test(branch)
+      )
+    }
+  },
   mounted() {
     this.$axios.get('/account/query/branch/me').then(({ data }) => {
       this.accounts = data.map(({ accountId, holder, branch }) => ({

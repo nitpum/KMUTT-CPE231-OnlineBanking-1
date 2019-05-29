@@ -9,7 +9,7 @@ const accountSchema = mongoose.Schema({
   accountType: typeRef,
   branchId: branchRef,
   balance: { type: Number, default: 0 },
-  status: { type: String, enum: ['ACTIVE', 'LOCK', 'ETC'], required: true }
+  status: { type: String, enum: ['ACTIVE', 'LOCK', 'ETC', 'REVOKE'], required: true }
 })
 
 accountSchema.index({ '$**': 'text' })

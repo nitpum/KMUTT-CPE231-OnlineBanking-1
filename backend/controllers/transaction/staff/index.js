@@ -15,15 +15,15 @@ router.get('/', (req, res) => {
 router.get('/cheque', async (req, res) => {
   const staffs = await staffModel.query.all()
   const accountIds = await accountModel.account.query.all()
-  const chequeIds = await chequeModel.query.all()
-  const servieRefs = await serviceRefModel.serviceRef.query.all()
-  console.log(servieRefs)
+  const chequeIds = await chequeModel.query.status('ACTIVE')
+  const serviceRefs = await serviceRefModel.serviceRef.query.all()
+
   res.render(path.join(__dirname, '../../../views/transaction/staff', 'cheque'),
     {
       staffs: staffs,
       accountIds: accountIds,
       chequeIds: chequeIds,
-      servieRefs: servieRefs
+      serviceRefs: serviceRefs
     }
   )
 })

@@ -17,7 +17,7 @@
 
 <script>
 import Card from '@/components/staff/Card'
-import Dialog from '@/components/staff/Dialog'
+import Dialog from '@/components/core/staff/Dialog'
 
 export default {
   layout: 'manager',

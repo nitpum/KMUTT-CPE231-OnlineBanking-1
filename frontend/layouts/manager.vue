@@ -1,8 +1,10 @@
 <template>
-  <v-app>
+  <v-app :dark="$store.state.darkMode">
     <drawer v-model="drawerPannel" :items="items" :minivariant="miniVariant">
-      <staff-info />
-      <v-divider class="mt-1" />
+      <template v-slot:top>
+        <staff-info />
+        <v-divider class="mt-1" />
+      </template>
     </drawer>
     <toolbar
       :dark="true"
@@ -14,12 +16,14 @@
     <v-content>
       <nuxt />
     </v-content>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import Drawer from '@/components/Drawer.vue'
 import Toolbar from '@/components/Toolbar'
+import Snackbars from '@/components/core/Snackbars'
 import theme from './themes/manager'
 import StaffInfo from '@/components/StaffInfo'
 
@@ -27,6 +31,7 @@ export default {
   components: {
     Drawer,
     Toolbar,
+    Snackbars,
     StaffInfo
   },
   data() {
@@ -58,6 +63,7 @@ export default {
         {
           icon: 'mdi-bank',
           title: 'Transactions',
+          group: '/manager/transactions/.*',
           children: [
             {
               icon: 'add',

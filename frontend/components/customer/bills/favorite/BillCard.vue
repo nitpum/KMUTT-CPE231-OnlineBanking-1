@@ -16,11 +16,29 @@
           </v-flex>
           <v-flex shrink py-0 my-0>
             <v-divider />
-            <v-btn flat color="primary">Pay</v-btn>
+            <v-btn flat color="primary" @click="payDialog = true">
+              Pay
+            </v-btn>
             <v-btn flat color="primary">History</v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
+
+    <pay-dialog v-model="payDialog" :bill="ref1" />
   </v-card>
 </template>
+
+<script>
+import PayDialog from './../PayDialog'
+
+export default {
+  components: {
+    PayDialog
+  },
+  data: () => ({
+    payDialog: false,
+    ref1: '123456'
+  })
+}
+</script>

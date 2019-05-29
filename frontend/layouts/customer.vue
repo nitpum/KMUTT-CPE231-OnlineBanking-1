@@ -1,8 +1,10 @@
 <template>
-  <v-app>
+  <v-app :dark="$store.state.darkMode">
     <drawer v-model="drawerPannel" :items="items" :minivariant="miniVariant">
-      <accounts />
-      <v-divider class="mt-1" />
+      <template v-slot:top>
+        <accounts />
+        <v-divider class="mt-1" />
+      </template>
     </drawer>
     <toolbar
       :dark="true"
@@ -13,19 +15,23 @@
     <v-content>
       <nuxt />
     </v-content>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import drawer from '@/components/Drawer.vue'
 import toolbar from '@/components/Toolbar'
+import Snackbars from '@/components/core/Snackbars'
 import theme from './themes/customer'
 import Accounts from '@/components/customer/accounts/Switch'
 
 export default {
+  middleware: 'customer',
   components: {
     drawer,
     toolbar,
+    Snackbars,
     Accounts
   },
   data() {
@@ -60,12 +66,19 @@ export default {
           to: '/app/bills'
         },
         {
-          icon: 'account_balance_wallet',
-          title: 'Account'
-        },
-        {
           icon: 'build',
-          title: 'Settings'
+          title: 'Settings',
+          group: '/app/settings/.*',
+          children: [
+            {
+              text: 'Change Username',
+              to: '/app/settings/username'
+            },
+            {
+              text: 'Change Password',
+              to: '/app/settings/password'
+            }
+          ]
         }
       ],
       miniVariant: false,

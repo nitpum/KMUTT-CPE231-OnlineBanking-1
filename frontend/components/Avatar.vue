@@ -30,6 +30,17 @@
       <v-list>
         <v-list-tile>
           <v-list-tile-action>
+            <v-switch v-model="darkMode" color="primary" />
+          </v-list-tile-action>
+          <v-list-tile-title
+            style="cursor: pointer"
+            @click="darkMode = !darkMode"
+          >
+            Dark Mode
+          </v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="logout()">
+          <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
           <v-list-tile-title>Sign out</v-list-tile-title>
@@ -46,6 +57,25 @@ export default {
     avatar: 'https://pbs.twimg.com/media/DsGJSBuVsAANIUN.jpg',
     name: 'Name',
     username: 'username'
-  })
+  }),
+  computed: {
+    darkMode: {
+      get() {
+        return this.$store.state.darkMode
+      },
+      set(val) {
+        this.$store.commit('SET_DARKMODE', val)
+      }
+    }
+  },
+  methods: {
+    logout() {
+      const strategy = this.$store.state.auth.strategy
+      this.$auth.logout().then(() => {
+        if (strategy === 'customer') this.$router.push('/')
+        else this.$router.push(`/${strategy}/login`)
+      })
+    }
+  }
 }
 </script>

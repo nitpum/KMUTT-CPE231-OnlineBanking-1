@@ -23,6 +23,7 @@
             <h3 class="headline mb-0">
               Top Services
             </h3>
+            <v-spacer />
           </v-card-title>
           <v-divider />
           <v-card-text>
@@ -40,12 +41,10 @@
         <v-card>
           <v-card-title>
             <h3 class="headline mb-0">
-              Organization List
+              Service List
             </h3>
             <v-spacer />
-            <v-btn color="primary">
-              Create Organization
-            </v-btn>
+            <v-btn color="primary" class="my-0">CREATE SERVICE</v-btn>
           </v-card-title>
           <v-divider />
           table here
@@ -70,7 +69,6 @@ export default {
     from: undefined,
     to: undefined,
     data: {
-      totalOrg: 300,
       totalService: 850,
       avgSPO: 5,
       maxService: 20,
@@ -79,10 +77,6 @@ export default {
     },
     overviews: [
       [
-        {
-          key: 'totalOrg',
-          label: 'Total Organization'
-        },
         {
           key: 'totalService',
           label: 'Total Service'

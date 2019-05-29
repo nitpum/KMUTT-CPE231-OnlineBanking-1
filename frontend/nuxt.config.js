@@ -44,13 +44,106 @@ module.exports = {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    '@nuxtjs/auth'
   ],
+
   /*
    ** Axios module configuration
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    prefix: '/api/'
+  },
+
+  proxy: {
+    '/api/': {
+      target: 'http://localhost:8080',
+      pathRewrite: { '^/api': '' }
+    }
+  },
+
+  auth: {
+    redirect: false,
+    strategies: {
+      customer: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/customer/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/customer/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/customer/query/me',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      staff: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/staff/general/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/staff/general/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/staff/general/query/me',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      manager: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/staff/manager/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/staff/manager/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/staff/manager/query/me',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      },
+      admin: {
+        _scheme: 'local',
+        endpoints: {
+          login: {
+            url: '/admin/login',
+            method: 'post'
+          },
+          logout: {
+            url: '/admin/logout',
+            method: 'get'
+          },
+          user: {
+            url: '/admin/query/me',
+            method: 'get'
+          }
+        },
+        tokenRequired: false,
+        tokenType: false
+      }
+    }
   },
 
   /*

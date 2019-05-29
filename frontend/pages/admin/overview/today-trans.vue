@@ -37,7 +37,7 @@ export default {
       },
       {
         text: 'Total Transaction',
-        align: 'center',
+        align: 'left',
         value: 'totalTrans'
       }
     ],

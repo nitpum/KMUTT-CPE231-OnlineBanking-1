@@ -6,6 +6,34 @@
           {{ title }}
         </h3>
       </v-card-title>
+      <v-card-text>
+        <v-text-field v-model="name" label="Branch Name" required />
+        <v-textarea v-model="address" label="Address" required />
+        <v-text-field v-model="zipcode" label="Zipcode" mask="#####" required />
+        <v-select v-model="status" label="Status" :items="status" required />
+        <v-text-field v-model="type" label="Type" disabled="true" required />
+        <v-text-field
+          v-model="Bank1000"
+          label="Bank1000"
+          type="number"
+          min="0"
+          required
+        />
+        <v-text-field
+          v-model="Bank500"
+          label="Bank500"
+          type="number"
+          min="0"
+          required
+        />
+        <v-text-field
+          v-model="Bank100"
+          label="Bank100"
+          type="number"
+          min="0"
+          required
+        />
+      </v-card-text>
       <v-card-actions>
         <v-spacer />
         <v-btn flat @click="dialog = false">
@@ -28,17 +56,18 @@ export default {
     },
     type: {
       type: String,
-      default: 'atm'
+      default: 'ATM'
     },
     title: {
       type: String,
       default: ''
-    },
-    setValue: {
-      type: Function,
-      default: null
     }
   },
+  data: () => ({
+    status: ['UP', 'DOWN', 'NO CASH'],
+    formHasErrors: false,
+    loading: false
+  }),
   computed: {
     dialog: {
       get() {
@@ -48,11 +77,6 @@ export default {
         this.$emit('input', val)
       }
     }
-  },
-  mounted() {
-    this.$emit('update:setValue', item => {
-      /* set value here */
-    })
   }
 }
 </script>

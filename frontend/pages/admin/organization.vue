@@ -12,32 +12,38 @@
               Organization List
             </h3>
             <v-spacer />
-            <create-organization />
+            <v-btn color="primary" @click="openCreateDialog">
+              Create Organization
+            </v-btn>
           </v-card-title>
           <v-divider />
           <lists />
         </v-card>
       </v-flex>
+      <Dialog v-model="dialog" :mode="dialogMode" />
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
-import CreateOrganization from '@/components/admin/org/CreateOrganization'
+import Dialog from '@/components/admin/org/Dialog'
 import Lists from '@/components/admin/org/Lists'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    CreateOrganization,
+    Dialog,
     Lists
   },
   data: () => ({
     showHeatmap: false,
     from: undefined,
     to: undefined,
+    org: {},
+    dialog: false,
+    dialogMode: 'create',
     data: {
       totalOrg: 300,
       totalService: 850,
@@ -57,6 +63,12 @@ export default {
   }),
   mounted() {
     this.showHeatmap = true
+  },
+  methods: {
+    openCreateDialog() {
+      this.dialog = true
+      this.dialogMode = 'create'
+    }
   }
 }
 </script>

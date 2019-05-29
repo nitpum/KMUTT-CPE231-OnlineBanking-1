@@ -116,6 +116,18 @@
         />
         <v-text-field
           v-if="editable && passwordEditable"
+          v-model="username"
+          label="Username"
+          placeholder="Username"
+        />
+        <v-text-field
+          v-if="editable && passwordEditable"
+          v-model="email"
+          label="Email"
+          placeholder="Email"
+        />
+        <v-text-field
+          v-if="editable && passwordEditable"
           v-model="password"
           label="Password"
           placeholder="Password"
@@ -168,13 +180,23 @@ export default {
     },
     data: {
       type: Object,
-      default: () => ({
-        name: {
-          firstName: '',
-          lastName: ''
-        },
-        birthDate: new Date()
-      })
+      default() {
+        return {
+          name: {
+            firstName: '',
+            lastName: ''
+          },
+          gender: 'Male',
+          citizenId: '',
+          address: '',
+          zipcode: '',
+          birthDate: new Date(),
+          role: '',
+          username: '',
+          password: '',
+          email: ''
+        }
+      }
     },
     passwordEditable: {
       type: Boolean,
@@ -206,67 +228,75 @@ export default {
     },
     firstName: {
       get() {
-        return this.data.name.firstName
+        return this.data.name.firstName || ''
       },
       set(val) {
         const data = this.data
         data.name.firstName = val
         this.$emit('update:data', data)
+        this.data.firstName = val
       }
     },
     lastName: {
       get() {
-        return this.data.name.lastName
+        return this.data.name.lastName || ''
       },
       set(val) {
         const data = this.data
         data.name.lastName = val
         this.$emit('update:data', data)
+        this.data.lastName = val
       }
     },
     gender: {
       get() {
-        return this.data.gender
+        return this.data.gender || 'Undefined'
       },
       set(val) {
         const data = this.data
         data.gender = val
         this.$emit('update:data', data)
+        this.data.gender = val
       }
     },
     citizenId: {
       get() {
-        return this.data.citizenId
+        return this.data.citizenId || ''
       },
       set(val) {
         const data = this.data
         data.citizenId = val
         this.$emit('update:data', data)
+        this.data.citizenId = val
       }
     },
     address: {
       get() {
-        return this.data.address
+        return this.data.address || ''
       },
       set(val) {
         const data = this.data
         data.address = val
         this.$emit('update:data', data)
+        this.data.address = val
       }
     },
     zipcode: {
       get() {
-        return this.data.zipcode
+        return this.data.zipcode || ''
       },
       set(val) {
         const data = this.data
         data.zipcode = val
         this.$emit('update:data', data)
+        this.data.zipcode = val
       }
     },
     birthDate: {
       get() {
-        return new Date(this.data.birthDate).toISOString().split('T')[0]
+        return this.data.birthDate
+          ? new Date(this.data.birthDate).toISOString().split('T')[0]
+          : new Date()
       },
       set(val) {
         const data = this.data
@@ -279,19 +309,43 @@ export default {
         return this.data.role
       },
       set(val) {
-        const data = this.data
+        const data = this.data || 'Staff'
         data.role = val
         this.$emit('update:data', data)
+        this.data.role = val
+      }
+    },
+    username: {
+      get() {
+        return this.data.username || ''
+      },
+      set(val) {
+        const data = this.data
+        data.username = val
+        this.$emit('update:data', data)
+        this.data.username = val
       }
     },
     password: {
       get() {
-        return this.data.password
+        return this.data.password || ''
       },
       set(val) {
         const data = this.data
         data.password = val
         this.$emit('update:data', data)
+        this.data.password = val
+      }
+    },
+    email: {
+      get() {
+        return this.data.email || ''
+      },
+      set(val) {
+        const data = this.data
+        data.email = val
+        this.$emit('update:data', data)
+        this.data.email = val
       }
     },
     disabled() {
@@ -314,7 +368,9 @@ export default {
         zipcode: this.zipcode,
         birthDate: this.birthDate,
         role: this.role,
-        password: this.password
+        username: this.data.username,
+        password: this.password,
+        email: this.data.email
       }
     }
   },
@@ -329,21 +385,22 @@ export default {
       }
     },
     create() {
+      const data = {
+        name: `${this.firstName} ${this.lastName}`,
+        gender: this.gender,
+        citizenId: this.citizenId,
+        address: this.address,
+        zipcode: this.zipcode,
+        birthDate: this.birthDate,
+        position: this.role,
+        username: this.data.username,
+        password: this.password,
+        email: this.data.email,
+        phone: '0'
+      }
       this.loading = true
       this.$axios
-        .post('/staff/general/create', {
-          name: `${this.firstName} ${this.lastName}`,
-          gender: this.gender,
-          citizenId: this.citizenId,
-          address: this.address,
-          zipcode: this.zipcode,
-          birthDate: this.birthDate,
-          position: this.role,
-          password: this.password,
-          email: String(Date.now()) + 'dummy@domain.com',
-          username: String(Date.now()),
-          phone: '0'
-        })
+        .post('/staff/general/create', data)
         .then(res => {
           this.firstName = ''
           this.lastName = ''
@@ -353,8 +410,11 @@ export default {
           this.zipcode = ''
           this.birthDate = ''
           this.position = ''
+          this.username = ''
           this.password = ''
+          this.email = ''
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
+          this.model = false
         })
         .catch(e => {
           this.$store.dispatch(
@@ -379,11 +439,11 @@ export default {
         zipcode: this.zipcode,
         birthDate: this.birthDate,
         position: this.role,
-        email: String(Date.now()) + 'dummy@domain.com',
-        username: String(Date.now()),
         phone: '0'
       }
       if (this.passwordEditable) {
+        data.email = this.email
+        data.username = this.username
         data.password = this.password
       }
       this.$axios
@@ -393,6 +453,7 @@ export default {
         })
         .then(res => {
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
+          this.model = false
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)

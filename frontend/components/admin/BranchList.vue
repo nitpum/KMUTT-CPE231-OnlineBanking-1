@@ -14,6 +14,14 @@
 
 <script>
 export default {
+  props: {
+    items: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
   data: () => ({
     headers: [
       {
@@ -43,17 +51,6 @@ export default {
       {
         text: 'Transaction / Day',
         value: 'tD'
-      }
-    ],
-    items: [
-      {
-        id: '000',
-        name: 'BangMod',
-        balance: '100,000',
-        scount: '20',
-        tPS: '4',
-        mTPD: '500',
-        tPD: '300'
       }
     ]
   })

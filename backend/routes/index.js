@@ -5,6 +5,7 @@ const customer = require('../controllers/customer')
 const organization = require('../controllers/organization')
 const account = require('../controllers/account/')
 const serviceRef = require('../controllers/serviceReference')
+const transaction = require('../controllers/transaction')
 
 /**
  * router HTTP function top on express.js
@@ -19,6 +20,7 @@ module.exports = app => {
   app.use('/organization', organization)
   app.use('/account', account)
   app.use('/service-reference', serviceRef)
+  app.use('/transaction', transaction)
 
   app.use('*', (req, res) => {
     res.send('online banking system')

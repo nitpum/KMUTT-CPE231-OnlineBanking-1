@@ -36,14 +36,19 @@ const customerValidation = (id) => new Promise(async (resolve, reject) => {
   reject(new Error('not found this citizenId in customer'))
 })
 
+const accountValidation = (id) => new Promise((resolve, reject) => {
+
+})
+
 /**
   * create bank account
  * @param  {Object} data
- * @param  {String} data.accountId - username
- * @param  {Object} data.citizenId - customer mongodb object
- * @param  {Object} data.accountType - acc type mongodb object
- * @param  {Object} data.branchId - branchid mongodb object
- * @param  {String} data.status - status  enum: ['ACTIVE', 'LOCK', 'ETC']
+ * @param  {String} data.accountId - accountId mongodb object
+ * @param  {Object} data.customerId - customerId mongodb object
+ * @param  {Object} data.accountType - accountType mongodb object
+ * @param  {Object} data.branchId - branchId mongodb object
+ * @param  {String} data.balance - balance
+ * @param  {String} data.status - status enum: ['ACTIVE', 'LOCK', 'ETC']
  * @returns {Object} - mongodb document
  */
 const create = data => new Promise(async (resolve, reject) => {
@@ -64,11 +69,12 @@ const create = data => new Promise(async (resolve, reject) => {
 /**
   * edit bank account
  * @param  {Object} data
- * @param  {String} data.accountId - username
- * @param  {Object} data.customerId - customer mongodb object
- * @param  {Object} data.accountType - acc type mongodb object
- * @param  {Object} data.branchId - branchid mongodb object
- * @param  {String} data.status - status  enum: ['ACTIVE', 'LOCK', 'ETC']
+ * @param  {String} data.accountId - accountId mongodb object
+ * @param  {Object} data.customerId - customerId mongodb object
+ * @param  {Object} data.accountType - accountType mongodb object
+ * @param  {Object} data.branchId - branchId mongodb object
+ * @param  {String} data.balance - balance
+ * @param  {String} data.status - status enum: ['ACTIVE', 'LOCK', 'ETC']
  * @returns {Object} - mongodb document
  */
 const edit = (id, data) => new Promise((resolve, reject) => {

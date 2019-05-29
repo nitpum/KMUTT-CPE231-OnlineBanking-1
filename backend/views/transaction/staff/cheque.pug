@@ -1,0 +1,32 @@
+form(action="/transaction/staff/cheque", method="post")
+    h3 transaction cheque
+    label(for="type") type of transaction
+    select(name="type")
+        option(value="CHEQUE") CHEQUE
+    br
+    label(for="surrogateName") surrogateName
+    input(type="text" name="surrogateName")
+    br
+    label(for="staff") staff
+    select(name="staff")
+        for staff in staffs
+            option(value=staff._id)=staff.name.firstName + " " +staff.name.firstName
+    br
+    label(for="accountId") accountId
+    select(name="accountId")
+        for accountId in accountIds
+            option(value=accountId._id)=accountId.accountId
+    br
+    label(for="chequeId") chequeId
+    select(name="chequeId")
+        for chequeId in chequeIds
+            option(value=chequeId._id)=chequeId.chequeId
+    br
+    label(for="ref1") ref1
+    select(name="ref1")
+        for serviceRef in serviceRefs
+            option(value=serviceRef._id)=serviceRef.organizationId.name + ' ' +serviceRef.detail
+    br
+    label(for="ref2") ref2 
+    input(type="text" name="ref2")
+    button(type="submit") cheque!

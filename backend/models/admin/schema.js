@@ -1,4 +1,4 @@
-const mongoose = required('mongoose')
+const mongoose = require('mongoose')
 
 const adminSchema = mongoose.Schema({
   username: { type: String, index: true },

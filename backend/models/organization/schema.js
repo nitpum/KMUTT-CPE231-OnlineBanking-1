@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = required('mongoose')
 
 const organizationSchema = mongoose.Schema({
   name: { type: String, required: true },

@@ -91,6 +91,7 @@ const customer =[{
 }]
 
 const favorite=[{
+    model:'favorite',
     schema:{
         customerId: customerRef,
         ref1: '111111111111111',
@@ -99,4 +100,64 @@ const favorite=[{
 
     }
 }]
-const 
+const organization =[{
+    model:'organization',
+    schema :{
+        name: 'Umbella Cob',
+        type: 'COMPANY',
+        bankSwift: 'KASITHBK',
+        bankAccount: '900654123123123'
+    }
+}]
+
+const serviceRef =[{
+    model:'ServiceRef',
+    schema:{
+    organizationId: organizationRef,
+    detail: 'Computer Engineering Department,KMUTT',
+    fee: 2000,
+    typeId: serviceTypeRef
+    }
+}]
+
+const staff =[{
+    model:'staff',
+    schema:{
+
+  username: 'Cara Delevine',
+  password: '123456',
+  name: {
+    firstName: 'Cara',
+    lastName: 'Delevine'
+  },
+  email: 'Cara.D@mail.com',
+  zipcode: '11111',
+  address: '45 Chareonkrung40 Bangkok',
+  birthDate: 1992-03-04,
+  phone: '0980009988',
+  gender: 'F',
+  citizenId: 3400011000233,
+  permission: 'admin',
+  position: 'admin',
+  branch: branchRef,
+
+    }
+
+}]
+
+const transaction=[{
+    model:'transaction',
+    schema:{
+        timestamp: default,
+        type: 'TRANSFER',
+        amount: 2000,
+        balance: 1000,
+        surrogateName: 'Jenny',
+        staff: staffRef,
+        accountId: accountIdRef,
+        machineId: machineIdRef,
+        chequeId: chequeIdRef,
+        ref1: serviceRef,
+        ref2: '00010010001001001'
+    }
+}]

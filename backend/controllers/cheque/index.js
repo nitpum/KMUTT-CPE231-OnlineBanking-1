@@ -16,14 +16,27 @@ const chequeModel = require('../../models/cheque')
 const organizationModel = require('../../models/organization')
 const accountModel = require('../../models/account')
 
-router.get('/create',async (req, res) => {
-    const orgs = await organizationModel.query.all()
-    const accInternal = await accountModel.account.query.all()
-  res.render(path.join(__dirname, '../../views/cheque/', 'create'))
+router.get('/', (req, res) => {
+  res.send('cheque jaa')
+})
+
+router.get('/create', async (req, res) => {
+  const orgs = await organizationModel.query.all()
+  const accInternals = await accountModel.account.query.all()
+  res.render(path.join(__dirname, '../../views/cheque/', 'create'),
+    {
+      organizations: orgs,
+      accountIds: accInternals
+    }
+  )
 })
 
 router.post('/create', (req, res) => {
-  res.send(req.body)
+  const data = req.body
+  chequeModel
+    .create(data)
+    .then(doc => res.send(doc))
+    .catch(err => res.status(400).send(String(err)))
 })
 
 module.exports = router

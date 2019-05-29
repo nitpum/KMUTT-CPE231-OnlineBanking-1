@@ -4,7 +4,12 @@ const router = express.Router()
 
 // models
 const staffModel = require('../../models/staff')
-// const accountModel = require('../../models/account')
+const serviceRefModel = require('../../models/servicReference')
+const chequeModel = require('../../models/cheque')
+const accountModel = require('../../models/account')
+
+// controllers
+const staffControllers = require('./staff')
 
 const PERMISSION = {
   default: ['admin', 'general', 'manager', 'customer'],
@@ -17,13 +22,24 @@ const PERMISSION = {
 
 router.get('/', async (req, res) => {
   const staffs = await staffModel.general.query.all()
+  const serviceRefs = await serviceRefModel.serviceRef.query.all()
+  const chequeIds = await chequeModel.query.all()
+  const accountIds = await accountModel.account.query.all()
+
   res.render(path.join(__dirname, '../../views/transaction', 'index'),
-    { staffs: staffs }
+    {
+      staffs: staffs,
+      serviceRefs: serviceRefs,
+      chequeIds: chequeIds,
+      accountIds: accountIds
+    }
   )
 })
 
 router.post('/', (req, res) => {
   res.send(req.body)
 })
+
+router.use('/staff', staffControllers)
 
 module.exports = router

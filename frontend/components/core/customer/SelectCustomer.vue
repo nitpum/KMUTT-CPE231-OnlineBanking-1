@@ -48,12 +48,7 @@ export default {
     }
   },
   data: () => ({
-    customers: [
-      {
-        name: 'Korbboon Thuswongsa',
-        id: '123124'
-      }
-    ]
+    customers: []
   }),
   computed: {
     dialog: {
@@ -65,9 +60,20 @@ export default {
       }
     }
   },
+  mounted() {
+    this.fetch()
+  },
   methods: {
     select(customer) {
       this.value(customer.id)
+    },
+    fetch() {
+      this.$axios.get('/customer/query').then(({ data }) => {
+        this.customers = data.map(({ name, _id }) => ({
+          name: [name.firstName, name.lastName].join(' '),
+          id: _id
+        }))
+      })
     }
   }
 }

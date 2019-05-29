@@ -71,7 +71,8 @@ router.post('/create', (req, res) => {
     name: {
       firstName: firstName,
       lastName: lastName
-    }
+    },
+    permission: 'general'
   })
     .then(doc => res.send(doc))
     .catch(err => res.status(400).send({

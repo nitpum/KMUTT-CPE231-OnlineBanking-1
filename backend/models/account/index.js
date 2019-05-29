@@ -34,15 +34,24 @@ const accountValidation = (id) => new Promise((resolve, reject) => {
   AccountSchema.findOne({ accountId: id })
     .then(doc => {
       if (doc) return reject(new Error('duplicated account id'))
-      resolve(true)
+      resolve(id)
     })
+})
+
+const customerValidation = (id) => new Promise((resolve, reject) => {
+  CustomerModel.query.citizenId(id)
+    .then(doc => {
+      if (doc) return resolve(doc._id)
+      reject(new Error('this citizenId not found in customer'))
+    })
+    .catch(err => reject(err))
 })
 
 /**
   * create bank account
  * @param  {Object} data
  * @param  {String} data.accountId - virtual id
- * @param  {Object} data.customerId - customerId mongodb object
+ * @param  {Object} data.citizenId - customerId mongodb object
  * @param  {Object} data.accountType - accountType mongodb object
  * @param  {Object} data.branchId - branchId mongodb object
  * @param  {String} data.balance - balance
@@ -52,7 +61,10 @@ const accountValidation = (id) => new Promise((resolve, reject) => {
 const create = data => new Promise(async (resolve, reject) => {
   try {
     const accIdValid = await accountValidation(data.accountId)
+    const customerId = await customerValidation(data.citizenId)
+    data.customerId = customerId
     data.accountId = accIdValid
+    console.log(data)
     const doc = new AccountSchema(data)
     doc.save(err => {
       if (err) reject(err)
@@ -99,10 +111,11 @@ const account = {
   edit: edit,
   delete: remove,
   query: AccountQueryModel,
-  genId: generateAccId
+  genId: generateAccId,
+  schema: AccountSchema
 }
 
 module.exports = {
   account: account,
-  type: AccountTypesModel
+  type: AccountTypesModel,
 }

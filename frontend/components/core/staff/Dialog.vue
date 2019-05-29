@@ -106,7 +106,15 @@
           placeholder="Role"
           :text="role"
         ></text-label>
-        <v-select v-else v-model="role" label="Role" :items="roles" required />
+        <v-select
+          v-else
+          v-model="role"
+          label="Role"
+          :items="roles"
+          item-text="text"
+          item-value="value"
+          required
+        />
         <!-- <text-label v-if="!editable" label="Branch" :text="branch.name" /> -->
         <branch-select v-model="item.branch" />
         <v-text-field
@@ -212,7 +220,16 @@ export default {
       { text: 'Female', value: 'F' },
       { text: 'Undefined', value: 'U' }
     ],
-    roles: ['Staff', 'Manager'],
+    roles: [
+      {
+        text: 'Staff',
+        value: 'general'
+      },
+      {
+        text: 'Manager',
+        value: 'manager'
+      }
+    ],
     formHasErrors: false,
     loading: false
   }),
@@ -412,7 +429,7 @@ export default {
       }
       this.loading = true
       this.$axios
-        .post('/staff/general/create', data)
+        .post('/staff/' + this.role + '/create', data)
         .then(res => {
           this.firstName = ''
           this.lastName = ''

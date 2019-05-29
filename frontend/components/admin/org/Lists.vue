@@ -13,6 +13,12 @@ import numeral from 'numeral'
 const comma = val => numeral(val).format('0,0')
 
 export default {
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  },
   data: () => ({
     headers: [
       {
@@ -47,17 +53,6 @@ export default {
         text: 'Max Usage Service Count (Month)',
         value: 'maxUsageServicePM',
         format: comma
-      }
-    ],
-    items: [
-      {
-        id: '000',
-        name: 'BangMod',
-        services: 20,
-        avgUsageServicePD: 300,
-        maxUsageServicePD: 500,
-        avgUsageServicePM: 80000,
-        maxUsageServicePM: 100000
       }
     ]
   }),

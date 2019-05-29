@@ -42,7 +42,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
   const {
     username, password, name, zipcode,
     address, birthDate, gender, phone,
-    citizenId, position, branch, email
+    citizenId, position, branch, email, permission
   } = data
   const { firstName, lastName } = name
   const valid = await validation({
@@ -65,7 +65,8 @@ const create = (data) => new Promise(async (resolve, reject) => {
     position: position,
     branch: branch,
     email: email,
-    phone: phone
+    phone: phone,
+    permission: permission
   })
 
   doc.save(err => {

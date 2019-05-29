@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="model" lazy max-width="500">
+  <v-dialog v-model="model" lazy max-width="500" scrollable>
     <v-card>
       <v-card-title primary-title>
         <h2>

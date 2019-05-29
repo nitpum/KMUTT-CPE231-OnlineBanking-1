@@ -10,6 +10,7 @@
 import Login from '@/components/Login'
 
 export default {
+  layout: 'centered',
   components: {
     Login
   }

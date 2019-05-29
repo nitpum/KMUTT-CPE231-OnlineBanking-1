@@ -128,15 +128,15 @@ module.exports = {
         _scheme: 'local',
         endpoints: {
           login: {
-            url: '/staff/admin/login',
+            url: '/admin/login',
             method: 'post'
           },
           logout: {
-            url: '/staff/admin/logout',
+            url: '/admin/logout',
             method: 'get'
           },
           user: {
-            url: '/staff/admin/query/me',
+            url: '/admin/query/me',
             method: 'get'
           }
         },

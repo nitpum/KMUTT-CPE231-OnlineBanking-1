@@ -2,7 +2,7 @@
   <v-layout row align-center>
     <v-flex grow>
       <v-select
-        v-model="bank"
+        v-model="ref1"
         :items="banks"
         item-value="id"
         item-text="name"
@@ -24,18 +24,13 @@ export default {
     Contact
   },
   data: () => ({
-    bank: null,
-    acc: null,
-    banks: [
-      {
-        id: 1,
-        name: 'Korbboon Bank Co, Ltd.'
-      }
-    ]
+    ref1: null,
+    ref2: null,
+    banks: []
   }),
   methods: {
     fill(val) {
-      this.bank = val.ref1
+      this.ref1 = val.ref1
       this.ref2 = val.ref2
     }
   }

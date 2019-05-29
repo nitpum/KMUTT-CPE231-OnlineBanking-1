@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const CardSchema = mongoose.Schema9({
+const CardSchema = mongoose.Schema({
     CardId: {type: String,require:true},
     AccountId: {type: String,require:true},
     Holder: String,

@@ -101,7 +101,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat @click="model = false">Close</v-btn>
-        <v-btn v-if="editable" color="primary" flat @click="create()">
+        <v-btn v-if="editable" color="primary" flat @click="submit">
           <slot name="sumbit-btn">Submit</slot>
         </v-btn>
       </v-card-actions>
@@ -142,6 +142,10 @@ export default {
     passwordEditable: {
       type: Boolean,
       default: false
+    },
+    submitMode: {
+      type: String,
+      default: 'none'
     }
   },
   data: () => ({
@@ -201,6 +205,16 @@ export default {
         this.$emit('update:data', data)
       }
     },
+    zipcode: {
+      get() {
+        return this.data.zipcode
+      },
+      set(val) {
+        const data = this.data
+        data.zipcode = val
+        this.$emit('update:data', data)
+      }
+    },
     birthDate: {
       get() {
         return this.data.birthDate
@@ -233,6 +247,15 @@ export default {
     }
   },
   methods: {
+    submit() {
+      if (this.submitMode === 'create') {
+        this.create()
+      } else if (this.submitMode === 'update') {
+        this.update()
+      } else {
+        this.$emit('onSubmit')
+      }
+    },
     create() {
       this.$axios
         .post('/staff/general/create', {
@@ -257,6 +280,31 @@ export default {
           this.birthDate = ''
           this.position = ''
           this.password = ''
+          this.$emit('onSubmit')
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/show', e.message)
+        })
+    },
+    update() {
+      const data = {
+        name: this.name,
+        gender: this.gender,
+        citizenId: this.citizenId,
+        address: this.address,
+        zipcode: this.zipcode,
+        birthDate: this.birthDate,
+        position: this.role,
+        email: String(Date.now()) + 'dummy@domain.com',
+        username: String(Date.now()),
+        phone: '0'
+      }
+      if (this.passwordEditable) {
+        data.password = this.password
+      }
+      this.$axios
+        .post('/staff/general/edit', data)
+        .then(res => {
           this.$emit('onSubmit')
         })
         .catch(e => {

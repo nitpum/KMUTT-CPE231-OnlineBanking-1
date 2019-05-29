@@ -15,7 +15,14 @@
               Staff List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0" @click="createDialog = true">
+            <v-btn
+              color="primary"
+              class="my-0"
+              @click="
+                dialog = true
+                dialogType = 'create'
+              "
+            >
               Create Staff
             </v-btn>
           </v-card-title>
@@ -24,11 +31,12 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <create-dialog
-      v-model="createDialog"
+    <Dialog
+      v-model="dialog"
       :data="data"
       :password-editable="true"
       :editable="true"
+      :submit-mode="dialogType"
       @onSubmit="createBranch"
     />
   </v-container>
@@ -36,20 +44,21 @@
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
-import CreateDialog from '@/components/core/staff/Dialog'
+import Dialog from '@/components/core/staff/Dialog'
 import List from '@/components/admin/staff/List'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    CreateDialog,
+    Dialog,
     List
   },
   data: () => ({
     from: undefined,
     to: undefined,
-    createDialog: false,
+    dialog: false,
+    dialogType: 'create',
     data: {
       name: '',
       gender: 'Male',

@@ -74,8 +74,19 @@ router.post('/create', (req, res) => {
     }
   })
     .then(doc => res.send(doc))
-    .catch(err => res.send({
+    .catch(err => res.status(400).send({
       validation: false,
+      err: String(err)
+    }))
+})
+
+router.post('/edit', (req, res) => {
+  const id = req.body.id
+  const data = req.body.data
+  StaffModel.edit(id, data)
+    .then(doc => res.send(doc))
+    .catch(err => res.status(400).send({
+      op: false,
       err: String(err)
     }))
 })

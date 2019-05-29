@@ -70,13 +70,18 @@ export default {
       email: ''
     },
     overviewsData: {
-      totalStaff: 0
+      totalStaff: 0,
+      avgAgeStaff: 15
     },
     overviews: [
       [
         {
           key: 'totalStaff',
           label: 'Total Staff'
+        },
+        {
+          key: 'avgAgeStaff',
+          label: 'Average Age Staff'
         }
       ]
     ],
@@ -142,6 +147,9 @@ export default {
       this.data.zipcode = item.zipcode
       this.data.address = item.address
       this.data.birthDate = item.birthDate
+      if (item.branch) {
+        this.data.branch = item.branch
+      }
       this.data.citizenId = item.citizenId
       this.data.role = item.position
     }

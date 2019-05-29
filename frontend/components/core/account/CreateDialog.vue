@@ -51,6 +51,7 @@ export default {
   data: () => ({
     customerId: '',
     accTypeId: '',
+    accId: '',
     accTypes: [],
     balance: 0,
     branch: {}
@@ -79,7 +80,7 @@ export default {
       this.$axios
         .post('/account/create', {
           customerId: this.customerId,
-          accountId: this.accTypeId,
+          accountId: this.accId,
           balance: this.balance,
           branchId: this.branch._id,
           status: 'ACTIVE',

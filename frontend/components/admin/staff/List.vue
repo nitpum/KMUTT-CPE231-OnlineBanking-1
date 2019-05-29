@@ -4,7 +4,14 @@
       <td>{{ item._id }}</td>
       <td>{{ item.name.firstName }} {{ item.name.lastName }}</td>
       <td>{{ item.position }}</td>
-      <td>{{ item.branch || '-' }}</td>
+      <td>
+        <template v-if="item.branch">
+          {{ item.branch.name }}
+        </template>
+        <template v-else>
+          -
+        </template>
+      </td>
       <td class="text-xs-right">
         <v-btn icon @click="$emit('onItemClick', item)">
           <v-icon>edit</v-icon>

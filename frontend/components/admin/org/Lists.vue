@@ -14,9 +14,9 @@ const comma = val => numeral(val).format('0,0')
 
 export default {
   props: {
-    requestFetch: {
-      type: Function,
-      default: null
+    items: {
+      type: Array,
+      default: () => []
     }
   },
   data: () => ({
@@ -54,29 +54,11 @@ export default {
         value: 'maxUsageServicePM',
         format: comma
       }
-    ],
-    items: []
+    ]
   }),
-  mounted() {
-    this.fetch()
-    this.requestFetch(this.fetch)
-  },
   methods: {
     format(value, format) {
       return format ? format(value) : value
-    },
-    fetch() {
-      this.$axios.get('/organization/query').then(({ data }) => {
-        this.items = data.map(item => ({
-          id: item.id,
-          name: item.name,
-          services: 20,
-          avgUsageServicePD: 300,
-          maxUsageServicePD: 500,
-          avgUsageServicePM: 80000,
-          maxUsageServicePM: 100000
-        }))
-      })
     }
   }
 }

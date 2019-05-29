@@ -17,7 +17,7 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <lists :request-fetch="requestFetch" />
+          <lists :items="orgs" />
         </v-card>
       </v-flex>
       <Dialog v-model="dialog" :mode="dialogMode" @created="fetch()" />
@@ -41,7 +41,7 @@ export default {
     showHeatmap: false,
     from: undefined,
     to: undefined,
-    org: {},
+    orgs: [],
     dialog: false,
     dialogMode: 'create',
     data: {
@@ -59,19 +59,29 @@ export default {
           label: 'Total Organization'
         }
       ]
-    ],
-    fetch: null
+    ]
   }),
   mounted() {
-    this.showHeatmap = true
+    this.fetch()
   },
   methods: {
     openCreateDialog() {
       this.dialog = true
       this.dialogMode = 'create'
     },
-    requestFetch(fetch) {
-      this.fetch = fetch
+    fetch() {
+      this.$axios.get('/organization/query').then(({ data }) => {
+        this.orgs = data.map(item => ({
+          id: item.id,
+          name: item.name,
+          services: 20,
+          avgUsageServicePD: 300,
+          maxUsageServicePD: 500,
+          avgUsageServicePM: 80000,
+          maxUsageServicePM: 100000
+        }))
+        this.data.totalOrg = this.orgs.length
+      })
     }
   }
 }

@@ -5,6 +5,10 @@
         <h3 class="headline mb-0">
           ADM Summary
         </h3>
+        <v-spacer />
+        <v-btn color="primary" class="my-0" @click="openCreateDialog">
+          Create ATM
+        </v-btn>
       </v-card-title>
       <v-divider />
       <v-data-table :headers="headers" :items="items" class="elevation-1">
@@ -20,6 +24,11 @@
                 .toFixed(2)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
             }}
+          </td>
+          <td class="text-xs-right">
+            <v-btn icon @click="$emit('onItemClick', item)">
+              <v-icon>edit</v-icon>
+            </v-btn>
           </td>
         </template>
       </v-data-table>

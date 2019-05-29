@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" lazy max-width="500" persistent>
+  <v-dialog v-model="dialog" lazy max-width="400" persistent>
     <v-card>
       <v-card-title primary-title>
         <h2>
@@ -126,6 +126,7 @@ export default {
             'snackbars/success',
             'Success'
           )
+          this.$emit('created')
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)

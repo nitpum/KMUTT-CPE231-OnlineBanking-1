@@ -15,27 +15,38 @@
               Manager List
             </h3>
             <v-spacer />
+            <v-btn color="primary" class="my-0" @click="openCreateDialog">
+              Create Manager
+            </v-btn>
           </v-card-title>
           <v-divider />
           <branch-list />
         </v-card>
       </v-flex>
     </v-layout>
-    <create-dialog v-model="createDialog" @onSubmit="createBranch" />
+    <Dialog
+      v-model="createDialog"
+      mode="create"
+      :editable="true"
+      :password-editable="true"
+      title="Create Manager"
+      fixed-position="manager"
+      @onSubmit="createBranch"
+    />
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import BranchList from '@/components/admin/BranchList'
-import CreateDialog from '@/components/admin/branch/CreateDialog'
+import Dialog from '@/components/core/staff/Dialog'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
     BranchList,
-    CreateDialog
+    Dialog
   },
   data: () => ({
     from: undefined,
@@ -82,6 +93,9 @@ export default {
     ]
   }),
   methods: {
+    openCreateDialog() {
+      this.createDialog = true
+    },
     createBranch() {
       this.createDialog = false
     }

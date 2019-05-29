@@ -39,4 +39,7 @@ form(action="/staff/create", method="post")
         for branch in branches
             option(value=branch._id)=branch.name
     br
+    select(name="permission")
+        option(value="manager")="Manager"
+        option(value="general")="General"
     button(type="submit") create

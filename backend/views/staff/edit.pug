@@ -1,0 +1,12 @@
+form(action="/staff/edit", method="post")
+    label(for="permission") permission
+    select(name="permission")
+        option(value="manager")="Manager"
+        option(value="general")="Genral"
+    br
+    label(for="staff") staff
+    select(name="staff")
+        for staff in staffs
+            option(value=staff._id)=staff.name.firstName + staff.name.firstName 
+    br
+    button(type="submit") create

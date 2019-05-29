@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="model" lazy max-width="500">
+  <v-dialog v-model="model" lazy max-width="500" scrollable>
     <v-card>
       <v-card-title primary-title>
         <h2>
@@ -7,96 +7,72 @@
         </h2>
       </v-card-title>
       <v-card-text>
-        <text-label
-          v-if="!editable"
-          label="Firstname"
-          placeholder="Firstname"
-          :text="firstName"
-        ></text-label>
-        <v-text-field
-          v-else
+        <component
+          :is="component('v-text-field')"
           v-model="firstName"
           label="Firstname"
-        ></v-text-field>
-        <text-label
-          v-if="!editable"
+          :text="firstName"
+        />
+        <component
+          :is="component('v-text-field')"
+          v-model="lastName"
           label="Lastname"
-          placeholder="Lastname"
           :text="lastName"
-        ></text-label>
-        <v-text-field v-else v-model="lastName" label="Lastname"></v-text-field>
-        <text-label
-          v-if="!editable"
-          label="Gender"
-          placeholder="Gender"
-          :text="gender"
-        ></text-label>
-        <v-select
-          v-else
+        />
+        <component
+          :is="component('v-select')"
           v-model="gender"
           label="Gender"
+          :text="gender"
           :items="genders"
           item-text="text"
           item-value="value"
-        ></v-select>
-        <text-label
-          v-if="!editable"
-          label="Citizen ID"
-          placeholder="Citizen ID"
-          :text="citizenId"
-        ></text-label>
-        <v-text-field
-          v-else
+        />
+        <component
+          :is="component('v-text-field')"
           v-model="citizenId"
           label="Citizen ID"
-        ></v-text-field>
-        <text-label
-          v-if="!editable"
+          :text="citizenId"
+        />
+        <component
+          :is="component('v-text-field')"
+          v-model="address"
           label="Address"
-          placeholder="Address"
           :text="address"
-        ></text-label>
-        <v-text-field v-else v-model="address" label="Address"></v-text-field>
-        <text-label
-          v-if="!editable"
-          label="Zipcode"
-          placeholder="Zipcode"
-          :text="zipcode"
-        ></text-label>
-        <v-text-field
-          v-else
+        />
+        <component
+          :is="component('v-text-field')"
           v-model="zipcode"
           label="Zipcode"
+          :text="zipcode"
           :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
-        ></v-text-field>
-        <text-label
-          v-if="!editable"
+        />
+        <component
+          :is="component('date-picker-dialog')"
+          v-model="zipcode"
           label="Birth Date"
-          placeholder="Birth Date"
           :text="birthDate"
-        ></text-label>
-        <date-picker-dialog v-else v-model="birthDate" label="Birth Date" />
-        <text-label
-          v-if="!editable"
+        />
+        <component
+          :is="component('v-text-field')"
+          v-model="phone"
           label="Phone"
-          placeholder="Phone"
           :text="phone"
-        ></text-label>
-        <v-text-field v-else v-model="phone" label="Phone" />
-        <text-label
-          v-if="!editable"
+        />
+        <component
+          :is="component('v-text-field')"
+          v-model="email"
           label="Email"
-          placeholder="Email"
           :text="email"
-        ></text-label>
-        <v-text-field v-else v-model="email" label="Email" />
-        <text-label
-          v-if="!editable"
+          type="email"
+        />
+        <component
+          :is="component('v-text-field')"
+          v-model="username"
           label="Username"
-          placeholder="Username"
           :text="username"
-        ></text-label>
-        <v-text-field v-else v-model="username" label="Username" />
+        />
+
         <v-text-field
           v-if="passwordEditable"
           v-model="password"
@@ -418,6 +394,9 @@ export default {
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)
         })
+    },
+    component(component) {
+      return this.editable ? component : 'text-label'
     }
   }
 }

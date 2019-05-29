@@ -5,6 +5,10 @@
         <h3 class="headline mb-0">
           ADM Summary
         </h3>
+        <v-spacer />
+        <v-btn color="primary" class="my-0" @click="create()">
+          Create ADM
+        </v-btn>
       </v-card-title>
       <v-divider />
       <v-data-table :headers="headers" :items="items" class="elevation-1">
@@ -21,16 +25,35 @@
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
             }}
           </td>
+          <td class="text-xs-right">
+            <v-btn icon @click="edit(item)">
+              <v-icon>edit</v-icon>
+            </v-btn>
+          </td>
         </template>
       </v-data-table>
     </v-card>
+
+    <machine-dialog
+      v-model="dialog"
+      type="adm"
+      :title="dialogTitle"
+      :set-value.sync="setValue"
+    />
   </v-container>
 </template>
 
 <script>
+import MachineDialog from '@/components/admin/machine/Dialog'
+
 export default {
   layout: 'admin',
+  components: {
+    MachineDialog
+  },
   data: () => ({
+    dialog: false,
+    dialogTitle: '',
     headers: [
       {
         text: 'ID',
@@ -61,6 +84,10 @@ export default {
         text: 'Balance (THB)',
         align: 'right',
         value: 'balance'
+      },
+      {
+        text: '',
+        value: 'actions'
       }
     ],
     items: [
@@ -84,7 +111,19 @@ export default {
         },
         balance: 10000
       }
-    ]
-  })
+    ],
+    setValue: null
+  }),
+  methods: {
+    create() {
+      this.dialog = true
+      this.dialogTitle = 'Create ATM'
+    },
+    edit(item) {
+      this.dialog = true
+      this.dialogTitle = 'Edit ATM'
+      this.setValue(item)
+    }
+  }
 }
 </script>

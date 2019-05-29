@@ -12,9 +12,12 @@
           -
         </template>
       </td>
-      <td class="text-xs-right">
+      <td>
         <v-btn icon @click="$emit('onItemClick', item)">
           <v-icon>edit</v-icon>
+        </v-btn>
+        <v-btn icon @click="$emit('onRemoveClick', item)">
+          <v-icon>delete</v-icon>
         </v-btn>
       </td>
     </template>

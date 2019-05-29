@@ -92,6 +92,16 @@ router.post('/edit', (req, res) => {
     }))
 })
 
+router.delete('/', (req, res) => {
+  const id = req.body.id
+  StaffModel.remove(id)
+    .then(doc => res.send(doc))
+    .catch(err => res.status(400).send({
+      op: false,
+      err: String(err)
+    }))
+})
+
 router.use('/analytic', AnalyticControllers)
 router.use('/query', QueryControllers)
 

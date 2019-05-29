@@ -79,18 +79,6 @@ const create = (data) => new Promise(async (resolve, reject) => {
  * edit staff user
  * @param  {Object} data
  * @param  {String} data.username - username
- * @param  {String} data.password - password
- * @param  {String} data.email - email
- * @param  {String} data.name.firstName - firstname
- * @param  {String} data.name.lastName - firstname
- * @param  {String} data.zipcode - zipcode
- * @param  {String} data.address - address
- * @param  {Date} data.birthDate - birthdate
- * @param  {String} data.gender - ['M', 'F', 'U']
- * @param  {String} data.citizenId - citizenId
- * @param  {String} data.position - position
- * @param  {String} data.phone - phone
- * @param  {String} data.branch - branch that staff assigned
  * @returns {Object} - mongodb document
  */
 const edit = (id, data) => new Promise(async (resolve, reject) => {
@@ -108,6 +96,18 @@ const edit = (id, data) => new Promise(async (resolve, reject) => {
 })
 
 /**
+ * delete staff user
+ * @param  {String} id - mongodb id
+ * @returns {Object} - mongodb document
+ */
+const remove = (id) => new Promise((resolve, reject) => {
+  StaffSchema.findOneAndDelete({ _id: id }, (err, res) => {
+    if (err) reject(err)
+    if (!res) reject(new Error('not found'))
+    resolve(res)
+  })
+})
+/**
  * @param  {String} username
  * @param  {String} password
  * @returns {Object}
@@ -124,6 +124,7 @@ const login = (username, password) => new Promise(async (resolve, reject) => {
 module.exports = {
   create: create,
   edit: edit,
+  remove: remove,
   schema: StaffSchema,
   login: login,
   query: QueryModel,

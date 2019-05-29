@@ -102,7 +102,7 @@ export default {
           this.bankAccount = ''
         })
         .catch(e => {
-          /* error handler here */
+          this.$store.dispatch('snackbars/show', e.message)
         })
         .finally(() => {
           this.loading = false

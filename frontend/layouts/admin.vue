@@ -11,19 +11,22 @@
     <v-content>
       <nuxt />
     </v-content>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import Drawer from '@/components/Drawer.vue'
 import Toolbar from '@/components/Toolbar'
+import Snackbars from '@/components/core/Snackbars'
 import theme from './themes/admin'
 
 export default {
   middleware: 'admin',
   components: {
     Drawer,
-    Toolbar
+    Toolbar,
+    Snackbars
   },
   data() {
     return {

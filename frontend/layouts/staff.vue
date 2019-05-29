@@ -16,12 +16,14 @@
     <v-content>
       <nuxt />
     </v-content>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import Drawer from '@/components/Drawer.vue'
 import Toolbar from '@/components/Toolbar'
+import Snackbars from '@/components/core/Snackbars'
 import theme from './themes/staff'
 import StaffInfo from '@/components/StaffInfo'
 
@@ -29,6 +31,7 @@ export default {
   components: {
     Drawer,
     Toolbar,
+    Snackbars,
     StaffInfo
   },
   data() {

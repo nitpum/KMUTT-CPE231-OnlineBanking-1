@@ -23,4 +23,6 @@ router.get('/', (req, res) => {
   }
 })
 
+router.get('/me', (req, res) => res.json(req.session.password.user))
+
 module.exports = router

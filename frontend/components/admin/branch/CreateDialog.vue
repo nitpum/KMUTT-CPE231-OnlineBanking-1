@@ -6,13 +6,22 @@
       </v-card-title>
       <v-card-text>
         <v-text-field v-model="name" label="Branch Name" />
-        <v-text-field v-model="address" label="Address" />
+        <v-textarea v-model="address" label="Address" />
         <v-text-field v-model="zipcode" label="Zipcode" />
+        <v-text-field v-model="balance" label="Balance" type="number" />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat @click="model = false">Close</v-btn>
-        <v-btn color="primary" flat @click="$emit('onSubmit')">Submit</v-btn>
+        <v-btn
+          color="primary"
+          flat
+          @click="create()"
+          :disabled="loading"
+          :loading="loading"
+        >
+          Submit</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -29,7 +38,9 @@ export default {
   data: () => ({
     name: '',
     address: '',
-    zipcode: ''
+    zipcode: '',
+    balance: 0,
+    loading: false
   }),
   computed: {
     model: {
@@ -39,6 +50,27 @@ export default {
       set(val) {
         this.$emit('input', val)
       }
+    }
+  },
+  methods: {
+    create() {
+      this.loading = true
+      this.$axios
+        .post('/branch/create', {
+          name: this.name,
+          address: this.address,
+          zipcode: this.zipcode,
+          balance: this.balance
+        })
+        .then(res => {
+          this.$emit('onSubmit')
+        })
+        .catch(e => {
+          /* error handler here */
+        })
+        .finally(() => {
+          this.loading = false
+        })
     }
   }
 }

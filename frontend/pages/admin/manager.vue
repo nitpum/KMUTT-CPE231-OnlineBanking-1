@@ -53,41 +53,45 @@ export default {
     to: undefined,
     createDialog: false,
     data: {
-      totalBranch: 120,
-      minStaff: 10,
-      maxStaff: 40,
-      avgStaff: 20,
-      mostTransaction: 300,
-      avgTranPStaff: 5
+      totalManager: 120,
+      avgAge: 10,
+      maxAge: 40,
+      minAge: 20,
+      mostWorkday: 300,
+      minWorkday: 5,
+      avgWorkday: 10
     },
     overviews: [
       [
         {
-          key: 'totalBranch',
-          label: 'Total Branch'
+          key: 'totalManager',
+          label: 'Total Manager'
         },
         {
-          key: 'minStaff',
-          label: 'Minimum Staff'
+          key: 'avgAge',
+          label: 'Average Age'
         },
         {
-          key: 'maxStaff',
-          label: 'Maximum Staff'
+          key: 'maxAge',
+          label: 'Minimum Age'
         },
         {
-          key: 'avgStaff',
-          label: 'Average Staff'
+          key: 'avgAge',
+          label: 'Maximum Age'
         }
       ],
       [
         {
-          key: 'mostTransaction',
-          label: 'Most Transaction',
-          suffix: '(BangMod)'
+          key: 'mostWorkday',
+          label: 'Most Workday'
         },
         {
-          key: 'avgTranPStaff',
-          label: 'Average Transaction / Staff'
+          key: 'minWorkday',
+          label: 'Minimum Workday'
+        },
+        {
+          key: 'avgWorkday',
+          label: 'Average Workday'
         }
       ]
     ],

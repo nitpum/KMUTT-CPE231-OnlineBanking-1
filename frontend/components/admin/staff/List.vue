@@ -5,8 +5,10 @@
       <td>{{ item.name.firstName }} {{ item.name.lastName }}</td>
       <td>{{ item.position }}</td>
       <td>{{ item.branch || '-' }}</td>
-      <td>
-        <v-btn @click="$emit('onItemClick', item)">INFO</v-btn>
+      <td class="text-xs-right">
+        <v-btn icon @click="$emit('onItemClick', item)">
+          <v-icon>edit</v-icon>
+        </v-btn>
       </td>
     </template>
   </v-data-table>
@@ -39,7 +41,8 @@ export default {
         value: 'branch'
       },
       {
-        text: 'Action'
+        text: '',
+        width: '50'
       }
     ]
   })

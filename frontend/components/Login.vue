@@ -54,10 +54,13 @@ export default {
           )
           this.$router.push(redirect)
         })
-        .catch(({ response }) => {
+        .catch(({ response, message }) => {
           if (response.status === 401) {
             this.password = ''
             this.$refs.password.focus()
+            this.$store.dispatch('snackbars/show', 'Incorrect password')
+          } else {
+            this.$store.dispatch('snackbars/error', message)
           }
         })
     }

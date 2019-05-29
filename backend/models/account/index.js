@@ -31,10 +31,9 @@ const generateAccId = () => new Promise(async (resolve, reject) => {
 })
 
 const customerValidation = (id) => new Promise(async (resolve, reject) => {
-  console.log('citizenId', id)
   const doc = await CustomerModel.query.citizenId(id)
-  console.log(doc)
   if (doc) resolve(String(doc._id))
+  reject(new Error('not found this citizenId in customer'))
 })
 
 /**
@@ -48,17 +47,19 @@ const customerValidation = (id) => new Promise(async (resolve, reject) => {
  * @returns {Object} - mongodb document
  */
 const create = data => new Promise(async (resolve, reject) => {
-  const customerValid = await customerValidation(data.citizenId)
-  console.log(customerValid)
-  if (!customerValid) return reject(new Error('not found this citizenId in customer'))
-  data.customerId = customerValid
-  delete data.citizenId
-  console.log(data)
-  const doc = new AccountSchema(data)
-  doc.save(err => {
-    if (err) reject(err)
-    resolve(doc)
-  })
+  try {
+    const customerValid = await customerValidation(data.citizenId)
+    data.customerId = customerValid
+    delete data.citizenId
+    console.log(data)
+    const doc = new AccountSchema(data)
+    doc.save(err => {
+      if (err) reject(err)
+      resolve(doc)
+    })
+  } catch (err) {
+    reject(err)
+  }
 })
 
 /**

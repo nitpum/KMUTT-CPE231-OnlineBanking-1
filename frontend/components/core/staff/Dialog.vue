@@ -168,7 +168,21 @@ export default {
     },
     data: {
       type: Object,
-      default: null
+      default() {
+        return {
+          name: {
+            firstName: '',
+            lastName: ''
+          },
+          gender: 'Male',
+          citizenId: '',
+          address: '',
+          zipcode: '',
+          birthDate: null,
+          role: '',
+          password: ''
+        }
+      }
     },
     passwordEditable: {
       type: Boolean,

@@ -8,10 +8,10 @@
     ></v-text-field>
     <v-layout row wrap>
       <v-flex v-for="(staff, i) in staffs" :key="i" md4 sm12 pr-2 mb-1>
-        <card @onMoreInfo="moreinfo" @onEdit="edit"></card>
+        <card @onMoreInfo="moreinfo"></card>
       </v-flex>
     </v-layout>
-    <Dialog v-model="dialog" :staff="staff"></Dialog>
+    <Dialog v-model="dialog" :data="staff"></Dialog>
   </v-container>
 </template>
 
@@ -29,7 +29,19 @@ export default {
     dialog: false,
     createDialog: false,
     staffs: [{}, {}, {}],
-    staff: null
+    staff: {
+      name: {
+        firstName: '',
+        lastName: ''
+      },
+      gender: 'Male',
+      citizenId: '',
+      address: '',
+      zipcode: '',
+      birthDate: null,
+      role: '',
+      password: ''
+    }
   }),
   methods: {
     moreinfo: function(staff) {

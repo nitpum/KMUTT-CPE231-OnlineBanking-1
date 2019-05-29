@@ -9,4 +9,6 @@ const serviceRefSchema = mongoose.Schema({
   typeId: serviceTypeRef
 })
 
+serviceRefSchema.index({ detail: 'text' })
+
 module.exports = mongoose.model('serviceReference', serviceRefSchema)

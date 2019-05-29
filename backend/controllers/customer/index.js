@@ -47,7 +47,7 @@ router.post('/create', (req, res) => {
     }
   }).then(doc => {
     res.send(doc)
-  }).catch(err => res.send(
+  }).catch(err => res.status(400).send(
     {
       validation: false,
       err: String(err)

@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>
         <h3 class="headline mb-0">
-          Active User
+          Login User This Hours
         </h3>
       </v-card-title>
       <v-divider />
@@ -11,7 +11,6 @@
         <template v-slot:items="{ item }">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-          <td>{{ item.acessTime }}</td>
         </template>
       </v-data-table>
     </v-card>
@@ -34,23 +33,16 @@ export default {
         text: 'Name',
         align: 'left',
         value: 'name'
-      },
-      {
-        text: 'Acess Time',
-        align: 'center',
-        value: 'acessTime'
       }
     ],
     items: [
       {
-        id: 'eieiza',
-        name: 'Euei Naja',
-        acessTime: ''
+        id: '000',
+        name: 'Euei Naja'
       },
       {
-        id: 'Inweieiza5678',
-        name: 'Eiei Naja',
-        acessTime: ''
+        id: '001',
+        name: 'Eiei Naja'
       }
     ],
     setValue: null

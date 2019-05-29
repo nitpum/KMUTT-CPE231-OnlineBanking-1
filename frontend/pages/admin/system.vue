@@ -2,7 +2,7 @@
   <v-container grid-list-xl>
     <v-layout row wrap>
       <v-flex v-for="(card, i) in cards" :key="'ov-card-' + i" xs12 sm6>
-        <overview-card :title="card.title" :color="card.color" :to="to">
+        <overview-card :title="card.title" :color="card.color" :to="card.to">
           <span class="display-3">
             {{ card.value.split('/')[0] }}
           </span>

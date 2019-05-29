@@ -15,7 +15,7 @@
             <create-organization />
           </v-card-title>
           <v-divider />
-          table here
+          <lists />
         </v-card>
       </v-flex>
     </v-layout>
@@ -25,12 +25,14 @@
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import CreateOrganization from '@/components/admin/org/CreateOrganization'
+import Lists from '@/components/admin/org/Lists'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    CreateOrganization
+    CreateOrganization,
+    Lists
   },
   data: () => ({
     showHeatmap: false,

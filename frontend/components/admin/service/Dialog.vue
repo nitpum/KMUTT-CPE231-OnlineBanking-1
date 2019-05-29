@@ -8,6 +8,7 @@
         <org-select v-model="data.organization" />
         <type-select v-model="data.type" />
         <v-text-field v-model="data.fee" type="number" label="Fee" required />
+        <v-textarea v-model="data.detail" label="Detail" />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -52,6 +53,7 @@ export default {
       type: Object,
       default() {
         return {
+          _id: '',
           organization: {
             _id: '',
             bankAccount: '',
@@ -90,6 +92,7 @@ export default {
         this.data.type._id === '' ||
         !this.data.fee ||
         this.data.fee === '' ||
+        this.data.detail === '' ||
         this.loading
       )
     }
@@ -102,20 +105,31 @@ export default {
     create() {
       this.loading = true
       this.$axios
-        .post('/branch/create', {
-          name: this.name,
-          address: this.address,
-          zipcode: this.zipcode,
-          balance: this.balance
+        .post('/service-reference/create', {
+          organizationId: this.data.organization._id,
+          detail: this.data.detail,
+          fee: this.data.fee,
+          typeId: this.data.type._id
         })
         .then(res => {
           this.$emit('onSubmit')
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
           this.model = false
-          this.name = ''
-          this.address = ''
-          this.zipcode = ''
-          this.balance = 0
+          // Clear
+          this.data.organization = {
+            _id: '',
+            bankAccount: '',
+            bankSwift: '',
+            name: '',
+            type: ''
+          }
+          this.data.detail = ''
+          this.data.fee = 0
+          this.data.type = {
+            _id: '',
+            name: '',
+            type: ''
+          }
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)
@@ -124,7 +138,30 @@ export default {
           this.loading = false
         })
     },
-    update() {}
+    update() {
+      this.loading = true
+      this.$axios
+        .post('/service-reference/edit', {
+          id: this.data._id,
+          data: {
+            organizationId: this.data.organization._id,
+            detail: this.data.detail,
+            fee: this.data.fee,
+            typeId: this.data.type._id
+          }
+        })
+        .then(res => {
+          this.$emit('onSubmit')
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
+          this.model = false
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/show', e.message)
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    }
   }
 }
 </script>

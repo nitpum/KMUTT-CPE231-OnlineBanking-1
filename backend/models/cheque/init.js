@@ -56,7 +56,7 @@ const cheque=[{
     payee: 'Tom Hiddleton',
     type: 'CHASH',
     status: 'ACTIVE',
-    drawee: { type: String, required: true },
-    created: { type: Date, default: Date.now },
-    drawDate: { type: Date, required: true }
+    drawee: 'Loki Adinson',
+
+    drawDate: 2019-05-28
 }]

@@ -9,7 +9,7 @@ const chequeSchema = mongoose.Schema({
   accountId: accRef,
   accountNo: String,
   amount: { type: Number, default: 0 },
-  payFor: String,
+  payee: String,
   type: { type: String, enum: ['CHASH', 'ORDER', 'ETC'] },
   status: { type: String, enum: ['ACTIVE', 'REJECT', 'ETC'] },
   drawee: { type: String, required: true },

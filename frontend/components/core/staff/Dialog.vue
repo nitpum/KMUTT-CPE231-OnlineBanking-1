@@ -18,6 +18,7 @@
           v-model="firstName"
           label="Firstname"
           placeholder="Firstname"
+          required
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -30,6 +31,7 @@
           v-model="lastName"
           label="Lastname"
           placeholder="Lastname"
+          required
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -45,6 +47,7 @@
           :items="genders"
           item-text="text"
           item-value="value"
+          required
         ></v-select>
         <text-label
           v-if="!editable"
@@ -69,6 +72,7 @@
           v-model="address"
           label="Address"
           placeholder="Address"
+          required
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -82,6 +86,7 @@
           label="Zipcode"
           placeholder="Zipcode"
           :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
+          required
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -89,7 +94,12 @@
           placeholder="Birth Date"
           :text="birthDate"
         ></text-label>
-        <date-picker-dialog v-else v-model="birthDate" label="Birth Date" />
+        <date-picker-dialog
+          v-else
+          v-model="birthDate"
+          label="Birth Date"
+          required
+        />
         <text-label
           v-if="!editable"
           label="Role"
@@ -102,6 +112,7 @@
           label="Role"
           placeholder="Role"
           :items="roles"
+          required
         />
         <v-text-field
           v-if="editable && passwordEditable"
@@ -114,7 +125,14 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat @click="model = false">Close</v-btn>
-        <v-btn v-if="editable" color="primary" flat @click="submit">
+        <v-btn
+          v-if="editable"
+          :loading="loading"
+          :disabled="disabled"
+          color="primary"
+          flat
+          @click="submit"
+        >
           <slot name="sumbit-btn">Submit</slot>
         </v-btn>
       </v-card-actions>
@@ -168,7 +186,8 @@ export default {
       { text: 'Undefined', value: 'U' }
     ],
     roles: ['Staff', 'Manager'],
-    formHasErrors: false
+    formHasErrors: false,
+    loading: false
   }),
   computed: {
     model: {
@@ -181,21 +200,21 @@ export default {
     },
     firstName: {
       get() {
-        return this.data.firstName
+        return this.data.name.firstName
       },
       set(val) {
         const data = this.data
-        data.firstName = val
+        data.name.firstName = val
         this.$emit('update:data', data)
       }
     },
     lastName: {
       get() {
-        return this.data.lastName
+        return this.data.name.lastName
       },
       set(val) {
         const data = this.data
-        data.lastName = val
+        data.name.lastName = val
         this.$emit('update:data', data)
       }
     },
@@ -241,7 +260,7 @@ export default {
     },
     birthDate: {
       get() {
-        return this.data.birthDate
+        return new Date(this.data.birthDate).toISOString().split('T')[0]
       },
       set(val) {
         const data = this.data
@@ -269,6 +288,16 @@ export default {
         this.$emit('update:data', data)
       }
     },
+    disabled() {
+      return (
+        !this.firstName ||
+        !this.lastName ||
+        !this.citizenId ||
+        !this.address ||
+        !this.zipcode ||
+        this.loading
+      )
+    },
     form() {
       return {
         firstName: this.firstName,
@@ -294,6 +323,7 @@ export default {
       }
     },
     create() {
+      this.loading = true
       this.$axios
         .post('/staff/general/create', {
           name: `${this.firstName} ${this.lastName}`,
@@ -326,10 +356,17 @@ export default {
             e.response.status === 400 ? e.response.data.err : e.message
           )
         })
+        .finally(() => {
+          this.loading = false
+        })
     },
     update() {
+      this.loading = true
       const data = {
-        name: `${this.firstName} ${this.lastName}`,
+        name: {
+          firstName: this.firstName,
+          lastName: this.lastName
+        },
         gender: this.gender,
         citizenId: this.citizenId,
         address: this.address,
@@ -344,12 +381,18 @@ export default {
         data.password = this.password
       }
       this.$axios
-        .post('/staff/general/edit', data)
+        .post('/staff/general/edit', {
+          id: this.data.id,
+          data: data
+        })
         .then(res => {
-          this.$emit('onSubmit')
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)
+        })
+        .finally(() => {
+          this.loading = false
         })
     }
   }

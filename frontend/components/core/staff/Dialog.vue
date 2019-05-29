@@ -60,6 +60,7 @@
           v-model="citizenId"
           label="Citizen ID"
           placeholder="Citizen ID"
+          mask="# #### ##### ## #"
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -85,6 +86,7 @@
           v-model="zipcode"
           label="Zipcode"
           placeholder="Zipcode"
+          mask="#####"
           :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
           required
         ></v-text-field>

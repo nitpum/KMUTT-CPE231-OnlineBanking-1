@@ -8,6 +8,7 @@ const query = {
        */
   all: (limit = 5000) => new Promise((resolve, reject) => {
     accountModel.find({})
+      .populate('customerId')
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))

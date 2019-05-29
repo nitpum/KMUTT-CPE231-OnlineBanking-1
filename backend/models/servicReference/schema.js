@@ -5,7 +5,7 @@ const serviceTypeRef = { type: mongoose.Schema.Types.ObjectId, ref: 'serviceType
 const serviceRefSchema = mongoose.Schema({
   organizationId: organizationRef,
   detail: String,
-  fee: { type: Number, default: 0 },
+  fee: { type: Number, default: 0, required: true },
   typeId: serviceTypeRef
 })
 

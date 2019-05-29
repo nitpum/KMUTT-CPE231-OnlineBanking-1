@@ -5,6 +5,9 @@ const router = express.Router()
 // models
 const serviceRefModel = require('../../../models/servicReference')
 
+// controllers
+const QueryControllers = require('./query')
+
 router.get('/', (req, res) => {
   res.send('service type jaa')
 })
@@ -38,5 +41,7 @@ router.post('/delete', (req, res) => {
     .then(res => res.send(res))
     .catch(err => res.status(400).send(String(err)))
 })
+
+router.use('/query', QueryControllers)
 
 module.exports = router

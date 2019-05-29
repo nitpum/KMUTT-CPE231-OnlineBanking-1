@@ -2,7 +2,7 @@
   <v-container grid-list-xl>
     <v-layout row wrap>
       <v-flex v-for="(card, i) in cards" :key="'ov-card-' + i" xs12 sm6>
-        <overview-card :title="card.title" :color="card.color">
+        <overview-card :title="card.title" :color="card.color" :to="card.to">
           <span class="display-3">
             {{ card.value.split('/')[0] }}
           </span>
@@ -31,17 +31,20 @@ export default {
       {
         title: 'Notification Send / Read',
         value: '30K/27K',
-        color: '#00BCD4'
+        color: '#00BCD4',
+        to: '/admin/system/notification'
       },
       {
         title: 'Login User Per Hours',
         value: '2,983',
-        color: '#EC008C'
+        color: '#EC008C',
+        to: '/admin/system/userHours'
       },
       {
         title: 'Transaction Per Hours',
         value: '48,021',
-        color: '#9C27B0'
+        color: '#9C27B0',
+        to: '/admin/system/transaction'
       }
     ]
   })

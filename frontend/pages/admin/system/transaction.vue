@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>
         <h3 class="headline mb-0">
-          Today Transaction
+          Transaction This Hours
         </h3>
       </v-card-title>
       <v-divider />

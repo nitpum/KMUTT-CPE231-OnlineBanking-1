@@ -3,15 +3,14 @@
     <v-card>
       <v-card-title>
         <h3 class="headline mb-0">
-          Today Transaction
+          Login User This Hours
         </h3>
       </v-card-title>
       <v-divider />
       <v-data-table :headers="headers" :items="items" class="elevation-1">
         <template v-slot:items="{ item }">
-          <td>{{ item.accId }}</td>
+          <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-          <td>{{ item.totalTrans }}</td>
         </template>
       </v-data-table>
     </v-card>
@@ -26,31 +25,24 @@ export default {
     dialogTitle: '',
     headers: [
       {
-        text: 'Account Id',
+        text: 'ID',
         align: 'left',
-        value: 'accId'
+        value: 'id'
       },
       {
         text: 'Name',
         align: 'left',
         value: 'name'
-      },
-      {
-        text: 'Total Transaction(THB)',
-        align: 'left',
-        value: 'totalTrans'
       }
     ],
     items: [
       {
-        accId: '000',
-        name: 'Euei Naja',
-        totalTrans: 1515151515151
+        id: '000',
+        name: 'Euei Naja'
       },
       {
-        accId: '001',
-        name: 'Eiei Naja',
-        totalTrans: 1515151515151
+        id: '001',
+        name: 'Eiei Naja'
       }
     ],
     setValue: null

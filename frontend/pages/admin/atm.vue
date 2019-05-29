@@ -6,7 +6,7 @@
           ATM Summary
         </h3>
         <v-spacer />
-        <v-btn color="primary" class="my-0" @click="dialog = true">
+        <v-btn color="primary" class="my-0" @click="create()">
           Create ATM
         </v-btn>
       </v-card-title>
@@ -26,7 +26,7 @@
             }}
           </td>
           <td class="text-xs-right">
-            <v-btn icon @click="$emit('onItemClick', item)">
+            <v-btn icon @click="edit(item)">
               <v-icon>edit</v-icon>
             </v-btn>
           </td>
@@ -34,7 +34,12 @@
       </v-data-table>
     </v-card>
 
-    <machine-dialog v-model="dialog" type="atm" title="ATM" />
+    <machine-dialog
+      v-model="dialog"
+      type="atm"
+      :title="dialogTitle"
+      :set-value.sync="setValue"
+    />
   </v-container>
 </template>
 
@@ -48,6 +53,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    dialogTitle: '',
     headers: [
       {
         text: 'ID',
@@ -96,7 +102,7 @@ export default {
         balance: 5000
       },
       {
-        id: '000',
+        id: '001',
         name: 'Bangmod 1',
         transactions: {
           today: 5,
@@ -105,7 +111,19 @@ export default {
         },
         balance: 10000
       }
-    ]
-  })
+    ],
+    setValue: null
+  }),
+  methods: {
+    create() {
+      this.dialog = true
+      this.dialogTitle = 'Create ATM'
+    },
+    edit(item) {
+      this.dialog = true
+      this.dialogTitle = 'Edit ATM'
+      this.setValue(item)
+    }
+  }
 }
 </script>

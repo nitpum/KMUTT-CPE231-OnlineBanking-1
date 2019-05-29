@@ -33,6 +33,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    setValue: {
+      type: Function,
+      default: null
     }
   },
   computed: {
@@ -44,6 +48,11 @@ export default {
         this.$emit('input', val)
       }
     }
+  },
+  mounted() {
+    this.$emit('update:setValue', item => {
+      /* set value here */
+    })
   }
 }
 </script>

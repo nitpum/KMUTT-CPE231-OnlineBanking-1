@@ -4,8 +4,8 @@ form(action="/transaction/staff/cheque", method="post")
     select(name="type")
         option(value="CHEQUE") CHEQUE
     br
-    label(for="surrogateName") surrogateName
-    input(type="text" name="surrogateName")
+    label(for="payee") payee
+    input(type="text" name="payee")
     br
     label(for="staff") staff
     select(name="staff")
@@ -17,16 +17,10 @@ form(action="/transaction/staff/cheque", method="post")
         for accountId in accountIds
             option(value=accountId._id)=accountId.accountId
     br
-    label(for="chequeId") chequeId
-    select(name="chequeId")
+    label(for="chequeIds") chequeIds
+    select(name="chequeIds")
         for chequeId in chequeIds
             option(value=chequeId._id)=chequeId.chequeId
     br
-    label(for="ref1") ref1
-    select(name="ref1")
-        for serviceRef in serviceRefs
-            option(value=serviceRef._id)=serviceRef.organizationId.name + ' ' +serviceRef.detail
-    br
-    label(for="ref2") ref2 
-    input(type="text" name="ref2")
+    
     button(type="submit") cheque!

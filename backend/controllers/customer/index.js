@@ -8,7 +8,7 @@ const router = express.Router()
 const authen = require('../helpers/authen')
 const logout = require('../helpers/logout')
 
-const PERMISSION = ['customer', 'admin']
+const PERMISSION = ['customer', 'general', 'admin']
 
 // models
 const CustomerModel = require('../../models/customer')

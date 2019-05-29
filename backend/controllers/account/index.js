@@ -21,6 +21,7 @@ const BranchModel = require('../../models/branch')
 // controllers
 const QueryController = require('./query')
 const typeController = require('./type')
+const TransactionControllers = require('./transaction')
 
 router.get('/create', authen({ permission: PERMISSION.create }),
   async (req, res) => {
@@ -49,5 +50,6 @@ router.get('/', (req, res) => {
 
 router.use('/query', QueryController)
 router.use('/type', typeController)
+router.use('/transaction', TransactionControllers)
 
 module.exports = router

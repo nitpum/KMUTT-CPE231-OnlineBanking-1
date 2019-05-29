@@ -1,5 +1,4 @@
 const path = require('path')
-const passport = require('passport')
 const express = require('express')
 const router = express.Router()
 
@@ -12,8 +11,15 @@ const PERMISSION = {
 // models
 const serviceReferenceModel = require('../../models/servicReference')
 
+// controllers
+const serviceRefTypeControllers = require('./type')
+const QueryControllers = require('./quey')
+
 router.get('/', (req, res) => {
   res.send('service ref jaa')
 })
+
+router.use('/type', serviceRefTypeControllers)
+router.use('/query', QueryControllers)
 
 module.exports = router

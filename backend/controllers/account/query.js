@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
 
 // models
 const AccountModel = require('../../models/account/')
@@ -21,11 +22,11 @@ router.get('/', (req, res) => {
 
 router.get('/branch/me', async (req, res) => {
   const accounts = await AccountModel.account.schema.aggregate([
-    // {
-    //   $match: {
-    //     branchId: req.session.passport.user.branch
-    //   }
-    // }
+    {
+      $match: {
+        branchId: mongoose.Types.ObjectId(req.session.passport.user.branch)
+      }
+    },
     {
       $lookup: {
         from: 'customers',
@@ -59,7 +60,6 @@ router.get('/branch/me', async (req, res) => {
     }
   ])
   res.send(accounts)
-  // res.send(accounts.filter(el => String(el.branchId) === String(req.session.passport.user.branch)))
 })
 
 module.exports = router

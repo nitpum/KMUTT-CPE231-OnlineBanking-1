@@ -17,10 +17,10 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <lists />
+          <lists :request-fetch="requestFetch" />
         </v-card>
       </v-flex>
-      <Dialog v-model="dialog" :mode="dialogMode" />
+      <Dialog v-model="dialog" :mode="dialogMode" @created="fetch()" />
     </v-layout>
   </v-container>
 </template>
@@ -59,7 +59,8 @@ export default {
           label: 'Total Organization'
         }
       ]
-    ]
+    ],
+    fetch: null
   }),
   mounted() {
     this.showHeatmap = true
@@ -68,6 +69,9 @@ export default {
     openCreateDialog() {
       this.dialog = true
       this.dialogMode = 'create'
+    },
+    requestFetch(fetch) {
+      this.fetch = fetch
     }
   }
 }

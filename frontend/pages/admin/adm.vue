@@ -6,8 +6,8 @@
           ADM Summary
         </h3>
         <v-spacer />
-        <v-btn color="primary" class="my-0" @click="openCreateDialog">
-          Create ATM
+        <v-btn color="primary" class="my-0" @click="dialog = true">
+          Create ADM
         </v-btn>
       </v-card-title>
       <v-divider />
@@ -33,13 +33,21 @@
         </template>
       </v-data-table>
     </v-card>
+
+    <machine-dialog v-model="dialog" type="adm" title="ADM" />
   </v-container>
 </template>
 
 <script>
+import MachineDialog from '@/components/admin/machine/Dialog'
+
 export default {
   layout: 'admin',
+  components: {
+    MachineDialog
+  },
   data: () => ({
+    dialog: false,
     headers: [
       {
         text: 'ID',

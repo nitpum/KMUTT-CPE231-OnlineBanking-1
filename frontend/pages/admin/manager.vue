@@ -20,7 +20,7 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <branch-list />
+          <list :items="items" />
         </v-card>
       </v-flex>
     </v-layout>
@@ -31,21 +31,21 @@
       :password-editable="true"
       title="Create Manager"
       fixed-position="manager"
-      @onSubmit="createBranch"
+      @onSubmit="createManager"
     />
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
-import BranchList from '@/components/admin/BranchList'
+import List from '@/components/admin/staff/List'
 import Dialog from '@/components/core/staff/Dialog'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    BranchList,
+    List,
     Dialog
   },
   data: () => ({
@@ -90,14 +90,32 @@ export default {
           label: 'Average Transaction / Staff'
         }
       ]
-    ]
+    ],
+    items: []
   }),
+  mounted() {
+    this.fetch()
+  },
   methods: {
     openCreateDialog() {
       this.createDialog = true
     },
-    createBranch() {
+    createManager() {
       this.createDialog = false
+      this.fetch()
+    },
+    fetch() {
+      this.$axios
+        .get('/staff/manager/query')
+        .then(res => {
+          this.items = res.data
+        })
+        .catch(e => {
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
+        })
     }
   }
 }

@@ -429,7 +429,7 @@ export default {
       }
       this.loading = true
       this.$axios
-        .post('/staff/general/create', data)
+        .post('/staff/' + this.role + '/create', data)
         .then(res => {
           this.firstName = ''
           this.lastName = ''

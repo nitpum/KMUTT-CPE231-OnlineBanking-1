@@ -27,7 +27,7 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <list />
+          <list :items="items" />
         </v-card>
       </v-flex>
     </v-layout>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 import OverviewInfo from '@/components/core/overview/Info'
 import Dialog from '@/components/core/staff/Dialog'
 import List from '@/components/admin/staff/List'
@@ -76,11 +77,28 @@ export default {
           label: 'Total Staff'
         }
       ]
-    ]
+    ],
+    items: []
   }),
+  created() {
+    this.fetch()
+  },
   methods: {
     createBranch() {
       this.createDialog = false
+    },
+    fetch() {
+      this.$axios
+        .get('/staff/general/query/')
+        .then(res => {
+          this.items = res.data
+        })
+        .catch(e => {
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
+        })
     }
   }
 }

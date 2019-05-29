@@ -9,15 +9,27 @@
       <v-card-text>
         <text-label
           v-if="!editable"
-          label="Name"
-          placeholder="Name"
-          :text="name"
+          label="Firstname"
+          placeholder="Firstname"
+          :text="firstName"
         ></text-label>
         <v-text-field
           v-else
-          v-model="name"
-          label="Name"
-          placeholder="Name"
+          v-model="firstName"
+          label="Firstname"
+          placeholder="Firstname"
+        ></v-text-field>
+        <text-label
+          v-if="!editable"
+          label="Lastname"
+          placeholder="Lastname"
+          :text="lastName"
+        ></text-label>
+        <v-text-field
+          v-else
+          v-model="lastName"
+          label="Lastname"
+          placeholder="Lastname"
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -165,13 +177,23 @@ export default {
         this.$emit('input', val)
       }
     },
-    name: {
+    firstName: {
       get() {
-        return this.data.name
+        return this.data.firstName
       },
       set(val) {
         const data = this.data
-        data.name = val
+        data.firstName = val
+        this.$emit('update:data', data)
+      }
+    },
+    lastName: {
+      get() {
+        return this.data.lastName
+      },
+      set(val) {
+        const data = this.data
+        data.lastName = val
         this.$emit('update:data', data)
       }
     },
@@ -259,7 +281,7 @@ export default {
     create() {
       this.$axios
         .post('/staff/general/create', {
-          name: this.name,
+          name: `${this.firstName} ${this.lastName}`,
           gender: this.gender,
           citizenId: this.citizenId,
           address: this.address,
@@ -272,7 +294,8 @@ export default {
           phone: '0'
         })
         .then(res => {
-          this.name = ''
+          this.firstName = ''
+          this.lastName = ''
           this.gender = ''
           this.citizenId = ''
           this.address = ''
@@ -291,7 +314,7 @@ export default {
     },
     update() {
       const data = {
-        name: this.name,
+        name: `${this.firstName} ${this.lastName}`,
         gender: this.gender,
         citizenId: this.citizenId,
         address: this.address,

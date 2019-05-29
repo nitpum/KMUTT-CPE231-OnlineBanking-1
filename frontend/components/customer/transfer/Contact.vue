@@ -8,11 +8,11 @@
 
     <v-card>
       <v-card-title>
-        <h3 class="headline" @click="fetch()">
+        <h3 class="headline">
           Favorites
         </h3>
         <v-spacer />
-        <add-contact />
+        <add-contact :fetch="() => fetch()" />
       </v-card-title>
       <v-card-text class="text-xs-right">
         <v-list two-line>

@@ -31,7 +31,8 @@ export default {
       {
         title: 'Notification Send / Read',
         value: '30K/27K',
-        color: '#00BCD4'
+        color: '#00BCD4',
+        to: '/admin/system/notification'
       },
       {
         title: 'Login User Per Hours',

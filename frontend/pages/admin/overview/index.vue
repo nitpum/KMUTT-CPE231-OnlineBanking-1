@@ -43,7 +43,8 @@ export default {
       {
         title: 'Daily New Card',
         value: '31',
-        color: '#9C27B0'
+        color: '#9C27B0',
+        to: '/admin/overview/new-card'
       }
     ]
   })

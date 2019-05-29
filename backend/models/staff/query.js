@@ -11,6 +11,7 @@ const query = {
     let query = {}
     if (permission) query = { permission: permission }
     StaffSchema.find(query)
+      .populate('branch')
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
@@ -26,6 +27,7 @@ const query = {
     if (permission) query = { ...query, ...{ permission: permission } }
 
     StaffSchema.find(query)
+      .populate('branch')
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
@@ -36,6 +38,7 @@ const query = {
      */
   id: (id) => new Promise((resolve, reject) => {
     StaffSchema.findById(id)
+      .populate('branch')
       .then(doc => resolve(doc))
       .catch(err => reject(err))
   })

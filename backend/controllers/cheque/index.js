@@ -11,6 +11,10 @@ const PERMISSION = {
   delete: ['general', 'manager']
 }
 
+// controllers
+const transactionControllers = require('./transaction')
+const queryControllers = require('./query')
+
 // models
 const chequeModel = require('../../models/cheque')
 const organizationModel = require('../../models/organization')
@@ -38,5 +42,8 @@ router.post('/create', (req, res) => {
     .then(doc => res.send(doc))
     .catch(err => res.status(400).send(String(err)))
 })
+
+router.use('/transaction', transactionControllers)
+router.use('/query', queryControllers)
 
 module.exports = router

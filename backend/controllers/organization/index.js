@@ -34,7 +34,7 @@ router.post('/create', (req, res) => {
   const data = req.body
   OrganizationModel.create(data)
     .then(doc => res.send(doc))
-    .catch(err => res.send({
+    .catch(err => res.status(400).send({
       op: false,
       err: String(err)
     }))

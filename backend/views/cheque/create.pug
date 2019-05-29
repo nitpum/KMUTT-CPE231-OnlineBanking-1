@@ -1,15 +1,18 @@
 form(action="/transaction", method="post")
-    h3 transaction jaa
+    h3 cheque jaa
     label(for="byOrganizationId") byOrganizationId
     select(name="byOrganizationId")
         for organization in organizations
-            select(value=organization._id)=organization.name
+            option(value=organization._id)=organization.name
     br
     label(for="accountId") accountId
     select(name="accountId")
         option(value="")="other bank"
         for accountId in accountIds
             option(value=accountId._id)=accountId.accountId
+    br
+    label(for="accountNo") accountNo (if other bank set here)
+    input(type="text" name="accountNo")
     br
     label(for="amount") amount
     input(type="text" name="amount")
@@ -26,9 +29,6 @@ form(action="/transaction", method="post")
         option(value="ACTIVE") ACTIVE
         option(value="REJECT") REJECT
         option(value="ETC") ETC
-    br
-    label(for="drawee") payFor
-    input(type="text" name="drawee")
     br
     label(for="drawDate") drawDate
     input(type="date" name="drawDate")

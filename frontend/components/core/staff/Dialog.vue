@@ -107,6 +107,8 @@
           :text="role"
         ></text-label>
         <v-select v-else v-model="role" label="Role" :items="roles" required />
+        <!-- <text-label v-if="!editable" label="Branch" :text="branch.name" /> -->
+        <branch-select v-model="item.branch" />
         <v-text-field
           v-if="editable && passwordEditable"
           v-model="username"
@@ -145,11 +147,13 @@
 <script>
 import TextLabel from '@/components/core/TextLabel'
 import DatePickerDialog from '@/components/core/DatePickerDialog'
+import BranchSelect from '@/components/core/branch/Select'
 
 export default {
   components: {
     DatePickerDialog,
-    TextLabel
+    TextLabel,
+    BranchSelect
   },
   props: {
     value: {
@@ -184,7 +188,8 @@ export default {
           role: '',
           username: '',
           password: '',
-          email: ''
+          email: '',
+          branch: {}
         }
       }
     },
@@ -218,6 +223,14 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    },
+    item: {
+      get() {
+        return this.data
+      },
+      set(val) {
+        this.$emit('update:data', val)
       }
     },
     firstName: {
@@ -351,6 +364,7 @@ export default {
         !this.citizenId ||
         !this.address ||
         !this.zipcode ||
+        !this.item.branch ||
         this.loading
       )
     },
@@ -392,6 +406,7 @@ export default {
         username: this.data.username,
         password: this.password,
         email: this.data.email,
+        branch: this.item.branch._id,
         phone: '0',
         permission: this.role
       }
@@ -409,6 +424,7 @@ export default {
           this.position = ''
           this.username = ''
           this.password = ''
+          this.item.branch = null
           this.email = ''
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
           this.model = false
@@ -437,6 +453,7 @@ export default {
         birthDate: this.birthDate,
         position: this.role,
         permission: this.role,
+        branch: this.item.branch._id,
         phone: '0'
       }
       if (this.passwordEditable) {

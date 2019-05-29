@@ -142,6 +142,9 @@ export default {
       this.data.zipcode = item.zipcode
       this.data.address = item.address
       this.data.birthDate = item.birthDate
+      if (item.branch) {
+        this.data.branch = item.branch
+      }
       this.data.citizenId = item.citizenId
       this.data.role = item.position
     }

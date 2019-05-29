@@ -56,8 +56,13 @@ export default {
         },
         {
           icon: 'mdi-domain',
-          title: 'Organization & Services',
-          to: '/admin/organization_services'
+          title: 'Organization',
+          to: '/admin/organization'
+        },
+        {
+          icon: 'subscriptions',
+          title: 'Services',
+          to: '/admin/services'
         },
         {
           icon: 'mdi-cloud',

@@ -24,7 +24,6 @@
               Top Services
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0">CREATE SERVICE</v-btn>
           </v-card-title>
           <v-divider />
           <v-card-text>
@@ -42,10 +41,10 @@
         <v-card>
           <v-card-title>
             <h3 class="headline mb-0">
-              Organization List
+              Service List
             </h3>
             <v-spacer />
-            <create-organization />
+            <v-btn color="primary" class="my-0">CREATE SERVICE</v-btn>
           </v-card-title>
           <v-divider />
           table here
@@ -58,21 +57,18 @@
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import Heatmap from '@/components/admin/org/Heatmap'
-import CreateOrganization from '@/components/admin/org/CreateOrganization'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    Heatmap,
-    CreateOrganization
+    Heatmap
   },
   data: () => ({
     showHeatmap: false,
     from: undefined,
     to: undefined,
     data: {
-      totalOrg: 300,
       totalService: 850,
       avgSPO: 5,
       maxService: 20,
@@ -81,10 +77,6 @@ export default {
     },
     overviews: [
       [
-        {
-          key: 'totalOrg',
-          label: 'Total Organization'
-        },
         {
           key: 'totalService',
           label: 'Total Service'

@@ -5,13 +5,14 @@ form(action="/transaction", method="post")
         option(value="TRANSFER") TRANSFER
         option(value="RECEIVE") RECEIVE
         option(value="WITHDRAW") WITHDRAW
+        option(value="CHEQUE") CHEQUE
         option(value="ETC") ETC
-    br
-    label(for="amount") amount
-    input(type="number" name="amount" value=0)
     br
     label(for="surrogateName") surrogateName
     input(type="text" name="surrogateName")
+    br
+    label(for="amount") amount
+    input(type="number" name="amount" value=0)
     br
     label(for="staff") staff
     select(name="staff")
@@ -19,17 +20,21 @@ form(action="/transaction", method="post")
         for staff in staffs
             option(value=staff._id)=staff.name.firstName + " " +staff.name.firstName
     br
-    label(for="accountId") accountId (virtual id)
-    input(type="text" name="accountId")
+    label(name="accountId") accountId
+    select(for="accountId") accountId
+        for accountId in accountIds
+            option(value=accountId._id)=accountId.accountId
     br
-    label(for="machineId") machineId (mongodb object)
-    input(type="text" name="machineId")
+    label(for="chequeId") chequeId
+    select(name="chequeId")
+        option(value="") optional
+        for chequeId in chequeIds
+            option(value=chequeId._id)=chequeId.chequeId
     br
-    label(for="chequeId") chequeId (virtual id)
-    input(type="text" name="chequeId")
-    br
-    label(for="ref1") ref1 
-    input(type="text" name="ref1")
+    label(for="ref1") ref1
+    select(name="ref1")
+        for serviceRef in serviceRefs
+            option(value=serviceRef._id)=serviceRef.organizationId.name + ' ' +serviceRef.detail
     br
     label(for="ref2") ref2 
     input(type="text" name="ref2")

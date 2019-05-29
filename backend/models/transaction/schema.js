@@ -8,7 +8,7 @@ const serviceRef = { type: mongoose.Schema.Types.ObjectId, ref: 'serviceReferenc
 
 const transactionSchema = mongoose.Schema({
   timestamp: { type: Date, default: Date.now },
-  type: { type: String, enum: ['TRANSFER', 'RECEIVE', 'WITHDRAW', 'ETC'] },
+  type: { type: String, enum: ['TRANSFER', 'RECEIVE', 'WITHDRAW', 'ETC', 'CHEQUE'], required: true },
   amount: { type: Number, default: 0 },
   balance: Number,
   surrogateName: String,

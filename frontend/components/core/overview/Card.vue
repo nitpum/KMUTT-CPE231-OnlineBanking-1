@@ -8,7 +8,7 @@
     </v-sheet>
     <v-card-actions>
       <v-spacer />
-      <v-btn flat color="primary" :to="to">
+      <v-btn flat color="primary" :to="to" :disabled="!to">
         more info
       </v-btn>
     </v-card-actions>

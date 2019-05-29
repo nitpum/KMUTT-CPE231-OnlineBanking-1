@@ -1,0 +1,82 @@
+form(action="/transaction", method="post")
+    h3 transaction jaa
+    label(for="type") type of transaction
+    select(name="type")
+        option(value="TRANSFER") TRANSFER
+        option(value="RECEIVE") RECEIVE
+        option(value="WITHDRAW") WITHDRAW
+        option(value="ETC") ETC
+    br
+    label(for="amount") amount
+    input(type="number" value=0)
+    br
+    label(for="surrogateName") surrogateName
+    input(type="text" name="surrogateName")
+    br
+    label(for="staff") staff
+    select(name="staff")
+        option(value="") self
+        for staff in staffs
+            option(value=staff._id)=staff.name.firstName + " " +staff.name.firstName
+    br
+    label(for="accountId") accountId (virtual id)
+    input(type="text" name="accountId")
+    br
+    label(for="machineId") machineId (mongodb object)
+    input(type="text" name="machineId")
+    br
+    label(for="chequeId") chequeId (virtual id)
+    input(type="text" name="chequeId")
+    br
+    label(for="ref1") ref1 
+    input(type="text" name="ref1")
+    br
+    label(for="ref2") ref2 
+    input(type="text" name="ref2")
+    button(type="submit") hit me !
+    
+
+    //- label(for="username") username
+    //- input(type="text" name="username")
+    //- br
+    //- label(for="password") password
+    //- input(type="password" name="password")
+    //- br
+    //- label(for="email") email
+    //- input(type="text" name="email")
+    //- br
+    //- label(for="name") name
+    //- input(type="text" name="name")
+    //- br
+    //- label(for="zipcode") zipcode
+    //- input(type="number" name="zipcode")
+    //- br
+    //- label(for="address") address
+    //- input(type="text" name="address")
+    //- br
+    //- label(for="birthDate") birthDate
+    //- input(type="date" name="birthDate")
+    //- br
+    //- label(for="phone") phone
+    //- input(type="number" name="phone")
+    //- br
+    //- label(for="gender") gender
+    //- select(name="gender")
+    //-     option(value='M') M
+    //-     option(value='F') F
+    //-     option(value='U') U
+    //- br
+    //- label(for="citizenId") citizenId
+    //- input(type="number" name="citizenId")
+    //- br
+    //- label(for="position") position
+    //- input(type="text" name="position")
+    //- br
+    //- select(name="branch")
+    //-     for branch in branches
+    //-         option(value=branch._id)=branch.name
+    //- br
+    //- select(name="permission")
+    //-     option(value="manager")="Manager"
+    //-     option(value="general")="General"
+    //- button(type="submit") create

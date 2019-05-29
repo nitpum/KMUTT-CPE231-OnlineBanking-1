@@ -18,13 +18,11 @@ const cashUp = (id) => new Promise(async (resolve, reject) => {
 })
 
 const valid = (id) => new Promise(async (resolve, reject) => {
-  try {
-    const doc = await chequeModel.findOne({ _id: id })
+  chequeModel.findOne({ chequeId: id, status: 'ACTIVE' }, (err, doc) => {
+    if (err) return reject(err)
     if (!doc) return reject(new Error('not found cheque'))
     resolve(doc)
-  } catch (err) {
-    reject(err)
-  }
+  })
 })
 
 module.exports = {

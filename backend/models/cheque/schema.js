@@ -14,7 +14,7 @@ const chequeSchema = mongoose.Schema({
   status: { type: String, enum: ['ACTIVE', 'REJECT', 'ETC', 'PAY'] },
   drawee: { type: String, required: true },
   created: { type: Date, default: Date.now },
-  drawDate: { type: Date, required: true }
+  // drawDate: { type: Date, required: true }
 })
 
 chequeSchema.index({ '$**': 'text' })

@@ -31,6 +31,8 @@
           label="Gender"
           placeholder="Gender"
           :items="genders"
+          item-text="text"
+          item-value="value"
         ></v-select>
         <text-label
           v-if="!editable"
@@ -99,7 +101,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat @click="model = false">Close</v-btn>
-        <v-btn v-if="editable" color="primary" flat @click="$emit('onSubmit')">
+        <v-btn v-if="editable" color="primary" flat @click="create()">
           <slot name="sumbit-btn">Submit</slot>
         </v-btn>
       </v-card-actions>
@@ -143,7 +145,11 @@ export default {
     }
   },
   data: () => ({
-    genders: ['Male', 'Female', 'Undefined'],
+    genders: [
+      { text: 'Male', value: 'M' },
+      { text: 'Female', value: 'F' },
+      { text: 'Undefined', value: 'U' }
+    ],
     roles: ['Staff', 'Manager']
   }),
   computed: {
@@ -224,6 +230,38 @@ export default {
         data.password = val
         this.$emit('update:data', data)
       }
+    }
+  },
+  methods: {
+    create() {
+      this.$axios
+        .post('/staff/general/create', {
+          name: this.name,
+          gender: this.gender,
+          citizenId: this.citizenId,
+          address: this.address,
+          zipcode: this.zipcode,
+          birthDate: this.birthDate,
+          position: this.role,
+          password: this.password,
+          email: String(Date.now()) + 'dummy@domain.com',
+          username: String(Date.now()),
+          phone: '0'
+        })
+        .then(res => {
+          this.name = ''
+          this.gender = ''
+          this.citizenId = ''
+          this.address = ''
+          this.zipcode = ''
+          this.birthDate = ''
+          this.position = ''
+          this.password = ''
+          this.$emit('onSubmit')
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/show', e.message)
+        })
     }
   }
 }

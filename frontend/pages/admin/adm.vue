@@ -70,6 +70,10 @@ export default {
         text: 'Balance (THB)',
         align: 'right',
         value: 'balance'
+      },
+      {
+        text: '',
+        value: 'actions'
       }
     ],
     items: [

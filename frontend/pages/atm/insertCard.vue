@@ -3,14 +3,14 @@
     <v-card-text>
       <v-form>
         <v-text-field
-          v-model="CardNo"
-          prepend-icon="card-bulleted-outline"
-          name="CardNo"
+          v-model="cardNo"
+          prepend-icon="mdi-credit-card"
+          name="cardNo"
           label="CardNo"
           type="text"
         />
         <v-text-field
-          v-model="password"
+          v-model="pin"
           prepend-icon="lock"
           name="pin"
           label="PIN"
@@ -29,8 +29,8 @@
 <script>
 export default {
   data: () => ({
-    username: '',
-    password: ''
+    cardNo: '',
+    pin: ''
   })
 }
 </script>

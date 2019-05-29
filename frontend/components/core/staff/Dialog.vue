@@ -168,7 +168,13 @@ export default {
     },
     data: {
       type: Object,
-      default: null
+      default: () => ({
+        name: {
+          firstName: '',
+          lastName: ''
+        },
+        birthDate: new Date()
+      })
     },
     passwordEditable: {
       type: Boolean,

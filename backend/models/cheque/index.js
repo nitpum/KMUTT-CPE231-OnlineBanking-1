@@ -1,6 +1,7 @@
 // models
 const QueryModel = require('./query')
 const chequeSchema = require('./schema')
+const TransactionModel = require('./transaction')
 
 // helpers
 const virtualChequeIdHelpers = require('../helpers/virtual-id')
@@ -52,5 +53,6 @@ const create = data => new Promise(async (resolve, reject) => {
 
 module.exports = {
   create: create,
-  query: QueryModel
+  query: QueryModel,
+  transaction: TransactionModel
 }

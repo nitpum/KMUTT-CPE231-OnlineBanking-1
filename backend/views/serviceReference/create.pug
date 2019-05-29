@@ -1,0 +1,19 @@
+form(action="/service-reference/create", method="post")
+    h3='service ref'
+    label(for="detail") detail
+    input(type="text" name="detail")
+    br
+    label(for="fee") fee
+    input(type="text" name="fee")
+    br
+    label(for="organizationId") organization
+    select(name="organizationId")
+        for organizationId in organizationIds
+            option(value=organizationId._id)=organizationId.name
+    br
+    label(for="typeId") type
+    select(name="typeId")
+        for typeId in typeIds
+            option(value=typeId._id)=typeId.name
+    br
+    button(type="submit") create

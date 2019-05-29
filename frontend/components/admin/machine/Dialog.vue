@@ -10,7 +10,12 @@
         <v-text-field v-model="name" label="Branch Name" required />
         <v-textarea v-model="address" label="Address" required />
         <v-text-field v-model="zipcode" label="Zipcode" mask="#####" required />
-        <v-select v-model="status" label="Status" :items="statuses" required />
+        <v-select
+          v-model="status"
+          label="Status"
+          :items="statuses.concat(type === 'atm' ? 'NO CASH' : 'FULL')"
+          required
+        />
         <v-text-field
           v-if="type === 'atm'"
           v-model="bank1000"
@@ -70,7 +75,7 @@ export default {
     }
   },
   data: () => ({
-    statuses: ['UP', 'DOWN', 'NO CASH'],
+    statuses: ['UP', 'DOWN'],
     formHasErrors: false,
     loading: false,
     name: '',

@@ -15,9 +15,14 @@
 <script>
 export default {
   data: () => ({
-    name: 'Somsuk Sukjai',
     no: '001',
     branch: 'Bangmod (001)'
-  })
+  }),
+  computed: {
+    name() {
+      const { firstName, lastName } = this.$store.state.user.name
+      return [firstName, lastName].join(' ')
+    }
+  }
 }
 </script>

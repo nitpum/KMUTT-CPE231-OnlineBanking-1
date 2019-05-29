@@ -2,7 +2,10 @@
   <v-container style="max-width: 500px">
     <v-card>
       <v-card-text>
-        Current UserName: {{ $store.state.user.username }}
+        <text-label
+          label="Current username: "
+          :text="$store.state.user.username"
+        />
         <v-text-field
           v-model="Password"
           :append-icon="show1 ? 'visibility' : 'visibility_off'"
@@ -31,8 +34,13 @@
 </template>
 
 <script>
+import TextLabel from '@/components/core/TextLabel'
+
 export default {
   layout: 'customer',
+  components: {
+    TextLabel
+  },
   data: () => {
     return {
       show1: false,

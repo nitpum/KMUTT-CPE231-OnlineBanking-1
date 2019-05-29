@@ -54,9 +54,7 @@
 export default {
   data: () => ({
     menu: false,
-    avatar: 'https://pbs.twimg.com/media/DsGJSBuVsAANIUN.jpg',
-    name: 'Name',
-    username: 'username'
+    avatar: 'https://pbs.twimg.com/media/DsGJSBuVsAANIUN.jpg'
   }),
   computed: {
     darkMode: {
@@ -66,6 +64,13 @@ export default {
       set(val) {
         this.$store.commit('SET_DARKMODE', val)
       }
+    },
+    name() {
+      const { firstName, lastName } = this.$store.state.user.name
+      return [firstName, lastName].join(' ')
+    },
+    username() {
+      return this.$store.state.user.username
     }
   },
   methods: {

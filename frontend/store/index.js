@@ -1,11 +1,11 @@
 export const state = () => ({
   user: {
-    username: 'somsukUsername',
+    username: '',
     name: {
-      firstName: 'Somsuk',
-      lastName: 'Sukjai'
+      firstName: '',
+      lastName: ''
     },
-    email: 'eiei@whatismyemail.com'
+    email: ''
   },
   darkMode: false
 })
@@ -13,5 +13,6 @@ export const state = () => ({
 export const mutations = {
   SET_DARKMODE: (state, val) => (state.darkMode = val),
   ACTIVE_DARKMODE: state => (state.darkMode = true),
-  REMOVE_DARKMODE: state => (state.darkMode = false)
+  REMOVE_DARKMODE: state => (state.darkMode = false),
+  SET_USER: (state, user) => (state.user = user)
 }

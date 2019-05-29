@@ -75,43 +75,6 @@ const create = (data) => new Promise(async (resolve, reject) => {
 })
 
 /**
- * edit staff user
- * @param  {Object} data
- * @param  {String} data.username - username
- * @param  {String} data.password - password
- * @param  {String} data.email - email
- * @param  {String} data.name.firstName - firstname
- * @param  {String} data.name.lastName - firstname
- * @param  {String} data.zipcode - zipcode
- * @param  {String} data.address - address
- * @param  {Date} data.birthDate - birthdate
- * @param  {String} data.gender - ['M', 'F', 'U']
- * @param  {String} data.citizenId - citizenId
- * @param  {String} data.position - position
- * @param  {String} data.phone - phone
- * @param  {String} data.branch - branch that staff assigned
- * @returns {Object} - mongodb document
- */
-const edit = (id, data) => new Promise(async (resolve, reject) => {
-  const {
-    username, password, citizenId
-  } = data
-  const valid = await validation({
-    username: username,
-    citizenId: citizenId
-  })
-  if (!valid) return reject(Error('username or citizendId or email duplicated'))
-  if (data.password) {
-    const hash = await passwordHelpers.generate(password)
-    data.password = hash
-  }
-  StaffSchema.findByIdAndUpdate(id, data, (err, doc) => {
-    if (err) reject(err)
-    resolve(doc)
-  })
-})
-
-/**
  * @param  {String} username
  * @param  {String} password
  * @returns {Object}
@@ -127,7 +90,6 @@ const login = (username, password) => new Promise(async (resolve, reject) => {
 
 module.exports = {
   create: create,
-  edit: edit,
   schema: StaffSchema,
   login: login,
   query: QueryModel,

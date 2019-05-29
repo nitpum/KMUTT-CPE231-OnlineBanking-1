@@ -1,8 +1,8 @@
 {
+
     "name": "KMUTT",
     "address": "126 pracha Utit road",
     "zipcode": "10140",
     "balance": {"type": 1000,"default":0 },
-    "datacreate": {"type": "" , "default": " " }
-
+    "datacreate": {"type": "" , "default": "" }
 }

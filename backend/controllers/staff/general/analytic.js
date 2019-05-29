@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 router.get('/count', (req, res) => {
   const position = req.query.position || undefined
   if (position) {
-    StaffModel.analytic.count(position)
+    StaffModel.analytic.count()
       .then(count => res.send(count))
       .catch(err => res.status(400).send({
         op: false,

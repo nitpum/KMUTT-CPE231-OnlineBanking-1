@@ -5,8 +5,8 @@
         <h2>{{ title }}</h2>
       </v-card-title>
       <v-card-text>
-        <v-text-field v-model="name" label="Name"></v-text-field>
-        <v-textarea v-model="detail" label="Detail"></v-textarea>
+        <v-text-field v-model="data.name" label="Name"></v-text-field>
+        <v-textarea v-model="data.detail" label="Detail"></v-textarea>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -36,17 +36,15 @@ export default {
       type: String,
       default: 'Create Services Type'
     },
-    id: {
-      type: String,
-      default: ''
-    },
-    name: {
-      type: String,
-      default: ''
-    },
-    detail: {
-      type: String,
-      default: ''
+    data: {
+      type: Object,
+      default() {
+        return {
+          _id: '',
+          name: '',
+          detail: ''
+        }
+      }
     },
     mode: {
       type: String,
@@ -66,7 +64,7 @@ export default {
       }
     },
     disabled() {
-      return !this.name || !this.detail
+      return !this.data.name || !this.data.detail
     }
   },
   methods: {
@@ -78,15 +76,15 @@ export default {
       this.loading = true
       this.$axios
         .post('/service-reference/type/create', {
-          name: this.name,
-          detail: this.detail
+          name: this.data.name,
+          detail: this.data.detail
         })
         .then(res => {
-          this.$emit('onSubmit')
-          this.name = ''
-          this.detail = ''
-          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
           this.model = false
+          this.$emit('onSubmit')
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
+          this.data.name = ''
+          this.data.detail = ''
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)
@@ -101,8 +99,8 @@ export default {
         .post('/service-reference/type/edit', {
           id: this.id,
           data: {
-            name: this.name,
-            detail: this.detail
+            name: this.data.name,
+            detail: this.data.detail
           }
         })
         .then(res => {

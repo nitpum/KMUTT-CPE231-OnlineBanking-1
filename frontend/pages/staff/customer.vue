@@ -5,6 +5,7 @@
         <v-icon>add</v-icon>
       </v-btn>
       <v-text-field
+        v-model="search"
         label="Search"
         placeholder="Search"
         prepend-inner-icon="search"
@@ -20,7 +21,11 @@
           mb-3
           pr-3
         >
-          <card @onMoreInfo="openDialog"></card>
+          <card
+            :name="customer.name"
+            :citizen-id="customer.citizenId"
+            @onMoreInfo="openDialog"
+          ></card>
         </v-flex>
       </v-layout>
     </v-container>
@@ -29,6 +34,8 @@
       :password-editable="true"
       title="Create Customer"
       :editable="true"
+      mode="create"
+      @onSubmit="createStaff"
     />
     <Dialog v-model="infoDialog" title="Edit Customer" :editable="true" />
   </div>
@@ -48,8 +55,17 @@ export default {
     createDialog: false,
     infoDialog: false,
     customer: {},
-    customers: [{}, {}, {}]
+    customers: [],
+    search: ''
   }),
+  watch: {
+    search: {
+      immediate: true,
+      handler(val) {
+        this.fetch()
+      }
+    }
+  },
   methods: {
     openDialog: function(item) {
       this.infoDialog = true
@@ -58,6 +74,23 @@ export default {
     openCreateDialog: function() {
       this.infoDialog = false
       this.createDialog = true
+    },
+    createStaff() {
+      this.createDialog = false
+    },
+    fetch() {
+      this.$axios
+        .get('/customer/query', {
+          params: {
+            search: this.search
+          }
+        })
+        .then(({ data }) => {
+          this.customers = data.map(({ name, citizenId }) => ({
+            name: [name.firstName, name.lastName].join(' '),
+            citizenId
+          }))
+        })
     }
   }
 }

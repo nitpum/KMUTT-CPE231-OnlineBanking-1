@@ -44,14 +44,16 @@
               Service List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0">CREATE SERVICE</v-btn>
+            <v-btn color="primary" class="my-0" @click="openCreateDialog"
+              >CREATE SERVICE</v-btn
+            >
           </v-card-title>
           <v-divider />
-          table here
+          <list :items="list" />
         </v-card>
       </v-flex>
     </v-layout>
-    <Dialog />
+    <Dialog v-model="createDialog" />
   </v-container>
 </template>
 
@@ -59,18 +61,21 @@
 import OverviewInfo from '@/components/core/overview/Info'
 import Heatmap from '@/components/admin/org/Heatmap'
 import Dialog from '@/components/admin/service/Dialog'
+import List from '@/components/admin/service/Lists'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
     Heatmap,
-    Dialog
+    Dialog,
+    List
   },
   data: () => ({
     showHeatmap: false,
     from: undefined,
     to: undefined,
+    createDialog: false,
     data: {
       totalService: 850,
       avgSPO: 5,
@@ -78,6 +83,7 @@ export default {
       todayService: 800,
       thisMonthService: 421561
     },
+    list: [],
     overviews: [
       [
         {
@@ -107,6 +113,17 @@ export default {
   }),
   mounted() {
     this.showHeatmap = true
+    this.fetch()
+  },
+  methods: {
+    openCreateDialog() {
+      this.createDialog = true
+    },
+    fetch() {
+      this.$axios.get('/service-reference/query').then(res => {
+        this.list = res.data
+      })
+    }
   }
 }
 </script>

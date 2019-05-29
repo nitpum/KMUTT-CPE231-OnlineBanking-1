@@ -5,15 +5,10 @@
         <h2>{{ title }}</h2>
       </v-card-title>
       <v-card-text>
-        <v-text-field v-model="name" label="Branch Name" required />
-        <v-textarea v-model="address" label="Address" required />
-        <v-text-field v-model="zipcode" label="Zipcode" mask="#####" required />
-        <v-text-field
-          v-model="balance"
-          label="Balance"
-          type="number"
-          required
-        />
+        <org-select v-model="data.organization" />
+        <type-select v-model="data.type" />
+        <v-text-field v-model="data.fee" type="number" label="Fee" required />
+        <v-textarea v-model="data.detail" label="Detail" />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -33,7 +28,14 @@
 </template>
 
 <script>
+import OrgSelect from '@/components/admin/org/Select'
+import TypeSelect from '@/components/admin/service/type/Select'
+
 export default {
+  components: {
+    OrgSelect,
+    TypeSelect
+  },
   props: {
     value: {
       type: Boolean,
@@ -46,13 +48,31 @@ export default {
     title: {
       type: String,
       default: 'Create Services'
+    },
+    data: {
+      type: Object,
+      default() {
+        return {
+          _id: '',
+          organization: {
+            _id: '',
+            bankAccount: '',
+            bankSwift: '',
+            name: '',
+            type: ''
+          },
+          detail: '',
+          fee: 0,
+          type: {
+            _id: '',
+            name: '',
+            type: ''
+          }
+        }
+      }
     }
   },
   data: () => ({
-    name: '',
-    address: '',
-    zipcode: '',
-    balance: 0,
     loading: false
   }),
   computed: {
@@ -65,7 +85,16 @@ export default {
       }
     },
     disabled() {
-      return !this.name || !this.address || !this.zipcode || this.loading
+      return (
+        !this.data.organization._id ||
+        this.data.organization._id === '' ||
+        !this.data.type._id ||
+        this.data.type._id === '' ||
+        !this.data.fee ||
+        this.data.fee === '' ||
+        this.data.detail === '' ||
+        this.loading
+      )
     }
   },
   methods: {
@@ -76,19 +105,31 @@ export default {
     create() {
       this.loading = true
       this.$axios
-        .post('/branch/create', {
-          name: this.name,
-          address: this.address,
-          zipcode: this.zipcode,
-          balance: this.balance
+        .post('/service-reference/create', {
+          organizationId: this.data.organization._id,
+          detail: this.data.detail,
+          fee: this.data.fee,
+          typeId: this.data.type._id
         })
         .then(res => {
           this.$emit('onSubmit')
-          this.name = ''
-          this.address = ''
-          this.zipcode = ''
-          this.balance = 0
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
+          this.model = false
+          // Clear
+          this.data.organization = {
+            _id: '',
+            bankAccount: '',
+            bankSwift: '',
+            name: '',
+            type: ''
+          }
+          this.data.detail = ''
+          this.data.fee = 0
+          this.data.type = {
+            _id: '',
+            name: '',
+            type: ''
+          }
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)
@@ -97,7 +138,30 @@ export default {
           this.loading = false
         })
     },
-    update() {}
+    update() {
+      this.loading = true
+      this.$axios
+        .post('/service-reference/edit', {
+          id: this.data._id,
+          data: {
+            organizationId: this.data.organization._id,
+            detail: this.data.detail,
+            fee: this.data.fee,
+            typeId: this.data.type._id
+          }
+        })
+        .then(res => {
+          this.$emit('onSubmit')
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
+          this.model = false
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/show', e.message)
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    }
   }
 }
 </script>

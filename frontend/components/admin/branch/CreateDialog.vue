@@ -5,25 +5,13 @@
         <h2>Create Branch</h2>
       </v-card-title>
       <v-card-text>
-        <v-text-field
-          v-model="name"
-          label="Branch Name"
-          :rules="rules"
-          required
-        />
-        <v-textarea v-model="address" label="Address" :rules="rules" required />
-        <v-text-field
-          v-model="zipcode"
-          label="Zipcode"
-          mask="#####"
-          :rules="rules"
-          required
-        />
+        <v-text-field v-model="name" label="Branch Name" required />
+        <v-textarea v-model="address" label="Address" required />
+        <v-text-field v-model="zipcode" label="Zipcode" mask="#####" required />
         <v-text-field
           v-model="balance"
           label="Balance"
           type="number"
-          :rules="rules"
           required
         />
       </v-card-text>
@@ -35,7 +23,7 @@
           flat
           :loading="loading"
           :disabled="disabled"
-          @click="create()"
+          @click="submit"
         >
           Submit
         </v-btn>
@@ -50,6 +38,10 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    submitMode: {
+      type: String,
+      default: 'create'
     }
   },
   data: () => ({
@@ -73,6 +65,10 @@ export default {
     }
   },
   methods: {
+    submit() {
+      if (this.submitMode === 'create') this.create()
+      else if (this.submitMode === 'update') this.update()
+    },
     create() {
       this.loading = true
       this.$axios
@@ -88,6 +84,7 @@ export default {
           this.address = ''
           this.zipcode = ''
           this.balance = 0
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)
@@ -95,7 +92,8 @@ export default {
         .finally(() => {
           this.loading = false
         })
-    }
+    },
+    update() {}
   }
 }
 </script>

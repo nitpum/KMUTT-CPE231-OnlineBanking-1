@@ -113,7 +113,8 @@ const account = {
   delete: remove,
   query: AccountQueryModel,
   genId: generateAccId,
-  transaction: TransactionModel
+  transaction: TransactionModel,
+  schema: AccountSchema
 }
 
 module.exports = {

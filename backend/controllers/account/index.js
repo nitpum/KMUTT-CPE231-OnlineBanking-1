@@ -17,6 +17,7 @@ const authen = require('../helpers/authen')
 // models
 const AccountModel = require('../../models/account')
 const BranchModel = require('../../models/branch')
+const StaffModel = require('../../models/staff')
 
 // controllers
 const QueryController = require('./query')
@@ -35,6 +36,21 @@ router.get('/create', authen({ permission: PERMISSION.create }),
       branchs: branchs
     })
   })
+
+router.get('/create/data', authen({ permission: PERMISSION.create }),
+  async (req, res) => {
+    const [ staff, types ] = await Promise.all([
+      StaffModel.query.id(req.session.passport.user._id),
+      AccountModel.type.query.all()
+    ])
+
+    const branch = await BranchModel.query.id(staff.branch)
+
+    res.json({
+      branch, types
+    })
+  }
+)
 
 router.post('/create', authen({ permission: PERMISSION.create }),
   (req, res) => {

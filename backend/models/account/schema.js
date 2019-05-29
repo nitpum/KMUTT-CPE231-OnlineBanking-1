@@ -12,4 +12,6 @@ const accountSchema = mongoose.Schema({
   status: { type: String, enum: ['ACTIVE', 'LOCK', 'ETC', 'REVOKE'], required: true }
 })
 
+accountSchema.index({ '$**': 'text' })
+
 module.exports = mongoose.model('account', accountSchema)

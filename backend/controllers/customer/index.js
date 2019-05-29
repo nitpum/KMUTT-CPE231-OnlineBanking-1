@@ -1,13 +1,14 @@
 const path = require('path')
 const passport = require('passport')
 const express = require('express')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 // helpers
 const authen = require('../helpers/authen')
 const logout = require('../helpers/logout')
 
-const PERMISSION = ['customer', 'admin']
+const PERMISSION = ['customer', 'general', 'admin']
 
 // models
 const CustomerModel = require('../../models/customer')
@@ -46,7 +47,7 @@ router.post('/create', (req, res) => {
     }
   }).then(doc => {
     res.send(doc)
-  }).catch(err => res.send(
+  }).catch(err => res.status(400).send(
     {
       validation: false,
       err: String(err)
@@ -61,7 +62,7 @@ router.get('/logout', logout, (req, res) => res.sendStatus(200))
 router.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../../views/customer/', 'login.html')))
 
 // authen required
-router.use(['/', '/edit', '/analytic', '/query'], authen({
+router.use(['/', '/edit', '/analytic', '/query', '/favorite'], authen({
   permission: PERMISSION,
   unauthorizedPath: '/customer/login'
 }))
@@ -123,6 +124,36 @@ router.get('/delete', (req, res) => {
     .catch(err => res.send({
       op: false,
       err: String(err)
+    }))
+})
+
+router.patch('/me', async (req, res) => {
+  const id = req.session.passport.user._id
+  let set
+  const {
+    password, newPassword, newUsername
+  } = req.body
+
+  const hashPwd = (await CustomerModel.query.id(id)).password
+
+  if (!await bcrypt.compare(password, hashPwd)) {
+    /* incorrect password */
+    return res.sendStatus(401)
+  }
+
+  if (newUsername) {
+    set = { username: newUsername }
+  } else if (newPassword) {
+    set = { password: newPassword }
+  } else {
+    return res.sendStatus(400)
+  }
+
+  CustomerModel.edit(id, set)
+    .then(doc => res.send(doc))
+    .catch(err => res.send({
+      op: false,
+      err: err
     }))
 })
 

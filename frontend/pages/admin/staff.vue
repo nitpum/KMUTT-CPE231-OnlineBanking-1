@@ -27,7 +27,7 @@
     <Dialog
       v-model="dialog"
       :data="data"
-      :password-editable="true"
+      :password-editable="passwordEditable"
       :editable="true"
       :submit-mode="dialogType"
       @onSubmit="createStaff"
@@ -53,6 +53,7 @@ export default {
     to: undefined,
     dialog: false,
     dialogType: 'create',
+    passwordEditable: false,
     data: {
       name: {
         firstName: '',
@@ -64,7 +65,9 @@ export default {
       zipcode: '',
       birthDate: new Date(),
       role: '',
-      password: ''
+      username: '',
+      password: '',
+      email: ''
     },
     overviewsData: {
       totalStaff: 0
@@ -114,6 +117,7 @@ export default {
     openCreateDialog() {
       this.dialog = true
       this.dialogType = 'create'
+      this.passwordEditable = true
       this.data = {
         name: {
           firstName: '',
@@ -131,6 +135,7 @@ export default {
     showItem(item) {
       this.dialog = true
       this.dialogType = 'update'
+      this.passwordEditable = false
       this.data.id = item._id
       this.data.name = item.name
       this.data.gender = item.gender

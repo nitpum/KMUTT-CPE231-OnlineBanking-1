@@ -257,11 +257,11 @@ export default {
           this.birthDate = ''
           this.position = ''
           this.password = ''
-          this.$emit('onSubmit')
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
         })
         .catch(e => {
           this.$store.dispatch(
-            'snackbars/show',
+            'snackbars/error',
             e.response.status === 400 ? e.response.data.err : e.message
           )
         })

@@ -17,5 +17,20 @@ export const actions = {
     commit('SHOW', true)
     commit('COLOR', null)
     commit('TEXT', text)
+  },
+  success({ commit }, text) {
+    commit('SHOW', true)
+    commit('COLOR', 'success')
+    commit('TEXT', text)
+  },
+  error({ commit }, text) {
+    commit('SHOW', true)
+    commit('COLOR', 'error')
+    commit('TEXT', text)
+  },
+  color({ commit }, text) {
+    commit('SHOW', true)
+    commit('COLOR', 'error')
+    commit('TEXT', text)
   }
 }

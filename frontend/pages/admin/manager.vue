@@ -29,7 +29,7 @@
       mode="create"
       :editable="true"
       :password-editable="true"
-      title="Create Staff"
+      title="Create Manager"
       fixed-position="manager"
       @onSubmit="createBranch"
     />

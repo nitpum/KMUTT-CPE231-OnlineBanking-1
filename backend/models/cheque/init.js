@@ -53,9 +53,9 @@ const cheque=[{
     accountId: accRef,
     accountNo: '400500600700800',
     amount: 5000,
-    payFor: String,
-    type: { type: String, enum: ['CHASH', 'ORDER', 'ETC'] },
-    status: { type: String, enum: ['ACTIVE', 'REJECT', 'ETC'] },
+    payee: 'Tom Hiddleton',
+    type: 'CHASH',
+    status: 'ACTIVE',
     drawee: { type: String, required: true },
     created: { type: Date, default: Date.now },
     drawDate: { type: Date, required: true }

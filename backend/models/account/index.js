@@ -51,7 +51,6 @@ const create = data => new Promise(async (resolve, reject) => {
     const customerValid = await customerValidation(data.citizenId)
     data.customerId = customerValid
     delete data.citizenId
-    console.log(data)
     const doc = new AccountSchema(data)
     doc.save(err => {
       if (err) reject(err)

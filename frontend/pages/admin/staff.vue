@@ -20,7 +20,11 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <list :items="items" @onItemClick="showItem" />
+          <list
+            :items="items"
+            @onItemClick="showItem"
+            @onRemoveClick="removeItem"
+          />
         </v-card>
       </v-flex>
     </v-layout>
@@ -32,6 +36,11 @@
       :mode="dialogType"
       @onSubmit="createStaff"
     />
+    <confirm-dialog
+      v-model="confirmDialog"
+      title="Delete confirm"
+      @onYes="confimedRemove"
+    />
   </v-container>
 </template>
 
@@ -39,6 +48,7 @@
 /* eslint-disable no-console */
 import OverviewInfo from '@/components/core/overview/Info'
 import Dialog from '@/components/core/staff/Dialog'
+import ConfirmDialog from '@/components/core/ConfirmDialog'
 import List from '@/components/admin/staff/List'
 
 export default {
@@ -46,12 +56,14 @@ export default {
   components: {
     OverviewInfo,
     Dialog,
+    ConfirmDialog,
     List
   },
   data: () => ({
     from: undefined,
     to: undefined,
     dialog: false,
+    confirmDialog: false,
     dialogType: 'create',
     passwordEditable: false,
     data: {
@@ -85,7 +97,8 @@ export default {
         }
       ]
     ],
-    items: []
+    items: [],
+    removePending: {}
   }),
   created() {
     this.fetch()
@@ -152,6 +165,21 @@ export default {
       }
       this.data.citizenId = item.citizenId
       this.data.role = item.position
+    },
+    removeItem(item) {
+      this.confirmDialog = true
+      this.removePending = item
+    },
+    confimedRemove() {
+      this.$axios
+        .delete('/staff/general', { data: { id: this.removePending._id } })
+        .then(_ => {
+          this.$store.dispatch('snackbars/success', 'Remove success')
+          this.fetch()
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/show', e.message)
+        })
     }
   }
 }

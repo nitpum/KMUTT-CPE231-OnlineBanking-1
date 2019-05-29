@@ -1,0 +1,35 @@
+form(action="/transaction", method="post")
+    h3 transaction jaa
+    label(for="byOrganizationId") byOrganizationId
+    select(name="byOrganizationId")
+        for organization in organizations
+            select(value=organization._id)=organization.name
+    br
+    label(for="accountId") accountId
+    select(name="accountId")
+        option(value="")="other bank"
+        for accountId in accountIds
+            option(value=accountId._id)=accountId.accountId
+    br
+    label(for="amount") amount
+    input(type="text" name="amount")
+    br
+    label(for="payFor") payFor
+    input(type="text" name="payFor")
+    br
+    select(name="type")
+        option(value="CASH") CASH
+        option(value="ORDER") ORDER
+        option(value="ETC") ETC
+    br
+    select(name="status")
+        option(value="ACTIVE") ACTIVE
+        option(value="REJECT") REJECT
+        option(value="ETC") ETC
+    br
+    label(for="drawee") payFor
+    input(type="text" name="drawee")
+    br
+    label(for="drawDate") drawDate
+    input(type="date" name="drawDate")
+    button(type="submit") hit me !

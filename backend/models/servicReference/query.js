@@ -9,6 +9,7 @@ const query = {
   all: (limit = 5000) => new Promise((resolve, reject) => {
     serviceReferenceSchema.find({})
       .populate('organizationId')
+      .populate('typeId')
       .limit(limit)
       .then(doc => resolve(doc))
       .catch(err => reject(err))

@@ -81,6 +81,7 @@
           v-model="zipcode"
           label="Zipcode"
           placeholder="Zipcode"
+          :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -166,7 +167,8 @@ export default {
       { text: 'Female', value: 'F' },
       { text: 'Undefined', value: 'U' }
     ],
-    roles: ['Staff', 'Manager']
+    roles: ['Staff', 'Manager'],
+    formHasErrors: false
   }),
   computed: {
     model: {
@@ -265,6 +267,19 @@ export default {
         const data = this.data
         data.password = val
         this.$emit('update:data', data)
+      }
+    },
+    form() {
+      return {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        gender: this.gender,
+        citizenId: this.citizenId,
+        address: this.address,
+        zipcode: this.zipcode,
+        birthDate: this.birthDate,
+        role: this.role,
+        password: this.password
       }
     }
   },

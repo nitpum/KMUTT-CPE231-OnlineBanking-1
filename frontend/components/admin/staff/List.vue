@@ -3,7 +3,8 @@
     <template v-slot:items="{ item }">
       <td>{{ item._id }}</td>
       <td>{{ item.name.firstName }} {{ item.name.lastName }}</td>
-      <td class="text-xs-right">{{ item.position }}</td>
+      <td>{{ item.position }}</td>
+      <td>{{ item.branch || '-' }}</td>
     </template>
   </v-data-table>
 </template>

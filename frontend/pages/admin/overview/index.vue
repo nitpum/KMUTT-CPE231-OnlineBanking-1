@@ -31,12 +31,14 @@ export default {
       {
         title: 'Daily New User',
         value: '92',
-        color: '#EC008C'
+        color: '#EC008C',
+        to: '/admin/overview/new-user'
       },
       {
         title: 'Today Total Transaction',
         value: '1,152,504',
-        color: '#FF9800'
+        color: '#FF9800',
+        to: '/admin/overview/today-trans'
       },
       {
         title: 'Daily New Card',

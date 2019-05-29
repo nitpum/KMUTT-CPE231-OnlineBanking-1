@@ -37,12 +37,14 @@ export default {
       {
         title: 'Login User Per Hours',
         value: '2,983',
-        color: '#EC008C'
+        color: '#EC008C',
+        to: '/admin/system/userHours'
       },
       {
         title: 'Transaction Per Hours',
         value: '48,021',
-        color: '#9C27B0'
+        color: '#9C27B0',
+        to: '/admin/system/transaction'
       }
     ]
   })

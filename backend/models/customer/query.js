@@ -23,11 +23,17 @@ const query = {
       .catch(err => reject(err))
   }),
   /**
-     * @param  {String} id - mongodb object id
+     * @param  {String} id - citizenId
      * @returns {Object} - mongodb object
      */
   id: (id) => new Promise((resolve, reject) => {
     CustomerSchema.findById(id)
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
+  }),
+
+  citizenId: (id) => new Promise((resolve, reject) => {
+    CustomerSchema.findOne({ citizenId: id })
       .then(doc => resolve(doc))
       .catch(err => reject(err))
   })

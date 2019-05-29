@@ -1,5 +1,8 @@
 form(action="/account/create", method="post")
     h3='bank account'
+    label(for="citizenId") citizenId
+    input(type="text" name="citizenId")
+    br
     label(for="accountId") accountId
     input(type="text" name="accountId" value=accountId)
     br
@@ -11,12 +14,13 @@ form(action="/account/create", method="post")
         for branch in branchs
             option(value=branch._id)=branch.name
     br
+    select(name="status")
+        option(value="ACTIVE") ACTIVE
+        option(value="LOCK") LOCK
+        option(value="ETC") ETC
+    br
     label(for="accountType") accountType
     select(name="accountType")
         for type in types
-            option(value=types._id)=types.name
-    br
-    
-
-
+            option(value=type._id)=type.name
     button(type="submit") create

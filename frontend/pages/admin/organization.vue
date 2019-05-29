@@ -17,7 +17,7 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          table here
+          <lists />
         </v-card>
       </v-flex>
       <Dialog v-model="dialog" :mode="dialogMode" />
@@ -28,12 +28,14 @@
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import Dialog from '@/components/admin/org/Dialog'
+import Lists from '@/components/admin/org/Lists'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    Dialog
+    Dialog,
+    Lists
   },
   data: () => ({
     showHeatmap: false,

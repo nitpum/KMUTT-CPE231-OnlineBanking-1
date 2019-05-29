@@ -12,7 +12,7 @@
         <v-card>
           <v-card-title>
             <h3 class="headline mb-0">
-              Manger List
+              Manager List
             </h3>
             <v-spacer />
           </v-card-title>

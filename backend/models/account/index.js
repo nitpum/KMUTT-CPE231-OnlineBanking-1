@@ -4,12 +4,13 @@ const AccTypeSchema = require('./type/schema')
 // models
 const AccountQueryModel = require('./query')
 const AccountTypesModel = require('./type')
+const CustomerModel = require('../customer')
 
 const generateAccId = () => new Promise(async (resolve, reject) => {
-  function stringGen (len) {
+  const stringGen = (len) => {
     let text = ''
     let charset = '0123456789'
-    for (var i = 0; i < len; i++) { text += charset.charAt(Math.floor(Math.random() * charset.length))}
+    for (var i = 0; i < len; i++) { text += charset.charAt(Math.floor(Math.random() * charset.length)) }
     return text
   }
 
@@ -29,22 +30,35 @@ const generateAccId = () => new Promise(async (resolve, reject) => {
   }
 })
 
+const customerValidation = (id) => new Promise(async (resolve, reject) => {
+  const doc = await CustomerModel.query.citizenId(id)
+  if (doc) resolve(String(doc._id))
+  reject(new Error('not found this citizenId in customer'))
+})
+
 /**
   * create bank account
  * @param  {Object} data
  * @param  {String} data.accountId - username
- * @param  {Object} data.customerId - customer mongodb object
+ * @param  {Object} data.citizenId - customer mongodb object
  * @param  {Object} data.accountType - acc type mongodb object
  * @param  {Object} data.branchId - branchid mongodb object
  * @param  {String} data.status - status  enum: ['ACTIVE', 'LOCK', 'ETC']
  * @returns {Object} - mongodb document
  */
-const create = data => new Promise((resolve, reject) => {
-  const doc = new AccountSchema(data)
-  doc.save(err => {
-    if (err) reject(err)
-    resolve(doc)
-  })
+const create = data => new Promise(async (resolve, reject) => {
+  try {
+    const customerValid = await customerValidation(data.citizenId)
+    data.customerId = customerValid
+    delete data.citizenId
+    const doc = new AccountSchema(data)
+    doc.save(err => {
+      if (err) reject(err)
+      resolve(doc)
+    })
+  } catch (err) {
+    reject(err)
+  }
 })
 
 /**

@@ -5,34 +5,27 @@
         <h2>Create Branch</h2>
       </v-card-title>
       <v-card-text>
-        <v-form v-model="valid">
-          <v-text-field
-            v-model="name"
-            label="Branch Name"
-            :rules="rules"
-            required
-          />
-          <v-textarea
-            v-model="address"
-            label="Address"
-            :rules="rules"
-            required
-          />
-          <v-text-field
-            v-model="zipcode"
-            label="Zipcode"
-            mask="#####"
-            :rules="rules"
-            required
-          />
-          <v-text-field
-            v-model="balance"
-            label="Balance"
-            type="number"
-            :rules="rules"
-            required
-          />
-        </v-form>
+        <v-text-field
+          v-model="name"
+          label="Branch Name"
+          :rules="rules"
+          required
+        />
+        <v-textarea v-model="address" label="Address" :rules="rules" required />
+        <v-text-field
+          v-model="zipcode"
+          label="Zipcode"
+          mask="#####"
+          :rules="rules"
+          required
+        />
+        <v-text-field
+          v-model="balance"
+          label="Balance"
+          type="number"
+          :rules="rules"
+          required
+        />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -64,9 +57,7 @@ export default {
     address: '',
     zipcode: '',
     balance: 0,
-    loading: false,
-    valid: false,
-    rules: [v => !!v || 'Required']
+    loading: false
   }),
   computed: {
     model: {
@@ -78,7 +69,7 @@ export default {
       }
     },
     disabled() {
-      return !this.valid || this.loading
+      return !this.name || !this.address || !this.zipcode || this.loading
     }
   },
   methods: {
@@ -93,6 +84,10 @@ export default {
         })
         .then(res => {
           this.$emit('onSubmit')
+          this.name = ''
+          this.address = ''
+          this.zipcode = ''
+          this.balance = 0
         })
         .catch(e => {
           /* error handler here */

@@ -45,9 +45,7 @@
               Organization List
             </h3>
             <v-spacer />
-            <v-btn color="primary">
-              Create Organization
-            </v-btn>
+            <create-organization />
           </v-card-title>
           <v-divider />
           table here
@@ -60,12 +58,14 @@
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import Heatmap from '@/components/admin/org/Heatmap'
+import CreateOrganization from '@/components/admin/org/CreateOrganization'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    Heatmap
+    Heatmap,
+    CreateOrganization
   },
   data: () => ({
     showHeatmap: false,

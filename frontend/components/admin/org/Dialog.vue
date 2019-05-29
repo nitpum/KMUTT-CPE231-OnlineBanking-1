@@ -126,6 +126,7 @@ export default {
             'snackbars/success',
             'Success'
           )
+          this.$emit('created')
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)

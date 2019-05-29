@@ -1,5 +1,4 @@
 const path = require('path')
-const passport = require('passport')
 const express = require('express')
 const router = express.Router()
 
@@ -32,7 +31,7 @@ router.post('/create', (req, res) => {
   const {
     username, password, name, zipcode,
     address, birthDate, gender, citizenId,
-    position, branch, email, phone
+    position, branch, email, phone, permission
   } = req.body
   const [firstName, lastName] = name.split(' ')
 
@@ -51,13 +50,28 @@ router.post('/create', (req, res) => {
     name: {
       firstName: firstName,
       lastName: lastName
-    }
+    },
+    permission: permission
   })
     .then(doc => res.send(doc))
     .catch(err => res.send({
       validation: false,
       err: String(err)
     }))
+})
+
+router.get('/edit', async (req, res) => {
+  const staffs = await StaffModel.query.all()
+  res.render(path.join(__dirname, '../../views/staff', 'edit'),
+    { staffs: staffs })
+})
+
+router.post('/edit', (req, res) => {
+  const id = req.body.id
+  const data = req.body.data
+  StaffModel.edit(id, data)
+    .then(doc => res.send(doc))
+    .catch(err => res.status(400).send(String(err)))
 })
 
 // DEPRECATED

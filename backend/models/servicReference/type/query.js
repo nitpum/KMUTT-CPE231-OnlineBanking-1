@@ -33,3 +33,5 @@ const query = {
       .catch(err => reject(err))
   })
 }
+
+module.exports = query

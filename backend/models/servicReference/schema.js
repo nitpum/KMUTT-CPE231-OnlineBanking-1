@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const organizationRef = { type: mongoose.Schema.Types.ObjectId, ref: 'organization', required: true }
-const serviceTypeRef = { type: mongoose.Schema.Types.ObjectId, ref: 'serviceType', required: true }
+const serviceTypeRef = { type: mongoose.Schema.Types.ObjectId, ref: 'serviceReferenceType', required: true }
 
 const serviceRefSchema = mongoose.Schema({
   organizationId: organizationRef,

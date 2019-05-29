@@ -18,7 +18,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="primary" flat>
+        <v-btn color="primary" flat @click="dialog = false">
           cancel
         </v-btn>
         <v-btn color="primary" flat>

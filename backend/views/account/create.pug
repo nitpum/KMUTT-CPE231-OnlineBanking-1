@@ -14,6 +14,11 @@ form(action="/account/create", method="post")
         for branch in branchs
             option(value=branch._id)=branch.name
     br
+    select(name="status")
+        option(value="ACTIVE") ACTIVE
+        option(value="LOCK") LOCK
+        option(value="ETC") ETC
+    br
     label(for="accountType") accountType
     select(name="accountType")
         for type in types

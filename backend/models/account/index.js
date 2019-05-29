@@ -31,24 +31,29 @@ const generateAccId = () => new Promise(async (resolve, reject) => {
 })
 
 const customerValidation = (id) => new Promise(async (resolve, reject) => {
+  console.log('citizenId', id)
   const doc = await CustomerModel.query.citizenId(id)
   console.log(doc)
-  if (doc) resolve(doc)
+  if (doc) resolve(String(doc._id))
 })
 
 /**
   * create bank account
  * @param  {Object} data
  * @param  {String} data.accountId - username
- * @param  {Object} data.customerId - customer mongodb object
+ * @param  {Object} data.citizenId - customer mongodb object
  * @param  {Object} data.accountType - acc type mongodb object
  * @param  {Object} data.branchId - branchid mongodb object
  * @param  {String} data.status - status  enum: ['ACTIVE', 'LOCK', 'ETC']
  * @returns {Object} - mongodb document
  */
 const create = data => new Promise(async (resolve, reject) => {
-  const customerValid = await customerValidation(data.customerId)
+  const customerValid = await customerValidation(data.citizenId)
+  console.log(customerValid)
   if (!customerValid) return reject(new Error('not found this citizenId in customer'))
+  data.customerId = customerValid
+  delete data.citizenId
+  console.log(data)
   const doc = new AccountSchema(data)
   doc.save(err => {
     if (err) reject(err)

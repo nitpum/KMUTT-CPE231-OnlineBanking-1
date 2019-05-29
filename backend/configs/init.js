@@ -68,27 +68,24 @@ const cheque=[{
 const customer =[{
     model:'customer',
     schema:{
-    username: { type: String, required: true },
-    password: { type: String, required: true },
+    username: 'Christ Hamwest',
+    password: '123456',
     name: {
-        firstName: { type: String, required: true },
-        lastName: { type: String, required: true }
+        firstName: 'Christ',
+        lastName: 'Hamwest'
     },
-    email: { type: String, required: true },
-    zipcode: { type: String, maxlength: 5 },
-    address: String,
-    birthDate: Date,
-    gender: { type: String, enum: ['M', 'F', 'U'], required: true },
-    citizenId: { type: String, maxlength: 13, required: true },
-    phone: { type: String, maxlength: 13, required: true },
-    lastAccess: Date,
-    status: { type: String, enum: ['ACTIVE', 'LOCKED', 'TOKEN', 'RESETPASS', 'ETC'], default: 'ACTIVE' },
+    email: 'christ.h@mail.com',
+    zipcode: '10140',
+    address: '33 Pracha-Utit road,TungKru,bangkok ',
+    birthDate: 1990-01-02,
+    gender: 'M',
+    citizenId:'3544455566777',
+    phone: '0909998877',
+    lastAccess: 2019-04-25,
+    status: 'LOCKED',
     favorite: [favoriteRef],
     notifications: [notifyRef],
     account: [accRef],
-    balance: { type: Number, default: 0 },
-
-    dateCreate: { type: Date, default: Date.now }
-
-}
+    balance: 10000,
+    }
 }]

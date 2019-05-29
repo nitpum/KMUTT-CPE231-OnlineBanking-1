@@ -10,6 +10,7 @@
           placeholder="0-000-000-000-000-000"
         ></text-label>
         <text-label label="Type" placeholder="Type"></text-label>
+        <text-label label="Status" placeholder="Status"></text-label>
         <text-label label="Bank" placeholder="Yee Bank"></text-label>
         <text-label label="Account ID" placeholder="Account ID"></text-label>
         <text-label label="Account Name" placeholder="Name"></text-label>
@@ -23,6 +24,17 @@
           v-if="editable"
           label="Drawee"
           placeholder="Drawee"
+          disabled="true"
+        ></v-text-field>
+        <text-label
+          v-if="!editable"
+          label="Payee"
+          placeholder="Payee"
+        ></text-label>
+        <v-text-field
+          v-if="editable"
+          label="Payee"
+          placeholder="Payee"
         ></v-text-field>
       </v-card-text>
       <v-card-actions>

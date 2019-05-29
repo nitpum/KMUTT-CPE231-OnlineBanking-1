@@ -3,8 +3,10 @@
     v-model="model"
     :mini-variant="minivariant"
     :color="color"
-    clipped
-    fixed
+    :clipped="clipped"
+    :fixed="fixed"
+    :right="right"
+    :floating="floating"
     app
   >
     <slot name="top" />
@@ -12,7 +14,12 @@
       <slot name="before-list" />
       <template v-for="(item, i) in items">
         <template v-if="item.children">
-          <v-list-group :key="i" v-model="item.model" :prepend-icon="item.icon">
+          <v-list-group
+            :key="i"
+            v-model="item.model"
+            :prepend-icon="item.icon"
+            :group="item.group"
+          >
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -60,13 +67,29 @@ export default {
       type: Boolean,
       default: null
     },
-    minivariant: {
+    clipped: {
       type: Boolean,
       default: true
     },
     color: {
       type: String,
       default: 'white'
+    },
+    minivariant: {
+      type: Boolean,
+      default: true
+    },
+    fixed: {
+      type: Boolean,
+      default: true
+    },
+    floating: {
+      type: Boolean,
+      default: false
+    },
+    right: {
+      type: Boolean,
+      default: false
     },
     items: {
       type: Array,

@@ -11,18 +11,22 @@
     <v-content>
       <nuxt />
     </v-content>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import Drawer from '@/components/Drawer.vue'
 import Toolbar from '@/components/Toolbar'
+import Snackbars from '@/components/core/Snackbars'
 import theme from './themes/admin'
 
 export default {
+  middleware: 'admin',
   components: {
     Drawer,
-    Toolbar
+    Toolbar,
+    Snackbars
   },
   data() {
     return {
@@ -37,11 +41,13 @@ export default {
         },
         {
           icon: 'mdi-clipboard-account',
-          title: 'Staff'
+          title: 'Staff',
+          to: '/admin/staff'
         },
         {
           icon: 'mdi-face',
-          title: 'Manager'
+          title: 'Manager',
+          to: '/admin/manager'
         },
         {
           icon: 'mdi-domain',
@@ -50,8 +56,13 @@ export default {
         },
         {
           icon: 'mdi-domain',
-          title: 'Organization & Services',
-          to: '/admin/organization_services'
+          title: 'Organization',
+          to: '/admin/organization'
+        },
+        {
+          icon: 'subscriptions',
+          title: 'Services',
+          to: '/admin/services'
         },
         {
           icon: 'mdi-cloud',

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    halo
-  </div>
+  <div></div>
 </template>
 
 <script>

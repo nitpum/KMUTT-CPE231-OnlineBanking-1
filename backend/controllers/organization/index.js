@@ -13,10 +13,18 @@ const QueryControllers = require('./query')
 const OrganizationModel = require('../../models/organization')
 
 const PERMISSION = {
-  default: ['admin', 'customer', 'manager', 'general'],
+  default: ['admin'],
   query: ['admin', 'customer', 'manager', 'general'],
   analytic: ['admin', 'manager', 'general']
 }
+
+router.use(['/analytic'], authen({ permission: PERMISSION.analytic }))
+router.use('/analytic', AnalytiicControllers)
+
+router.use(['/query'], authen({ permission: PERMISSION.query }))
+router.use('/query', QueryControllers)
+
+router.use(['/'], authen({ permission: PERMISSION.default }))
 
 router.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '../../views/organization/', 'create.html'))
@@ -26,7 +34,7 @@ router.post('/create', (req, res) => {
   const data = req.body
   OrganizationModel.create(data)
     .then(doc => res.send(doc))
-    .catch(err => res.send({
+    .catch(err => res.status(400).send({
       op: false,
       err: String(err)
     }))
@@ -42,8 +50,5 @@ router.post('/edit', (req, res) => {
       err: String(err)
     }))
 })
-
-router.use('/analytic', AnalytiicControllers)
-router.use('/query', QueryControllers)
 
 module.exports = router

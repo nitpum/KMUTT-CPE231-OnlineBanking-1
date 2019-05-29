@@ -16,12 +16,14 @@
     <v-content>
       <nuxt />
     </v-content>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import Drawer from '@/components/Drawer.vue'
 import Toolbar from '@/components/Toolbar'
+import Snackbars from '@/components/core/Snackbars'
 import theme from './themes/staff'
 import StaffInfo from '@/components/StaffInfo'
 
@@ -29,6 +31,7 @@ export default {
   components: {
     Drawer,
     Toolbar,
+    Snackbars,
     StaffInfo
   },
   data() {
@@ -40,6 +43,7 @@ export default {
         {
           icon: 'account_balance',
           title: 'Transactions',
+          group: '/staff/transactions/.*',
           children: [
             {
               icon: 'add',
@@ -73,6 +77,11 @@ export default {
           icon: 'mdi-checkbook',
           title: 'Cheque',
           to: '/staff/cheque'
+        },
+        {
+          icon: 'account_circle',
+          title: 'Customer',
+          to: '/staff/customer'
         }
       ],
       miniVariant: false,

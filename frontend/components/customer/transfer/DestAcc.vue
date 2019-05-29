@@ -2,13 +2,13 @@
   <v-layout row align-center>
     <v-flex grow>
       <v-select
-        v-model="bank"
+        v-model="ref1"
         :items="banks"
         item-value="id"
         item-text="name"
         label="Bank"
       />
-      <v-text-field v-model="acc" label="Account No." />
+      <v-text-field v-model="ref2" label="Account No." mask="###-#-#####-#" />
     </v-flex>
     <v-flex shrink>
       <contact @selected="fill" />
@@ -24,19 +24,14 @@ export default {
     Contact
   },
   data: () => ({
-    bank: null,
-    acc: null,
-    banks: [
-      {
-        id: 1,
-        name: 'Korbboon Bank Co, Ltd.'
-      }
-    ]
+    ref1: null,
+    ref2: null,
+    banks: []
   }),
   methods: {
     fill(val) {
-      this.bank = val.bankId
-      this.acc = val.acc
+      this.ref1 = val.ref1
+      this.ref2 = val.ref2
     }
   }
 }

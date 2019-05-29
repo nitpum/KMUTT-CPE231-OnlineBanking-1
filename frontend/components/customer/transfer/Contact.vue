@@ -7,19 +7,14 @@
     </v-btn>
 
     <v-card>
-      <v-toolbar>
-        <v-toolbar-title flat>
+      <v-card-title>
+        <h3 class="headline">
           Favorites
-        </v-toolbar-title>
+        </h3>
         <v-spacer />
-        <v-btn icon flat @click="dialog = false">
-          <v-icon>
-            close
-          </v-icon>
-        </v-btn>
-      </v-toolbar>
+        <add-contact :fetch="() => fetch()" />
+      </v-card-title>
       <v-card-text class="text-xs-right">
-        <add-contact />
         <v-list two-line>
           <v-list-tile
             v-for="(contact, i) in contacts"
@@ -34,12 +29,19 @@
                 {{ contact.bank }}
               </v-list-tile-sub-title>
               <v-list-tile-sub-title>
-                {{ contact.acc }}
+                {{ contact.ref2 }}
               </v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
       </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+
+        <v-btn flat color="primary" @click="dialog = false">
+          close
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -53,19 +55,29 @@ export default {
   },
   data: () => ({
     dialog: false,
-    contacts: [
-      {
-        name: 'Thuswongsa K.',
-        bank: 'Korbboon Bank Co, Ltd.',
-        bankId: 1,
-        acc: '325-9-71464-9'
-      }
-    ]
+    contacts: []
   }),
+  watch: {
+    dialog(val) {
+      if (val) {
+        this.fetch()
+      }
+    }
+  },
   methods: {
     selected(contact) {
       this.$emit('selected', contact)
       this.dialog = false
+    },
+    fetch() {
+      this.$axios
+        .get('/customer/payment/favorite')
+        .then(({ data }) => {
+          this.contacts = data
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/error', e.message)
+        })
     }
   }
 }

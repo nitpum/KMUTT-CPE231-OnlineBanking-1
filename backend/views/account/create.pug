@@ -1,0 +1,22 @@
+form(action="/account/create", method="post")
+    h3='bank account'
+    label(for="accountId") accountId
+    input(type="text" name="accountId" value=accountId)
+    br
+    label(for="balance") balance
+    input(type="text" name="balance" value=0)
+    br
+    label(for="branchId") branchId
+    select(name="branchId")
+        for branch in branchs
+            option(value=branch._id)=branch.name
+    br
+    label(for="accountType") accountType
+    select(name="accountType")
+        for type in types
+            option(value=types._id)=types.name
+    br
+    
+
+
+    button(type="submit") create

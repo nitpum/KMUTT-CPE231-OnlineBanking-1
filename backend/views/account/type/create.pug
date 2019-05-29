@@ -1,0 +1,25 @@
+form(action="/account/type/create", method="post")
+    h3='type bank account'
+    label(for="name") name
+    input(type="text" name="name")
+    br
+    label(for="balance") fee
+    input(type="number" name="fee" value=0)
+    br
+    label(for="interestMRound") interestMRound
+    input(type="number" name="interestMRound" value=12)
+    br
+    label(for="interest") interest
+    input(type="number" name="interest" value=1)
+    br
+    label(for="DepositRound") DepositRound
+    input(type="number" name="DepositRound" value=0)
+    br
+    label(for="minDeposit") minDeposit
+    input(type="number" name="minDeposit" value=0)
+    br
+    label(for="interestMin") interestMin
+    input(type="number" name="interestMin" value=1)
+
+
+    button(type="submit") create

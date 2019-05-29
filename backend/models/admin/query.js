@@ -2,7 +2,7 @@ const AdminModel = require('./schema')
 
 const query = {
   /**
-       * get all branch
+       * get all admin
        * @param  {Number} limit=5000 - list first 5000 branch order by indexed
        * @returns {Array} - mongodb object
        */

@@ -16,6 +16,10 @@
           placeholder="0.00 THB"
           type="number"
         ></v-text-field>
+        <v-text-field
+          label="Drawee Name"
+          placeholder="Drawee Name"
+        ></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

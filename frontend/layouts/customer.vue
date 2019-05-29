@@ -15,12 +15,14 @@
     <v-content>
       <nuxt />
     </v-content>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import drawer from '@/components/Drawer.vue'
 import toolbar from '@/components/Toolbar'
+import Snackbars from '@/components/core/Snackbars'
 import theme from './themes/customer'
 import Accounts from '@/components/customer/accounts/Switch'
 
@@ -29,6 +31,7 @@ export default {
   components: {
     drawer,
     toolbar,
+    Snackbars,
     Accounts
   },
   data() {
@@ -65,6 +68,7 @@ export default {
         {
           icon: 'build',
           title: 'Settings',
+          group: '/app/settings/.*',
           children: [
             {
               text: 'Change Username',

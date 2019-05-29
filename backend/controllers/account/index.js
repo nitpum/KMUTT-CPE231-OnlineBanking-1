@@ -26,6 +26,7 @@ router.get('/create', authen({ permission: PERMISSION.create }),
     const branchs = await BranchModel.query.all()
     const types = await AccountModel.type.query.all()
     const accId = await AccountModel.account.genId()
+
     res.render(path.join(__dirname, '../../views/account/', 'create'), {
       types: types,
       accountId: accId,
@@ -34,8 +35,14 @@ router.get('/create', authen({ permission: PERMISSION.create }),
   })
 
 router.post('/create', authen({ permission: PERMISSION.default }),
-  async (req, res) => {
-    res.send(req.body)
+  (req, res) => {
+    const data = req.body
+    AccountModel.account.create(data)
+      .then(doc => res.send(doc))
+      .catch(err => res.send({
+        op: false,
+        err: String(err)
+      }))
   })
 
 router.get('/', (req, res) => {

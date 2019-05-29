@@ -6,19 +6,15 @@ const router = express.Router()
 const AccountModel = require('../../../models/account')
 const BranchModel = require('../../../models/branch')
 
+// controllers
+const QueryControllers = require('./query')
+
 router.get('/', (req, res) => {
   res.send('bank type jaaa')
 })
 
-router.get('/create', async (req, res) => {
-  const branchs = await BranchModel.query.all()
-  const types = await AccountModel.type.query.all()
-  const accId = await AccountModel.account.genId()
-  res.render(path.join(__dirname, '../../../views/account/type', 'create'), {
-    types: types,
-    accountId: accId,
-    branchs: branchs
-  })
+router.get('/create', (req, res) => {
+  res.render(path.join(__dirname, '../../../views/account/type', 'create'))
 })
 
 router.post('/create', (req, res) => {
@@ -30,5 +26,7 @@ router.post('/create', (req, res) => {
       err: String(err)
     }))
 })
+
+router.use('/query', QueryControllers)
 
 module.exports = router

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
 const FavoriteSchema = require('./schema')
+const QueryModel = require('./query')
 
 /**
  * create customer user
@@ -32,5 +32,6 @@ const create = (data) => new Promise(async (resolve, reject) => {
 
 module.exports = {
   schema: FavoriteSchema,
-  create: create
+  query: QueryModel,
+  create
 }

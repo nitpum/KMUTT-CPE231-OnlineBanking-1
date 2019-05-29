@@ -12,7 +12,7 @@
           Favorites
         </h3>
         <v-spacer />
-        <add-contact />
+        <add-contact :fetch="() => fetch()" />
       </v-card-title>
       <v-card-text class="text-xs-right">
         <v-list two-line>
@@ -29,7 +29,7 @@
                 {{ contact.bank }}
               </v-list-tile-sub-title>
               <v-list-tile-sub-title>
-                {{ contact.acc }}
+                {{ contact.ref2 }}
               </v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -55,19 +55,29 @@ export default {
   },
   data: () => ({
     dialog: false,
-    contacts: [
-      {
-        name: 'Thuswongsa K.',
-        bank: 'Korbboon Bank Co, Ltd.',
-        bankId: 1,
-        acc: '325-9-71464-9'
-      }
-    ]
+    contacts: []
   }),
+  watch: {
+    dialog(val) {
+      if (val) {
+        this.fetch()
+      }
+    }
+  },
   methods: {
     selected(contact) {
       this.$emit('selected', contact)
       this.dialog = false
+    },
+    fetch() {
+      this.$axios
+        .get('/customer/payment/favorite')
+        .then(({ data }) => {
+          this.contacts = data
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/error', e.message)
+        })
     }
   }
 }

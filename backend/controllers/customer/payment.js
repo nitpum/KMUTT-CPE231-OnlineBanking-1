@@ -6,10 +6,13 @@ const FavoriteModel = require('../../models/favorite')
 
 router.get('/favorite', (req, res) => {
   /* list favorite */
+  FavoriteModel.query.customer(req.session.passport.user._id)
+    .then(doc => res.json(doc))
+    .catch(e => res.status(500).send(String(e)))
 })
 
 router.post('/favorite', (req, res) => {
-  /* list favorite */
+  /* new favorite */
   const { ref1, ref2, name } = req.body
   FavoriteModel
     .create({

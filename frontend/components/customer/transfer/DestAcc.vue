@@ -8,7 +8,7 @@
         item-text="name"
         label="Bank"
       />
-      <v-text-field v-model="acc" label="Account No." />
+      <v-text-field v-model="ref2" label="Account No." mask="###-#-#####-#" />
     </v-flex>
     <v-flex shrink>
       <contact @selected="fill" />
@@ -35,8 +35,8 @@ export default {
   }),
   methods: {
     fill(val) {
-      this.bank = val.bankId
-      this.acc = val.acc
+      this.bank = val.ref1
+      this.ref2 = val.ref2
     }
   }
 }

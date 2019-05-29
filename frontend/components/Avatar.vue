@@ -54,7 +54,7 @@
 export default {
   data: () => ({
     menu: false,
-    avatar: 'https://pbs.twimg.com/media/DsGJSBuVsAANIUN.jpg'
+    avatar: ''
   }),
   computed: {
     darkMode: {
@@ -73,6 +73,9 @@ export default {
       return this.$store.state.user.username
     }
   },
+  mounted() {
+    this.changeAvatar()
+  },
   methods: {
     logout() {
       const strategy = this.$store.state.auth.strategy
@@ -80,6 +83,11 @@ export default {
         if (strategy === 'customer') this.$router.push('/')
         else this.$router.push(`/${strategy}/login`)
       })
+    },
+    changeAvatar() {
+      this.avatar = `https://avatars.dicebear.com/v2/male/${
+        this.$store.state.user.name.firstName
+      }.svg`
     }
   }
 }

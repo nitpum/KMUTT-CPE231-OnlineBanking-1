@@ -20,6 +20,7 @@ import Toolbar from '@/components/Toolbar'
 import theme from './themes/admin'
 
 export default {
+  middleware: 'admin',
   components: {
     Drawer,
     Toolbar

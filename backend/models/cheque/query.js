@@ -30,6 +30,19 @@ const query = {
     chequeSchema.findById(id)
       .then(doc => resolve(doc))
       .catch(err => reject(err))
+  }),
+
+  /**
+       * get all cheque active
+       * @param {String} status - cheque status
+       * @param  {Number} limit=5000 - list first 5000 chrque order by indexed
+       * @returns {Array} - mongodb object
+       */
+  status: (status, limit = 5000) => new Promise((resolve, reject) => {
+    chequeSchema.find({ status: status })
+      .limit(limit)
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
   })
 }
 

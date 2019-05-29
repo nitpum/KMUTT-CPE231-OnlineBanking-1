@@ -7,4 +7,4 @@ const serviceRefTypeSchema = mongoose.Schema({
 
 serviceRefTypeSchema.index({ name: 'text' })
 
-module.exports = mongoose.model('serviceReference', serviceRefTypeSchema)
+module.exports = mongoose.model('serviceReferenceType', serviceRefTypeSchema)

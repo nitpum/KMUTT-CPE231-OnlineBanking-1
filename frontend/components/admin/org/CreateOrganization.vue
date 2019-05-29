@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" lazy max-width="500" persistent>
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" v-on="on">
+      <v-btn color="primary" class="my-0" v-on="on">
         Create Organization
       </v-btn>
     </template>

@@ -89,3 +89,14 @@ const customer =[{
     balance: 10000,
     }
 }]
+
+const favorite=[{
+    schema:{
+        customerId: customerRef,
+        ref1: '111111111111111',
+        ref2: '222222222222222',
+        name: 'Regina Gorge'
+
+    }
+}]
+const 

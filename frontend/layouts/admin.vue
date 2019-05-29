@@ -41,11 +41,13 @@ export default {
         },
         {
           icon: 'mdi-clipboard-account',
-          title: 'Staff'
+          title: 'Staff',
+          to: '/admin/staff'
         },
         {
           icon: 'mdi-face',
-          title: 'Manager'
+          title: 'Manager',
+          to: '/admin/manager'
         },
         {
           icon: 'mdi-domain',

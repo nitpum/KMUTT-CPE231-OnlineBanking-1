@@ -7,6 +7,7 @@
       data-no-underline
       readonly
       @click="dialog = true"
+      @click:append="dialog = true"
     ></v-text-field>
     <select-dialog v-model="dialog" @onSelect="select"></select-dialog>
   </div>

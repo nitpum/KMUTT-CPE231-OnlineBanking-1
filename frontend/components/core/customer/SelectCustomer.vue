@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     select(customer) {
-      this.value()(customer.id)
+      this.value(customer.id)
     }
   }
 }

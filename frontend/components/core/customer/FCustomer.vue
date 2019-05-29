@@ -4,7 +4,7 @@
       v-model="customerId"
       label="Customer ID"
       append-outer-icon="search"
-      @click:append-outer="select = () => selectFn"
+      @click:append-outer="select = selectFn()"
     />
     <select-customer v-model="select" />
   </div>
@@ -37,9 +37,11 @@ export default {
     }
   },
   methods: {
-    selectFn(val) {
-      this.customerId = val
-      this.select = null
+    selectFn() {
+      return val => {
+        this.customerId = val
+        this.select = null
+      }
     }
   }
 }

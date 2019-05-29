@@ -1,14 +1,38 @@
 <template>
-  <v-dialog v-model="model" lazy max-width="500">
+  <v-dialog v-model="model" lazy max-width="500" persistent>
     <v-card>
       <v-card-title primary-title>
         <h2>Create Branch</h2>
       </v-card-title>
       <v-card-text>
-        <v-text-field v-model="name" label="Branch Name" />
-        <v-textarea v-model="address" label="Address" />
-        <v-text-field v-model="zipcode" label="Zipcode" />
-        <v-text-field v-model="balance" label="Balance" type="number" />
+        <v-form v-model="valid">
+          <v-text-field
+            v-model="name"
+            label="Branch Name"
+            :rules="rules"
+            required
+          />
+          <v-textarea
+            v-model="address"
+            label="Address"
+            :rules="rules"
+            required
+          />
+          <v-text-field
+            v-model="zipcode"
+            label="Zipcode"
+            mask="#####"
+            :rules="rules"
+            required
+          />
+          <v-text-field
+            v-model="balance"
+            label="Balance"
+            type="number"
+            :rules="rules"
+            required
+          />
+        </v-form>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -16,12 +40,12 @@
         <v-btn
           color="primary"
           flat
-          @click="create()"
-          :disabled="loading"
           :loading="loading"
+          :disabled="disabled"
+          @click="create()"
         >
-          Submit</v-btn
-        >
+          Submit
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -40,7 +64,9 @@ export default {
     address: '',
     zipcode: '',
     balance: 0,
-    loading: false
+    loading: false,
+    valid: false,
+    rules: [v => !!v || 'Required']
   }),
   computed: {
     model: {
@@ -50,6 +76,9 @@ export default {
       set(val) {
         this.$emit('input', val)
       }
+    },
+    disabled() {
+      return !this.valid || this.loading
     }
   },
   methods: {

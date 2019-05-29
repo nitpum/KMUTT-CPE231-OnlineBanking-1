@@ -4,7 +4,7 @@ const staffRef = { type: mongoose.Schema.Types.ObjectId, ref: 'staff' }
 const accountIdRef = { type: mongoose.Schema.Types.ObjectId, ref: 'account' }
 const machineIdRef = { type: mongoose.Schema.Types.ObjectId, ref: 'machine' }
 const chequeIdRef = { type: mongoose.Schema.Types.ObjectId, ref: 'cheque' }
-const serviceRef = { type: mongoose.Schema.Types.ObjectId, ref: 'serviceReference' }
+const serviceRef = { type: mongoose.Schema.Types.ObjectId, ref: 'serviceReference', required: true }
 
 const transactionSchema = mongoose.Schema({
   timestamp: { type: Date, default: Date.now },

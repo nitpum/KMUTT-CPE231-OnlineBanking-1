@@ -17,7 +17,6 @@
           v-else
           v-model="firstName"
           label="Firstname"
-          placeholder="Firstname"
           required
         ></v-text-field>
         <text-label
@@ -30,7 +29,6 @@
           v-else
           v-model="lastName"
           label="Lastname"
-          placeholder="Lastname"
           required
         ></v-text-field>
         <text-label
@@ -43,7 +41,6 @@
           v-else
           v-model="gender"
           label="Gender"
-          placeholder="Gender"
           :items="genders"
           item-text="text"
           item-value="value"
@@ -59,7 +56,7 @@
           v-else
           v-model="citizenId"
           label="Citizen ID"
-          placeholder="Citizen ID"
+          mask="# #### ##### ## #"
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -71,7 +68,6 @@
           v-else
           v-model="address"
           label="Address"
-          placeholder="Address"
           required
         ></v-text-field>
         <text-label
@@ -84,7 +80,7 @@
           v-else
           v-model="zipcode"
           label="Zipcode"
-          placeholder="Zipcode"
+          mask="#####"
           :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
           required
         ></v-text-field>
@@ -106,31 +102,21 @@
           placeholder="Role"
           :text="role"
         ></text-label>
-        <v-select
-          v-else
-          v-model="role"
-          label="Role"
-          placeholder="Role"
-          :items="roles"
-          required
-        />
+        <v-select v-else v-model="role" label="Role" :items="roles" required />
         <v-text-field
           v-if="editable && passwordEditable"
           v-model="username"
           label="Username"
-          placeholder="Username"
         />
         <v-text-field
           v-if="editable && passwordEditable"
           v-model="email"
           label="Email"
-          placeholder="Email"
         />
         <v-text-field
           v-if="editable && passwordEditable"
           v-model="password"
           label="Password"
-          placeholder="Password"
           type="password"
         />
       </v-card-text>

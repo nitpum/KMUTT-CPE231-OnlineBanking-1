@@ -12,4 +12,4 @@ const machineSchema = mongoose.Schema({
     Bank100: Number
 })
 
-module.exports = mongoose.model('Machine', machineSchema) 
+module.exports = mongoose.model('Machine', machineSchema)

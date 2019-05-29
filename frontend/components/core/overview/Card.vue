@@ -8,15 +8,21 @@
     </v-sheet>
     <v-card-actions>
       <v-spacer />
-      <v-btn flat color="primary" :to="to">
+      <v-btn flat color="primary" @click="dialog = true">
         more info
       </v-btn>
+      <card-dialog v-model="dialog" />
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import CardDialog from './CardDialog'
+
 export default {
+  components: {
+    CardDialog
+  },
   props: {
     color: {
       type: String,
@@ -29,11 +35,10 @@ export default {
     title: {
       type: String,
       default: ''
-    },
-    to: {
-      type: String,
-      default: ''
     }
-  }
+  },
+  data: () => ({
+    dialog: false
+  })
 }
 </script>

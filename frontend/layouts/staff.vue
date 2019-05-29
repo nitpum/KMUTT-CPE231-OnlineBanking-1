@@ -76,8 +76,9 @@ export default {
           to: '/staff/cheque'
         },
         {
-          icon: 'mdi-checkbook',
-          title: 'Customer'
+          icon: 'account_circle',
+          title: 'Customer',
+          to: '/staff/customer'
         }
       ],
       miniVariant: false,

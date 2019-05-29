@@ -1,6 +1,7 @@
 const path = require('path')
 const passport = require('passport')
 const express = require('express')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 // helpers
@@ -123,6 +124,36 @@ router.get('/delete', (req, res) => {
     .catch(err => res.send({
       op: false,
       err: String(err)
+    }))
+})
+
+router.patch('/me', async (req, res) => {
+  const id = req.session.passport.user._id
+  let set
+  const {
+    password, newPassword, newUsername
+  } = req.body
+
+  const hashPwd = (await CustomerModel.query.id(id)).password
+
+  if (!await bcrypt.compare(password, hashPwd)) {
+    /* incorrect password */
+    return res.sendStatus(401)
+  }
+
+  if (newUsername) {
+    set = { username: newUsername }
+  } else if (newPassword) {
+    set = { password: newPassword }
+  } else {
+    return res.sendStatus(400)
+  }
+
+  CustomerModel.edit(id, set)
+    .then(doc => res.send(doc))
+    .catch(err => res.send({
+      op: false,
+      err: err
     }))
 })
 

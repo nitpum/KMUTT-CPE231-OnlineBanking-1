@@ -33,9 +33,10 @@ router.get('/create', async (req, res) => {
 
 router.post('/create', (req, res) => {
   const data = req.body
-  chequeModel(data)
+  chequeModel
+    .create(data)
     .then(doc => res.send(doc))
-    .then(err => res.status(400).send(String(err)))
+    .catch(err => res.status(400).send(String(err)))
 })
 
 module.exports = router

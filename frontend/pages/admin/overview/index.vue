@@ -2,7 +2,7 @@
   <v-container grid-list-xl>
     <v-layout row wrap>
       <v-flex v-for="(card, i) in cards" :key="'ov-card-' + i" xs12 sm6>
-        <overview-card :title="card.title" :color="card.color">
+        <overview-card :title="card.title" :color="card.color" :to="card.to">
           <span class="display-3">
             {{ card.value }}
           </span>
@@ -25,7 +25,8 @@ export default {
       {
         title: 'Daily Active User',
         value: '300,342',
-        color: '#00BCD4'
+        color: '#00BCD4',
+        to: '/admin/overview/active-user'
       },
       {
         title: 'Daily New User',

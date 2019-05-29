@@ -6,9 +6,9 @@ const PERMISSION = {
   default: ['admin', 'general', 'manager', 'customer'],
   query: ['admin', 'general', 'manager', 'customer'],
   analytic: ['admin', 'general', 'manager'],
-  create: ['general', 'manager'],
-  edit: ['general', 'manager'],
-  delete: ['general', 'manager']
+  create: ['general'],
+  edit: ['general'],
+  delete: ['general']
 }
 
 // helpers
@@ -35,7 +35,7 @@ router.get('/create', authen({ permission: PERMISSION.create }),
     })
   })
 
-router.post('/create', authen({ permission: PERMISSION.default }),
+router.post('/create', authen({ permission: PERMISSION.create }),
   (req, res) => {
     const data = req.body
     AccountModel.account.create(data)

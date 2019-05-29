@@ -51,18 +51,21 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <Dialog />
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import Heatmap from '@/components/admin/org/Heatmap'
+import Dialog from '@/components/admin/service/Dialog'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    Heatmap
+    Heatmap,
+    Dialog
   },
   data: () => ({
     showHeatmap: false,

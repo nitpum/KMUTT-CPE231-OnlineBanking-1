@@ -29,7 +29,7 @@
       :data="data"
       :password-editable="passwordEditable"
       :editable="true"
-      :submit-mode="dialogType"
+      :mode="dialogType"
       @onSubmit="createStaff"
     />
   </v-container>

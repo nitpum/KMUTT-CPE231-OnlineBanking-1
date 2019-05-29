@@ -97,7 +97,11 @@
           required
         />
         <text-label
-          v-if="!editable"
+          v-if="
+            !editable ||
+              fixedPosition === 'staff' ||
+              fixedPosition === 'manager'
+          "
           label="Role"
           placeholder="Role"
           :text="role"
@@ -183,6 +187,10 @@ export default {
           email: ''
         }
       }
+    },
+    fixedPosition: {
+      type: String,
+      default: ''
     },
     passwordEditable: {
       type: Boolean,
@@ -292,6 +300,8 @@ export default {
     },
     role: {
       get() {
+        if (this.fixedPosition === 'staff' || this.fixedPosition === 'manager')
+          return this.fixedPosition
         return this.data.role
       },
       set(val) {
@@ -382,7 +392,8 @@ export default {
         username: this.data.username,
         password: this.password,
         email: this.data.email,
-        phone: '0'
+        phone: '0',
+        permission: this.role
       }
       this.loading = true
       this.$axios
@@ -425,6 +436,7 @@ export default {
         zipcode: this.zipcode,
         birthDate: this.birthDate,
         position: this.role,
+        permission: this.role,
         phone: '0'
       }
       if (this.passwordEditable) {

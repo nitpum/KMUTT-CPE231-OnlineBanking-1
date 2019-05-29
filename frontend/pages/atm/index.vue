@@ -3,6 +3,25 @@
     <v-container>
       <h1>พื้นที่ โฆษณาจ้า!</h1>
     </v-container>
+    <v-card-text>
+      <v-form>
+        <v-text-field
+          v-model="cardNo"
+          prepend-icon="mdi-credit-card"
+          name="cardNo"
+          label="CardNo"
+          type="text"
+        />
+        <v-text-field
+          v-model="pin"
+          prepend-icon="lock"
+          name="pin"
+          label="PIN"
+          type="password"
+          @keyup.enter="signIn()"
+        />
+      </v-form>
+    </v-card-text>
     <v-bottom-sheet
       :hide-overlay="true"
       :value="true"

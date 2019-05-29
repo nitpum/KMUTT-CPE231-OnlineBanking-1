@@ -20,7 +20,7 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <branch-list />
+          <branch-list :items="branchs" />
         </v-card>
       </v-flex>
     </v-layout>
@@ -52,6 +52,8 @@ export default {
       mostTransaction: 300,
       avgTranPStaff: 5
     },
+    branch: {},
+    branchs: [],
     overviews: [
       [
         {
@@ -84,9 +86,21 @@ export default {
       ]
     ]
   }),
+  created() {
+    this.fetch()
+  },
   methods: {
     createBranch() {
       this.createDialog = false
+      this.fetch()
+    },
+    fetch() {
+      this.$axios.get('/branch/').then(res => {
+        this.data.totalBranch = res.data.n
+      })
+      this.$axios.get('/branch/query').then(res => {
+        this.branchs = res.data
+      })
     }
   }
 }

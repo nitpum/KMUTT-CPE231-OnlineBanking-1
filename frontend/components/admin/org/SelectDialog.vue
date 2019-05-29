@@ -44,10 +44,8 @@ export default {
     }
   },
   data: () => ({
-    name: '',
-    address: '',
-    zipcode: '',
-    orgs: [{ name: 'Bill Gate', type: 'Bank' }]
+    search: '',
+    orgs: []
   }),
   computed: {
     model: {
@@ -59,8 +57,18 @@ export default {
       }
     }
   },
+  mounted() {
+    this.fetch()
+  },
   methods: {
-    select(org) {}
+    select(org) {
+      this.$emit('onSelect', org)
+    },
+    fetch() {
+      this.$axios.get('/organization/query').then(res => {
+        this.orgs = res.data
+      })
+    }
   }
 }
 </script>

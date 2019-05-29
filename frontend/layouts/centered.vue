@@ -7,5 +7,17 @@
         </v-layout>
       </v-container>
     </v-content>
+
+    <snackbars />
   </v-app>
 </template>
+
+<script>
+import Snackbars from '@/components/core/Snackbars'
+
+export default {
+  components: {
+    Snackbars
+  }
+}
+</script>

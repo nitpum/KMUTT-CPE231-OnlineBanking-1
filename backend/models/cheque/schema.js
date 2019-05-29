@@ -11,7 +11,7 @@ const chequeSchema = mongoose.Schema({
   amount: { type: Number, default: 0 },
   payee: String,
   type: { type: String, enum: ['CASH', 'ORDER', 'ETC'] },
-  status: { type: String, enum: ['ACTIVE', 'REJECT', 'ETC'] },
+  status: { type: String, enum: ['ACTIVE', 'REJECT', 'ETC', 'PAY'] },
   drawee: { type: String, required: true },
   created: { type: Date, default: Date.now },
   drawDate: { type: Date, required: true }

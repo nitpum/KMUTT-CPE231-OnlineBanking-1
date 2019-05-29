@@ -1,13 +1,11 @@
 <template>
-  <v-dialog v-model="dialog" lazy max-width="500" persistent>
-    <template v-slot:activator="{ on }">
-      <v-btn color="primary" class="my-0" v-on="on">
-        Create Organization
-      </v-btn>
-    </template>
+  <v-dialog v-model="dialog" lazy max-width="400" persistent>
     <v-card>
       <v-card-title primary-title>
-        <h2>Create Organization</h2>
+        <h2>
+          {{ mode === 'create' ? 'Create ' : '' }}
+          Organization
+        </h2>
       </v-card-title>
       <v-card-text>
         <v-text-field v-model="name" label="Organization Name" required />
@@ -34,7 +32,7 @@
           flat
           :loading="loading"
           :disabled="disabled"
-          @click="create()"
+          @click="submit"
         >
           Submit
         </v-btn>
@@ -49,14 +47,26 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    mode: {
+      type: String,
+      default: 'create'
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+    bankSwift: {
+      type: String,
+      default: ''
+    },
+    bankAccount: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
-    dialog: false,
-    name: '',
-    type: '',
-    bankSwift: '',
-    bankAccount: '',
+    value: false,
     types: [
       {
         text: 'Bank',
@@ -74,6 +84,14 @@ export default {
     loading: false
   }),
   computed: {
+    dialog: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        this.$emit('input', val)
+      }
+    },
     disabled() {
       return (
         !this.name ||
@@ -85,6 +103,10 @@ export default {
     }
   },
   methods: {
+    submit() {
+      if (this.mode === 'create') this.create()
+      else if (this.mode === 'update') this.update()
+    },
     create() {
       this.loading = true
       this.$axios
@@ -100,6 +122,11 @@ export default {
           this.type = ''
           this.bankSwift = ''
           this.bankAccount = ''
+          this.$emit('onSubmitSuccess').$store.dispatch(
+            'snackbars/success',
+            'Success'
+          )
+          this.$emit('created')
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)
@@ -107,7 +134,8 @@ export default {
         .finally(() => {
           this.loading = false
         })
-    }
+    },
+    update() {}
   }
 }
 </script>

@@ -5,6 +5,7 @@ const AccTypeSchema = require('./type/schema')
 const AccountQueryModel = require('./query')
 const AccountTypesModel = require('./type')
 const CustomerModel = require('../customer')
+const TransactionModel = require('./transaction')
 
 const generateAccId = () => new Promise(async (resolve, reject) => {
   const stringGen = (len) => {
@@ -111,7 +112,9 @@ const account = {
   edit: edit,
   delete: remove,
   query: AccountQueryModel,
-  genId: generateAccId
+  genId: generateAccId,
+  transaction: TransactionModel,
+  schema: AccountSchema
 }
 
 module.exports = {

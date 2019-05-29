@@ -28,6 +28,7 @@ import theme from './themes/manager'
 import StaffInfo from '@/components/StaffInfo'
 
 export default {
+  middleware: 'manager',
   components: {
     Drawer,
     Toolbar,

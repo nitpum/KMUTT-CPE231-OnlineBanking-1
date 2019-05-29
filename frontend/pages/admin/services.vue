@@ -44,30 +44,40 @@
               Service List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0">CREATE SERVICE</v-btn>
+            <v-btn color="primary" class="my-0" @click="openCreateDialog"
+              >CREATE SERVICE</v-btn
+            >
           </v-card-title>
           <v-divider />
-          table here
+          <list :items="list" @onItemClick="openDialog" />
         </v-card>
       </v-flex>
     </v-layout>
+    <Dialog v-model="createDialog" />
+    <Dialog v-model="editDialog" :data="item" />
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
 import Heatmap from '@/components/admin/org/Heatmap'
+import Dialog from '@/components/admin/service/Dialog'
+import List from '@/components/admin/service/Lists'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    Heatmap
+    Heatmap,
+    Dialog,
+    List
   },
   data: () => ({
     showHeatmap: false,
     from: undefined,
     to: undefined,
+    createDialog: false,
+    editDialog: false,
     data: {
       totalService: 850,
       avgSPO: 5,
@@ -75,6 +85,24 @@ export default {
       todayService: 800,
       thisMonthService: 421561
     },
+    item: {
+      _id: '',
+      organization: {
+        _id: '',
+        bankAccount: '',
+        bankSwift: '',
+        name: '',
+        type: ''
+      },
+      detail: '',
+      fee: 0,
+      type: {
+        _id: '',
+        name: '',
+        type: ''
+      }
+    },
+    list: [],
     overviews: [
       [
         {
@@ -104,6 +132,32 @@ export default {
   }),
   mounted() {
     this.showHeatmap = true
+    this.fetch()
+  },
+  methods: {
+    openCreateDialog() {
+      this.createDialog = true
+      this.editDialog = false
+    },
+    openDialog(item) {
+      this.createDialog = false
+      this.editDialog = true
+      this.item = { ...item }
+    },
+    fetch() {
+      this.$axios.get('/service-reference/query').then(res => {
+        this.list = []
+        res.data.forEach(item => {
+          this.list.push({
+            _id: item._id,
+            organization: item.organizationId,
+            detail: item.detail,
+            fee: item.fee,
+            type: item.typeId
+          })
+        })
+      })
+    }
   }
 }
 </script>

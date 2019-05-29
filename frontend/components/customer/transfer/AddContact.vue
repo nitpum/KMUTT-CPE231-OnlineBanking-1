@@ -40,6 +40,12 @@
 
 <script>
 export default {
+  props: {
+    fetch: {
+      type: Function,
+      default: null
+    }
+  },
   data: () => ({
     dialog: false,
     name: '',
@@ -70,6 +76,7 @@ export default {
           this.ref2 = ''
           this.dialog = false
           this.$store.dispatch('snackbars/success', 'Success')
+          this.fetch()
         })
         .catch(e => {
           this.$store.dispatch('snackbars/error', e.message)

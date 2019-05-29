@@ -24,6 +24,7 @@ const configDB = require('./configs/db')
 mongoose.connect(
   configDB.url, configDB.options
 )
+mongoose.set('useFindAndModify', false)
 
 app.use(passport.initialize())
 app.use(passport.session())

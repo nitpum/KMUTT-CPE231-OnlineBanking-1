@@ -5,88 +5,164 @@
         <overview-info
           :overviews="overviews"
           :data="data"
-          title="Branch Overview"
+          title="Manager Overview"
         />
       </v-flex>
       <v-flex>
         <v-card>
           <v-card-title>
             <h3 class="headline mb-0">
-              Branch List
+              Manager List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0" @click="createDialog = true">
-              Create Branch
+            <v-btn color="primary" class="my-0" @click="openCreateDialog">
+              Create Manager
             </v-btn>
           </v-card-title>
           <v-divider />
-          <branch-list />
+          <list :items="items" @onItemClick="showItem" />
         </v-card>
       </v-flex>
     </v-layout>
-    <create-dialog v-model="createDialog" @onSubmit="createBranch" />
+    <Dialog
+      v-model="dialog"
+      mode="create"
+      :editable="true"
+      :password-editable="passwordEditable"
+      title="Create Manager"
+      :data="data"
+      :fixed-position="fixedPosition"
+      @onSubmit="createManager"
+    />
   </v-container>
 </template>
 
 <script>
 import OverviewInfo from '@/components/core/overview/Info'
-import BranchList from '@/components/admin/BranchList'
-import CreateDialog from '@/components/admin/branch/CreateDialog'
+import List from '@/components/admin/staff/List'
+import Dialog from '@/components/core/staff/Dialog'
 
 export default {
   layout: 'admin',
   components: {
     OverviewInfo,
-    BranchList,
-    CreateDialog
+    List,
+    Dialog
   },
   data: () => ({
     from: undefined,
     to: undefined,
-    createDialog: false,
+    dialog: false,
+    dialogType: 'create',
+    passwordEditable: false,
+    fixedPosition: 'manager',
     data: {
-      totalBranch: 120,
-      minStaff: 10,
-      maxStaff: 40,
-      avgStaff: 20,
-      mostTransaction: 300,
-      avgTranPStaff: 5
+      name: {
+        firstName: '',
+        lastName: ''
+      },
+      gender: 'Male',
+      citizenId: '',
+      address: '',
+      zipcode: '',
+      birthDate: new Date(),
+      role: '',
+      username: '',
+      password: '',
+      email: ''
     },
     overviews: [
       [
         {
-          key: 'totalBranch',
-          label: 'Total Branch'
+          key: 'totalManager',
+          label: 'Total Manager'
         },
         {
-          key: 'minStaff',
-          label: 'Minimum Staff'
+          key: 'avgAge',
+          label: 'Average Age'
         },
         {
-          key: 'maxStaff',
-          label: 'Maximum Staff'
+          key: 'maxAge',
+          label: 'Minimum Age'
         },
         {
-          key: 'avgStaff',
-          label: 'Average Staff'
+          key: 'avgAge',
+          label: 'Maximum Age'
         }
       ],
       [
         {
-          key: 'mostTransaction',
-          label: 'Most Transaction',
-          suffix: '(BangMod)'
+          key: 'mostWorkday',
+          label: 'Most Workday'
         },
         {
-          key: 'avgTranPStaff',
-          label: 'Average Transaction / Staff'
+          key: 'minWorkday',
+          label: 'Minimum Workday'
+        },
+        {
+          key: 'avgWorkday',
+          label: 'Average Workday'
         }
       ]
-    ]
+    ],
+    items: []
   }),
+  mounted() {
+    this.fetch()
+  },
   methods: {
-    createBranch() {
+    createManager() {
       this.createDialog = false
+      this.fetch()
+    },
+    fetch() {
+      this.$axios
+        .get('/staff/manager/query')
+        .then(res => {
+          this.items = res.data
+        })
+        .catch(e => {
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
+        })
+    },
+    openCreateDialog() {
+      this.dialog = true
+      this.dialogType = 'create'
+      this.passwordEditable = true
+      this.fixedPosition = 'manager'
+      this.data = {
+        name: {
+          firstName: '',
+          lastName: ''
+        },
+        gender: 'Male',
+        citizenId: '',
+        address: '',
+        zipcode: '',
+        birthDate: new Date(),
+        role: '',
+        password: ''
+      }
+    },
+    showItem(item) {
+      this.dialog = true
+      this.dialogType = 'update'
+      this.passwordEditable = false
+      this.fixedPosition = ''
+      this.data.id = item._id
+      this.data.name = item.name
+      this.data.gender = item.gender
+      this.data.zipcode = item.zipcode
+      this.data.address = item.address
+      this.data.birthDate = item.birthDate
+      if (item.branch) {
+        this.data.branch = item.branch
+      }
+      this.data.citizenId = item.citizenId
+      this.data.role = item.position
     }
   }
 }

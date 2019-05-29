@@ -24,6 +24,7 @@
           v-if="editable"
           label="Drawee"
           placeholder="Drawee"
+          disabled="true"
         ></v-text-field>
         <text-label
           v-if="!editable"

@@ -148,7 +148,7 @@ const staff =[{
 const transaction=[{
     model:'transaction',
     schema:{
-        timestamp: default,
+        timestamp: new Date,
         type: 'TRANSFER',
         amount: 2000,
         balance: 1000,

@@ -4,12 +4,13 @@ const AccTypeSchema = require('./type/schema')
 // models
 const AccountQueryModel = require('./query')
 const AccountTypesModel = require('./type')
+const CustomerModel = require('../customer')
 
 const generateAccId = () => new Promise(async (resolve, reject) => {
-  function stringGen (len) {
+  const stringGen = (len) => {
     let text = ''
     let charset = '0123456789'
-    for (var i = 0; i < len; i++) { text += charset.charAt(Math.floor(Math.random() * charset.length))}
+    for (var i = 0; i < len; i++) { text += charset.charAt(Math.floor(Math.random() * charset.length)) }
     return text
   }
 
@@ -29,6 +30,12 @@ const generateAccId = () => new Promise(async (resolve, reject) => {
   }
 })
 
+const customerValidation = (id) => new Promise(async (resolve, reject) => {
+  const doc = await CustomerModel.query.citizenId(id)
+  console.log(doc)
+  if (doc) resolve(doc)
+})
+
 /**
   * create bank account
  * @param  {Object} data
@@ -39,7 +46,9 @@ const generateAccId = () => new Promise(async (resolve, reject) => {
  * @param  {String} data.status - status  enum: ['ACTIVE', 'LOCK', 'ETC']
  * @returns {Object} - mongodb document
  */
-const create = data => new Promise((resolve, reject) => {
+const create = data => new Promise(async (resolve, reject) => {
+  const customerValid = await customerValidation(data.customerId)
+  if (!customerValid) return reject(new Error('not found this citizenId in customer'))
   const doc = new AccountSchema(data)
   doc.save(err => {
     if (err) reject(err)

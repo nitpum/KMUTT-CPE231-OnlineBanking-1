@@ -20,17 +20,18 @@
             </v-btn>
           </v-card-title>
           <v-divider />
-          <list :items="items" />
+          <list :items="items" @onItemClick="showItem" />
         </v-card>
       </v-flex>
     </v-layout>
     <Dialog
-      v-model="createDialog"
+      v-model="dialog"
       mode="create"
       :editable="true"
-      :password-editable="true"
+      :password-editable="passwordEditable"
       title="Create Manager"
-      fixed-position="manager"
+      :data="data"
+      :fixed-position="fixedPosition"
       @onSubmit="createManager"
     />
   </v-container>
@@ -51,15 +52,24 @@ export default {
   data: () => ({
     from: undefined,
     to: undefined,
-    createDialog: false,
+    dialog: false,
+    dialogType: 'create',
+    passwordEditable: false,
+    fixedPosition: 'manager',
     data: {
-      totalManager: 120,
-      avgAge: 10,
-      maxAge: 40,
-      minAge: 20,
-      mostWorkday: 300,
-      minWorkday: 5,
-      avgWorkday: 10
+      name: {
+        firstName: '',
+        lastName: ''
+      },
+      gender: 'Male',
+      citizenId: '',
+      address: '',
+      zipcode: '',
+      birthDate: new Date(),
+      role: '',
+      username: '',
+      password: '',
+      email: ''
     },
     overviews: [
       [
@@ -101,9 +111,6 @@ export default {
     this.fetch()
   },
   methods: {
-    openCreateDialog() {
-      this.createDialog = true
-    },
     createManager() {
       this.createDialog = false
       this.fetch()
@@ -120,6 +127,42 @@ export default {
             e.response.status === 400 ? e.response.data.err : e.message
           )
         })
+    },
+    openCreateDialog() {
+      this.dialog = true
+      this.dialogType = 'create'
+      this.passwordEditable = true
+      this.fixedPosition = 'manager'
+      this.data = {
+        name: {
+          firstName: '',
+          lastName: ''
+        },
+        gender: 'Male',
+        citizenId: '',
+        address: '',
+        zipcode: '',
+        birthDate: new Date(),
+        role: '',
+        password: ''
+      }
+    },
+    showItem(item) {
+      this.dialog = true
+      this.dialogType = 'update'
+      this.passwordEditable = false
+      this.fixedPosition = ''
+      this.data.id = item._id
+      this.data.name = item.name
+      this.data.gender = item.gender
+      this.data.zipcode = item.zipcode
+      this.data.address = item.address
+      this.data.birthDate = item.birthDate
+      if (item.branch) {
+        this.data.branch = item.branch
+      }
+      this.data.citizenId = item.citizenId
+      this.data.role = item.position
     }
   }
 }

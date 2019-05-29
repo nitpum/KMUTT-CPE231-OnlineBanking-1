@@ -12,7 +12,12 @@
     />
     <v-layout row wrap>
       <v-flex v-for="(account, i) in accounts" :key="i" md4 sm12 xs12 mb-3 pr-3>
-        <card :show-revoke-btn="true"></card>
+        <card
+          :show-revoke-btn="true"
+          :account-id="account.accountId"
+          :holder="account.holder"
+          :branch="account.branch"
+        />
       </v-flex>
     </v-layout>
   </v-container>
@@ -29,8 +34,17 @@ export default {
     CreateDialog
   },
   data: () => ({
-    accounts: [{}, {}, {}],
+    accounts: [],
     createDialog: false
-  })
+  }),
+  mounted() {
+    this.$axios.get('/account/query/branch/me').then(({ data }) => {
+      this.accounts = data.map(({ accountId, holder, branch }) => ({
+        accountId,
+        holder,
+        branch
+      }))
+    })
+  }
 }
 </script>

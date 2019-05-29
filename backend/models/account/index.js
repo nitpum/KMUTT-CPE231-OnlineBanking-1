@@ -99,10 +99,11 @@ const account = {
   edit: edit,
   delete: remove,
   query: AccountQueryModel,
-  genId: generateAccId
+  genId: generateAccId,
+  schema: AccountSchema
 }
 
 module.exports = {
   account: account,
-  type: AccountTypesModel
+  type: AccountTypesModel,
 }

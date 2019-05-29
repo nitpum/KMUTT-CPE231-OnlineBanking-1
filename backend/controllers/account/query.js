@@ -19,4 +19,47 @@ router.get('/', (req, res) => {
   }
 })
 
+router.get('/branch/me', async (req, res) => {
+  const accounts = await AccountModel.account.schema.aggregate([
+    // {
+    //   $match: {
+    //     branchId: req.session.passport.user.branch
+    //   }
+    // }
+    {
+      $lookup: {
+        from: 'customers',
+        localField: 'customerId',
+        foreignField: '_id',
+        as: 'customer'
+      }
+    },
+    {
+      $lookup: {
+        from: 'branches',
+        localField: 'branchId',
+        foreignField: '_id',
+        as: 'branch'
+      }
+    },
+    {
+      $project: {
+        accountId: 1,
+        holder: {
+          $concat: [
+            { $arrayElemAt: ['$customer.name.firstName', 0] },
+            ' ',
+            { $arrayElemAt: ['$customer.name.lastName', 0] }
+          ]
+        },
+        branch: { 
+          $arrayElemAt: ['$branch.name', 0]
+        }
+      }
+    }
+  ])
+  res.send(accounts)
+  // res.send(accounts.filter(el => String(el.branchId) === String(req.session.passport.user.branch)))
+})
+
 module.exports = router

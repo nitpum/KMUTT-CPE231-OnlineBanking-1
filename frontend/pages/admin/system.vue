@@ -39,11 +39,6 @@ export default {
         color: '#EC008C'
       },
       {
-        title: 'OTP Reqeust Per Hours',
-        value: '3,243',
-        color: '#FF9800'
-      },
-      {
         title: 'Transaction Per Hours',
         value: '48,021',
         color: '#9C27B0'

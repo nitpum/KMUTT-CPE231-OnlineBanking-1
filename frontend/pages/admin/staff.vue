@@ -15,19 +15,12 @@
               Staff List
             </h3>
             <v-spacer />
-            <v-btn
-              color="primary"
-              class="my-0"
-              @click="
-                dialog = true
-                dialogType = 'create'
-              "
-            >
+            <v-btn color="primary" class="my-0" @click="openCreateDialog">
               Create Staff
             </v-btn>
           </v-card-title>
           <v-divider />
-          <list :items="items" />
+          <list :items="items" @onItemClick="showItem" />
         </v-card>
       </v-flex>
     </v-layout>
@@ -61,7 +54,10 @@ export default {
     dialog: false,
     dialogType: 'create',
     data: {
-      name: '',
+      name: {
+        firstName: '',
+        lastName: ''
+      },
       gender: 'Male',
       citizenId: '',
       address: '',
@@ -114,6 +110,35 @@ export default {
             e.response.status === 400 ? e.response.data.err : e.message
           )
         })
+    },
+    openCreateDialog() {
+      this.dialog = true
+      this.dialogType = 'create'
+      this.data = {
+        name: {
+          firstName: '',
+          lastName: ''
+        },
+        gender: 'Male',
+        citizenId: '',
+        address: '',
+        zipcode: '',
+        birthDate: new Date(),
+        role: '',
+        password: ''
+      }
+    },
+    showItem(item) {
+      this.dialog = true
+      this.dialogType = 'update'
+      this.data.id = item._id
+      this.data.name = item.name
+      this.data.gender = item.gender
+      this.data.zipcode = item.zipcode
+      this.data.address = item.address
+      this.data.birthDate = item.birthDate
+      this.data.citizenId = item.citizenId
+      this.data.role = item.position
     }
   }
 }

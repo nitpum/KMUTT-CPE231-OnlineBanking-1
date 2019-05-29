@@ -5,19 +5,16 @@
         <overview-info
           :overviews="overviews"
           :data="data"
-          title="Branch Overview"
+          title="Manager Overview"
         />
       </v-flex>
       <v-flex>
         <v-card>
           <v-card-title>
             <h3 class="headline mb-0">
-              Branch List
+              Manager List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0" @click="createDialog = true">
-              Create Branch
-            </v-btn>
           </v-card-title>
           <v-divider />
           <branch-list />

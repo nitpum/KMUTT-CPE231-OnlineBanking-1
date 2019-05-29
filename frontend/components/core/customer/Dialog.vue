@@ -17,7 +17,6 @@
           v-else
           v-model="firstName"
           label="Firstname"
-          placeholder="Firstname"
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -25,12 +24,7 @@
           placeholder="Lastname"
           :text="lastName"
         ></text-label>
-        <v-text-field
-          v-else
-          v-model="lastName"
-          label="Lastname"
-          placeholder="Lastname"
-        ></v-text-field>
+        <v-text-field v-else v-model="lastName" label="Lastname"></v-text-field>
         <text-label
           v-if="!editable"
           label="Gender"
@@ -41,7 +35,6 @@
           v-else
           v-model="gender"
           label="Gender"
-          placeholder="Gender"
           :items="genders"
           item-text="text"
           item-value="value"
@@ -56,7 +49,6 @@
           v-else
           v-model="citizenId"
           label="Citizen ID"
-          placeholder="Citizen ID"
         ></v-text-field>
         <text-label
           v-if="!editable"
@@ -64,12 +56,7 @@
           placeholder="Address"
           :text="address"
         ></text-label>
-        <v-text-field
-          v-else
-          v-model="address"
-          label="Address"
-          placeholder="Address"
-        ></v-text-field>
+        <v-text-field v-else v-model="address" label="Address"></v-text-field>
         <text-label
           v-if="!editable"
           label="Zipcode"
@@ -80,7 +67,6 @@
           v-else
           v-model="zipcode"
           label="Zipcode"
-          placeholder="Zipcode"
           :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
         ></v-text-field>
         <text-label
@@ -94,67 +80,41 @@
           v-if="!editable"
           label="Phone"
           placeholder="Phone"
-          :text="Phone"
+          :text="phone"
         ></text-label>
-        <v-select
-          v-else
-          v-model="phone"
-          label="Phone"
-          placeholder="Phone"
-          :items="Phone"
-        />
+        <v-text-field v-else v-model="phone" label="Phone" />
         <text-label
           v-if="!editable"
           label="Email"
           placeholder="Email"
-          :text="Email"
+          :text="email"
         ></text-label>
-        <v-select
-          v-else
-          v-model="email"
-          label="Email"
-          placeholder="Email"
-          :items="Email"
-        />
+        <v-text-field v-else v-model="email" label="Email" />
         <text-label
           v-if="!editable"
           label="Username"
           placeholder="Username"
-          :text="Username"
+          :text="username"
         ></text-label>
-        <v-select
-          v-else
-          v-model="username"
-          label="Username"
-          placeholder="Username"
-          :items="Username"
+        <v-text-field v-else v-model="username" label="Username" />
+        <v-text-field
+          v-if="passwordEditable"
+          v-model="password"
+          label="Password"
         />
         <text-label
           v-if="!editable"
           label="LastAcess"
           placeholder="LastAcess"
-          :text="LastAcess"
+          :text="lastacess"
         ></text-label>
-        <v-select
-          v-else
-          v-model="lastAcess"
-          label="LastAcess"
-          placeholder="LastAcess"
-          :items="LastAcess"
-        />
         <text-label
           v-if="!editable"
           label="Status"
           placeholder="Status"
-          :text="Status"
+          :text="status"
         ></text-label>
-        <v-select
-          v-else
-          v-model="status"
-          label="Status"
-          placeholder="Status"
-          :items="Status"
-        />
+        <v-select v-else v-model="status" label="Status" :items="statusList" />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -195,11 +155,32 @@ export default {
     },
     data: {
       type: Object,
-      default: null
+      default() {
+        return {
+          name: {
+            firstName: '',
+            lastName: ''
+          },
+          gender: 'Undefined',
+          citizenId: '',
+          address: '',
+          zipcode: '',
+          birthDate: new Date(),
+          phone: '',
+          username: '',
+          status: '',
+          email: '',
+          lastaccess: ''
+        }
+      }
     },
-    submitMode: {
+    mode: {
       type: String,
       default: 'none'
+    },
+    passwordEditable: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -208,6 +189,11 @@ export default {
       { text: 'Female', value: 'F' },
       { text: 'Undefined', value: 'U' }
     ],
+    statusList: [
+      { text: 'ACTIVE', value: 'ACTIVE' },
+      { text: 'LOCK', value: 'LOCK' }
+    ],
+    password: '',
     formHasErrors: false
   }),
   computed: {
@@ -282,6 +268,8 @@ export default {
     birthDate: {
       get() {
         return this.data.birthDate
+          ? new Date(this.data.birthDate).toISOString().split('T')[0]
+          : new Date().toISOString().split('T')[0]
       },
       set(val) {
         const data = this.data
@@ -358,9 +346,9 @@ export default {
   },
   methods: {
     submit() {
-      if (this.submitMode === 'create') {
+      if (this.mode === 'create') {
         this.create()
-      } else if (this.submitMode === 'update') {
+      } else if (this.mode === 'update') {
         this.update()
       } else {
         this.$emit('onSubmit')
@@ -375,12 +363,11 @@ export default {
           address: this.address,
           zipcode: this.zipcode,
           birthDate: this.birthDate,
-          position: this.role,
+          username: this.username,
+          email: this.email,
           password: this.password,
-          email: String(Date.now()) + 'dummy@domain.com',
-          username: String(Date.now()),
-          phone: '0',
-          lastacess: ''
+          phone: '',
+          lastacess: new Date()
         })
         .then(res => {
           this.firstName = ''
@@ -414,17 +401,17 @@ export default {
         zipcode: this.zipcode,
         birthDate: this.birthDate,
         position: this.role,
-        email: String(Date.now()) + 'dummy@domain.com',
-        username: String(Date.now()),
+        email: this.email,
+        username: this.username,
         phone: '0',
         lastacess: '0',
-        status: '0'
+        status: this.status
       }
       if (this.passwordEditable) {
         data.password = this.password
       }
       this.$axios
-        .post('/staff/general/edit', data)
+        .post('/customer/edit', data)
         .then(res => {
           this.$emit('onSubmit')
         })

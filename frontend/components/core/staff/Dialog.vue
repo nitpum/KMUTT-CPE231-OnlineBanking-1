@@ -202,7 +202,7 @@ export default {
       type: Boolean,
       default: false
     },
-    submitMode: {
+    mode: {
       type: String,
       default: 'none'
     }
@@ -296,7 +296,7 @@ export default {
       get() {
         return this.data.birthDate
           ? new Date(this.data.birthDate).toISOString().split('T')[0]
-          : new Date()
+          : new Date().toISOString().split('T')[0]
       },
       set(val) {
         const data = this.data
@@ -376,9 +376,9 @@ export default {
   },
   methods: {
     submit() {
-      if (this.submitMode === 'create') {
+      if (this.mode === 'create') {
         this.create()
-      } else if (this.submitMode === 'update') {
+      } else if (this.mode === 'update') {
         this.update()
       } else {
         this.$emit('onSubmit')

@@ -36,7 +36,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="success" :disabled="!valid">Save</v-btn>
+        <v-btn color="success" :disabled="!valid" @click="commit()">Save</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -71,6 +71,24 @@ export default {
       return this.newPassword && this.newPassword === this.confirmPass
         ? true
         : "Password doesn't match"
+    }
+  },
+  methods: {
+    commit() {
+      this.$axios
+        .patch('/customer/me', {
+          password: this.oldPassword,
+          newPassword: this.newPassword
+        })
+        .then(() => {
+          this.$store.dispatch('snackbars/success', 'Success')
+          this.oldPassword = ''
+          this.newPassword = ''
+          this.confirmPassword = ''
+        })
+        .catch(e => {
+          this.$store.dispatch('snackbars/error', e.message)
+        })
     }
   }
 }

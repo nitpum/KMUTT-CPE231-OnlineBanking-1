@@ -70,13 +70,18 @@ export default {
       email: ''
     },
     overviewsData: {
-      totalStaff: 0
+      totalStaff: 0,
+      avgAgeStaff: 15
     },
     overviews: [
       [
         {
           key: 'totalStaff',
           label: 'Total Staff'
+        },
+        {
+          key: 'avgAgeStaff',
+          label: 'Average Age Staff'
         }
       ]
     ],

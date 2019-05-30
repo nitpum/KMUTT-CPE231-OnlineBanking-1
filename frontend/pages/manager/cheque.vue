@@ -18,7 +18,12 @@
           </v-card-title>
           <v-divider />
           <v-card-text>
-            <line-chart :data="charts" :options="chartOptions" :height="300" />
+            <line-chart
+              v-if="showChart"
+              :data="charts"
+              :options="chartOptions"
+              :height="300"
+            />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -37,6 +42,7 @@ export default {
     OverviewInfo
   },
   data: () => ({
+    showChart: false,
     data: {
       total: 5453210,
       min: 1,
@@ -99,22 +105,22 @@ export default {
         'Dec'
       ],
       datasets: [
+        // {
+        //   label: '> 100,000,000',
+        //   fill: false,
+        //   borderColor: ['#3F51B5'],
+        //   backgroundColor: ['#3F51B5'],
+        //   data: [70, 80, 65, 75, 80, 60, 95, 80, 78, 74, 80, 95, 100]
+        // },
+        // {
+        //   label: '1,000,000 - 100,000,000',
+        //   fill: false,
+        //   borderColor: ['#009688'],
+        //   backgroundColor: ['#009688'],
+        //   data: [40, 25, 30, 50, 45, 40, 20, 10, 15, 20, 30, 50, 50]
+        // },
         {
-          label: '> 100,000,000',
-          fill: false,
-          borderColor: ['#3F51B5'],
-          backgroundColor: ['#3F51B5'],
-          data: [70, 80, 65, 75, 80, 60, 95, 80, 78, 74, 80, 95, 100]
-        },
-        {
-          label: '1,000,000 - 100,000,000',
-          fill: false,
-          borderColor: ['#009688'],
-          backgroundColor: ['#009688'],
-          data: [40, 25, 30, 50, 45, 40, 20, 10, 15, 20, 30, 50, 50]
-        },
-        {
-          label: '0 - 1,000,000',
+          label: '', // '0 - 1,000,000',
           fill: false,
           borderColor: ['#EC008C'],
           backgroundColor: ['#EC008C'],
@@ -147,6 +153,10 @@ export default {
     fetch() {
       this.$axios.get('/cheque/query/overview').then(({ data }) => {
         this.data = data
+      })
+      this.$axios.get('/cheque/query/usage').then(({ data }) => {
+        this.charts.datasets[0].data = data
+        this.showChart = true
       })
     }
   }

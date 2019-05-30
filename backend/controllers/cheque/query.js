@@ -44,4 +44,18 @@ router.get('/overview', async (req, res) => {
   })
 })
 
+router.get('/usage', async (req, res) => {
+  const cheques = await chequeModel.query.all()
+  res.send(
+    Array(12)
+      .fill(0)
+      .map((v, i) =>
+        cheques
+          .map(({ created }) => new Date(created).getMonth() + 1)
+          .filter(val => val === i)
+          .length
+      )
+  )
+})
+
 module.exports = router

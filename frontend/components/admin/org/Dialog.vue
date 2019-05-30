@@ -56,6 +56,10 @@ export default {
       type: String,
       default: ''
     },
+    type: {
+      type: String,
+      default: ''
+    },
     bankSwift: {
       type: String,
       default: ''
@@ -66,7 +70,6 @@ export default {
     }
   },
   data: () => ({
-    value: false,
     types: [
       {
         text: 'Bank',

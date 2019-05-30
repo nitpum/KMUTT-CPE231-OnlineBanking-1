@@ -9,8 +9,12 @@
       <v-divider />
       <v-data-table :headers="headers" :items="items" class="elevation-1">
         <template v-slot:items="{ item }">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
+          <td
+            v-for="header in headers"
+            :key="[header.value, item.id].join('-')"
+          >
+            {{ item[header.value] }}
+          </td>
         </template>
       </v-data-table>
     </v-card>
@@ -33,6 +37,16 @@ export default {
         text: 'Name',
         align: 'left',
         value: 'name'
+      },
+      {
+        text: 'Age',
+        align: 'left',
+        value: 'age'
+      },
+      {
+        text: 'Date Created',
+        align: 'left',
+        value: 'dateCreate'
       }
     ],
     items: [
@@ -46,6 +60,11 @@ export default {
       }
     ],
     setValue: null
-  })
+  }),
+  mounted() {
+    this.$axios.get('/admin/query/new-user').then(({ data }) => {
+      this.items = data
+    })
+  }
 }
 </script>

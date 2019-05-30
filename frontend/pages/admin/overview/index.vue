@@ -4,7 +4,7 @@
       <v-flex v-for="(card, i) in cards" :key="'ov-card-' + i" xs12 sm6>
         <overview-card :title="card.title" :color="card.color" :to="card.to">
           <span class="display-3">
-            {{ card.value }}
+            {{ data[card.key] || 0 }}
           </span>
         </overview-card>
       </v-flex>
@@ -24,29 +24,35 @@ export default {
     cards: [
       {
         title: 'Daily Active User',
-        value: '300,342',
+        key: 'activeUser',
         color: '#00BCD4',
         to: '/admin/overview/active-user'
       },
       {
         title: 'Daily New User',
-        value: '92',
+        key: 'newUser',
         color: '#EC008C',
         to: '/admin/overview/new-user'
       },
       {
         title: 'Today Total Transaction',
-        value: '1,152,504',
+        key: 'totalTrans',
         color: '#FF9800',
         to: '/admin/overview/today-trans'
       },
       {
         title: 'Daily New Card',
-        value: '31',
+        key: 'newCard',
         color: '#9C27B0',
         to: '/admin/overview/new-card'
       }
-    ]
-  })
+    ],
+    data: {}
+  }),
+  mounted() {
+    this.$axios.get('/admin/query/overview').then(({ data }) => {
+      this.data = data
+    })
+  }
 }
 </script>

@@ -12,23 +12,17 @@ router.get('/', async (req, res) => {
   res.send(parser)
 })
 
-router.get('/count', (req, res) => {
-  const position = req.query.position || undefined
-  if (position) {
-    StaffModel.analytic.count()
-      .then(count => res.send(count))
-      .catch(err => res.status(400).send({
-        op: false,
-        err: String(err)
-      }))
-  } else {
-    StaffModel.analytic.count()
-      .then(count => res.send(count))
-      .catch(err => res.status(400).send({
-        op: false,
-        err: String(err)
-      }))
-  }
+router.get('/count', async (req, res) => {
+  const age = date => new Date(new Date() - date.getTime()).getUTCFullYear() - 1970
+  // const position = req.query.position || undefined
+  const staffs = await StaffModel.query.all()
+
+  res.json({
+    totalStaff: staffs.length,
+    avgAgeStaff: staffs
+      .map(({ birthDate }) => age(birthDate))
+      .reduce((acc, val) => acc + val, 0) / staffs.length
+  })
 })
 
 module.exports = router

@@ -65,15 +65,20 @@ export default {
           to: '/admin/services'
         },
         {
-          icon: 'mdi-cloud',
-          title: 'ATM',
-          to: '/admin/atm'
+          icon: 'account_balance_wallet',
+          title: 'Account',
+          to: '/admin/account'
         },
-        {
-          icon: 'mdi-cloud',
-          title: 'ADM',
-          to: '/admin/adm'
-        },
+        // {
+        //   icon: 'mdi-cloud',
+        //   title: 'ATM',
+        //   to: '/admin/atm'
+        // },
+        // {
+        //   icon: 'mdi-cloud',
+        //   title: 'ADM',
+        //   to: '/admin/adm'
+        // },
         {
           icon: 'mdi-cloud',
           title: 'System',

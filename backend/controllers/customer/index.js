@@ -81,12 +81,12 @@ router.get('/edit', async (req, res) => {
 })
 
 router.post('/edit', (req, res) => {
-  const id = req.session.passport.user._id
+  const id = req.body.id
   const {
     username, password, name, zipcode,
     address, birthDate, gender, citizenId,
     email, phone, balance
-  } = req.body
+  } = req.body.data
   const [firstName, lastName] = name.split(' ')
   CustomerModel.edit(id, {
     username: username,

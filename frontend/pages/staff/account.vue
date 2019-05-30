@@ -4,16 +4,14 @@
       <v-icon>add</v-icon>
     </v-btn>
     <create-dialog v-model="createDialog" @onSubmit="fetch" />
-    <v-text-field
-      v-model="search"
-      label="Search"
-      placeholder="Search"
-      prepend-inner-icon="search"
-      solo
-    />
+    <search-box :filter="fn => (filter = fn)" />
     <v-layout row wrap>
       <v-flex
-        v-for="(account, i) in filteredAccounts"
+        v-for="(account, i) in filter(accounts, [
+          'accountId',
+          'holder',
+          'branch'
+        ])"
         :key="i"
         md4
         sm12
@@ -40,7 +38,7 @@
 </template>
 
 <script>
-import safeRegex from 'safe-regex'
+import SearchBox from '@/components/core/SearchBox'
 import Card from '@/components/core/account/Card'
 import CreateDialog from '@/components/core/account/CreateDialog'
 import ConfirmDialog from '@/components/core/ConfirmDialog'
@@ -48,6 +46,7 @@ import ConfirmDialog from '@/components/core/ConfirmDialog'
 export default {
   layout: 'staff',
   components: {
+    SearchBox,
     Card,
     CreateDialog,
     ConfirmDialog
@@ -57,17 +56,9 @@ export default {
     pendingItem: {},
     createDialog: false,
     confirmDialog: false,
-    search: ''
+    search: '',
+    filter: () => {}
   }),
-  computed: {
-    filteredAccounts() {
-      const regex = safeRegex(this.search) ? new RegExp(this.search, 'gi') : /./
-      return this.accounts.filter(
-        ({ accountId, holder, branch, status }) =>
-          regex.test(accountId) || regex.test(holder) || regex.test(branch)
-      )
-    }
-  },
   mounted() {
     this.fetch()
   },

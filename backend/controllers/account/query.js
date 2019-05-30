@@ -68,36 +68,4 @@ router.get('/branch/me', async (req, res) => {
   res.send(accounts)
 })
 
-router.get('/overview', async (req, res) => {
-  const accounts = await AccountModel.account.schema.aggregate([
-    { $match: {
-      branchId: mongoose.Types.ObjectId(req.session.passport.user.branch)
-    } },
-    { $lookup: {
-      from: 'transactions',
-      localField: '_id',
-      foreignField: 'accountId',
-      as: 'transactions'
-    } },
-    { $lookup: {
-      from: 'customers',
-      localField: 'customerId',
-      foreignField: '_id',
-      as: 'customer'
-    } }
-  ])
-
-  res.send(
-    accounts
-      .map(({ accountId, customer, transactions }) => ({
-        accountId: accountId,
-        name: [customer[0].name.firstName, customer[0].name.lastName].join(' '),
-        amount: transactions.reduce((acc, { amount }) => acc + amount, 0),
-        min: Math.min(...transactions.map(({ amount }) => amount)),
-        max: Math.max(...transactions.map(({ amount }) => amount)),
-        avg: transactions.reduce((acc, { amount }) => acc + amount, 0) / transactions.length
-      }))
-  )
-})
-
 module.exports = router

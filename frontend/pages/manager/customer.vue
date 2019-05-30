@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     fetch() {
-      this.$axios.get('/account/query/overview').then(({ data }) => {
+      this.$axios.get('/customer/query/overview').then(({ data }) => {
         this.items = data
       })
     }

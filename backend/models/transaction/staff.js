@@ -1,21 +1,10 @@
 const TransactionSchema = require('./schema')
 
-const create = data => new Promise((resolve, reject) => {
-  const { staff, type, surrogateName, accountId,
-    chequeId, ref1, ref2 } = data
+const deposit = () => new Promise((resolve, reject) => {
 
-  const parser = {
-    staff: staff,
-    type: type,
-    surrogateName: surrogateName
-
-  }
-
-  const doc = TransactionSchema({
-    staff: staff
-  })
 })
 
 module.exports = {
-  create: create
+  deposit: deposit
+
 }

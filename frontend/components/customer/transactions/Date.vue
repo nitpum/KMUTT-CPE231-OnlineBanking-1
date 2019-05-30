@@ -31,10 +31,10 @@ export default {
     date: 'Dec 12, 2019',
     items: [
       {
-        type: 'Purchase',
-        desc: 'Google Play Store',
+        type: 'Withdraw',
+        desc: 'By Branch',
         time: '07:36:25 PM',
-        amount: -62.17
+        amount: 62.17
       },
       {
         type: 'Deposit',

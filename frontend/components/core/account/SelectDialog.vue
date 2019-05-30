@@ -5,38 +5,36 @@
         Account
       </v-card-title>
       <v-card-text>
-        <v-container>
-          <v-text-field
-            v-model="search"
-            label="Search"
-            prepend-inner-icon="search"
-            solo
-          />
-          <v-divider />
-          <v-list three-line>
-            <v-list-tile
-              v-for="(account, i) in items"
-              :key="i"
-              @click="select(account)"
-            >
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  {{
-                    `${account.customerId.name.firstName} ${
-                      account.customerId.name.lastName
-                    }`
-                  }}
-                </v-list-tile-title>
-                <v-list-tile-sub-title>
-                  Account No.: {{ account.accountId }}
-                </v-list-tile-sub-title>
-                <v-list-tile-sub-title>
-                  Account Type: {{ account.accountType.name }}
-                </v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-container>
+        <v-text-field
+          v-model="search"
+          label="Search"
+          prepend-inner-icon="search"
+          solo
+        />
+        <v-divider />
+        <v-list three-line>
+          <v-list-tile
+            v-for="(account, i) in items"
+            :key="i"
+            @click="select(account)"
+          >
+            <v-list-tile-content>
+              <v-list-tile-title>
+                {{
+                  `${account.customerId.name.firstName} ${
+                    account.customerId.name.lastName
+                  }`
+                }}
+              </v-list-tile-title>
+              <v-list-tile-sub-title>
+                Account No.: {{ account.accountId }}
+              </v-list-tile-sub-title>
+              <v-list-tile-sub-title>
+                Account Type: {{ account.accountType.name }}
+              </v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
       </v-card-text>
       <v-card-actions>
         <v-spacer />

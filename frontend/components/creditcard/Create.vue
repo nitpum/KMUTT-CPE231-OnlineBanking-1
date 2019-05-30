@@ -69,7 +69,7 @@ export default {
         accountId: this.account._id,
         holder: this.holder,
         paymentDate: this.paymentDate,
-        expire: this.expiredDate
+        expired: this.expiredDate
       }
       this.$axios
         .post('/card/create', data)
@@ -78,7 +78,12 @@ export default {
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
         })
         .catch(e => {
-          this.$store.dispatch('snackbars/show', e.message)
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response && e.response.status === 400
+              ? e.response.data
+              : e.message
+          )
         })
     }
   }

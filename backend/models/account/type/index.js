@@ -56,7 +56,8 @@ const accountType = {
   create: create,
   edit: edit,
   delete: remove,
-  query: QueryModel
+  query: QueryModel,
+  schema: AccountTypeModel
 }
 
 module.exports = accountType

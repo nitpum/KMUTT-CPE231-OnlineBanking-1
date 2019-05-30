@@ -4,14 +4,17 @@
       <v-icon>add</v-icon>
       <create-dialog v-model="createDialog" @onSubmit="fetch" />
     </v-btn>
-    <v-text-field
-      label="Search"
-      placeholder="Search"
-      prepend-inner-icon="search"
-      solo
-    ></v-text-field>
+    <search-box :filter="fn => (filter = fn)" />
     <v-layout align-center row wrap>
-      <v-flex v-for="(card, i) in cards" :key="i" md4 sm12 xs12 mb-3 pr-3>
+      <v-flex
+        v-for="(card, i) in filter(cards, ['number', 'holder'])"
+        :key="i"
+        md4
+        sm12
+        xs12
+        mb-3
+        pr-3
+      >
         <credit-card
           :censor="true"
           :number="card.number"
@@ -27,18 +30,21 @@
 </template>
 
 <script>
+import SearchBox from '@/components/core/SearchBox'
 import CreditCard from '@/components/creditcard/Card'
 import CreateDialog from '@/components/creditcard/Create'
 
 export default {
   layout: 'staff',
   components: {
+    SearchBox,
     CreditCard,
     CreateDialog
   },
   data: () => ({
     createDialog: false,
-    cards: []
+    cards: [],
+    filter: () => {}
   }),
   mounted() {
     this.fetch()

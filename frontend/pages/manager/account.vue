@@ -18,7 +18,12 @@
           </v-card-title>
           <v-divider />
           <v-card-text>
-            <bar-chart :data="charts" :options="chartOptions" :height="300" />
+            <bar-chart
+              v-if="showChart"
+              :data="charts"
+              :options="chartOptions"
+              :height="300"
+            />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -37,6 +42,7 @@ export default {
     OverviewInfo
   },
   data: () => ({
+    showChart: false,
     data: {
       new: 10,
       min: 1,
@@ -46,24 +52,24 @@ export default {
       expires: 'March'
     },
     overviews: [
-      [
-        {
-          key: 'new',
-          label: 'New account'
-        },
-        {
-          key: 'min',
-          label: 'Min new account / Month'
-        },
-        {
-          key: 'max',
-          label: 'Max new account / Month'
-        },
-        {
-          key: 'average',
-          label: 'Average new account / Month'
-        }
-      ],
+      // [
+      //   {
+      //     key: 'new',
+      //     label: 'New account'
+      //   },
+      //   {
+      //     key: 'min',
+      //     label: 'Min new account / Month'
+      //   },
+      //   {
+      //     key: 'max',
+      //     label: 'Max new account / Month'
+      //   },
+      //   {
+      //     key: 'average',
+      //     label: 'Average new account / Month'
+      //   }
+      // ],
       [
         {
           key: 'total',
@@ -95,6 +101,21 @@ export default {
         ]
       }
     }
-  })
+  }),
+  created() {
+    this.fetch()
+  },
+  methods: {
+    fetch() {
+      this.$axios.get('/account/query/overview').then(({ data }) => {
+        const types = Object.keys(data)
+        this.charts.labels = types
+        this.charts.datasets[0].data = types.map(key => data[key])
+        this.showChart = true
+
+        this.data.total = types.reduce((acc, val) => acc + data[val], 0)
+      })
+    }
+  }
 }
 </script>

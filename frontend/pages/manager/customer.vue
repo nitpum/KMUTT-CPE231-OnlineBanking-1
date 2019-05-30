@@ -9,26 +9,26 @@
       <v-divider />
       <v-data-table :headers="headers" :items="items" class="elevation-1">
         <template v-slot:items="{ item }">
-          <td>{{ item.AccountId }}</td>
+          <td>{{ item.accountId }}</td>
           <td>{{ item.name }}</td>
-          <td class="text-xs-center">{{ item.transactions.amount }}</td>
+          <td class="text-xs-center">{{ item.amount }}</td>
           <td class="text-xs-right">
             {{
-              Number(item.transactions.min)
+              Number(item.min)
                 .toFixed(2)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
             }}
           </td>
           <td class="text-xs-right">
             {{
-              Number(item.transactions.max)
+              Number(item.max)
                 .toFixed(2)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
             }}
           </td>
           <td class="text-xs-right">
             {{
-              Number(item.transactions.avg)
+              Number(item.avg)
                 .toFixed(2)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
             }}
@@ -47,7 +47,7 @@ export default {
       {
         text: 'AccountId',
         align: 'left',
-        value: 'AccountId'
+        value: 'accountId'
       },
       {
         text: 'Account Name',
@@ -57,46 +57,35 @@ export default {
       {
         text: 'Amount Of Transaction(THB)',
         align: 'center',
-        value: 'transactions.amount'
+        value: 'amount'
       },
       {
         text: 'Minimum Of Transaction(THB)',
         align: 'right',
-        value: 'transactions.min'
+        value: 'min'
       },
       {
         text: 'Maximum Of Transaction(THB)',
         align: 'right',
-        value: 'transactions.max'
+        value: 'max'
       },
       {
         text: 'Average Of Transaction(THB)',
         align: 'right',
-        value: 'transactions.avg'
+        value: 'avg'
       }
     ],
-    items: [
-      {
-        AccountId: '000',
-        name: 'Bangmod 1',
-        transactions: {
-          amount: 500000,
-          min: 1000,
-          max: 80000,
-          avg: 4000
-        }
-      },
-      {
-        AccountId: '001',
-        name: 'Bangmod 2',
-        transactions: {
-          amount: 500000,
-          min: 1000,
-          max: 80000,
-          avg: 4000
-        }
-      }
-    ]
-  })
+    items: []
+  }),
+  mounted() {
+    this.fetch()
+  },
+  methods: {
+    fetch() {
+      this.$axios.get('/account/query/overview').then(({ data }) => {
+        this.items = data
+      })
+    }
+  }
 }
 </script>

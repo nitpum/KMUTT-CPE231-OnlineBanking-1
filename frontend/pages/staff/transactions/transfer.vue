@@ -8,28 +8,28 @@
               <h2>Transfer</h2>
             </v-card-title>
             <v-card-text>
-              <h3>From</h3>
-              <select-account v-model="from" />
-              <h3>To</h3>
-              <v-select
-                label="Reciptient Bank"
-                :items="reciptientBank"
-              ></v-select>
-              <v-text-field
-                v-model="to.id"
-                label="Account ID"
-                placeholder="Account ID"
-              ></v-text-field>
-              <v-text-field
-                label="Amount"
-                placeholder="0.00"
-                type="number"
-              ></v-text-field>
+              <template v-if="state === 0">
+                <h3>From</h3>
+                <select-account v-model="from" />
+                <h3>To</h3>
+                <org-select v-model="org" />
+                <v-text-field
+                  v-model="toAccId"
+                  label="Account ID"
+                  placeholder="Account ID"
+                ></v-text-field>
+                <v-text-field
+                  v-model="amount"
+                  label="Amount"
+                  placeholder="0.00"
+                  type="number"
+                ></v-text-field>
+              </template>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn flat>Close</v-btn>
-              <v-btn color="primary" flat>Submit</v-btn>
+              <v-btn color="primary" flat @click="submit">Submit</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -40,17 +40,24 @@
 
 <script>
 import SelectAccount from '@/components/core/account/Select'
+import OrgSelect from '@/components/admin/org/Select'
 
 export default {
   layout: 'staff',
-  components: { SelectAccount },
+  components: { SelectAccount, OrgSelect },
   data: () => ({
-    from: null,
-    to: {
-      id: ''
-    },
+    from: {},
+    org: {},
+    toAccId: '',
+    amount: 0,
     fromDialog: false,
-    reciptientBank: ['SCB']
-  })
+    reciptientBank: ['SCB'],
+    state: 0
+  }),
+  methods: {
+    submit() {
+      this.$axios.post()
+    }
+  }
 }
 </script>

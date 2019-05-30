@@ -1,6 +1,7 @@
 export default store => {
-  const { username, email, name } = store.state.auth.user
+  const { username, email, name, _id } = store.state.auth.user
   store.commit('SET_USER', {
+    _id,
     username,
     name: name || {
       firstName: username,

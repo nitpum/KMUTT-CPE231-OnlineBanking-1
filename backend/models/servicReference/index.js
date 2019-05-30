@@ -1,6 +1,6 @@
 
 // models
-const ServiceReferenceModel = require('./schema')
+const ServiceReferenceSchema = require('./schema')
 const ServiceRefTypeModel = require('./type')
 const QueryModel = require('./query')
 /**
@@ -13,7 +13,7 @@ const QueryModel = require('./query')
  * @returns {Object} - mongodb document
  */
 const create = data => new Promise((resolve, reject) => {
-  const doc = new ServiceReferenceModel(data)
+  const doc = new ServiceReferenceSchema(data)
   doc.save(err => {
     if (err) reject(err)
     resolve(doc)
@@ -30,7 +30,7 @@ const create = data => new Promise((resolve, reject) => {
  * @returns {Object} - mongodb document
  */
 const edit = (id, data) => new Promise((resolve, reject) => {
-  ServiceReferenceModel.findByIdAndUpdate(id, data, (err, doc) => {
+  ServiceReferenceSchema.findByIdAndUpdate(id, data, (err, doc) => {
     if (err) reject(err)
     resolve(doc)
   })
@@ -42,7 +42,7 @@ const edit = (id, data) => new Promise((resolve, reject) => {
  * @returns {Object} mongodb object
  */
 const remove = (id) => new Promise((resolve, reject) => {
-  ServiceReferenceModel.findOneAndDelete({ _id: id }, (err, res) => {
+  ServiceReferenceSchema.findOneAndDelete({ _id: id }, (err, res) => {
     if (err) reject(err)
     if (!res) reject(new Error('not found'))
     resolve(res)
@@ -53,7 +53,8 @@ const serviceRef = {
   create: create,
   edit: edit,
   delete: remove,
-  query: QueryModel
+  query: QueryModel,
+  schema: ServiceReferenceSchema
 
 }
 

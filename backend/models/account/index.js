@@ -62,8 +62,8 @@ const customerValidation = (id) => new Promise((resolve, reject) => {
 const create = data => new Promise(async (resolve, reject) => {
   try {
     const accIdValid = await accountValidation(data.accountId)
-    const customerId = await customerValidation(data.citizenId)
-    data.customerId = customerId
+    // const customerId = await customerValidation(data.citizenId)
+    // data.customerId = customerId
     data.accountId = accIdValid
     console.log(data)
     const doc = new AccountSchema(data)

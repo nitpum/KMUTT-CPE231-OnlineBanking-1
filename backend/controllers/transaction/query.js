@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const moment = require('moment')
 const mongoose = require('mongoose')
 
 const transactionModel = require('../../models/transaction')
@@ -35,6 +36,22 @@ router.get('/overview', async (req, res) => {
     maxWdl: max(withdrawal),
     avgWdl: avg(withdrawal)
   })
+})
+
+router.get('/customer', async (req, res) => {
+  const { year, month, id } = req.query
+  const from = moment().month(month - 2).year(year).toDate()
+  const to = moment().month(month - 1).year(year).toDate()
+
+  const transactions = await transactionModel.schema.find({
+    $and: [
+      { timestamp: { $gte: from } },
+      { timestamp: { $lte: to } }
+    ],
+    accountId: mongoose.Types.ObjectId(id)
+  })
+
+  res.send(transactions)
 })
 
 module.exports = router

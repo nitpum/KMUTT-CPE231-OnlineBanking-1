@@ -17,7 +17,6 @@ router.post('/cashup', async (req, res) => {
     const transactionAdd = await transactionModel.cheque.cashUp(chequeId, validCheque, acc)
     const updatedCheque = await chequeModel.transaction.cashUp(chequeId)
     const result = { ...acc, ...updatedCheque, ...transactionAdd }
-    console.log(result)
     res.send(result)
   } catch (err) {
     res.status(400).send(String(err))

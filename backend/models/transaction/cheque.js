@@ -9,12 +9,13 @@ const TransactionModel = require('./schema')
  */
 const cashUp = (id, cheque, account) => new Promise(async (resolve, reject) => {
   try {
+      console.log(account)
     const { amount, byOrganizationId, _id } = cheque
 
     const doc = new TransactionModel({
       type: 'CHEQUE',
       amount: amount,
-      balance: account.balance,
+      balance: account.balance - amount,
       ref1: byOrganizationId,
       chequeId: _id,
       accountId: account._id

@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 
 router.post('/withdraw', async (req, res) => {
   try {
+    console.log(req.body)
     const amount = req.body.amount
     const accountId = req.body.accountId
     const staffId = req.body.staffId

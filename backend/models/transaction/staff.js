@@ -1,5 +1,6 @@
 const TransactionSchema = require('./schema')
 const staffModel = require('../../models/staff')
+const accountModel = require('../../models/account')
 
 const init = require('../../configs/init')
 
@@ -11,6 +12,14 @@ const staffValidation = (id) => new Promise((resolve, reject) => {
   })
 })
 
+const accountValidation = (id) => new Promise((resolve, reject) => {
+  accountModel.account.schema.findById(id, (err, doc) => {
+    if (err) return reject(err)
+    if (!doc) return reject(new Error('not found account from this id'))
+    resolve(doc)
+  })
+})
+
 /**
  * deposit
  * @param  {Object} data
@@ -18,9 +27,10 @@ const staffValidation = (id) => new Promise((resolve, reject) => {
  * @param  {Number} amount - amount
  * @param  {Object} data.staffId - staffId mongodb object id
  */
-const withdraw = (amount, account, staffId) => new Promise(async (resolve, reject) => {
+const withdraw = (amount, accountId, staffId) => new Promise(async (resolve, reject) => {
   try {
     const staff = await staffValidation(staffId)
+    const account = await accountValidation(accountId)
     const ref1 = init.serviceReference._id
     const doc = new TransactionSchema({
       type: 'WITHDRAW',

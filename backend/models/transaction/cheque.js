@@ -1,5 +1,14 @@
 // models
 const TransactionModel = require('./schema')
+const staffModel = require('../../models/staff')
+
+const staffValidation = (id) => new Promise((resolve, reject) => {
+  staffModel.schema.findById(id, (err, doc) => {
+    if (err) return reject(err)
+    if (!doc) return reject(new Error('not found staff from this id'))
+    resolve(doc)
+  })
+})
 
 /**
  * @param  {Object} id - cheque mongodb id
@@ -7,10 +16,10 @@ const TransactionModel = require('./schema')
  * @param  {Object} account - account object
  * @returns {Object} mongodb object
  */
-const cashUp = (id, cheque, account) => new Promise(async (resolve, reject) => {
+const cashUp = (id, cheque, account, staffId) => new Promise(async (resolve, reject) => {
   try {
-      console.log(account)
     const { amount, byOrganizationId, _id } = cheque
+    const staff = await staffValidation(staffId)
 
     const doc = new TransactionModel({
       type: 'CHEQUE',
@@ -18,7 +27,8 @@ const cashUp = (id, cheque, account) => new Promise(async (resolve, reject) => {
       balance: account.balance - amount,
       ref1: byOrganizationId,
       chequeId: _id,
-      accountId: account._id
+      accountId: account._id,
+      staff: staff
     })
 
     doc.save(err => {

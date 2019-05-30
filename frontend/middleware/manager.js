@@ -1,12 +1,11 @@
-export default ({ store, redirect }) => {
+import setDark from './utils/setDark'
+import setUser from './utils/setUser'
+
+export default ({ store, redirect, req }) => {
+  setDark({ store, req })
   if (!store.state.auth.loggedIn || store.state.auth.strategy !== 'manager') {
     redirect('/manager/login')
   } else {
-    const { username, name, email } = store.state.auth.user
-    store.commit('SET_USER', {
-      username,
-      name,
-      email
-    })
+    setUser(store)
   }
 }

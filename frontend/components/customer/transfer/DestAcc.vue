@@ -26,7 +26,7 @@ export default {
   data: () => ({
     ref1: null,
     ref2: null,
-    banks: []
+    banks: ['Yee Bank', 'Korbbon Bank']
   }),
   methods: {
     fill(val) {

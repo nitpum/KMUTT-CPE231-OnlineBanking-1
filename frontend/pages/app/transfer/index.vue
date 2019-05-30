@@ -5,6 +5,9 @@
         <dest-acc />
         <v-text-field label="Amount" type="number" />
       </v-card-text>
+      <v-btn color="primary" :disabled="disabled" flat @click="submit()">
+        submit
+      </v-btn>
     </v-card>
   </v-container>
 </template>

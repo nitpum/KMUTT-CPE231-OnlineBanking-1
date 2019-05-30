@@ -29,12 +29,6 @@ export default {
   data: () => ({
     cards: [
       {
-        title: 'Notification Send / Read',
-        value: '400/200',
-        color: '#00BCD4',
-        to: '/admin/system/notification'
-      },
-      {
         title: 'Login User Per Hours',
         value: '2',
         color: '#EC008C',

@@ -10,7 +10,7 @@
       {{ role }}
     </v-card-text>
     <v-divider class="mt-4" />
-    <v-card-actions>
+    <v-card-actions v-if="!hideMoreInfo">
       <v-spacer />
       <v-btn
         v-if="showMoreInfoBtn"
@@ -48,6 +48,10 @@ export default {
       default: true
     },
     showEditBtn: {
+      type: Boolean,
+      default: false
+    },
+    hideMoreInfo: {
       type: Boolean,
       default: false
     }

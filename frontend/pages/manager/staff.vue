@@ -8,7 +8,13 @@
     ></v-text-field>
     <v-layout row wrap>
       <v-flex v-for="(staff, i) in staffs" :key="i" md4 sm12 pr-2 mb-1>
-        <card @onMoreInfo="moreinfo"></card>
+        <card
+          :name="staff.name"
+          :gender="staff.gender"
+          :role="staff.role"
+          :hide-more-info="true"
+          @onMoreInfo="moreinfo"
+        ></card>
       </v-flex>
     </v-layout>
     <Dialog v-model="dialog" :data="staff"></Dialog>
@@ -28,26 +34,36 @@ export default {
   data: () => ({
     dialog: false,
     createDialog: false,
-    staffs: [{}, {}, {}],
-    staff: {
-      name: {
-        firstName: '',
-        lastName: ''
-      },
-      gender: 'Male',
-      citizenId: '',
-      address: '',
-      zipcode: '',
-      birthDate: null,
-      role: '',
-      password: ''
-    }
+    staffs: []
+    // staff: {
+    //   name: {
+    //     firstName: '',
+    //     lastName: ''
+    //   },
+    //   gender: 'Male',
+    //   citizenId: '',
+    //   address: '',
+    //   zipcode: '',
+    //   birthDate: null,
+    //   role: '',
+    //   password: ''
+    // }
   }),
+  mounted() {
+    this.fetch()
+  },
   methods: {
     moreinfo: function(staff) {
       this.editable = false
       this.dialog = true
       this.staff = staff
+    },
+    fetch() {
+      this.$axios.get('/staff/query/branch/me').then(({ data }) => {
+        this.staffs = data.staffs.map(({ name, gender }) => ({
+          name: [name.firstName, name.lastName].join(' ')
+        }))
+      })
     }
   }
 }

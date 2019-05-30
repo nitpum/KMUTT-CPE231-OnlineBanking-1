@@ -2,7 +2,7 @@
   <v-dialog v-model="model" lazy max-width="500" persistent>
     <v-card>
       <v-card-title primary-title>
-        <h2>Create Branch</h2>
+        <h2>Branch</h2>
       </v-card-title>
       <v-card-text>
         <v-text-field v-model="name" label="Branch Name" required />

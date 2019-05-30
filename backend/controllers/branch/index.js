@@ -92,13 +92,31 @@ router.get('/overview', async (req, res) => {
     } }
   ])
 
-  const staffs =  branch.map(({ staffs }) => staffs.length)
+  const staffs = branch.map(({ staffs }) => staffs.length)
   res.json({
     totalBranch: branch.length,
     minStaff: Math.min(...staffs),
     maxStaff: Math.max(...staffs),
     avgStaff: staffs.reduce((acc, val) => acc + val, 0) / staffs.length,
   })
+})
+
+router.get('/lists', async (req, res) => {
+  const branch = await BranchModel.schema.aggregate([
+    { $lookup: {
+      from: 'staffs',
+      localField: '_id',
+      foreignField: 'branch',
+      as: 'staffs'
+    } }
+  ])
+
+  res.send(branch.map(el => ({
+    id: el._id,
+    name: el.name,
+    balance: el.balance,
+    scount: el.staffs.length
+  })))
 })
 
 module.exports = router

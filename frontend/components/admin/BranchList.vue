@@ -5,9 +5,9 @@
       <td>{{ item.name }}</td>
       <td class="text-xs-right">{{ item.balance }}</td>
       <td class="text-xs-right">{{ item.scount }}</td>
-      <td class="text-xs-right">{{ item.tPS }}</td>
+      <!-- <td class="text-xs-right">{{ item.tPS }}</td>
       <td class="text-xs-right">{{ item.mTPD }}</td>
-      <td class="text-xs-right">{{ item.tPD }}</td>
+      <td class="text-xs-right">{{ item.tPD }}</td> -->
     </template>
   </v-data-table>
 </template>
@@ -39,19 +39,19 @@ export default {
       {
         text: 'Staff Count',
         value: 'scount'
-      },
-      {
-        text: 'Transactions / Staff',
-        value: 'tPS'
-      },
-      {
-        text: 'Max Transaction / Day',
-        value: 'mTPD'
-      },
-      {
-        text: 'Transaction / Day',
-        value: 'tD'
       }
+      // {
+      //   text: 'Transactions / Staff',
+      //   value: 'tPS'
+      // },
+      // {
+      //   text: 'Max Transaction / Day',
+      //   value: 'mTPD'
+      // },
+      // {
+      //   text: 'Transaction / Day',
+      //   value: 'tD'
+      // }
     ]
   })
 }

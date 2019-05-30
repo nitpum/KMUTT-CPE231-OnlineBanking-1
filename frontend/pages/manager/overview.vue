@@ -93,8 +93,19 @@ export default {
       ]
     ]
   }),
-  mounted() {
-    this.fetch()
+  watch: {
+    from: {
+      immediate: true,
+      handler() {
+        this.fetch()
+      }
+    },
+    to: {
+      immediate: true,
+      handler() {
+        this.fetch()
+      }
+    }
   },
   methods: {
     fetch() {

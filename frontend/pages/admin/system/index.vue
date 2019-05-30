@@ -30,19 +30,19 @@ export default {
     cards: [
       {
         title: 'Notification Send / Read',
-        value: '30K/27K',
+        value: '400/200',
         color: '#00BCD4',
         to: '/admin/system/notification'
       },
       {
         title: 'Login User Per Hours',
-        value: '2,983',
+        value: '2',
         color: '#EC008C',
         to: '/admin/system/userHours'
       },
       {
         title: 'Transaction Per Hours',
-        value: '48,021',
+        value: '2',
         color: '#9C27B0',
         to: '/admin/system/transaction'
       }

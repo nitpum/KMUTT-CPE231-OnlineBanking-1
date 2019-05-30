@@ -36,10 +36,7 @@ const create = (data) => new Promise(async (resolve, reject) => {
  * @param  {Date} data.paymentDate - pin
  */
 const edit = (id, data) => new Promise(async (resolve, reject) => {
-  const cardId = randomIdString(16)
-  data.cardId = cardId
-  const doc = new CardModel(data)
-  doc.save(err => {
+  CardModel.findByIdAndUpdate(id, data, (err, doc) => {
     if (err) return reject(err)
     resolve(doc)
   })
@@ -47,6 +44,7 @@ const edit = (id, data) => new Promise(async (resolve, reject) => {
 
 const remove = (id) => new Promise((resolve, reject) => {
   CardModel.findByIdAndDelete(id, (err, doc) => {
+    if (!doc) return reject(new Error('not found this card'))
     if (err) return reject(err)
     resolve(doc)
   })

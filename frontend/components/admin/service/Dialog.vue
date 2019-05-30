@@ -62,7 +62,7 @@ export default {
             type: ''
           },
           detail: '',
-          fee: 0,
+          fee: null,
           type: {
             _id: '',
             name: '',

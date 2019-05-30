@@ -1,6 +1,8 @@
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
 
+console.log(process.env.NODE_ENV) //eslint-disable-line
+
 module.exports = {
   mode: 'universal',
 
@@ -54,7 +56,11 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    prefix: '/api/'
+    baseURL:
+      process.env.NODE_ENV === 'production'
+        ? 'https://yeebank.topty.me/api'
+        : 'http://localhost:3000/api'
+    // prefix: process.env.NODE_ENV === 'development' ? '/api/' : undefined
   },
 
   proxy: {

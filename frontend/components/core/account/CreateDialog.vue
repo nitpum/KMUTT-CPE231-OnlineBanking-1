@@ -14,13 +14,7 @@
           mask="###-#-######-#"
         />
         <v-text-field v-model="balance" label="Balance" type="number" min="0" />
-        <v-select
-          v-model="accTypeId"
-          label="Account Type"
-          :items="accTypes"
-          item-text="text"
-          item-value="id"
-        />
+        <type-select v-model="accType" />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -37,10 +31,12 @@
 
 <script>
 import FCustomer from '@/components/core/customer/FCustomer'
+import TypeSelect from '@/components/core/account/type/Select'
 
 export default {
   components: {
-    FCustomer
+    FCustomer,
+    TypeSelect
   },
   props: {
     value: {
@@ -50,7 +46,7 @@ export default {
   },
   data: () => ({
     customerId: '',
-    accTypeId: '',
+    accType: {},
     accId: '',
     accTypes: [],
     balance: 0,
@@ -84,7 +80,7 @@ export default {
           balance: this.balance,
           branchId: this.branch._id,
           status: 'ACTIVE',
-          accountType: this.accTypeId
+          accountType: this.accType._id
         })
         .then(() => {
           this.$store.dispatch('snackbars/success', 'Success')

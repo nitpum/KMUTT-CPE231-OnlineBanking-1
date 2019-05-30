@@ -1,7 +1,15 @@
 <template>
   <div>
     <v-container>
-      <v-btn color="accent" fixed bottom fab right @click="openCreateDialog">
+      <v-btn
+        color="accent"
+        fixed
+        bottom
+        fab
+        right
+        @click="openCreateDialog"
+        @onSubmit="fetch"
+      >
         <v-icon>add</v-icon>
       </v-btn>
       <v-text-field
@@ -24,7 +32,7 @@
           <card
             :name="customer.name"
             :citizen-id="customer.citizenId"
-            @onMoreInfo="openDialog"
+            @onMoreInfo="openDialog(customer)"
           ></card>
         </v-flex>
       </v-layout>
@@ -37,7 +45,13 @@
       mode="create"
       @onSubmit="createStaff"
     />
-    <Dialog v-model="infoDialog" title="Edit Customer" :editable="true" />
+    <Dialog
+      v-model="infoDialog"
+      :data="customer"
+      title="Edit Customer"
+      :editable="true"
+      mode="update"
+    />
   </div>
 </template>
 
@@ -54,7 +68,22 @@ export default {
   data: () => ({
     createDialog: false,
     infoDialog: false,
-    customer: {},
+    customer: {
+      name: {
+        firstName: '',
+        lastName: ''
+      },
+      gender: 'Undefined',
+      citizenId: '',
+      address: '',
+      zipcode: '',
+      birthDate: new Date().toISOString().split('T')[0],
+      phone: '',
+      username: '',
+      status: '',
+      email: '',
+      lastaccess: ''
+    },
     customers: [],
     search: ''
   }),
@@ -70,6 +99,8 @@ export default {
     openDialog: function(item) {
       this.infoDialog = true
       this.createDialog = false
+      /* eslint-disable no-console */
+      this.customer = { ...item }
     },
     openCreateDialog: function() {
       this.infoDialog = false
@@ -86,10 +117,7 @@ export default {
           }
         })
         .then(({ data }) => {
-          this.customers = data.map(({ name, citizenId }) => ({
-            name: [name.firstName, name.lastName].join(' '),
-            citizenId
-          }))
+          this.customers = data
         })
     }
   }

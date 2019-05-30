@@ -174,7 +174,10 @@ export default {
       this.$axios
         .delete('/staff/general', { data: { id: this.removePending._id } })
         .then(_ => {
-          this.$store.dispatch('snackbars/success', 'Remove success')
+          this.$emit('onSubmit').$store.dispatch(
+            'snackbars/success',
+            'Remove success'
+          )
           this.fetch()
         })
         .catch(e => {

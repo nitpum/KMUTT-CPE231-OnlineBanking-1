@@ -11,19 +11,19 @@
           :is="component('v-text-field')"
           v-model="data.name.firstName"
           label="Firstname"
-          :text="firstName"
+          :text="data.name.firstName"
         />
         <component
           :is="component('v-text-field')"
           v-model="data.name.lastName"
           label="Lastname"
-          :text="lastName"
+          :text="data.name.lastName"
         />
         <component
           :is="component('v-select')"
           v-model="data.gender"
           label="Gender"
-          :text="gender"
+          :text="data.gender"
           :items="genders"
           item-text="text"
           item-value="value"
@@ -32,48 +32,48 @@
           :is="component('v-text-field')"
           v-model="data.citizenId"
           label="Citizen ID"
-          :text="citizenId"
+          :text="data.citizenId"
           mask="# #### ##### ## #"
         />
         <component
           :is="component('v-text-field')"
           v-model="data.address"
           label="Address"
-          :text="address"
+          :text="data.address"
         />
         <component
           :is="component('v-text-field')"
           v-model="data.zipcode"
           label="Zipcode"
-          :text="zipcode"
+          :text="data.zipcode"
           mask="#####"
           :rules="[val => val.length == 5 || 'Zipcode length must be 5']"
         />
         <component
           :is="component('date-picker-dialog')"
-          v-model="data.birthDate"
+          v-model="new Date(data.birthDate).toISOString().split('T')[0]"
           label="Birth Date"
-          :text="birthDate"
+          :text="new Date(data.birthDate).toISOString().split('T')[0]"
         />
         <component
           :is="component('v-text-field')"
           v-model="data.phone"
           label="Phone"
-          :text="phone"
+          :text="data.phone"
           mask="## #### ####"
         />
         <component
           :is="component('v-text-field')"
           v-model="data.email"
           label="Email"
-          :text="email"
+          :text="data.email"
           type="email"
         />
         <component
           :is="component('v-text-field')"
           v-model="data.username"
           label="Username"
-          :text="username"
+          :text="data.username"
         />
 
         <v-text-field
@@ -85,15 +85,20 @@
           v-if="!editable"
           label="LastAcess"
           placeholder="LastAcess"
-          :text="lastacess"
+          :text="data.lastacess"
         ></text-label>
         <text-label
           v-if="!editable"
           label="Status"
           placeholder="Status"
-          :text="status"
+          :text="data.status"
         ></text-label>
-        <v-select v-else v-model="status" label="Status" :items="statusList" />
+        <v-select
+          v-else
+          v-model="data.status"
+          label="Status"
+          :items="statusList"
+        />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -211,8 +216,10 @@ export default {
           lastacess: new Date()
         })
         .then(res => {
-          this.firstName = ''
-          this.lastName = ''
+          this.name = {
+            firstName: '',
+            lastName: ''
+          }
           this.gender = ''
           this.citizenId = ''
           this.address = ''
@@ -235,15 +242,15 @@ export default {
     },
     update() {
       const data = {
-        name: `${this.firstName} ${this.lastName}`,
-        gender: this.gender,
-        citizenId: this.citizenId,
-        address: this.address,
-        zipcode: this.zipcode,
-        birthDate: this.birthDate,
-        position: this.role,
-        email: this.email,
-        username: this.username,
+        name: `${this.data.name.firstName} ${this.data.name.lastName}`,
+        gender: this.data.gender,
+        citizenId: this.data.citizenId,
+        address: this.data.address,
+        zipcode: this.data.zipcode,
+        birthDate: this.data.birthDate,
+        position: this.data.role,
+        email: this.data.email,
+        username: this.data.username,
         phone: '0',
         lastacess: '0',
         status: this.status
@@ -252,9 +259,10 @@ export default {
         data.password = this.password
       }
       this.$axios
-        .post('/customer/edit', data)
+        .post('/customer/edit', { id: this.data._id, data: data })
         .then(res => {
-          this.$emit('onSubmit')
+          this.model = false
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)

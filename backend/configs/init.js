@@ -7,7 +7,7 @@ module.exports = {
     bankAccount: '999999999999999'
   },
   serviceReferenceType: {
-    _id: '2',
+    _id: '1',
     name: 'Korbboon Bank OP',
     detail: 'Korbboon Bank Operation'
   },
@@ -15,7 +15,13 @@ module.exports = {
     organizationId: '1',
     detail: 'Korbboon Bank operation system',
     fee: 0,
-    typeId: '2'
+    typeId: '1'
   },
-  
+  serviceReferenceFee: {
+    organizationId: '1',
+    detail: 'Korbboon Bank operation system 10B fee',
+    fee: 10,
+    typeId: '1'
+  }
+
 }

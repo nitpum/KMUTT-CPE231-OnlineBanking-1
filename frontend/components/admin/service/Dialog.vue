@@ -112,7 +112,6 @@ export default {
           typeId: this.data.type._id
         })
         .then(res => {
-          this.$emit('onSubmit')
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
           this.model = false
           // Clear

@@ -12,12 +12,14 @@ module.exports = {
     detail: 'Korbboon Bank Operation'
   },
   serviceReference: {
+    _id: '1',
     organizationId: '1',
     detail: 'Korbboon Bank operation system',
     fee: 0,
     typeId: '1'
   },
   serviceReferenceFee: {
+    _id: '2',
     organizationId: '1',
     detail: 'Korbboon Bank operation system 10B fee',
     fee: 10,

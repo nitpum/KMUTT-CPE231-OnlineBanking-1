@@ -41,6 +41,26 @@ router.get('/overview', async (req, res) => {
   })
 })
 
+router.get('/new-user', async (req, res) => {
+  const todayms = new Date().setHours(0, 0, 0, 0)
+  const newUser = await CustomerModel.schema.aggregate([
+    { $match: {
+      dateCreate: { $gte: new Date(todayms) }
+    } },
+    { $project: {
+      name: { $concat: ['$name.firstName', ' ', '$name.lastName'] },
+      birthDate: 1,
+      dateCreate: 1
+    } }
+  ])
+  res.json(newUser.map(({ _id, name, birthDate, dateCreate }) => ({
+    id: _id,
+    name,
+    age: new Date(new Date() - birthDate.getTime()).getUTCFullYear() - 1970,
+    dateCreate
+  })))
+})
+
 router.get('/me', (req, res) => res.json(req.session.passport.user))
 
 module.exports = router

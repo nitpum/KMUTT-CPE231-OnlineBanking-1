@@ -11,6 +11,7 @@
         xl3
       >
         <card
+          :cheque-id="cheques.chequeId"
           :account-id="cheque.accountId"
           :amount="cheque.amount"
           :show-more-info="true"

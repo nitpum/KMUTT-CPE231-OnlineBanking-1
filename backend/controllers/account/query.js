@@ -8,8 +8,14 @@ const AccountModel = require('../../models/account/')
 router.get('/', (req, res) => {
   const id = req.query.id || undefined
   const limit = Number(req.query.limit) || undefined
+  const search = req.query.search || undefined
 
-  if (id) {
+  if (search) {
+    AccountModel.account.query.search(search)
+      .then(doc => res.send(doc))
+      .catch(err => res.send({ op: false, err: String(err) }))
+  }
+  else if (id) {
     AccountModel.account.query.id(id)
       .then(doc => res.send(doc))
       .catch(err => res.send({ op: false, err: String(err) }))

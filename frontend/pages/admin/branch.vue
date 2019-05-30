@@ -63,7 +63,9 @@ export default {
         {
           key: 'minStaff',
           label: 'Minimum Staff'
-        },
+        }
+      ],
+      [
         {
           key: 'maxStaff',
           label: 'Maximum Staff'
@@ -73,18 +75,18 @@ export default {
           label: 'Average Staff',
           place: 2
         }
-      ],
-      [
-        {
-          key: 'mostTransaction',
-          label: 'Most Transaction',
-          suffix: '(BangMod)'
-        },
-        {
-          key: 'avgTranPStaff',
-          label: 'Average Transaction / Staff'
-        }
       ]
+      // [
+      //   {
+      //     key: 'mostTransaction',
+      //     label: 'Most Transaction',
+      //     suffix: '(BangMod)'
+      //   },
+      //   {
+      //     key: 'avgTranPStaff',
+      //     label: 'Average Transaction / Staff'
+      //   }
+      // ]
     ]
   }),
   created() {
@@ -99,7 +101,7 @@ export default {
       this.$axios.get('/branch/overview').then(({ data }) => {
         this.data = data
       })
-      this.$axios.get('/branch/query').then(res => {
+      this.$axios.get('/branch/lists').then(res => {
         this.branchs = res.data
       })
     }

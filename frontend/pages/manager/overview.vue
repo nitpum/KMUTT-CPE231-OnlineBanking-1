@@ -26,8 +26,8 @@ export default {
     DatePickerDialog
   },
   data: () => ({
-    from: undefined,
-    to: undefined,
+    from: new Date().toISOString().substr(0, 10),
+    to: new Date().toISOString().substr(0, 10),
     data: {
       totalDep: 587541,
       minDep: 200,
@@ -92,6 +92,23 @@ export default {
         }
       ]
     ]
-  })
+  }),
+  mounted() {
+    this.fetch()
+  },
+  methods: {
+    fetch() {
+      this.$axios
+        .get('/transaction/query/overview', {
+          params: {
+            from: this.from,
+            to: this.to
+          }
+        })
+        .then(({ data }) => {
+          this.data = data
+        })
+    }
+  }
 }
 </script>

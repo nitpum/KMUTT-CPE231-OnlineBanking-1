@@ -35,7 +35,14 @@
       v-model="confirmDialog"
       title="Revoke confirm"
       @onYes="confirmRevoke"
-    />
+    >
+      <div class="grey--text">
+        {{ pendingItem.accountId }}
+      </div>
+      <div class="grey--text">
+        {{ pendingItem.holder }}
+      </div>
+    </confirm-dialog>
   </v-container>
 </template>
 
@@ -79,7 +86,7 @@ export default {
     },
     revoke(item) {
       this.confirmDialog = true
-      this.pendingItem = item
+      this.pendingItem = { ...item }
       this.pendingItem.status = 'REVOKE'
     },
     confirmRevoke() {

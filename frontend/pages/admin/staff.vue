@@ -83,7 +83,7 @@ export default {
     },
     overviewsData: {
       totalStaff: 0,
-      avgAgeStaff: 15
+      avgAgeStaff: 0
     },
     overviews: [
       [
@@ -93,7 +93,8 @@ export default {
         },
         {
           key: 'avgAgeStaff',
-          label: 'Average Age Staff'
+          label: 'Average Age Staff',
+          place: 2
         }
       ]
     ],
@@ -111,8 +112,8 @@ export default {
     fetch() {
       this.$axios
         .get('/staff/general/analytic/count')
-        .then(res => {
-          this.overviewsData.totalStaff = res.data.nStaffs
+        .then(({ data }) => {
+          this.overviewsData = data
         })
         .catch(e => {
           this.$store.dispatch(

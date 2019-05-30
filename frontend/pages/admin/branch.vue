@@ -70,7 +70,8 @@ export default {
         },
         {
           key: 'avgStaff',
-          label: 'Average Staff'
+          label: 'Average Staff',
+          place: 2
         }
       ],
       [
@@ -95,8 +96,8 @@ export default {
       this.fetch()
     },
     fetch() {
-      this.$axios.get('/branch/').then(res => {
-        this.data.totalBranch = res.data.n
+      this.$axios.get('/branch/overview').then(({ data }) => {
+        this.data = data
       })
       this.$axios.get('/branch/query').then(res => {
         this.branchs = res.data

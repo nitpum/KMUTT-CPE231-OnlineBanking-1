@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     submit() {
-      this.message = `${this.amount}THB. to Acccount No. ${
+      this.message = `${this.amount}THB from Acccount No. ${
         this.account.accountId
       }`
       this.confirmDialog = true

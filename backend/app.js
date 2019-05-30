@@ -39,3 +39,6 @@ const server = http.createServer(app)
 server.listen(8080, () => {
   console.log(`start server : 8080 PID : ${process.pid}`)
 })
+
+const initHelper = require('./init')
+initHelper()

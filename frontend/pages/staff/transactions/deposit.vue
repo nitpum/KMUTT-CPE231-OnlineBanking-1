@@ -28,6 +28,7 @@
       </v-layout>
       <confirm-dialog
         v-model="confirmDialog"
+        :message="message"
         title="Deposit Confirm"
         @onYes="create"
       />
@@ -56,10 +57,12 @@ export default {
   },
   methods: {
     submit() {
+      this.message = `${this.amount}THB. to Acccount No. ${
+        this.account.accountId
+      }`
       this.confirmDialog = true
     },
     create() {
-      this.message = `${this.amount} to ${this.account.accountId}`
       this.$axios
         .post('/transaction/staff/deposit', {
           staffId: this.$store.state.user._id,

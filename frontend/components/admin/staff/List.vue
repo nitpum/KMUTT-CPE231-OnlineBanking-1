@@ -12,7 +12,7 @@
           -
         </template>
       </td>
-      <td>
+      <td class="text-xs-right">
         <v-btn icon @click="$emit('onItemClick', item)">
           <v-icon>edit</v-icon>
         </v-btn>
@@ -52,7 +52,7 @@ export default {
       },
       {
         text: '',
-        width: '50'
+        width: '160'
       }
     ]
   }),

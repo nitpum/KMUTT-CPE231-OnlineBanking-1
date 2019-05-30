@@ -2,6 +2,7 @@ const TransactionSchema = require('./schema')
 
 // models
 const chequeModel = require('./cheque')
+const staffModel = require('./staff')
 
 /**
   * create transaction
@@ -25,5 +26,6 @@ const create = (data) => new Promise((resolve, reject) => {
 
 module.exports = {
   create: create,
-  cheque: chequeModel
+  cheque: chequeModel,
+  staff: staffModel
 }

@@ -5,6 +5,7 @@ const accountIdRef = { type: mongoose.Schema.Types.ObjectId, ref: 'account' }
 const machineIdRef = { type: mongoose.Schema.Types.ObjectId, ref: 'machine' }
 const chequeIdRef = { type: mongoose.Schema.Types.ObjectId, ref: 'cheque' }
 const serviceRef = { type: mongoose.Schema.Types.ObjectId, ref: 'serviceReference', required: true }
+const branchRef = { type: mongoose.Schema.Types.ObjectId, ref: 'branch', required: true }
 
 const transactionSchema = mongoose.Schema({
   timestamp: { type: Date, default: Date.now },
@@ -17,7 +18,8 @@ const transactionSchema = mongoose.Schema({
   machineId: machineIdRef,
   chequeId: chequeIdRef,
   ref1: serviceRef,
-  ref2: String
+  ref2: String,
+  branch: branchRef
 })
 
 module.exports = mongoose.model('transaction', transactionSchema)

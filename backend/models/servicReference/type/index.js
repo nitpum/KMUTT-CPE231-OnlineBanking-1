@@ -1,4 +1,4 @@
-const ServiceTypeModel = require('./schema')
+const ServiceTypeSchema = require('./schema')
 
 // models
 const QueryModel = require('./query')
@@ -11,7 +11,7 @@ const QueryModel = require('./query')
  * @returns {Object} - mongodb document
  */
 const create = (data) => new Promise((resolve, reject) => {
-  const doc = new ServiceTypeModel(data)
+  const doc = new ServiceTypeSchema(data)
   doc.save(err => {
     if (err) reject(err)
     resolve(doc)
@@ -28,7 +28,7 @@ const create = (data) => new Promise((resolve, reject) => {
  */
 const edit = (id, data) => new Promise(async (resolve, reject) => {
   try {
-    const doc = await ServiceTypeModel.findByIdAndUpdate(id, { $set: data })
+    const doc = await ServiceTypeSchema.findByIdAndUpdate(id, { $set: data })
     if (!doc) return reject(new Error('not found id'))
     resolve(doc)
   } catch (err) {
@@ -41,7 +41,7 @@ const edit = (id, data) => new Promise(async (resolve, reject) => {
  * @returns {Object} mongodb object
  */
 const remove = id => new Promise((resolve, reject) => {
-  ServiceTypeModel.findOneAndDelete({ _id: id }, (err, res) => {
+  ServiceTypeSchema.findOneAndDelete({ _id: id }, (err, res) => {
     if (err) reject(err)
     if (!res) reject(new Error('not found'))
     resolve(res)
@@ -52,5 +52,6 @@ module.exports = {
   create: create,
   edit: edit,
   delete: remove,
-  query: QueryModel
+  query: QueryModel,
+  schema: ServiceTypeSchema
 }

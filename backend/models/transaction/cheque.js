@@ -28,7 +28,8 @@ const cashUp = (id, cheque, account, staffId) => new Promise(async (resolve, rej
       ref1: byOrganizationId,
       chequeId: _id,
       accountId: account._id,
-      staff: staff
+      staff: staff,
+      branch: staff.branch
     })
 
     doc.save(err => {

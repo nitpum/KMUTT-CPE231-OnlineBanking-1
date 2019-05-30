@@ -57,5 +57,6 @@ module.exports = {
   edit: edit,
   delete: remove,
   analytic: AnalyticModel,
-  query: QueryModel
+  query: QueryModel,
+  schema: OrganizationSchema
 }

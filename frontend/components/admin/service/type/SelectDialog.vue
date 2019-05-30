@@ -73,6 +73,11 @@ export default {
       }
     }
   },
+  watch: {
+    search() {
+      this.fetch(this.search)
+    }
+  },
   mounted() {
     this.fetch()
   },
@@ -80,8 +85,10 @@ export default {
     select(org) {
       this.$emit('onSelect', org)
     },
-    fetch() {
-      this.$axios.get('/service-reference/type/query').then(res => {
+    fetch(search) {
+      let url = '/service-reference/type/query'
+      if (search) url = `${url}?search=${search}`
+      this.$axios.get(url).then(res => {
         this.items = res.data
       })
     }

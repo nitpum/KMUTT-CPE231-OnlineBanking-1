@@ -21,7 +21,7 @@
         <v-btn flat @click="dialog = false">
           cancel
         </v-btn>
-        <v-btn color="primary" flat @click="create()">
+        <v-btn color="primary" :disabled="disabled" flat @click="create()">
           submit
         </v-btn>
       </v-card-actions>
@@ -60,6 +60,9 @@ export default {
       set(val) {
         this.$emit('input', val)
       }
+    },
+    disabled() {
+      return !this.accType || !this.accId || !this.balance
     }
   },
   mounted() {
@@ -83,7 +86,7 @@ export default {
           accountType: this.accType._id
         })
         .then(() => {
-          this.$store.dispatch('snackbars/success', 'Success')
+          this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
           this.dialog = false
         })
         .catch(e => {

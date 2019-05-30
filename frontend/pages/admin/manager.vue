@@ -4,7 +4,7 @@
       <v-flex>
         <overview-info
           :overviews="overviews"
-          :data="data"
+          :data="overviewData"
           title="Manager Overview"
         />
       </v-flex>
@@ -74,7 +74,7 @@ export default {
     overviews: [
       [
         {
-          key: 'totalManager',
+          key: 'total',
           label: 'Total Manager'
         },
         {
@@ -82,11 +82,11 @@ export default {
           label: 'Average Age'
         },
         {
-          key: 'maxAge',
+          key: 'minAge',
           label: 'Minimum Age'
         },
         {
-          key: 'avgAge',
+          key: 'maxAge',
           label: 'Maximum Age'
         }
       ],
@@ -105,6 +105,7 @@ export default {
         }
       ]
     ],
+    overviewData: {},
     items: []
   }),
   mounted() {
@@ -116,6 +117,17 @@ export default {
       this.fetch()
     },
     fetch() {
+      this.$axios
+        .get('/staff/manager/analytic/overview')
+        .then(res => {
+          this.overviewData = res.data
+        })
+        .catch(e => {
+          this.$store.dispatch(
+            'snackbars/error',
+            e.response.status === 400 ? e.response.data.err : e.message
+          )
+        })
       this.$axios
         .get('/staff/manager/query')
         .then(res => {

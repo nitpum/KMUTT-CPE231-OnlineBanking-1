@@ -60,6 +60,14 @@ router.post('/create', authen({ permission: PERMISSION.create }),
       .catch(err => res.status(400).send(String(err)))
   })
 
+router.post('/edit', (req, res) => {
+  const id = req.body.id
+  const data = req.body.data
+  AccountModel.account.edit(id, data)
+    .then(doc => res.send(doc))
+    .catch(err => res.status(400).send(String(err)))
+})
+
 router.get('/', (req, res) => {
   res.send('account bank jaaa')
 })

@@ -6,7 +6,26 @@
       </v-card-title>
       <v-card-text>
         <v-text-field v-model="data.name" label="Name"></v-text-field>
-        <v-textarea v-model="data.detail" label="Detail"></v-textarea>
+        <v-text-field v-model="data.fee" label="Fee" type="number" />
+        <v-text-field v-model="data.interestMRound" label="Month/Interest" />
+        <v-text-field
+          v-model="data.interest"
+          label="Interest"
+          type="number"
+          suffix="%"
+        />
+        <v-text-field v-model="data.DepositRound" label="Deposit Round" />
+        <v-text-field
+          v-model="data.minDeposit"
+          label="Min Deposit"
+          type="number"
+        />
+        <v-text-field
+          v-model="data.interestMin"
+          label="Min Interest"
+          type="number"
+          suffix="%"
+        />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -69,7 +88,15 @@ export default {
       }
     },
     disabled() {
-      return !this.data.name || !this.data.detail
+      return (
+        !this.data.name ||
+        !this.data.fee ||
+        !this.data.interestMRound ||
+        !this.data.interest ||
+        !this.data.DepositRound ||
+        !this.data.minDeposit ||
+        !this.data.interestMin
+      )
     }
   },
   methods: {
@@ -91,10 +118,7 @@ export default {
         })
         .then(res => {
           this.model = false
-          this.$emit('onSubmit')
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
-          this.data.name = ''
-          this.data.detail = ''
         })
         .catch(e => {
           this.$store.dispatch('snackbars/show', e.message)

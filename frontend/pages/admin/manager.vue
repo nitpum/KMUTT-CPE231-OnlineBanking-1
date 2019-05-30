@@ -80,7 +80,9 @@ export default {
         {
           key: 'avgAge',
           label: 'Average Age'
-        },
+        }
+      ],
+      [
         {
           key: 'minAge',
           label: 'Minimum Age'
@@ -89,21 +91,21 @@ export default {
           key: 'maxAge',
           label: 'Maximum Age'
         }
-      ],
-      [
-        {
-          key: 'mostWorkday',
-          label: 'Most Workday'
-        },
-        {
-          key: 'minWorkday',
-          label: 'Minimum Workday'
-        },
-        {
-          key: 'avgWorkday',
-          label: 'Average Workday'
-        }
       ]
+      // [
+      //   {
+      //     key: 'mostWorkday',
+      //     label: 'Most Workday'
+      //   },
+      //   {
+      //     key: 'minWorkday',
+      //     label: 'Minimum Workday'
+      //   },
+      //   {
+      //     key: 'avgWorkday',
+      //     label: 'Average Workday'
+      //   }
+      // ]
     ],
     overviewData: {},
     items: []

@@ -44,9 +44,9 @@
               Service List
             </h3>
             <v-spacer />
-            <v-btn color="primary" class="my-0" @click="openCreateDialog"
-              >CREATE SERVICE</v-btn
-            >
+            <v-btn color="primary" class="my-0" @click="openCreateDialog">
+              CREATE SERVICE
+            </v-btn>
           </v-card-title>
           <v-divider />
           <list :items="list" @onItemClick="openDialog" />
@@ -130,6 +130,14 @@ export default {
       ]
     ]
   }),
+  watch: {
+    editDialog(val) {
+      if (!val) this.fetch()
+    },
+    createDialog(val) {
+      if (!val) this.fetch()
+    }
+  },
   mounted() {
     this.showHeatmap = true
     this.fetch()

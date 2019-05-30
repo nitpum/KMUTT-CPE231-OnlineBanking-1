@@ -9,7 +9,6 @@
         <v-text-field
           v-model="password"
           :append-icon="show1 ? 'visibility' : 'visibility_off'"
-          :rules="[rules.required]"
           :type="show1 ? 'text' : 'password'"
           name="Password"
           label="Password"
@@ -18,16 +17,19 @@
         />
         <v-text-field
           v-model="newUsername"
-          :rules="[rules.required, rules.min]"
           name="newUsername"
           label="New Username"
-          hint="At least 8 characters"
           counter
         />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="success" :disabled="!valid" @click="commit()">Save</v-btn>
+        <v-btn
+          color="success"
+          :disabled="!password || !newUsername"
+          @click="commit()"
+          >Save</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-container>

@@ -41,7 +41,7 @@ export default {
       total: 5453210,
       min: 1,
       max: 100000000,
-      average: 6553500,
+      avg: 6553500,
       least: 'March',
       most: 'December'
     },
@@ -66,22 +66,22 @@ export default {
           suffix: 'THB'
         },
         {
-          key: 'average',
+          key: 'avg',
           label: 'Average value',
           place: 2,
           suffix: 'THB'
         }
-      ],
-      [
-        {
-          key: 'least',
-          label: 'Least usage'
-        },
-        {
-          key: 'most',
-          label: 'Most usage'
-        }
       ]
+      // [
+      //   {
+      //     key: 'least',
+      //     label: 'Least usage'
+      //   },
+      //   {
+      //     key: 'most',
+      //     label: 'Most usage'
+      //   }
+      // ]
     ],
     charts: {
       labels: [
@@ -139,6 +139,16 @@ export default {
         ]
       }
     }
-  })
+  }),
+  mounted() {
+    this.fetch()
+  },
+  methods: {
+    fetch() {
+      this.$axios.get('/cheque/query/overview').then(({ data }) => {
+        this.data = data
+      })
+    }
+  }
 }
 </script>

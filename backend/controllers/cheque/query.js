@@ -1,4 +1,5 @@
 const express = require('express')
+const moment = require('moment')
 const router = express.Router()
 
 // models
@@ -22,6 +23,25 @@ router.get('/', (req, res) => {
       .then(doc => res.send(doc))
       .catch(err => res.status(400).send(String(err)))
   }
+})
+
+router.get('/overview', async (req, res) => {
+  const thisMonth = moment().month(new Date().getMonth())
+  const start = thisMonth.startOf('month').toDate()
+  const end = thisMonth.endOf('month').toDate()
+
+  const cheques = await chequeModel.schema.find({
+    $and: [
+      { created: { $gte: start } },
+      { created: { $lte: end } }
+    ]
+  })
+  res.json({
+    total: cheques.reduce((acc, { amount }) => acc + amount, 0),
+    min: Math.min(...cheques.map(({ amount }) => amount)),
+    max: Math.max(...cheques.map(({ amount }) => amount)),
+    avg: cheques.reduce((acc, { amount }) => acc + amount, 0) / cheques.length
+  })
 })
 
 module.exports = router

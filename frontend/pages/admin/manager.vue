@@ -29,7 +29,7 @@
       mode="create"
       :editable="true"
       :password-editable="passwordEditable"
-      title="Create Manager"
+      title="Manager"
       :data="data"
       :fixed-position="fixedPosition"
       @onSubmit="createManager"

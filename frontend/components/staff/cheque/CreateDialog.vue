@@ -136,7 +136,11 @@ export default {
           this.model = false
         })
         .catch(e => {
-          this.$store.dispatch('snackbars/show', e.message)
+          if (e.response && e.response.status === 400) {
+            this.$store.dispatch('snackbars/show', e.response.data)
+          } else {
+            this.$store.dispatch('snackbars/show', e.message)
+          }
         })
         .finally(() => {
           this.loading = false

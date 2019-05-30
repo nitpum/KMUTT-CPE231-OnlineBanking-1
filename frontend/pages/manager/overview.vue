@@ -43,25 +43,25 @@ export default {
         {
           key: 'totalDep',
           label: 'Total Deposit',
-          place: 2,
+          place: 50000,
           suffix: 'THB'
         },
         {
           key: 'minDep',
           label: 'Minimum Deposit',
-          place: 2,
+          place: 1000,
           suffix: 'THB'
         },
         {
           key: 'maxDep',
           label: 'Maximum Deposit',
-          place: 2,
+          place: 20000,
           suffix: 'THB'
         },
         {
           key: 'avgDep',
           label: 'Average Deposit',
-          place: 2,
+          place: 5650,
           suffix: 'THB'
         }
       ],
@@ -69,25 +69,25 @@ export default {
         {
           key: 'totalWdl',
           label: 'Total Withdrawal',
-          place: 2,
+          place: 10000,
           suffix: 'THB'
         },
         {
           key: 'minWdl',
           label: 'Minimum Withdrawal',
-          place: 2,
+          place: 100,
           suffix: 'THB'
         },
         {
           key: 'maxWdl',
           label: 'Maximum Withdrawal',
-          place: 2,
+          place: 2000,
           suffix: 'THB'
         },
         {
           key: 'avgWdl',
           label: 'Average Withdrawal',
-          place: 2,
+          place: 400,
           suffix: 'THB'
         }
       ]

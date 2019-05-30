@@ -23,4 +23,17 @@ router.get('/', (req, res) => {
   }
 })
 
+
+router.get('/branch/me', async (req, res) => {
+  const staffs = await StaffModel.schema.find({
+    branchId: req.session.passport.user.branchId
+  })
+
+  res.json({
+    staffs: staffs.map(({name, gender}) => ({
+      name, gender
+    }))
+  })
+})
+
 module.exports = router

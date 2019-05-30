@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const mongoose = require('mongoose')
 
 const transactionModel = require('../../models/transaction')
 
@@ -6,11 +7,12 @@ router.get('/overview', async (req, res) => {
   const from = new Date(req.query.from)
   const to = new Date(new Date(req.query.to).setHours(23, 59, 59))
 
-  const transaction = await transactionModel.schema.find({ 
+  const transaction = await transactionModel.schema.find({
     $and: [
       { timestamp: { $gte: from } },
       { timestamp: { $lte: to } }
-    ]
+    ],
+    branch: mongoose.Types.ObjectId(req.session.passport.user.branch)
   })
 
   const deposit = transaction

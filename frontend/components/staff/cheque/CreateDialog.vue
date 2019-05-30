@@ -22,7 +22,7 @@
           ]"
           label="Bank"
         />
-        <org-select v-if="!ourBank" v-model="org" />
+        <org-select v-model="org" />
         <acc-select v-if="ourBank" v-model="account" />
         <v-text-field v-else v-model="accountNo" label="Account No." />
         <v-text-field
@@ -31,11 +31,16 @@
           placeholder="0.00 THB"
           type="number"
         ></v-text-field>
-        <v-text-field
+        <!-- <v-text-field
           v-if="type === 'ORDER'"
           v-model="paywee"
           label="Paywee Name"
           placeholder="Paywee Name"
+        ></v-text-field> -->
+        <v-text-field
+          v-model="drawee"
+          label="Drawee Name"
+          placeholder="Drawee Name"
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
@@ -86,7 +91,8 @@ export default {
     accountNo: '',
     org: {},
     amount: '',
-    payee: ''
+    payee: '',
+    drawee: ''
   }),
   computed: {
     model: {
@@ -100,11 +106,8 @@ export default {
     disabled() {
       if (this.type === 'ORDER') {
         return (
-          !this.type ||
-          !this.org ||
-          !this.account ||
-          !this.amount ||
-          !this.paywee
+          !this.type || !this.org || !this.account || !this.amount
+          // !this.paywee
         )
       }
       return !this.type || !this.org || !this.account || !this.amount
@@ -114,23 +117,27 @@ export default {
     submit() {
       const data = {
         amount: this.amount,
-        payee: this.payee,
+        // payee: this.payee,
         type: this.type,
         status: 'ACTIVE',
-        drawee: ''
+        drawee: this.drawee
       }
-      if (this.ourBank) {
-        data.byOrganizationId = this.org._id
-        data.accountId = this.account._id
-      } else {
-        data.byOrganizationId = this.org._id
-        data.accountNo = this.accountNo
-      }
+      // if (this.ourBank) {
+      //   data.byOrganizationId = this.org._id
+      //   data.accountId = this.account._id
+      // } else {
+      data.byOrganizationId = this.org._id
+      data.accountNo = this.accountNo
+      // }
       /* eslint-disable no-console */
       console.log(data)
       this.loading = true
       this.$axios
-        .post('/cheque/create', data)
+        .post('/cheque/create', data, {
+          params: {
+            ourBank: this.ourBank
+          }
+        })
         .then(res => {
           this.$emit('onSubmit').$store.dispatch('snackbars/success', 'Success')
           this.model = false

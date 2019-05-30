@@ -71,7 +71,7 @@ export default {
     revoke(item) {
       this.confirmDialog = true
       this.pendingItem = item
-      this.pendingItem.status = 'REVOKE'
+      // this.pendingItem.status = 'REVOKE'
     },
     confirmRevoke() {
       this.$axios

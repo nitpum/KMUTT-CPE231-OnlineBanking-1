@@ -4,8 +4,10 @@
       <v-card-title primary-title>
         <h2>{{ title }}</h2>
       </v-card-title>
-      <v-card-text v-if="message">
-        {{ message }}
+      <v-card-text>
+        <slot>
+          {{ msg }}
+        </slot>
       </v-card-text>
       <v-card-actions>
         <v-btn flat @click="no">
@@ -54,6 +56,11 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    },
+    msg: {
+      get() {
+        return this.message
       }
     }
   },

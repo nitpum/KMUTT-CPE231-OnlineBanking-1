@@ -33,11 +33,6 @@
         </v-layout>
       </v-layout>
     </v-card-title>
-    <v-card-actions>
-      <v-btn flat color="primary" class="mx-auto">
-        Export
-      </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 

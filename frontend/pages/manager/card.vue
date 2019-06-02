@@ -8,21 +8,6 @@
           title="Card Overview"
         />
       </v-flex>
-
-      <v-flex>
-        <v-card>
-          <v-card-title>
-            <h3 class="headline mb-0">
-              Card Expires
-            </h3>
-          </v-card-title>
-          <v-divider />
-          <v-card-text>
-            <!-- @todo: manager card expires graph -->
-            graph here
-          </v-card-text>
-        </v-card>
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -67,10 +52,6 @@ export default {
         {
           key: 'total',
           label: 'Total card'
-        },
-        {
-          key: 'expires',
-          label: 'Most expires month'
         }
       ]
     ]

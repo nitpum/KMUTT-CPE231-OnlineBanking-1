@@ -10,6 +10,7 @@ const accountModel = require('../../models/account')
 
 // controllers
 const staffControllers = require('./staff')
+const queryControllers = require('./query')
 
 const PERMISSION = {
   default: ['admin', 'general', 'manager', 'customer'],
@@ -41,5 +42,6 @@ router.post('/', (req, res) => {
 })
 
 router.use('/staff', staffControllers)
+router.use('/query', queryControllers)
 
 module.exports = router

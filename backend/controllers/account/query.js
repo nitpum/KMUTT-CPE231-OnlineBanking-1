@@ -8,8 +8,14 @@ const AccountModel = require('../../models/account/')
 router.get('/', (req, res) => {
   const id = req.query.id || undefined
   const limit = Number(req.query.limit) || undefined
+  const search = req.query.search || undefined
 
-  if (id) {
+  if (search) {
+    AccountModel.account.query.search(search)
+      .then(doc => res.send(doc))
+      .catch(err => res.send({ op: false, err: String(err) }))
+  }
+  else if (id) {
     AccountModel.account.query.id(id)
       .then(doc => res.send(doc))
       .catch(err => res.send({ op: false, err: String(err) }))
@@ -60,6 +66,28 @@ router.get('/branch/me', async (req, res) => {
     }
   ])
   res.send(accounts)
+})
+
+router.get('/overview', async (req, res) => {
+  const accounts = await AccountModel.account.schema.aggregate([
+    { $match: {
+      branchId: mongoose.Types.ObjectId(req.session.passport.user.branch)
+    } },
+    { $lookup: {
+      from: 'accounttypes',
+      localField: 'accountType',
+      foreignField: '_id',
+      as: 'accountType'
+    } }
+  ])
+  res.send(
+    accounts
+      .map(({ accountType }) => accountType[0].name)
+      .reduce((acc, val) => {
+        acc[val] = (acc[val] || 0) + 1
+        return acc
+      }, {})
+  )
 })
 
 module.exports = router

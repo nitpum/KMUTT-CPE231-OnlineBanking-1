@@ -18,7 +18,7 @@
     <v-divider class="mt-4" />
     <v-card-actions v-if="!disabled">
       <v-spacer />
-      <v-btn v-if="showRevokeBtn" flat colo="red" @click="$emit('onRevoke')">
+      <v-btn v-if="showRevokeBtn" flat color="red" @click="$emit('onRevoke')">
         Revoke
       </v-btn>
     </v-card-actions>

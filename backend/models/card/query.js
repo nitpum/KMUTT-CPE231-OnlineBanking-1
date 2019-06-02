@@ -12,6 +12,15 @@ const query = {
       .then(doc => resolve(doc))
       .catch(err => reject(err))
   }),
+  search: (s, limit = 1000, permission) => new Promise((resolve, reject) => {
+    let query = { $text: { $search: s } }
+    if (permission) query = { ...query, ...{ permission: permission } }
+
+    cardModel.find(query)
+      .limit(limit)
+      .then(doc => resolve(doc))
+      .catch(err => reject(err))
+  }),
   /**
      * @param  {String} id - mongodb object id
      * @returns {Object} - mongodb object

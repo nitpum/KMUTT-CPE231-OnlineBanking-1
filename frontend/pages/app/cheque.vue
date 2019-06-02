@@ -11,6 +11,7 @@
         xl3
       >
         <card
+          :cheque-id="cheques.chequeId"
           :account-id="cheque.accountId"
           :amount="cheque.amount"
           :show-more-info="true"
@@ -34,20 +35,17 @@ export default {
   },
   data: () => ({
     dialog: false,
-    cheques: [
-      {
-        id: '0-000-000-000-000-000',
-        accountId: '000-0-00000-0',
-        drawee: 'Euei Naja',
-        amount: 25000
-      },
-      {
-        id: '0-000-000-000-000-000',
-        accountId: '000-0-00000-0',
-        drawee: 'Euei Naja',
-        amount: 25000
-      }
-    ]
-  })
+    cheques: []
+  }),
+  mounted() {
+    this.fetch()
+  },
+  methods: {
+    fetch() {
+      this.$axios.get('/cheque/query').then(({ data }) => {
+        this.cheques = data
+      })
+    }
+  }
 }
 </script>

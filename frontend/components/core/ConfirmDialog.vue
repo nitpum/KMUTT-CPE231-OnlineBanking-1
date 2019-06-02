@@ -5,7 +5,9 @@
         <h2>{{ title }}</h2>
       </v-card-title>
       <v-card-text>
-        {{ msg }}
+        <slot>
+          {{ msg }}
+        </slot>
       </v-card-text>
       <v-card-actions>
         <v-btn flat @click="no">

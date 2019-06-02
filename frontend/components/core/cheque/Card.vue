@@ -3,7 +3,7 @@
     <v-card-title primary-title class="mb-0 pb-0">
       <h3 class="headline mb-0">{{ chequeId }}</h3>
     </v-card-title>
-    <v-card-text v-if="accountId" class="pt-0 pb-1 grey--text">
+    <v-card-text v-if="accountid" class="pt-0 pb-1 grey--text">
       Account ID: {{ accountId }}
     </v-card-text>
     <v-card-text v-if="bank" class="pt-0 pb-1 grey--text">
@@ -45,10 +45,6 @@ export default {
     accountId: {
       type: String,
       default: '000-0-000000-0'
-    },
-    holder: {
-      type: String,
-      default: 'Firstname Lastname'
     },
     bank: {
       type: String,

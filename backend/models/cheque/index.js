@@ -54,5 +54,6 @@ const create = data => new Promise(async (resolve, reject) => {
 module.exports = {
   create: create,
   query: QueryModel,
-  transaction: TransactionModel
+  transaction: TransactionModel,
+  schema: chequeSchema
 }

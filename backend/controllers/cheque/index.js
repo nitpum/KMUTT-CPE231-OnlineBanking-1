@@ -36,7 +36,11 @@ router.get('/create', async (req, res) => {
 })
 
 router.post('/create', (req, res) => {
-  const data = req.body
+  let data = req.body
+  // if(req.query.ourBank === 'true') {
+  //   data.
+  // }
+  console.log(data)
   chequeModel
     .create(data)
     .then(doc => res.send(doc))

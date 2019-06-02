@@ -27,5 +27,6 @@ const create = (data) => new Promise((resolve, reject) => {
 module.exports = {
   create: create,
   cheque: chequeModel,
-  staff: staffModel
+  staff: staffModel,
+  schema: TransactionSchema
 }

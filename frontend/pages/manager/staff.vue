@@ -1,13 +1,15 @@
 <template>
   <v-container>
-    <v-text-field
-      prepend-inner-icon="search"
-      label="Search"
-      placeholder="Search"
-      solo
-    ></v-text-field>
+    <search-box :filter="fn => (filter = fn)" />
     <v-layout row wrap>
-      <v-flex v-for="(staff, i) in staffs" :key="i" md4 sm12 pr-2 mb-1>
+      <v-flex
+        v-for="(staff, i) in filter(staffs, ['name'])"
+        :key="i"
+        md4
+        sm12
+        pr-2
+        mb-1
+      >
         <card
           :name="staff.name"
           :gender="staff.gender"
@@ -24,30 +26,33 @@
 <script>
 import Card from '@/components/staff/Card'
 import Dialog from '@/components/core/staff/Dialog'
+import SearchBox from '@/components/core/SearchBox'
 
 export default {
   layout: 'manager',
   components: {
     Card,
-    Dialog
+    Dialog,
+    SearchBox
   },
   data: () => ({
     dialog: false,
     createDialog: false,
-    staffs: []
-    // staff: {
-    //   name: {
-    //     firstName: '',
-    //     lastName: ''
-    //   },
-    //   gender: 'Male',
-    //   citizenId: '',
-    //   address: '',
-    //   zipcode: '',
-    //   birthDate: null,
-    //   role: '',
-    //   password: ''
-    // }
+    staffs: [],
+    filter: () => {},
+    staff: {
+      name: {
+        firstName: '',
+        lastName: ''
+      },
+      gender: 'Male',
+      citizenId: '',
+      address: '',
+      zipcode: '',
+      birthDate: null,
+      role: '',
+      password: ''
+    }
   }),
   mounted() {
     this.fetch()

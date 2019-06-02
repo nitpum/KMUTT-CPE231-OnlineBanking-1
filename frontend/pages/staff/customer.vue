@@ -108,6 +108,7 @@ export default {
     },
     createStaff() {
       this.createDialog = false
+      this.fetch()
     },
     fetch() {
       this.$axios

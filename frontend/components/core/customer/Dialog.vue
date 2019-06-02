@@ -51,9 +51,9 @@
         />
         <component
           :is="component('date-picker-dialog')"
-          v-model="new Date(data.birthDate).toISOString().split('T')[0]"
+          v-model="birthDate"
           label="Birth Date"
-          :text="new Date(data.birthDate).toISOString().split('T')[0]"
+          :text="birthDate"
         />
         <component
           :is="component('v-text-field')"
@@ -187,6 +187,16 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    },
+    birthDate: {
+      get() {
+        return new Date(this.data.birthDate).toISOString().split('T')[0]
+      },
+      set(val) {
+        const d = this.data
+        d.birthDate = val
+        this.$emit('update:data', d)
       }
     }
   },

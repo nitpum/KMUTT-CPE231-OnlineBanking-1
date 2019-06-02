@@ -26,8 +26,8 @@ export default {
     DatePickerDialog
   },
   data: () => ({
-    from: undefined,
-    to: undefined,
+    from: new Date().toISOString().substr(0, 10),
+    to: new Date().toISOString().substr(0, 10),
     data: {
       totalDep: 587541,
       minDep: 200,
@@ -43,25 +43,25 @@ export default {
         {
           key: 'totalDep',
           label: 'Total Deposit',
-          place: 50000,
+          place: 2,
           suffix: 'THB'
         },
         {
           key: 'minDep',
           label: 'Minimum Deposit',
-          place: 1000,
+          place: 2,
           suffix: 'THB'
         },
         {
           key: 'maxDep',
           label: 'Maximum Deposit',
-          place: 20000,
+          place: 2,
           suffix: 'THB'
         },
         {
           key: 'avgDep',
           label: 'Average Deposit',
-          place: 5650,
+          place: 2,
           suffix: 'THB'
         }
       ],
@@ -69,29 +69,57 @@ export default {
         {
           key: 'totalWdl',
           label: 'Total Withdrawal',
-          place: 10000,
+          place: 2,
           suffix: 'THB'
         },
         {
           key: 'minWdl',
           label: 'Minimum Withdrawal',
-          place: 100,
+          place: 2,
           suffix: 'THB'
         },
         {
           key: 'maxWdl',
           label: 'Maximum Withdrawal',
-          place: 2000,
+          place: 2,
           suffix: 'THB'
         },
         {
           key: 'avgWdl',
           label: 'Average Withdrawal',
-          place: 400,
+          place: 2,
           suffix: 'THB'
         }
       ]
     ]
-  })
+  }),
+  watch: {
+    from: {
+      immediate: true,
+      handler() {
+        this.fetch()
+      }
+    },
+    to: {
+      immediate: true,
+      handler() {
+        this.fetch()
+      }
+    }
+  },
+  methods: {
+    fetch() {
+      this.$axios
+        .get('/transaction/query/overview', {
+          params: {
+            from: this.from,
+            to: this.to
+          }
+        })
+        .then(({ data }) => {
+          this.data = data
+        })
+    }
+  }
 }
 </script>

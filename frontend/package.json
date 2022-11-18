@@ -24,7 +24,7 @@
     "express": "^4.16.4",
     "momentjs": "^2.0.0",
     "numeral": "^2.0.6",
-    "nuxt": "^2.7.1",
+    "nuxt": "^2.15.8",
     "safe-regex": "^2.0.2",
     "vue-chartjs": "^3.4.2",
     "vuetify": "^1.5.14",
